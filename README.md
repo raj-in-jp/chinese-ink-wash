@@ -1,12 +1,78 @@
-# chinese ink wash
+<div align="center">
 
-Chinese ink wash (水墨) paintings drawn entirely in code — no image model. Every wash, brush stroke and
-mist band is computed with numpy + Pillow, using the [claude-drawing](https://github.com/cloveric/claude-drawing-skill)
-skill (a git submodule in `.claude/skills/claude-drawing`). The same seed always gives the same picture.
+<img src="docs/readme/banner.jpg" alt="水墨 — an ink landscape painted by this repo's own code" width="100%" />
 
-![云深不知处](drawing_output/gifs/ink_cloud_temple.gif)
+<br/><br/>
 
-## Setup
+<h1>水 墨 &nbsp;·&nbsp; <i>chinese ink wash</i></h1>
+
+<p><i>Ink, water, paper, all made of numbers.</i><br/>
+<sub>Chinese ink wash paintings drawn entirely in code, without an image model. Every wash, brush stroke and mist band is computed with numpy + Pillow.</sub></p>
+
+<p>
+<img src="https://img.shields.io/badge/painted_with-numpy-1C1C1C?style=flat-square&logo=numpy&logoColor=F1EADC" />
+<img src="https://img.shields.io/badge/paper-Pillow-6E665E?style=flat-square" />
+<img src="https://img.shields.io/badge/image_model-none-B7372B?style=flat-square" />
+<img src="https://img.shields.io/badge/same_seed-same_painting-1C1C1C?style=flat-square" />
+</p>
+
+<sub><a href="#画廊">画廊 Gallery</a> &nbsp;·&nbsp; <a href="#笔法">笔法 Process</a> &nbsp;·&nbsp; <a href="#入门">入门 Begin</a> &nbsp;·&nbsp; <a href="#卷轴">卷轴 Reference</a></sub>
+
+</div>
+
+<br/>
+
+<a name="画廊"></a>
+<img src="docs/readme/h_gallery.jpg" width="100%" alt="画廊 · The Gallery" />
+
+<div align="center">
+
+<img src="drawing_output/gifs/ink_cloud_temple.gif" width="100%" alt="云深不知处" />
+
+<sub><b>云深不知处</b> &nbsp;<i>Lost somewhere in the deep clouds</i>: misty peaks, pine, bridge and pavilion</sub>
+
+<br/><br/>
+
+<img src="drawing_output/water_swordsman/water_swordsman.gif" width="100%" alt="水" />
+
+<sub><b>水</b> &nbsp;<i>Water</i>: calligraphy, a dry-brush wave and a swordsman, written stroke by stroke</sub>
+
+</div>
+
+<br/>
+
+<a name="笔法"></a>
+<img src="docs/readme/h_process.jpg" width="100%" alt="笔法 · How a painting forms" />
+
+<div align="center">
+<img src="docs/readme/stages.jpg" width="100%" alt="six stages of a painting" />
+<br/>
+<sub>Paper first, then distant hills, peaks, bridge and pavilion, pines and rocks, and finally the title and red seal.<br/>Strokes swell and thin with pressure, run dry into <b>飞白</b> (flying white), and bleed wet ink into the paper.</sub>
+</div>
+
+<br/>
+
+<a name="入门"></a>
+<img src="docs/readme/h_begin.jpg" width="100%" alt="入门 · Begin" />
+
+```bash
+git clone --recurse-submodules https://github.com/4amvibez/chinese-ink-wash.git
+cd chinese-ink-wash && pip install -r requirements.txt
+python -m poly_ink cloud-temple out.png --gif out.gif
+```
+
+```python
+from poly_ink import ink_landscape
+ink_landscape("江山如画", seal="墨韵", seed=9).save("my_painting.png")   # your own landscape
+```
+
+<br/>
+
+<a name="卷轴"></a>
+<img src="docs/readme/h_scroll.jpg" width="100%" alt="卷轴 · The scroll" />
+
+<details>
+<summary><b>📜 Setup & fonts</b></summary>
 
 ```bash
 git clone --recurse-submodules https://github.com/4amvibez/chinese-ink-wash.git
@@ -19,7 +85,10 @@ Titles and seals need a Chinese font. `chinese ink wash` finds Kaiti/Songti on m
 WenQuanYi or Noto CJK on Linux (`sudo apt install fonts-wqy-zenhei`). To use another font, set
 `INKPAINT_FONT=/path/to/font.ttf`. Without a font the painting still renders, just without the title and seal.
 
-## Use it from Python
+</details>
+
+<details>
+<summary><b>🖌️ Use it from Python</b></summary>
 
 Run from the repo root, or put the repo root on `PYTHONPATH` / `sys.path`.
 
@@ -41,9 +110,10 @@ make_gif(stages, "landscape.gif")
 Each call returns a Pillow `Image`, so you can also resize it, paste it into another image, or return it from a
 web handler. A 1920x1080 painting takes about 4 seconds. In a web app, render it once and cache the result.
 
-## Brush writing: calligraphy and big expressive strokes
+</details>
 
-![水](drawing_output/water_swordsman/water_swordsman.gif)
+<details>
+<summary><b>✒️ Brush writing: calligraphy and big expressive strokes</b></summary>
 
 `poly_ink.brush` is a fast bristle brush. Strokes swell and thin with pressure, run dry into flying white
 (飞白), bleed wet ink into the paper and flick off splatter. Each stroke records when the brush reached every
@@ -81,7 +151,10 @@ animate_scene(s, "mine.gif")
 | `wash(W, H, polygon, ink)` | a flat ink wash (hats, robes, rocks), revealed top to bottom |
 | `s.p` | the underlying claude-drawing `Painting`, for paper, misty mountains (`ridge` + `wash`, then `s.add_background()`) |
 
-## Use it from the command line
+</details>
+
+<details>
+<summary><b>⌨️ Command line</b></summary>
 
 ```bash
 python -m poly_ink cloud-temple out.png --gif out.gif
@@ -90,7 +163,10 @@ python -m poly_ink landscape out.jpg --title 江山如画 --seal 墨韵 --seed 9
 python -m poly_ink --help
 ```
 
-## Layout
+</details>
+
+<details>
+<summary><b>🗺️ Layout</b></summary>
 
 | Path | What |
 |---|---|
@@ -105,3 +181,13 @@ python -m poly_ink --help
 To draw something new, copy `cloud_temple()` in `poly_ink/scenes.py` and change it. The available drawing calls
 (`peak`, `wash`, `cun`, `pine`, `rock`, `pagoda`, `traveller`, `birds`, `sun`, `mist`, `trails`, `stroke`, …) are
 listed in the "水墨 `Painting`" section of `.claude/skills/claude-drawing/SKILL.md`.
+
+</details>
+
+<br/>
+
+<div align="center">
+<img src="docs/readme/seal.png" width="72" alt="水墨代码 seal" />
+<br/>
+<sub>Painted with the <a href="https://github.com/cloveric/claude-drawing-skill">claude-drawing</a> skill · the same seed always gives the same picture</sub>
+</div>
