@@ -56,7 +56,7 @@
 <img src="docs/readme/h_begin.jpg" width="100%" alt="入门 · Begin" />
 
 ```bash
-git clone --recurse-submodules https://github.com/4amvibez/chinese-ink-wash.git
+git clone --recurse-submodules https://github.com/raj-in-jp/chinese-ink-wash.git
 cd chinese-ink-wash && pip install -r requirements.txt
 python -m poly_ink cloud-temple out.png --gif out.gif
 ```
@@ -75,7 +75,7 @@ ink_landscape("江山如画", seal="墨韵", seed=9).save("my_painting.png")   #
 <summary><b>📜 Setup & fonts</b></summary>
 
 ```bash
-git clone --recurse-submodules https://github.com/4amvibez/chinese-ink-wash.git
+git clone --recurse-submodules https://github.com/raj-in-jp/chinese-ink-wash.git
 cd chinese-ink-wash
 pip install -r requirements.txt
 # already cloned without the submodule?  git submodule update --init
