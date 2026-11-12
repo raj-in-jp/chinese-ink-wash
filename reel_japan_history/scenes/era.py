@@ -56,11 +56,24 @@ MAPS = {
                                            (139.0, 37.9)]),
                      routes=[[(128.6, 35.2), (129.4, 34.4), (130.3, 33.7)], [(121.8, 29.9), (125.6, 31.0), (128.9, 32.6), (130.2, 33.55)]],
                      labels=[('1274', 128.0, 34.1), ('1281', 123.4, 30.3)]),
+    'edo': dict(view=(131.0, 37.0, 0.37), phase=('Japan closes', 'kabuki'), boat=False, ring=(136.6, 36.4, 250, 140, -42),
+                routes=[[(121.8, 30.2), (125.4, 31.5), (128.2, 32.4), (129.87, 32.75)]],
+                labels=[('CLOSED TO THE WORLD', 124.6, 41.6), ('TRADE ONLY AT NAGASAKI', 124.0, 32.9)]),
     'ships': dict(view=(139.5, 33.4, 0.55), phase=(None, 'black ships'), boat=True,
                   routes=[[(147.7, 30.4), (145.0, 31.6), (141.8, 33.6), (139.75, 35.2)]],
                   labels=[('FROM THE U.S.', 144.6, 29.8), ('EDO 江戸', 140.6, 36.3)]),
 }
 PANEL = (540, 1080, 1000, 560)
+# one line per era, under its year, saying what changed (and what it led to)
+TAGS = {'jomon': 'HUNTERS · VILLAGES · CLAY POTS', 'yayoi': 'RICE FARMING ARRIVES → VILLAGES GROW',
+        'kofun': 'RICH CHIEFS → GIANT TOMBS', 'asuka': 'BUDDHISM + A GOVERNMENT LIKE CHINA',
+        'nara': 'THE FIRST GREAT CAPITAL', 'heian': 'CAPITAL MOVES TO KYŌTO · KANA IS BORN',
+        'kamakura': 'SAMURAI TAKE POWER', 'muromachi': 'ZEN · TEA · NŌ THEATRE',
+        'sengoku': '100 YEARS OF WAR → JAPAN UNITED', 'edo': '250 YEARS OF PEACE · CLOSED TO THE WORLD',
+        'ships': 'JAPAN IS FORCED TO OPEN UP', 'meiji': 'SAMURAI END → MODERN JAPAN',
+        'taisho': 'DEMOCRACY · THE 1923 EARTHQUAKE', 'showa': 'WAR → REBUILDING → BULLET TRAINS',
+        'heisei': 'BUBBLE BURSTS · ANIME GOES GLOBAL', 'reiwa': 'JAPAN TODAY'}
+TAG_Y = 770
 # real pictures, shown as prints laid on the page: (file, crop x0, y0, x1, y1 in source px, caption, from phrase, until phrase)
 PHOTOS = {
     'jomon': [('jomon_pot.jpg', None, 'JŌMON POT', 'oldest pottery', None)],
@@ -115,6 +128,7 @@ class Scene(KanjiScene):
         self.glyphs = [typeset(c, 250, font=FONT_BRUSH_JP, seed=400 + 10 * self.idx + j, medians=False, sweep=(0.7, 1)) for j, c in enumerate(kanji)]
         self.furi = [text_layer(f, FONT_JP, 42)[0] if f else None for f in FURI[k]]
         self.rom, _ = text_layer(rom, FONT_EN_BOLD, 40, tracking=8)
+        self.tag = text_layer(TAGS[k], FONT_EN_BOLD, 34, tracking=5)[0]
         if k == 'heian':
             self.art = cached('h7_heian_nofan_v1', lambda: hart.heian(fan=False))
         elif k == 'taisho':
@@ -192,7 +206,7 @@ class Scene(KanjiScene):
         gy, gx = m + h + capb // 2 - cg.shape[0] // 2, (card.shape[1] - cg.shape[1]) // 2
         card[gy:gy + cg.shape[0], gx:gx + cg.shape[1]] *= (1 - cg[..., None] * (1 - np.array([0.3, 0.28, 0.26], np.float32)))
         e = ease_out(min(u / 0.6, 1))
-        cx, cy = 540, 1070 + 40 * (1 - e)
+        cx, cy = 540, 1105 + 40 * (1 - e)
         rot = np.radians(-1.6 * (1 - e) + 0.6 * np.sin(t * 0.6))
         sc = 0.94 + 0.06 * e
         Hc, Wc = card.shape[:2]
@@ -208,7 +222,14 @@ class Scene(KanjiScene):
         p = self.photo_amount(t)
         return (1 - 0.92 * p) * self.art_pulse_(t, c)
 
+    def peace_amount(self, t):
+        if self.key != 'edo':
+            return 0.0
+        return smooth((t - self.t_peace) / 0.4) * (1 - smooth((t - self.t_peace_out) / 0.4))
+
     def art_pulse_(self, t, c):
+        if self.key == 'edo':
+            return 1 - 0.8 * self.peace_amount(t)
         if self.key == 'sengoku':                        # the castle steps back when the warlords come forward
             return 1 - 0.75 * smooth((t - self.lords[0]['t'] + 0.3) / 0.5)
         if self.key == 'nara' and c == 'red':
@@ -386,6 +407,15 @@ class Scene(KanjiScene):
                 a0 = np.degrees(t * (3 - j)) % 360
                 cv2.ellipse(sw, tuple(np.round(c).astype(int)), (r, int(r * 0.6)), 0, a0, a0 + 250, 1.0, 5, cv2.LINE_AA)
             fr.ink(sw, INK, 0.75 * m * smooth(back * 3))
+        if 'ring' in self.mp:                             # Japan closes itself off: a vermilion ring drawn round it
+            lo, la, rx, ry, ang = self.mp['ring']
+            fz = ease_io((t - self.m_route_t - 0.2) / 1.2)
+            if fz > 0:
+                rg = np.zeros((H, W), np.float32)
+                c = self.to_screen(r5art_xy(lo, la), t)
+                sc = s / self.mp['view'][2]
+                cv2.ellipse(rg, tuple(np.round(c).astype(int)), (int(rx * sc), int(ry * sc)), ang, -90, -90 + 360 * fz, 1.0, 9, cv2.LINE_AA)
+                fr.ink(rg, VERM, 0.85 * m)
         for j, (g, xy) in enumerate(self.m_labels):
             p = self.to_screen(xy, t)
             kit.put(fr, Cam(540, 960, 1.0), g, p[0], p[1], INK, m * smooth((t - self.m_route_t - 0.5 - 0.3 * j) / 0.3))
@@ -405,9 +435,6 @@ class Scene(KanjiScene):
             self.t_kana = JA['kana']['start']
         elif k == 'ships':
             self.puffs = [hart.smoke_puff(seed=j) for j in range(4)]
-        elif k == 'meiji':
-            self.train = cached('h7_train_v1', lambda: dict(zip(('ink', 'red'), hart.steam_train())))
-            self.puffs = [hart.smoke_puff(seed=10 + j) for j in range(4)]
         elif k == 'taisho':
             self.tram = cached('h7_tram_v1', lambda: dict(zip(('ink', 'red'), hart.tram_sprite())))
             self.crack = cached('h7_crack_v1', lambda: {'d': hart.crack()})['d']
@@ -434,6 +461,12 @@ class Scene(KanjiScene):
             self.petal = np.clip(1 - np.hypot((xx - 11) / 10, (yy - 8) / 6), 0, 1).astype(np.float32) ** 0.6
         elif k == 'edo':
             self.t_kab = JA['kabuki']['start']
+            self.t_peace = at('Two hundred')[0] - 0.1
+            self.t_peace_out = at('Japan closes')[0] - 0.15
+            self.heiwa = text_layer('平和', FONT_JP, 120)[0]
+            self.peace_lab = text_layer('250 YEARS OF PEACE', FONT_EN_BOLD, 44, tracking=8)[0]
+            self.peace_y = [text_layer(y, FONT_HEAD, 40)[0] for y in ('1603', '1868')]
+            self.bar = kit.box(18, 700, 2.0)
         elif k == 'sengoku':
             self.lords = []
             for j, (key, kanji, crest) in enumerate((('nobunaga', '織田信長', 'crescent'), ('hideyoshi', '豊臣秀吉', 'rays'),
@@ -535,6 +568,8 @@ class Scene(KanjiScene):
         fr_ = smooth((t - self.t_in - 0.3) / 0.3)
         kit.put(fr, cam, self.rom, 540, ROM_Y + 10 * (1 - fr_), GREY, smooth((t - self.t_in - 0.45) / 0.3))
         kit.put(fr, cam, self.year_patch(t), 540, YEAR_Y, VERM, smooth((t - self.t0 - 0.1) / 0.25))
+        ft = smooth((t - self.t_in - 0.9) / 0.4)
+        kit.put(fr, cam, self.tag, 540, TAG_Y + 8 * (1 - ft), INDIGO, ft)
         self.ribbon(fr, t)
         return fr.img
 
@@ -608,15 +643,6 @@ class Scene(KanjiScene):
                     u = ((t - self.t0) * 0.5 + p / 3 + j * 0.13) % 1
                     kit.put(fr, cam, self.puffs[(p + j) % 4], sx + ox - 90 * u * s + 10, sy - 40 * s - 160 * u * s, PALE,
                             0.5 * np.sin(np.pi * u) * smooth((t - self.t0 - 0.4) / 0.5), s * (0.6 + 1.4 * u))
-        elif k == 'meiji':
-            u = (t - self.t0 - 0.3) / (self.t1 - self.t0 - 0.3)
-            x = lerp(-420, 1500, ease_io(np.clip(u, 0, 1)) * 0.75 + np.clip(u, 0, 1) * 0.25)
-            y = 1185 + 2 * np.sin(t * 20)
-            for p in range(5):
-                v = ((t - self.t0) * 1.2 + p / 5) % 1
-                kit.put(fr, cam, self.puffs[p % 4], x + 210 - 260 * v, y - 140 - 120 * v, PALE, 0.55 * (1 - v), 0.5 + 1.2 * v)
-            kit.put(fr, cam, self.train['red'], x, y, VERM, 0.85)
-            kit.put(fr, cam, self.train['ink'], x, y, INK, 1.0)
         elif k == 'taisho':
             u = ease_out(np.clip((t - self.art_t0) / (self.t_quake - self.art_t0), 0, 1))
             q = t - self.t_quake
@@ -657,16 +683,37 @@ class Scene(KanjiScene):
                 for j in range(5):
                     a = t * 0.8 + j * 2 * np.pi / 5
                     kit.put(fr, cam, self.dot, 540 + 220 * np.cos(a), 960 + 90 * np.sin(a), VERM, 0.8 * smooth(fg - 0.5), 0.45)
+        elif k == 'edo':
+            p = self.peace_amount(t)
+            if p > 0:
+                scr = Cam(540, 960, 1.0)
+                self.plate(fr, scr, 540, 1110, 900, 400, p)
+                u = ease_io((t - self.t_peace - 0.3) / 1.8)
+                kit.put(fr, scr, self.heiwa, 540, 1010, INK, p, 1 + 0.12 * np.exp(-max(t - self.t_peace, 0) * 4))
+                kit.put(fr, scr, self.peace_lab, 540, 1105, VERM, p * smooth((t - self.t_peace - 0.2) / 0.3))
+                kit.put(fr, scr, self.bar, 540, 1180, GREY, 0.35 * p)
+                if u > 0:
+                    kit.put(fr, scr, self.bar, 190 + 350 * u, 1180, VERM, 0.9 * p, u)
+                kit.put(fr, scr, self.dot, 190, 1180, INK, p, 0.55)
+                kit.put(fr, scr, self.dot, 890, 1180, VERM if u >= 1 else INK, p * (0.4 + 0.6 * smooth((u - 0.9) / 0.1)), 0.55)
+                kit.put(fr, scr, self.peace_y[0], 190, 1235, INK, p)
+                kit.put(fr, scr, self.peace_y[1], 890, 1235, INK, p * (0.4 + 0.6 * smooth((u - 0.9) / 0.1)))
         elif k == 'reiwa':
             for x, d, sp, ph in self.petals:
                 u = ((t - self.t0) * 0.12 * sp + d / 7) % 1
                 kit.put(fr, cam, self.petal, x + 60 * np.sin(t * sp + ph) - 140 * u, 760 + 700 * u, BLOSS, 0.8 * smooth((t - self.t0 - 0.5) / 0.6),
                         rot=t * sp + ph)
-            fm = smooth((t - self.t_poem + 0.1) / 0.4) * (1 - self.photo_amount(t))
+            fm = smooth((t - self.t_poem + 0.1) / 0.4)
             if fm > 0:
-                self.plate(fr, cam, 300, 880, 360, 150, fm)
-                kit.put(fr, cam, self.man, 300, 855, INK, fm, 1 + 0.15 * np.exp(-max(t - self.t_poem, 0) * 4))
-                kit.put(fr, cam, self.man_r, 300, 920, GREY, smooth((t - self.t_poem - 0.3) / 0.3))
+                scr = Cam(540, 960, 1.0)
+                self.plate(fr, scr, 540, 1500, 520, 160, fm)
+                kit.put(fr, scr, self.man, 540, 1475, INK, fm, 1 + 0.15 * np.exp(-max(t - self.t_poem, 0) * 4))
+                kit.put(fr, scr, self.man_r, 540, 1540, GREY, smooth((t - self.t_poem - 0.3) / 0.3))
+
+
+def r5art_xy(lon, lat):
+    import r5art
+    return r5art.chart_xy(lon, lat)
 
 
 def _bloom(s=700):

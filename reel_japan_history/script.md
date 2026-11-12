@@ -9,6 +9,20 @@ Look: the same ink-wash style. One long brushstroke timeline runs across the who
 along it. Each era gets its kanji name brushed in large, with its reading, its years, and one small illustration.
 A progress bar of era seals sits at the top, and the year counter in the corner keeps rolling forward.
 
+## v5 changes (same recording)
+
+- Hook: the user's relief map of Japan under the title; eight real pictures drop onto their regions one by one
+  (Jōmon pot → north-east, Daisen tomb → Osaka, Great Buddha → Nara, Golden Pavilion → Kyōto, Great Wave → Kanagawa,
+  black ship → Uraga, 0-series shinkansen → Tōkaidō, Tokyo today), each with a pin and the era name and year under the
+  title; then the map sinks back for the 2 MINUTES stopwatch, Ready? Go!  A 1.9 s pause after "Japan," gives the drops room.
+- Each era has one key line under its year (e.g. RICH CHIEFS → GIANT TOMBS, SAMURAI END → MODERN JAPAN), so the
+  eras link up.
+- Edo: 平和 / 250 YEARS OF PEACE bar 1603 → 1868, then a map with a vermilion ring closing round Japan (trade only at
+  Nagasaki), then Hokusai's Great Wave (Met Museum, public domain).
+- Meiji: the drawn train no longer dashes across the samurai photo. Reiwa: the announcement holds about 2 s longer,
+  with 万葉集 under it.
+- Short holds after key lines; the reel runs 117.6 s.
+
 ## v3 narration (recorded, final): simpler, no ruler names
 
 From clay pots... to bullet trains. Here's sixteen thousand years of Japan, in two minutes. Let's go!

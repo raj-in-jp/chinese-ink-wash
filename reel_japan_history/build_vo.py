@@ -40,7 +40,10 @@ STAND_IN = [('jomon', 'jomon'), ('yayoi', 'yayoi'), ('kofun', 'kofun'), ('asuka'
             ('tokyo', 'tokyo'), ('heisei', 'heisei'), ('tsunami', 'tsunami'), ('anime', 'anime'), ('reiwa', 'reiwa')]
 ERAS = [k for k, _, _ in JA_WORDS[:15]]
 MATANE = ('matane', 'またね！', 'matane!')
-HOLD = {'trains.': 0.25, 'go!': 0.3, 'up.': 0.3, 'poetry.': 0.5}     # silence after these words: the race starts, the ships land
+# silence after these words, so each picture can land: the hook's pictures drop onto the map after "Japan,", the
+# stopwatch after "minutes.", the peace bar fills, the ships land, the samurai photo is seen, the 2019 announcement lingers
+HOLD = {'Japan,': 1.9, 'minutes.': 0.5, 'Go!': 0.45, 'back.': 0.3, 'flourish.': 0.3, 'again.': 0.3, 'peace,': 0.5,
+        'world.': 0.5, 'up.': 0.4, 'ends.': 0.7, 'poetry.': 2.2}
 PAD = 0.04
 ERA_BREATH = 0.3                   # extra silence before each era name, so a new era never runs into the last line
 

@@ -367,11 +367,13 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         place(amb, x * e, t0, gain)
 
     hk = g('hook')
-    fx('counter', 0.05, 0.5)                                # the year counter racing through history
-    for j in range(7):                                      # a soft flick as each picture flashes past
-        fx('scroll', 0.05 + j * (hk.t_90 - 0.05) / 7, 0.12, pan=0.3 * (-1) ** j)
-    fx('brush', hk.t_90 - 0.1, 0.5)
-    fx('stamp', hk.t_90 + 0.35, 0.6)
+    from scenes.s_hook import DROP_DUR, DROPS
+    for j, td in enumerate(hk.t_drop):                      # each picture: a paper swish as it falls, a soft tap as it lands
+        pan = float(np.clip((DROPS[j][3][0] - 540) / 540, -0.6, 0.6))
+        fx('scroll', td, 0.16, pan=pan)
+        fx('pop', td + DROP_DUR - 0.04, 0.18, pan=pan)
+    fx('brush', hk.t_90, 0.5)
+    fx('stamp', hk.t_90 + 0.45, 0.6)
     fx('scroll', hk.t_ready - 0.05, 0.35)
     fx('taiko', hk.t_go, 0.75)
     for k in ERA_KEYS:
@@ -409,10 +411,13 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         fx('katana', sg.t_fight + 0.25 + 0.55 * j, 0.25, pan=0.3 * (-1) ** j)
     fx('stamp', sg.t_unite, 0.7)
     fx('taiko', sg.t_unite, 0.5)
-    fx('wave', g('edo').t_in + 0.3, 0.45)
+    ed = g('edo')
+    fx('chime', ed.t_peace + 0.1, 0.4)                       # 250 years of peace: the bar fills
+    fx('brush', ed.m_route_t + 0.2, 0.45)                    # the ring closes round Japan
+    fx('wave', ed.t_kab - 0.1, 0.35)                         # the Great Wave print
     sh = g('ships')
     fx('horn', sh.art_t0 + 0.1, 0.45)
-    fx('train', g('meiji').t0 + 0.4, 0.55)
+    fx('train', at('Railways')[0] - 0.1, 0.45)              # under the railway print, not the samurai
     ts = g('taisho')
     fx('tram', ts.t0 + 0.7, 0.3)
     fx('quake', ts.t_quake - 0.1, 0.75)
