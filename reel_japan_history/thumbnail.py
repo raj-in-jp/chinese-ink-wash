@@ -1,7 +1,7 @@
-"""thumbnail — the cover (1080x1920), painted with the reel's own ink engine.  The profile grid shows the centre 3:4
-(y 240-1680), so the title, the motif and the handle all sit inside it.
-  JAPAN'S ENTIRE / HISTORY / IN 2 MINUTES over a vermilion ensō with 90 in it, the fifteen era names in three rows
-  under it, misty hills, and the @raj_in_jp banner at the bottom.
+"""thumbnail — the cover (1080x1920), the hook's own last beat as a still: JAPAN'S ENTIRE / HISTORY at the top, the
+relief map of Japan under it with every real picture pinned to its region as a polaroid, and IN (2) MINUTES — the
+vermilion ensō round the 2 — between the title and the map.  The profile grid shows the centre 3:4 (y 240-1680), so
+the title, the ensō and the map all sit inside it.
     python thumbnail.py   -> output/thumbnail.jpg
 """
 import os
@@ -14,15 +14,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import kit  # noqa: E402
 from art import enso  # noqa: E402
-from cards import INDIGO  # noqa: E402
-from engine import (GREY, FONT_BRUSH_EN, FONT_EN_BOLD, FONT_HEAD, FONT_JP, H, INK, VERM, W, Cam, Frame, StrokeSet,  # noqa: E402
-                    cached, make_paper, noise, stroke, text_layer)
-from k6art import mist_hills  # noqa: E402
-from scenes.era import ERAS, FURI  # noqa: E402
-from timeline import ERA_KEYS  # noqa: E402
+from engine import Frame, FONT_BRUSH_EN, FONT_HEAD, H, INK, VERM, W, Cam, StrokeSet, noise, text_layer  # noqa: E402
+from scenes.s_hook import Scene  # noqa: E402
 
 CAM = Cam(540, 960, 1.0)
-IVORY = np.array([0.98, 0.95, 0.88], np.float32)
 
 
 def brush(s, size, seed):
@@ -31,30 +26,33 @@ def brush(s, size, seed):
 
 
 def main():
-    fr = Frame(make_paper(W, H, 299, stains=0.08))
-    fr.ink(cached('h7_hookhills_v1', lambda: mist_hills(1330, seed=17))['ink'], INK, 0.7)
-    kit.put(fr, CAM, text_layer("JAPAN'S ENTIRE", FONT_HEAD, 86)[0], 540, 330, INK, 1.0)
-    kit.put(fr, CAM, brush('HISTORY', 230, 1), 540, 480, VERM, 1.0, rot=-0.03)
+    sc = Scene(0.0, 10.0)
+    z = np.zeros((2, 2), np.float32)
+    sc.cap = [(z, z)] * len(sc.cap)                      # no era caption: the ensō takes that place
+    t = sc.t_90 - 0.15                                   # every picture has landed, the map not yet sunk back
+    sc.cam = lambda t_: CAM
+    img = sc.render(t)
+
+    fr = Frame(img)
+    # "IN (2) MINUTES": a small vermilion ensō round a brushed 2
     ss = StrokeSet(W, H)
-    enso(ss, 540, 790, 175, 18, 0, 0.01, seed=5, red=True)
-    fr.ink(ss.render(5, red=True), VERM, 0.95)
-    kit.put(fr, CAM, brush('2', 190, 3), 540, 760, INK, 1.0)
-    kit.put(fr, CAM, text_layer('MINUTES', FONT_EN_BOLD, 34, tracking=10)[0], 540, 870, INK, 0.8)
-    keys = [k for k in ERA_KEYS if k != 'ships']
-    for j, k in enumerate(keys):
-        x, y = 160 + (j % 5) * 190, 1050 + (j // 5) * 158
-        kit.put(fr, CAM, text_layer(ERAS[k][0], FONT_JP, 74)[0], x, y, INK if j < 14 else VERM, 1.0)
-        fu = FURI[k]
-        for i, f in enumerate(fu):
-            if f:
-                fx = x if not all(fu) else x + (i - 0.5) * 74
-                kit.put(fr, CAM, text_layer(f, FONT_JP, 22)[0], fx, y - 52, INDIGO, 0.9)
-        kit.put(fr, CAM, text_layer(ERAS[k][2].split(' ')[0], FONT_EN_BOLD, 22, tracking=3)[0], x, y + 52, GREY, 1.0)
-    bn = StrokeSet(W, H)
-    bn.add(stroke(W, H, [(270, 1596), (540, 1586), (810, 1594)], 112, ink=0.96, dry=0.5,
-                  profile=((0, 0.6), (0.06, 1.0), (0.85, 0.95), (1, 0.4)), seed=171), 0, 1)
-    fr.ink(bn.render(5), INK, 0.96)
-    kit.put(fr, CAM, text_layer('@raj_in_jp', FONT_BRUSH_EN, 86)[0], 540, 1584, IVORY, 1.0, over=True)
+    enso(ss, 470, 585, 62, 9, 0, 0.01, seed=5, red=True)
+    m = ss.render(5, red=True)
+    a = m[..., None] * 0.95
+    fr.img = fr.img * (1 - a) + VERM * a
+    kit.put(fr, CAM, text_layer('IN', FONT_HEAD, 52)[0], 350, 588, INK, 1.0)
+    kit.put(fr, CAM, brush('2', 96, 3), 470, 582, INK, 1.0)
+    kit.put(fr, CAM, text_layer('MINUTES', FONT_HEAD, 52)[0], 685, 588, INK, 1.0)
+    # shrink the whole page a little onto fresh paper, so the profile grid's 3:4 crop (y 240-1680) holds all of it
+    import cv2
+    k, cy = 0.87, 975
+    M = np.array([[k, 0, 540 * (1 - k)], [0, k, cy * (1 - k)]], np.float32)
+    small = cv2.warpAffine(fr.img, M, (W, H), flags=cv2.INTER_AREA)
+    m = np.zeros((H, W), np.float32)
+    m[150:-150, 130:-130] = 1
+    m = cv2.GaussianBlur(cv2.warpAffine(m, M, (W, H)), (0, 0), 55)[..., None]
+    paper = sc.frame(CAM).img
+    fr.img = small * m + paper * (1 - m)
     os.makedirs(os.path.join(HERE, 'output'), exist_ok=True)
     out = os.path.join(HERE, 'output', 'thumbnail.jpg')
     Image.fromarray((np.clip(fr.img, 0, 1) * 255).astype(np.uint8)).save(out, quality=95)
