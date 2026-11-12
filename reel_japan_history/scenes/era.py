@@ -63,14 +63,21 @@ MAPS = {
 PANEL = (540, 1080, 1000, 560)
 # real pictures, shown as prints laid on the page: (file, crop x0, y0, x1, y1 in source px, caption, from phrase, until phrase)
 PHOTOS = {
-    'jomon': ('jomon_pot.jpg', (0, 0, 736, 867), 'JŌMON POT', 'oldest pottery', None),
-    'kofun': ('kofun_daisen.jpg', (0, 0, 735, 500), 'DAISEN KOFUN · OSAKA', 'giant keyhole-shaped', None),
-    'nara': ('nara_daibutsu.jpg', (0, 40, 736, 840), 'THE GREAT BUDDHA · TŌDAI-JI', 'giant bronze', None),
-    'muromachi': ('muromachi_kinkakuji.jpg', (0, 110, 736, 900), 'KINKAKU-JI · THE GOLDEN PAVILION', 'ja:zen', None),
-    'sengoku': ('sengoku_unifier.jpg', (0, 0, 736, 780), 'JAPAN UNITED', 'united again', None),
-    'ships': ('ships_kurofune.jpg', (0, 0, 736, 414), 'A BLACK SHIP, DRAWN BY A JAPANESE ARTIST · 1850s', 'black ships', None),
-    'meiji': ('meiji_samurai.jpg', (0, 0, 551, 720), 'A SAMURAI · 19TH CENTURY', 'samurai era', 'Railways'),
-    'reiwa': ('reiwa_tokyo.jpg', (0, 80, 736, 760), 'TOKYO TODAY', 'ja:reiwa', 'first era'),
+    'jomon': [('jomon_pot.jpg', None, 'JŌMON POT', 'oldest pottery', None)],
+    'kofun': [('kofun_haniwa_warrior.jpg', None, 'HANIWA · A CLAY WARRIOR FROM A TOMB', 'Powerful chiefs', 'giant keyhole-shaped'),
+              ('kofun_daisen.jpg', None, 'DAISEN KOFUN · OSAKA', 'giant keyhole-shaped', None)],
+    'asuka': [('asuka_horyuji.jpg', None, "HŌRYŪ-JI · ONE OF THE WORLD'S OLDEST WOODEN BUILDINGS", 'and Japan builds', None)],
+    'nara': [('nara_daibutsu.jpg', (0, 40, 736, 840), 'THE GREAT BUDDHA · TŌDAI-JI', 'giant bronze', None)],
+    'heian': [('heian_byodoin.jpg', None, 'BYŌDŌ-IN · THE PHOENIX HALL', 'capital moves', 'its own kana')],
+    'muromachi': [('muromachi_kinkakuji.jpg', (0, 110, 736, 900), 'KINKAKU-JI · THE GOLDEN PAVILION', 'ja:zen', None)],
+    'sengoku': [('sengoku_unifier.jpg', (0, 0, 736, 780), 'JAPAN UNITED', 'united again', None)],
+    'edo': [('edo_great_wave.jpg', None, 'THE GREAT WAVE · HOKUSAI · UKIYO-E', 'ja:kabuki', None)],
+    'ships': [('ships_kurofune.jpg', None, 'A BLACK SHIP, DRAWN BY A JAPANESE ARTIST · 1850s', 'black ships', None)],
+    'meiji': [('meiji_samurai.jpg', (0, 0, 551, 720), 'A SAMURAI · 19TH CENTURY', 'samurai era', 'Railways'),
+              ('meiji_railway_print.jpg', None, "JAPAN'S FIRST RAILWAY · A WOODBLOCK PRINT", 'Railways', None)],
+    'taisho': [('taisho_1923.jpg', None, 'TOKYO AFTER THE 1923 EARTHQUAKE', 'devastates', None)],
+    'showa': [('showa_shinkansen0.jpg', None, 'THE FIRST SHINKANSEN · 1964', 'Olympics', None)],
+    'reiwa': [('reiwa_announcement.jpg', (1050, 380, 2000, 1250), 'THE NEW ERA NAME IS ANNOUNCED · 2019', 'ja:reiwa', None)],
 }
 PHOTO_BOX = (880, 520)                                     # largest picture inside the print
 ART_DEPTH = 1.25                            # the paintings sit nearer than the page: they travel more with the camera
@@ -123,7 +130,10 @@ class Scene(KanjiScene):
         self.mp = None
         if k in MAPS:
             self.map_build(MAPS[k])
-        self.photo = self.photo_build(PHOTOS[k]) if k in PHOTOS else None
+        import os
+        from engine import HERE
+        self.photos = [self.photo_build(P) for P in PHOTOS.get(k, []) if os.path.exists(os.path.join(HERE, 'data', 'photos', P[0]))]
+        self.photo = self.photos[0] if self.photos else None
         self.bloom = cached('h7_bloom_v2', lambda: {'d': _bloom()})['d']
         if k in BIRDS:
             r = np.random.default_rng(self.idx)
@@ -138,8 +148,10 @@ class Scene(KanjiScene):
         import os
         import cv2
         from engine import HERE
-        f, (x0, y0, x1, y1), cap, a, b = P
-        im = cv2.imread(os.path.join(HERE, 'data', 'photos', f))[y0:y1, x0:x1, ::-1].astype(np.float32) / 255
+        f, crop, cap, a, b = P
+        im = cv2.imread(os.path.join(HERE, 'data', 'photos', f))
+        x0, y0, x1, y1 = crop or (0, 0, im.shape[1], im.shape[0])
+        im = im[y0:y1, x0:x1, ::-1].astype(np.float32) / 255
         sc = min(PHOTO_BOX[0] / im.shape[1], PHOTO_BOX[1] / im.shape[0])
         im = cv2.resize(im, (int(im.shape[1] * sc * 1.08), int(im.shape[0] * sc * 1.08)), interpolation=cv2.INTER_AREA)
         paper = np.array([0.95, 0.92, 0.85], np.float32)
@@ -148,17 +160,23 @@ class Scene(KanjiScene):
         return dict(img=im, w=int(im.shape[1] / 1.08), h=int(im.shape[0] / 1.08), cap=text_layer(cap, FONT_EN_BOLD, 22, tracking=4)[0],
                     t_in=when(a) - 0.25, t_out=None if b is None else when(b) - 0.15)
 
-    def photo_amount(self, t):
-        P = self.photo
-        if P is None:
-            return 0.0
+    @staticmethod
+    def one_amount(P, t):
         a = smooth((t - P['t_in']) / 0.45)
         return a if P['t_out'] is None else a * (1 - smooth((t - P['t_out']) / 0.35))
 
-    def draw_photo(self, fr, t, o):
+    def photo_amount(self, t):
+        return max([self.one_amount(P, t) for P in self.photos] + [0.0])
+
+    def draw_photos(self, fr, t):
+        for P in self.photos:
+            o = self.one_amount(P, t)
+            if o > 0:
+                self.draw_photo(fr, t, o, P)
+
+    def draw_photo(self, fr, t, o, P):
         """the print: a cream mat with a soft shadow, the picture slowly zooming inside it, a small caption on the mat"""
         import cv2
-        P = self.photo
         w, h = P['w'], P['h']
         u = max(t - P['t_in'], 0)
         z = 1.0 + 0.07 * min(u / 5.0, 1)                         # Ken Burns: a slow push in
@@ -495,9 +513,8 @@ class Scene(KanjiScene):
         if m < 1:
             self.life(fr, cam, t)
             self.extras(fr, cam, t)
-        po = self.photo_amount(t)
-        if po > 0:
-            self.draw_photo(fr, t, po)
+        if self.photos:
+            self.draw_photos(fr, t)
         if m > 0:
             self.draw_map(fr, t, m)
         # the era's name, reading, romaji and year; a pale ink bloom opens behind the name as it is written
@@ -645,7 +662,7 @@ class Scene(KanjiScene):
                 u = ((t - self.t0) * 0.12 * sp + d / 7) % 1
                 kit.put(fr, cam, self.petal, x + 60 * np.sin(t * sp + ph) - 140 * u, 760 + 700 * u, BLOSS, 0.8 * smooth((t - self.t0 - 0.5) / 0.6),
                         rot=t * sp + ph)
-            fm = smooth((t - self.t_poem + 0.1) / 0.4)
+            fm = smooth((t - self.t_poem + 0.1) / 0.4) * (1 - self.photo_amount(t))
             if fm > 0:
                 self.plate(fr, cam, 300, 880, 360, 150, fm)
                 kit.put(fr, cam, self.man, 300, 855, INK, fm, 1 + 0.15 * np.exp(-max(t - self.t_poem, 0) * 4))
