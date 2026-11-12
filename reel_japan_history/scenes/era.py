@@ -61,6 +61,18 @@ MAPS = {
                   labels=[('FROM THE U.S.', 144.6, 29.8), ('EDO 江戸', 140.6, 36.3)]),
 }
 PANEL = (540, 1080, 1000, 560)
+# real pictures, shown as prints laid on the page: (file, crop x0, y0, x1, y1 in source px, caption, from phrase, until phrase)
+PHOTOS = {
+    'jomon': ('jomon_pot.jpg', (0, 0, 736, 867), 'JŌMON POT', 'oldest pottery', None),
+    'kofun': ('kofun_daisen.jpg', (0, 0, 735, 500), 'DAISEN KOFUN · OSAKA', 'giant keyhole-shaped', None),
+    'nara': ('nara_daibutsu.jpg', (0, 40, 736, 840), 'THE GREAT BUDDHA · TŌDAI-JI', 'giant bronze', None),
+    'muromachi': ('muromachi_kinkakuji.jpg', (0, 110, 736, 900), 'KINKAKU-JI · THE GOLDEN PAVILION', 'ja:zen', None),
+    'sengoku': ('sengoku_unifier.jpg', (0, 0, 736, 780), 'JAPAN UNITED', 'united again', None),
+    'ships': ('ships_kurofune.jpg', (0, 0, 736, 414), 'A BLACK SHIP, DRAWN BY A JAPANESE ARTIST · 1850s', 'black ships', None),
+    'meiji': ('meiji_samurai.jpg', (0, 0, 551, 720), 'A SAMURAI · 19TH CENTURY', 'samurai era', 'Railways'),
+    'reiwa': ('reiwa_tokyo.jpg', (0, 80, 736, 760), 'TOKYO TODAY', 'ja:reiwa', 'first era'),
+}
+PHOTO_BOX = (880, 520)                                     # largest picture inside the print
 ART_DEPTH = 1.25                            # the paintings sit nearer than the page: they travel more with the camera
 BIRDS = ('jomon', 'yayoi', 'asuka', 'nara', 'heian', 'muromachi', 'edo', 'reiwa')              # map panel centre and size on screen
 
@@ -111,6 +123,7 @@ class Scene(KanjiScene):
         self.mp = None
         if k in MAPS:
             self.map_build(MAPS[k])
+        self.photo = self.photo_build(PHOTOS[k]) if k in PHOTOS else None
         self.bloom = cached('h7_bloom_v2', lambda: {'d': _bloom()})['d']
         if k in BIRDS:
             r = np.random.default_rng(self.idx)
@@ -120,7 +133,64 @@ class Scene(KanjiScene):
             self.smoke = [hart.smoke_puff(seed=30 + j) for j in range(3)]
         self.extra_build()
 
+    # ---------------------------------------------------------------- the real pictures
+    def photo_build(self, P):
+        import os
+        import cv2
+        from engine import HERE
+        f, (x0, y0, x1, y1), cap, a, b = P
+        im = cv2.imread(os.path.join(HERE, 'data', 'photos', f))[y0:y1, x0:x1, ::-1].astype(np.float32) / 255
+        sc = min(PHOTO_BOX[0] / im.shape[1], PHOTO_BOX[1] / im.shape[0])
+        im = cv2.resize(im, (int(im.shape[1] * sc * 1.08), int(im.shape[0] * sc * 1.08)), interpolation=cv2.INTER_AREA)
+        paper = np.array([0.95, 0.92, 0.85], np.float32)
+        im = im * 0.9 + paper * 0.1                              # a touch of the page's warmth, so it sits on the washi
+        when = lambda p: (JA[p[3:]]['start'] if p.startswith('ja:') else at(p, after=self.t0 - 0.5)[0])
+        return dict(img=im, w=int(im.shape[1] / 1.08), h=int(im.shape[0] / 1.08), cap=text_layer(cap, FONT_EN_BOLD, 22, tracking=4)[0],
+                    t_in=when(a) - 0.25, t_out=None if b is None else when(b) - 0.15)
+
+    def photo_amount(self, t):
+        P = self.photo
+        if P is None:
+            return 0.0
+        a = smooth((t - P['t_in']) / 0.45)
+        return a if P['t_out'] is None else a * (1 - smooth((t - P['t_out']) / 0.35))
+
+    def draw_photo(self, fr, t, o):
+        """the print: a cream mat with a soft shadow, the picture slowly zooming inside it, a small caption on the mat"""
+        import cv2
+        P = self.photo
+        w, h = P['w'], P['h']
+        u = max(t - P['t_in'], 0)
+        z = 1.0 + 0.07 * min(u / 5.0, 1)                         # Ken Burns: a slow push in
+        H0, W0 = P['img'].shape[:2]
+        cw, ch = int(W0 / 1.08 / z * 1.0), int(H0 / 1.08 / z * 1.0)
+        cx0, cy0 = (W0 - cw) // 2, (H0 - ch) // 2
+        pic = cv2.resize(P['img'][cy0:cy0 + ch, cx0:cx0 + cw], (w, h), interpolation=cv2.INTER_LINEAR)
+        m, capb = 16, 46
+        card = np.ones((h + 2 * m + capb, w + 2 * m, 3), np.float32) * np.array([0.97, 0.95, 0.9], np.float32)
+        card[m:m + h, m:m + w] = pic
+        ca = np.ones(card.shape[:2], np.float32)
+        cg = P['cap']
+        gy, gx = m + h + capb // 2 - cg.shape[0] // 2, (card.shape[1] - cg.shape[1]) // 2
+        card[gy:gy + cg.shape[0], gx:gx + cg.shape[1]] *= (1 - cg[..., None] * (1 - np.array([0.3, 0.28, 0.26], np.float32)))
+        e = ease_out(min(u / 0.6, 1))
+        cx, cy = 540, 1070 + 40 * (1 - e)
+        rot = np.radians(-1.6 * (1 - e) + 0.6 * np.sin(t * 0.6))
+        sc = 0.94 + 0.06 * e
+        Hc, Wc = card.shape[:2]
+        M = cv2.getRotationMatrix2D((Wc / 2, Hc / 2), np.degrees(rot), sc)
+        M[:, 2] += (cx - Wc / 2, cy - Hc / 2)
+        shadow = cv2.warpAffine(ca, M + np.array([[0, 0, 10], [0, 0, 16]], np.float32), (W, H))
+        fr.img *= (1 - blur(shadow, 12)[..., None] * 0.28 * o)
+        a = cv2.warpAffine(ca, M, (W, H))[..., None] * o
+        rgb = cv2.warpAffine(card, M, (W, H))
+        fr.img = fr.img * (1 - a) + rgb * a
+
     def art_pulse(self, t, c):
+        p = self.photo_amount(t)
+        return (1 - 0.92 * p) * self.art_pulse_(t, c)
+
+    def art_pulse_(self, t, c):
         if self.key == 'sengoku':                        # the castle steps back when the warlords come forward
             return 1 - 0.75 * smooth((t - self.lords[0]['t'] + 0.3) / 0.5)
         if self.key == 'nara' and c == 'red':
@@ -416,7 +486,7 @@ class Scene(KanjiScene):
             z = 0.84 + 0.16 * smooth((t - self.art_t0) / (self.t1 - self.art_t0))
             for c in ('blue', 'ink'):
                 d = reveal_time(self.art[c], self.T_art, fa)
-                kit.put(fr, cam, d, 540, 1150 + (960 - 1150) * z, COLOURS[c], 0.95, z)
+                kit.put(fr, cam, d, 540, 1150 + (960 - 1150) * z, COLOURS[c], 0.95 * (1 - 0.92 * self.photo_amount(t)), z)
             fa = -1
         for c in ('grey', 'blue', 'red', 'gold', 'ink', 'bloss'):
             if c in self.art and fa > 0 and m < 1:
@@ -425,6 +495,9 @@ class Scene(KanjiScene):
         if m < 1:
             self.life(fr, cam, t)
             self.extras(fr, cam, t)
+        po = self.photo_amount(t)
+        if po > 0:
+            self.draw_photo(fr, t, po)
         if m > 0:
             self.draw_map(fr, t, m)
         # the era's name, reading, romaji and year; a pale ink bloom opens behind the name as it is written
@@ -488,13 +561,16 @@ class Scene(KanjiScene):
                 x = L['x'] + lunge + side * (-60) * unite
                 y = 1080 + 60 * (1 - ease_out(min(f, 1))) + clash * 6 * np.sin(t * 13 + j)
                 rot = clash * 0.06 * np.sin(t * 7 + j * 1.7) - 0.05 * side * (1 - unite) * clash
+                o *= 1 - self.photo_amount(t)
+                if o <= 0.01:
+                    continue
                 kit.card(fr, cam, self.card_b, self.card_r, x, y, o, color=np.array([0.96, 0.93, 0.86], np.float32))
                 for c, col in (('red', VERM), ('gold', GOLD), ('ink', INK)):
                     kit.put(fr, cam, L[c], x, y - 10, col, o * (0.9 if c != 'ink' else 1.0), 0.95, rot=rot)
             fu = (t - self.t_unite) / 0.18
-            if fu > 0:
+            if fu > 0 and self.photo_amount(t) < 0.99:
                 kit.put(fr, cam, self.unite, 540, 830, VERM, 0.95 * smooth(fu), 0.78 * (1.0 + 0.6 * np.exp(-fu * 2.4)), rot=-0.05)
-                kit.put(fr, cam, self.unite_lab, 790, 830, INK, smooth(fu - 1.5))
+                kit.put(fr, cam, self.unite_lab, 790, 830, INK, smooth(fu - 1.5) * (1 - self.photo_amount(t)))
         elif k == 'heian':
             fo = ease_out(np.clip((t - self.art_t0 - 0.3) / 0.9, 0, 1))      # the fan snaps open
             i = int(round(fo * 8))

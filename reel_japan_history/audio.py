@@ -380,7 +380,11 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         fx('scroll', s_.t0 - 0.1, 0.32, pan=0.3)            # the page unrolling to the next era
         fx('brush', s_.t_in - 0.25, 0.5, pan=-0.1)          # its name being written
         fx('stamp', s_.t_in + 0.2, 0.3)
-    from scenes.era import MAPS
+    from scenes.era import MAPS, PHOTOS
+    for k in PHOTOS:                                        # each real picture laid on the page
+        s_ = g(k)
+        fx('scroll', s_.photo['t_in'] - 0.05, 0.3, pan=-0.2)
+        fx('stamp', s_.photo['t_in'] + 0.35, 0.2)
     for k in MAPS:                                          # a quill drawing each route on the chart
         s_ = g(k)
         for j in range(len(s_.routes)):
