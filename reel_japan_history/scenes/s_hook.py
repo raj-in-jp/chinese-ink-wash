@@ -1,21 +1,24 @@
-"""The hook.  "From clay pots... to bullet trains.  Here's sixteen thousand years of Japan, in two minutes.  Let's go!"
-Frame 1 is already the picture: a cord-marked Jōmon pot on the paper, FROM CLAY POTS... over it and the year
-c. 14,000 BC.  On "bullet trains" a shinkansen blasts in from the right and races across, wiping the pot away behind
-it: Fuji and the viaduct of modern Japan are revealed in its wake while the year counter flies to 2026 and
-...TO BULLET TRAINS slams in.  On "Here's sixteen thousand years" the title JAPAN'S ENTIRE HISTORY is brushed in, on
-"two minutes" a vermilion ensō stopwatch with 2 MINUTES, and on "Let's go!" the counter rewinds to the start, the
-camera punches in and a brushstroke races along the top: the timeline the reel travels on."""
+"""The hook.  "Sixteen thousand years of Japan, in two minutes.  Ready?  Go!"
+Frame 1 is already the title: JAPAN'S ENTIRE / HISTORY (vermilion brush).  A year counter races from c. 14,000 BC to
+2026 while the era names flash past behind it, faint and huge.  On "two minutes" a vermilion ensō stopwatch is
+brushed round a big 2; on "Ready?" the counter rewinds to the start with a jolt; on "Go!" the camera punches in,
+the stopwatch hand starts to sweep and a brushstroke races along the top: the timeline the whole reel travels on.
+While the counter races, real pictures of each age flash past as small prints under it: the Jōmon pot, the Daisen
+tomb, the Great Buddha, the Golden Pavilion, a black ship, a samurai, Tokyo today."""
 import numpy as np
 
-import hart
 import kit
 from art import enso
-from engine import (FONT_BRUSH_EN, FONT_EN_BOLD, FONT_HEAD, GREY, H, INK, VERM, W, Cam, StrokeSet, cached, ease_in, ease_io,
-                    ease_out, lerp, noise, smooth, stroke, text_layer)
+from engine import FONT_BRUSH_EN, FONT_BRUSH_JP, FONT_EN_BOLD, FONT_HEAD, GREY, H, INK, VERM, W, Cam, StrokeSet, ease_in, ease_io, ease_out, lerp, noise, smooth, stroke, text_layer
 from k6art import mist_hills
-from scenes.era import BLUE, RIB_X0, RIB_X1, RIB_Y, year_label
+from engine import cached
+from scenes.era import ERAS, RIB_X0, RIB_X1, RIB_Y, year_label
 from scenes.kscene import SCREEN, KanjiScene
-from timeline import at
+from timeline import ERA_KEYS, at
+
+YEARS = [ERAS[k][3] for k in ERA_KEYS] + [2026]
+FLASH_YEARS = [-14000, 300, 710, 1397, 1853, 1868, 2019]      # pot, Daisen tomb, Great Buddha, Golden Pavilion, ship, samurai, Tokyo
+FLASH_ERA = [ERA_KEYS.index(k) for k in ('jomon', 'kofun', 'nara', 'muromachi', 'ships', 'meiji', 'reiwa')]
 
 
 class Scene(KanjiScene):
@@ -24,90 +27,118 @@ class Scene(KanjiScene):
 
     def build(self):
         b = lambda s, n, seed: (lambda d: d * (0.86 + 0.14 * noise(*d.shape, 6, 2, seed)))(text_layer(s, FONT_BRUSH_EN, n)[0])
-        self.hills = cached('h7_hookhills_v1', lambda: mist_hills(1330, seed=17))['ink']
-        self.pot = cached('h7_jomon_v1', hart.jomon)
-        self.now = cached('h7_showa_v1', hart.showa)
-        self.bt = cached('h7_bullet_v1', lambda: dict(zip(('ink', 'blue'), hart.bullet_train())))
-        self.from_, _ = text_layer('FROM CLAY POTS...', FONT_HEAD, 66)
-        self.to_ = b('...to bullet trains!', 120, 4)
         self.l1, _ = text_layer("JAPAN'S ENTIRE", FONT_HEAD, 78)
         self.l2 = b('HISTORY', 200, 1)
-        self.n2 = b('2', 150, 3)
-        self.mins, _ = text_layer('MINUTES', FONT_EN_BOLD, 28, tracking=8)
-        self.t_bt = at('bullet trains')[0] - 0.15
-        self.t_here = at('sixteen thousand')[0] - 0.2
-        self.t_two = at('two minutes')[0]
-        self.t_go = at('go')[0]
+        self.ghost = {k: text_layer(ERAS[k][0], FONT_BRUSH_JP, 330)[0] for k in ERA_KEYS}
+        self.t_90 = at('two minutes')[0]
+        self.t_ready = at('Ready')[0]
+        self.t_go = at('Go')[0]
+        self.n90 = b('2', 210, 3)
+        self.sec, _ = text_layer('MINUTES', FONT_EN_BOLD, 34, tracking=10)
         ss = StrokeSet(W, H)
-        enso(ss, 540, 1185, 130, 14, self.t_two - 0.1, 0.5, seed=5, red=True)
+        enso(ss, 540, 1130, 215, 18, self.t_90 - 0.1, 0.55, seed=5, red=True)
         self.ring = ss
+        hand = StrokeSet(40, 400)                            # pivot at the centre of the patch, the hand pointing up
+        hand.add(stroke(40, 400, [(20, 200), (20, 30)], 9, ink=0.95, dry=0.3, profile=((0, 1), (0.85, 0.9), (1, 0.2)), seed=6), 0, 1)
+        self.hand = hand.render(9)
         rb = StrokeSet(W, 260)
         rb.add(stroke(W, 260, [(RIB_X0 - 30, 130), (540, 126), (RIB_X1 + 30, 130)], 5, ink=0.6, dry=0.5,
                       profile=((0, 0.3), (0.1, 1), (0.9, 1), (1, 0.3)), seed=7), self.t_go, 0.45)
         self.rib = rb
+        self.hills = cached('h7_hookhills_v1', lambda: mist_hills(1330, seed=17))['ink']
         self._years = {}
         self.t_hit = self.t_go
+        self.flash = cached('h7_hookflash_v1', _flash_cards)['cards']
 
-    def train_x(self, t):
-        """the shinkansen's nose: in from the right edge, out past the left"""
-        u = (t - self.t_bt) / 1.1
-        return lerp(1700, -900, ease_in(np.clip(u, 0, 1)) * 0.35 + np.clip(u, 0, 1) * 0.65)
+    def count(self, t):
+        """the year on the counter: racing forward, rewinding on Ready?, held at the start on Go!"""
+        if t < self.t_ready:                             # in step with the pictures: each one's own year
+            n = len(FLASH_YEARS)
+            beat = (self.t_90 - 0.05) / n
+            k = int(np.clip((t - 0.05) / beat, 0, n - 1))
+            u = ease_out(np.clip(((t - 0.05) - k * beat) / 0.18, 0, 1))
+            y = lerp(FLASH_YEARS[max(k - 1, 0)], FLASH_YEARS[k], u if k else 1)
+            if t > self.t_90:
+                y = lerp(FLASH_YEARS[-1], 2026, ease_out(np.clip((t - self.t_90) / 0.3, 0, 1)))
+            return y, FLASH_ERA[k]
+        u = ease_out(np.clip((t - self.t_ready) / 0.5, 0, 1))
+        return lerp(2026, YEARS[0], u), int((1 - u) * (len(YEARS) - 2))
 
-    def year(self, t):
-        if t < self.t_go - 0.1:
-            u = ease_io(np.clip((t - self.t_bt) / 1.1, 0, 1))
-            y = lerp(-14000, 2026, u)
-        else:
-            y = lerp(2026, -14000, ease_out(np.clip((t - self.t_go + 0.1) / 0.5, 0, 1)))
+    def year_patch(self, y):
         y = int(round(y))
         s = year_label(round(y / 1000) * 1000 if y < -2000 else round(y / 100) * 100 if y < 300 else y)
         if s not in self._years:
-            self._years[s] = text_layer(s, FONT_HEAD, 84)[0]
+            self._years[s] = text_layer(s, FONT_HEAD, 96)[0]
         return self._years[s]
 
     def cam(self, t):
-        punch = 0.06 * np.exp(-max(t - self.t_go, 0) * 5) * (t > self.t_go) + 0.03 * np.exp(-max(t - self.t_bt - 0.2, 0) * 4) * (t > self.t_bt + 0.2)
-        q = t - self.t_bt - 0.2
-        rumble = 6 * np.exp(-q * 3) * np.sin(q * 60) * (q > 0)
-        return Cam(540 + rumble, 960, 1.0 + 0.04 * smooth(t / 7) + punch)
+        punch = 0.06 * np.exp(-max(t - self.t_go, 0) * 5) * (t > self.t_go)
+        q = t - self.t_ready
+        jolt = 10 * np.exp(-q * 7) * np.sin(q * 50) * (q > 0)
+        return Cam(540 + jolt, 960, 1.0 + 0.04 * smooth(t / 5) + punch)
 
     def render(self, t):
         cam = self.cam(t)
         fr = self.frame(cam)
-        self.layer(fr, cam, self.hills, opacity=0.55)
-        # the past on the left of the train, the present on the right of it
-        tx = self.train_x(t)
-        xx = np.arange(W, dtype=np.float32)[None, :]
-        past = np.clip((tx - 120 - xx) / 60, 0, 1)                 # ahead of the nose
-        now = 1 - past
-        fade = 1 - smooth((t - self.t_here) / 0.5) * 0.65          # the pictures step back under the title
-        for c, col in (('ink', INK),):
-            self.layer(fr, cam, self.pot[c] * past, 0, 60, opacity=0.95 * fade)
-        if t > self.t_bt:
-            self.layer(fr, cam, self.now['red'] * now, 0, 40, color=VERM, opacity=0.8 * fade)
-            self.layer(fr, cam, self.now['ink'] * now, 0, 40, opacity=0.95 * fade)
-        if -900 < tx < 1700 and t > self.t_bt:
-            for j in range(5):                                       # speed lines behind it
-                kit.put(fr, cam, kit.box(4, 260, 1.0), tx + 640 + 120 * j, 1150 + 18 * (j - 2), GREY, 0.5 * (1 - j / 5))
-            kit.put(fr, cam, self.bt['blue'], tx + 430, 1215, BLUE, 1.0, -1.25, 1.25)
-            kit.put(fr, cam, self.bt['ink'], tx + 430, 1215, INK, 1.0, -1.25, 1.25)
-        # the words
-        ff = 1 - smooth((t - self.t_here + 0.25) / 0.25)
-        kit.put(fr, cam, self.from_, 540, 330, INK, ff)
-        ft = (t - self.t_bt - 0.45) / 0.25
-        if ft > 0:
-            kit.put(fr, cam, self.to_, 540, 455, VERM, smooth(ft) * (1 - smooth((t - self.t_here + 0.25) / 0.25)), 1 + 0.25 * np.exp(-ft * 3), rot=-0.03)
-        fh = smooth((t - self.t_here - 0.05) / 0.35)
-        kit.put(fr, cam, self.l1, 540, 330 + 20 * (1 - fh), INK, fh)
-        kit.put(fr, cam, self.l2, 540, 475, VERM, smooth((t - self.t_here - 0.25) / 0.35), 1.1 - 0.1 * fh, rot=-0.03)
-        kit.put(fr, cam, self.year(t), 540, 650, INK, 1.0, 1 + 0.08 * np.exp(-max(t - self.t_go, 0) * 6) * (t > self.t_go))
-        # the two-minute stopwatch
-        f2 = (t - self.t_two) / 0.3
-        if f2 > 0:
-            self.plate(fr, cam, 540, 1185, 300, 300, smooth(f2) * 0.9)
+        self.layer(fr, cam, self.hills, opacity=0.7)
+        y, i = self.count(t)
+        flash = 0.13 if t < self.t_ready + 0.5 else 0.13 * (1 - smooth((t - self.t_ready - 0.5) / 0.3))
+        kit.put(fr, cam, self.ghost[ERA_KEYS[min(i, len(ERA_KEYS) - 1)]], 540, 790, INK, flash)
+        kit.put(fr, cam, self.l1, 540, 335, INK, 1.0, 1.06 - 0.06 * ease_out(t / 0.5))
+        kit.put(fr, cam, self.l2, 540, 480, VERM, 1.0, 1.1 - 0.1 * ease_out(t / 0.6), rot=-0.03)
+        kit.put(fr, cam, self.year_patch(y), 540, 770, INK, 1.0, 1 + 0.1 * np.exp(-max(t - self.t_ready, 0) * 6) * (t > self.t_ready))
+        # the photo montage under the counter, one print per beat, until the stopwatch arrives
+        if t < self.t_90 + 0.15:
+            n = len(self.flash)
+            k = int(np.clip((t - 0.05) / ((self.t_90 - 0.05) / n), 0, n - 1))
+            u = (t - 0.05) - k * (self.t_90 - 0.05) / n
+            _paste(fr, self.flash[k], 540, 1125, 1.0 - smooth((t - self.t_90) / 0.15), 1.06 - 0.06 * ease_out(min(u / 0.12, 1)), 0.02 * (-1) ** k)
+        # the stopwatch
+        f9 = (t - self.t_90) / 0.3
+        if f9 > 0:
             self.layer(fr, cam, self.ring.render(t, red=True), color=VERM, opacity=0.95)
-            kit.put(fr, cam, self.n2, 540, 1165, INK, smooth(f2), 1 + 0.3 * np.exp(-f2 * 3))
-            kit.put(fr, cam, self.mins, 540, 1245, GREY, smooth(f2 - 1))
+            kit.put(fr, cam, self.n90, 540, 1110, INK, smooth(f9), 1 + 0.25 * np.exp(-f9 * 3))
+            kit.put(fr, cam, self.sec, 540, 1215, GREY, smooth(f9 - 1))
+            ang = 0.0 if t < self.t_go else (t - self.t_go) * 2.2
+            kit.put(fr, cam, self.hand, 540, 1130, VERM, smooth(f9 - 0.5), rot=ang)
         if t > self.t_go - 0.05:
             kit.put(fr, SCREEN, self.rib.render(t), 540, RIB_Y, INK, 0.75)
         return fr.img
+
+
+def _flash_cards(h=380):
+    """the montage prints: each real picture cropped to a 4:3 window, on a cream mat"""
+    import os
+    import cv2
+    from engine import HERE
+    files = ['jomon_pot.jpg', 'kofun_daisen.jpg', 'nara_daibutsu.jpg', 'muromachi_kinkakuji.jpg', 'ships_kurofune.jpg',
+             'meiji_samurai.jpg', 'reiwa_tokyo.jpg']
+    out = []
+    for f in files:
+        im = cv2.imread(os.path.join(HERE, 'data', 'photos', f))[..., ::-1].astype(np.float32) / 255
+        ih, iw = im.shape[:2]
+        w = int(h * 4 / 3)
+        s = max(w / iw, h / ih)
+        im = cv2.resize(im, (int(iw * s + 1), int(ih * s + 1)), interpolation=cv2.INTER_AREA)
+        y0, x0 = (im.shape[0] - h) // 2, (im.shape[1] - w) // 2
+        im = im[y0:y0 + h, x0:x0 + w] * 0.9 + np.array([0.95, 0.92, 0.85], np.float32) * 0.1
+        m = 14
+        card = np.ones((h + 2 * m, w + 2 * m, 3), np.float32) * np.array([0.97, 0.95, 0.9], np.float32)
+        card[m:m + h, m:m + w] = im
+        out.append(card.astype(np.float32))
+    return {'cards': np.stack(out)}
+
+
+def _paste(fr, card, cx, cy, op, sc, rot):
+    import cv2
+    if op <= 0:
+        return
+    Hc, Wc = card.shape[:2]
+    M = cv2.getRotationMatrix2D((Wc / 2, Hc / 2), np.degrees(rot), sc)
+    M[:, 2] += (cx - Wc / 2, cy - Hc / 2)
+    a = cv2.warpAffine(np.ones((Hc, Wc), np.float32), M, (W, H))
+    sh = cv2.warpAffine(np.ones((Hc, Wc), np.float32), M + np.array([[0, 0, 8], [0, 0, 12]], np.float32), (W, H))
+    from engine import blur
+    fr.img *= (1 - blur(sh, 10)[..., None] * 0.25 * op)
+    a = a[..., None] * op
+    fr.img = fr.img * (1 - a) + cv2.warpAffine(card, M, (W, H)) * a

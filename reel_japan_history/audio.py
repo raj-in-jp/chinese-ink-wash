@@ -367,14 +367,13 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         place(amb, x * e, t0, gain)
 
     hk = g('hook')
-    fx('fire', 0.0, 0.3)                                    # the clay pot by the fire...
-    fx('shinkansen', hk.t_bt - 0.25, 0.75)                  # ...blown away by the bullet train
-    fx('counter', hk.t_bt, 0.45)
-    fx('brush', hk.t_here, 0.5)
-    fx('brush', hk.t_two - 0.1, 0.45)
-    fx('stamp', hk.t_two + 0.3, 0.55)
-    fx('scroll', hk.t_go - 0.1, 0.35)
-    fx('taiko', hk.t_go, 0.7)
+    fx('counter', 0.05, 0.5)                                # the year counter racing through history
+    for j in range(7):                                      # a soft flick as each picture flashes past
+        fx('scroll', 0.05 + j * (hk.t_90 - 0.05) / 7, 0.12, pan=0.3 * (-1) ** j)
+    fx('brush', hk.t_90 - 0.1, 0.5)
+    fx('stamp', hk.t_90 + 0.35, 0.6)
+    fx('scroll', hk.t_ready - 0.05, 0.35)
+    fx('taiko', hk.t_go, 0.75)
     for k in ERA_KEYS:
         s_ = g(k)
         fx('scroll', s_.t0 - 0.1, 0.32, pan=0.3)            # the page unrolling to the next era

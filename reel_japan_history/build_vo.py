@@ -1,6 +1,7 @@
 """build_vo — the narration: Raj's English take with every Japanese word spoken by Raj in Japanese.
 
     audio/take_en_a.mp3 + words_en_a.json     the English take, romaji stand-ins in it (Scribe word timings)
+    audio/hook_a.mp3 + words_hook_a.json      the opening line, "Sixteen thousand years of Japan, in two minutes. Ready? Go!"
     audio/words_ja_a.mp3                      the 31 Japanese words, one after another (split on their silences)
     audio/words_ja_b.mp3                      しょうぐん。 とくがわ。
     audio/matane_a.mp3                        またね！ (after "follow for more.")
@@ -101,6 +102,17 @@ def main():
     words = [w for w in json.load(open(os.path.join(A, 'words_en_a.json')))['words'] if w.get('type', 'word') == 'word']
     rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 0.01] ** 2))
     level = rms(en)
+    # the opening line comes from its own take (audio/hook_a.mp3): it replaces everything before "Jomon."
+    hk = load('hook_a.mp3')
+    hw = [w for w in json.load(open(os.path.join(A, 'words_hook_a.json')))['words'] if w.get('type', 'word') == 'word']
+    hk = faded(hk[:int(min(len(hk) / SR, hw[-1]['end'] + 0.12) * SR)]) * level / rms(hk)
+    i = next(i for i, w in enumerate(words) if norm(w['text']) == 'jomon')
+    c = quietest(e, words[i - 1]['end'] + 0.03, words[i]['start'] - 0.03)
+    gap = 0.45
+    shift = len(hk) / SR + gap - c
+    en = np.concatenate([hk, np.zeros(int(gap * SR), np.float32), en[int(c * SR):]])
+    words = hw + [dict(w, start=round(w['start'] + shift, 3), end=round(w['end'] + shift, 3)) for w in words[i:]]
+    e = env(en)
     jw = load('words_ja_a.mp3')
     segs = segments(jw)
     assert len(segs) == len(JA_WORDS), f'{len(segs)} segments in the Japanese words take'
