@@ -90,7 +90,7 @@ PHOTOS = {
     'meiji': [('meiji_samurai.jpg', (0, 0, 551, 720), 'A SAMURAI · 19TH CENTURY', 'samurai era', 'Railways'),
               ('meiji_railway_print.jpg', None, "JAPAN'S FIRST RAILWAY · A WOODBLOCK PRINT", 'Railways', None)],
     'taisho': [('taisho_1923_street.jpg', None, 'TOKYO AFTER THE 1923 EARTHQUAKE', 'devastates', None)],
-    'showa': [('showa_shinkansen_fuji.jpg', None, 'THE SHINKANSEN PASSING MOUNT FUJI · 1964', 'bullet train', None)],
+    'showa': [('showa_shinkansen_fuji.jpg', None, 'THE SHINKANSEN PASSING MOUNT FUJI · 1964', 'Olympics', None)],
     'heisei': [('heisei_tokyo_neon.jpg', None, 'TOKYO NEON · 1990s', 'ja:heisei', 'bubble bursts')],
     'reiwa': [('reiwa_announcement.jpg', (1050, 380, 2000, 1250), 'THE NEW ERA NAME IS ANNOUNCED · 2019', 'ja:reiwa', 'Japanese poetry'),
               ('reiwa_frame.jpg', None, "REIWA · FROM THE MAN'YŌSHŪ POEMS", 'Japanese poetry', None)],
@@ -659,8 +659,9 @@ class Scene(KanjiScene):
             jolt = 10 * np.exp(-q * 3) * np.sin(q * 40) * (q > 0)
             x = lerp(-260, 330, u) + jolt
             y = 1170 + 2 * np.sin(t * 14) * (u < 1) + 0.5 * jolt
-            kit.put(fr, cam, self.tram['red'], x, y, VERM, 0.85, rot=0.03 * np.sin(q * 30) * np.exp(-max(q, 0) * 3) * (q > 0))
-            kit.put(fr, cam, self.tram['ink'], x, y, INK, 1.0, rot=0.03 * np.sin(q * 30) * np.exp(-max(q, 0) * 3) * (q > 0))
+            po = 1 - self.photo_amount(t)                # the tram steps aside for the real photograph
+            kit.put(fr, cam, self.tram['red'], x, y, VERM, 0.85 * po, rot=0.03 * np.sin(q * 30) * np.exp(-max(q, 0) * 3) * (q > 0))
+            kit.put(fr, cam, self.tram['ink'], x, y, INK, po, rot=0.03 * np.sin(q * 30) * np.exp(-max(q, 0) * 3) * (q > 0))
             fc = (t - self.t_quake - 0.15) / 0.5
             if fc > 0:
                 self.layer(fr, cam, reveal_time(self.crack, self.T_crack, fc), color=INK, opacity=1.0)
