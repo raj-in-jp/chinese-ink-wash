@@ -1,7 +1,8 @@
 # Reel 7 — JAPAN'S ENTIRE HISTORY IN 90 SECONDS (@raj_in_jp)
 
 English: Raj (3HL8elsjVw0CPWZOXkOf).  Japanese: Raj in Japanese (O9wrU9R3lqrtkwAuQhDV).
-Every era name is spoken in the Japanese voice: romaji stand-ins in the English take are replaced with clips from a
+Every Japanese word (era names, Kyoto, kana, Murasaki Shikibu, Genji, samurai, Zen, Noh, Nobunaga, Hideyoshi, Ieyasu,
+kabuki, ukiyo-e, sushi, Tokyo, tsunami, anime) is spoken in the Japanese voice: romaji stand-ins in the English take are replaced with clips from a
 Japanese list take, as in reel 6. Target length 85–95 s.
 
 Look: the same ink-wash style. One long brushstroke timeline runs across the whole reel, and the camera travels
@@ -24,7 +25,7 @@ Voice: "Sixteen thousand years of Japan, in ninety seconds. Ready? Go!"
 | 3 | 古墳 こふん | c. 300 AD | keyhole-shaped tomb, seen from above | "Kofun: rulers are buried in giant keyhole-shaped tombs." |
 | 4 | 飛鳥 あすか | 538 | temple pagoda | "Asuka: Buddhism arrives, and Japan builds a state on the Chinese model." |
 | 5 | 奈良 なら | 710 | the Great Buddha | "Nara: a grand capital, and a bronze Buddha fifteen meters tall." |
-| 6 | 平安 へいあん | 794 | court lady with a scroll, あ forming from 安 | "Heian: the capital moves to Kyoto. Kana is born, and Lady Murasaki writes The Tale of Genji." |
+| 6 | 平安 へいあん | 794 | court fan; 安 → あ (kana is born) | "Heian: the capital moves to Kyoto. Kana is born, and Murasaki Shikibu writes The Tale of Genji." |
 | 7 | 鎌倉 かまくら | 1185 | samurai helmet, Mongol ships in a storm | "Kamakura: the samurai take power. Mongol fleets are driven back, twice." |
 | 8 | 室町 むろまち | 1336 | the Golden Pavilion, a tea bowl | "Muromachi: Zen, the tea ceremony, Noh theater, and the Golden Pavilion." |
 | 9 | 戦国 せんごく | 1467 | castle, banners, three warlord crests | "Sengoku: a century of war, until Nobunaga, Hideyoshi and Ieyasu unite the country." |
@@ -47,7 +48,16 @@ Japanese (Raj in Japanese): またね！ (matane)
 ## Japanese list (Raj in Japanese)
 
 じょうもん。 やよい。 こふん。 あすか。 なら。 へいあん。 かまくら。 むろまち。 せんごく。 えど。 めいじ。 たいしょう。
-しょうわ。 へいせい。 れいわ。 またね！
+しょうわ。 へいせい。 れいわ。 きょうと。 かな。 むらさきしきぶ。 げんじ。 さむらい。 ぜん。 のう。 のぶなが。 ひでよし。
+いえやす。 かぶき。 うきよえ。 すし。 とうきょう。 つなみ。 アニメ。  (またね！ reused from reel 6)
+
+## Recording
+
+- audio/take_en_a.mp3 (Raj, Scribe word-exact, the steadier of two takes) and audio/words_ja_a.mp3 (Raj in Japanese,
+  Scribe exact, the slower and clearer of two takes). build_vo.py splices 33 Japanese words into the English, with a
+  short breath before each era name. Narration 97.6 s; the reel runs 100.4 s with the closing hold.
+- Music: the user's track (audio/bgm.mp3), ducked under every word (voice leads by a median of about 23 dB while
+  Raj speaks), crossfaded on the beat into its own ending.
 
 ## Fact notes (checked before recording)
 
