@@ -1,6 +1,6 @@
 """thumbnail — the cover (1080x1920), painted with the reel's own ink engine.  The profile grid shows the centre 3:4
 (y 240-1680), so the title, the motif and the handle all sit inside it.
-  JAPAN'S ENTIRE / HISTORY / IN 90 SECONDS over a vermilion ensō with 90 in it, the fifteen era names in three rows
+  JAPAN'S ENTIRE / HISTORY / IN 2 MINUTES over a vermilion ensō with 90 in it, the fifteen era names in three rows
   under it, misty hills, and the @raj_in_jp banner at the bottom.
     python thumbnail.py   -> output/thumbnail.jpg
 """
@@ -38,8 +38,8 @@ def main():
     ss = StrokeSet(W, H)
     enso(ss, 540, 790, 175, 18, 0, 0.01, seed=5, red=True)
     fr.ink(ss.render(5, red=True), VERM, 0.95)
-    kit.put(fr, CAM, brush('90', 170, 3), 540, 760, INK, 1.0)
-    kit.put(fr, CAM, text_layer('SECONDS', FONT_EN_BOLD, 34, tracking=10)[0], 540, 870, INK, 0.8)
+    kit.put(fr, CAM, brush('2', 190, 3), 540, 760, INK, 1.0)
+    kit.put(fr, CAM, text_layer('MINUTES', FONT_EN_BOLD, 34, tracking=10)[0], 540, 870, INK, 0.8)
     keys = [k for k in ERA_KEYS if k != 'ships']
     for j, k in enumerate(keys):
         x, y = 160 + (j % 5) * 190, 1050 + (j // 5) * 158

@@ -1,7 +1,7 @@
-"""The hook.  "Sixteen thousand years of Japan, in ninety seconds.  Ready?  Go!"
+"""The hook.  "Sixteen thousand years of Japan, in two minutes.  Ready?  Go!"
 Frame 1 is already the title: JAPAN'S ENTIRE / HISTORY (vermilion brush).  A year counter races from c. 14,000 BC to
-2026 while the era names flash past behind it, faint and huge.  On "ninety seconds" a vermilion ensō stopwatch is
-brushed round a big 90; on "Ready?" the counter rewinds to the start with a jolt; on "Go!" the camera punches in,
+2026 while the era names flash past behind it, faint and huge.  On "two minutes" a vermilion ensō stopwatch is
+brushed round a big 2; on "Ready?" the counter rewinds to the start with a jolt; on "Go!" the camera punches in,
 the stopwatch hand starts to sweep and a brushstroke races along the top: the timeline the whole reel travels on."""
 import numpy as np
 
@@ -26,11 +26,11 @@ class Scene(KanjiScene):
         self.l1, _ = text_layer("JAPAN'S ENTIRE", FONT_HEAD, 78)
         self.l2 = b('HISTORY', 200, 1)
         self.ghost = {k: text_layer(ERAS[k][0], FONT_BRUSH_JP, 330)[0] for k in ERA_KEYS}
-        self.t_90 = at('ninety seconds')[0]
+        self.t_90 = at('two minutes')[0]
         self.t_ready = at('Ready')[0]
         self.t_go = at('Go')[0]
-        self.n90 = b('90', 190, 3)
-        self.sec, _ = text_layer('SECONDS', FONT_EN_BOLD, 34, tracking=10)
+        self.n90 = b('2', 210, 3)
+        self.sec, _ = text_layer('MINUTES', FONT_EN_BOLD, 34, tracking=10)
         ss = StrokeSet(W, H)
         enso(ss, 540, 1130, 215, 18, self.t_90 - 0.1, 0.55, seed=5, red=True)
         self.ring = ss

@@ -9,6 +9,39 @@ Look: the same ink-wash style. One long brushstroke timeline runs across the who
 along it. Each era gets its kanji name brushed in large, with its reading, its years, and one small illustration.
 A progress bar of era seals sits at the top, and the year counter in the corner keeps rolling forward.
 
+## v2 narration (recorded, about 2 minutes)
+
+Slower, with one "what changed" line per era and a breath before every era name (Japanese words in Raj in Japanese).
+
+Sixteen thousand years of Japan, in two minutes. Ready? Go!
+Jōmon. Hunters live in villages, and make some of the oldest pottery on Earth.
+Yayoi. People from the mainland bring rice farming and metal tools.  [map: routes to Kyūshū]
+Kofun. Powerful chiefs are buried in giant keyhole-shaped tombs.
+Asuka. Buddhism arrives from Korea, and Japan builds a government like China's.  [map: Korea → Nara]
+Nara. Japan's first great capital, with a bronze Buddha fifteen meters tall.
+Heian. The capital moves to Kyōto. Kana letters are born, and Murasaki Shikibu writes The Tale of Genji.  [安 → あ]
+Kamakura. The emperor still reigns in Kyōto, but now the samurai rule. Their leader, the shōgun, governs from
+Kamakura. Mongol fleets attack twice, and storms drive them back.
+  [map: 天皇 EMPEROR at Kyōto, 将軍 SHOGUN at Kamakura, riders gallop out and vermilion spreads over Japan;
+   then the 1274 / 1281 fleets and the storm]
+Muromachi. The shōgun moves back to Kyōto. Zen, the tea ceremony, and Noh theater flourish.
+Sengoku. The country breaks apart, and warlords fight for a hundred years. Then three great warriors, Nobunaga,
+Hideyoshi, and Ieyasu, unite Japan.  [portraits 織田信長 豊臣秀吉 徳川家康, then the 統一 seal]
+Edo. The Tokugawa shōguns bring two hundred and fifty years of peace, and Japan closes itself off from most of the
+world. Kabuki, ukiyo-e, and sushi flourish.
+Then, in 1853, American black ships arrive, and Japan must open its ports.  [map: across the Pacific to Edo]
+Meiji. The samurai era ends. Japan builds railways and factories, and becomes modern in one generation.
+Taishō. Democracy grows, and in 1923, a great earthquake devastates Tōkyō.
+Shōwa. War, and defeat in 1945. Then Japan rebuilds: the bullet train, and the Tōkyō Olympics.
+Heisei. The bubble bursts, a tsunami strikes in 2011, and anime goes global.
+And now, Reiwa. The first era name from Japanese poetry, not Chinese classics.
+Which era would you live in? Tell me in the comments, and follow for more. またね！
+
+Recording: audio/take_en_a.mp3 (Raj, take 2 of 2, Scribe word-exact), audio/words_ja_a.mp3 + words_ja_b.mp3
+(しょうぐん。 とくがわ。, Scribe exact). Narration 122.9 s; the reel runs 126.3 s.
+
+## v1 plan (kept for reference)
+
 ## 1. HOOK (0:00–0:04)
 
 Visual: a single brushstroke races across the paper as the counter spins from 14,000 BC to 2026.

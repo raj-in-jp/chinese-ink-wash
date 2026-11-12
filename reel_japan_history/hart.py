@@ -528,3 +528,66 @@ def wave_line(w=1080, h=260, seed=0):
 def junks():
     """three small junks for the Mongol fleet; each (ink, red)"""
     return [junk() for _ in range(3)]
+
+
+# ------------------------------------------------------------------ 戦国: the three unifiers, as armoured portraits
+def warrior(crest='crescent', w=300, h=360, seed=0):
+    """an armoured warlord, head and shoulders: helmet bowl with its neck guard and a gilded crest, a vermilion face
+    mask, shoulder guards of laced plates; returns (ink, red, gold) on a w x h canvas.  The crest tells them apart."""
+    ss, red, gold = StrokeSet(w, h), StrokeSet(w, h), StrokeSet(w, h)
+    cx = w / 2
+    # shoulders and the laced cuirass
+    ss.add(pwash(w, h, [(cx - 135, h), (cx - 125, 270), (cx - 60, 238), (cx + 60, 238), (cx + 125, 270), (cx + 135, h)], ink=0.8, soft=2,
+                 seed=seed + 1, grain=0.35), 0, 1)
+    for s_ in (-1, 1):                                       # shoulder guards (sode): stacked plates
+        for j in range(4):
+            y = 250 + j * 24
+            ss.add(pwash(w, h, [(cx + s_ * 60, y), (cx + s_ * 140, y + 12), (cx + s_ * 140, y + 34), (cx + s_ * 60, y + 22)], ink=0.92,
+                         soft=1.2, seed=seed + 10 + j + (s_ > 0) * 5), 0, 1)
+            red.add(stroke(w, h, [(cx + s_ * 64, y + 20), (cx + s_ * 136, y + 31)], 3, ink=0.85, dry=0.4, profile=BLUNT,
+                           seed=seed + 30 + j + (s_ > 0) * 5), 0, 1)
+    for j in range(3):                                       # lacing on the chest
+        red.add(stroke(w, h, [(cx - 50, 290 + j * 22), (cx + 50, 290 + j * 22)], 3, ink=0.75, dry=0.45, profile=BLUNT, seed=seed + 40 + j), 0, 1)
+    # the face, the red mask over mouth and chin, the eyes under the brim
+    ss.add(pwash(w, h, [(cx + 48 * np.cos(a), 190 + 52 * np.sin(a)) for a in np.linspace(0, 2 * np.pi, 24, endpoint=False)], ink=0.12,
+                 soft=2, seed=seed + 50), 0, 1)
+    red.add(pwash(w, h, [(cx - 46, 192), (cx + 46, 192), (cx + 40, 232), (cx, 246), (cx - 40, 232)], ink=0.9, soft=1.5, seed=seed + 51), 0, 1)
+    for s_ in (-1, 1):
+        ss.add(stroke(w, h, [(cx + s_ * 30, 175), (cx + s_ * 12, 178)], 4, ink=0.9, dry=0.3, profile=BLUNT, seed=seed + 52 + s_), 0, 1)
+        ss.add(stroke(w, h, [(cx + s_ * 40, 165), (cx + s_ * 10, 162)], 3, ink=0.8, dry=0.3, profile=SWEEP, seed=seed + 55 + s_), 0, 1)
+    # helmet: bowl, brim, flared neck guard
+    bowl = [(cx + 78 * np.cos(a), 150 + 70 * np.sin(a)) for a in np.linspace(np.pi, 2 * np.pi, 20)]
+    ss.add(pwash(w, h, bowl + [(cx + 78, 152), (cx - 78, 152)], ink=0.92, soft=1.5, seed=seed + 60), 0, 1)
+    for s_ in (-1, 1):
+        ss.add(pwash(w, h, [(cx + s_ * 70, 150), (cx + s_ * 120, 175), (cx + s_ * 128, 215), (cx + s_ * 60, 195)], ink=0.85, soft=1.5,
+                     seed=seed + 62 + s_), 0, 1)
+    ss.add(stroke(w, h, spline([(cx - 95, 158), (cx, 146), (cx + 95, 158)], 8), 8, ink=0.95, dry=0.3, profile=BLUNT, seed=seed + 65), 0, 1)
+    # the crest (maedate)
+    if crest == 'crescent':
+        gold.add(stroke(w, h, spline([(cx - 80, 40), (cx - 40, 85), (cx, 100), (cx + 40, 85), (cx + 80, 40)], 10), 14, ink=0.95, dry=0.3,
+                        profile=((0, 0.1), (0.5, 1), (1, 0.1)), seed=seed + 70), 0, 1)
+    elif crest == 'rays':
+        for j in range(9):
+            a = np.pi * (1.1 + 0.8 * j / 8)
+            gold.add(stroke(w, h, [(cx, 92), (cx + 95 * np.cos(a), 92 + 95 * np.sin(a))], 7, ink=0.9, dry=0.3, profile=SWEEP, seed=seed + 70 + j), 0, 1)
+    else:                                                    # 'fern': a tall leaf
+        gold.add(pwash(w, h, [(cx, 18), (cx + 26, 60), (cx + 18, 98), (cx, 104), (cx - 18, 98), (cx - 26, 60)], ink=0.9, soft=1.5, seed=seed + 70), 0, 1)
+        for j in range(5):
+            y = 40 + j * 13
+            ss.add(stroke(w, h, [(cx, y + 6), (cx + 16, y - 4)], 2, ink=0.5, dry=0.4, profile=SWEEP, seed=seed + 75 + j), 0, 1)
+    gold.add(_ring_s(w, h, cx, 110, 13, 6, seed + 79), 0, 1)
+    return _f(ss.render(9)), _f(red.render(9)), _f(gold.render(9))
+
+
+def samurai_icon(w=80, h=90, seed=0):
+    """a tiny mounted samurai for the map: rider with helmet and spear on a galloping horse; returns (ink, red)"""
+    ss, red = StrokeSet(w, h), StrokeSet(w, h)
+    ss.add(pwash(w, h, [(10, 60), (22, 48), (58, 46), (70, 52), (72, 60), (62, 66), (20, 66)], ink=0.92, soft=1.0, seed=seed), 0, 1)
+    ss.add(pwash(w, h, [(62, 50), (74, 36), (80, 40), (72, 56)], ink=0.92, soft=1.0, seed=seed + 1), 0, 1)
+    for k, (x0, x1) in enumerate(((18, 10), (28, 34), (52, 46), (62, 70))):
+        ss.add(stroke(w, h, [(x0, 64), (x1, 84)], 3, ink=0.9, dry=0.3, profile=BLUNT, seed=seed + 2 + k), 0, 1)
+    ss.add(pwash(w, h, [(34, 48), (48, 48), (46, 26), (36, 26)], ink=0.92, soft=1.0, seed=seed + 8), 0, 1)
+    ss.add(pwash(w, h, [(33, 26), (49, 26), (47, 16), (41, 12), (35, 16)], ink=0.95, soft=1.0, seed=seed + 9), 0, 1)
+    ss.add(stroke(w, h, [(30, 44), (66, 4)], 2.2, ink=0.9, dry=0.3, profile=BLUNT, seed=seed + 10), 0, 1)
+    red.add(pwash(w, h, [(36, 30), (50, 32), (46, 6), (38, 8)], ink=0.85, soft=1.0, seed=seed + 11), 0, 1)
+    return _f(ss.render(9)), _f(red.render(9))

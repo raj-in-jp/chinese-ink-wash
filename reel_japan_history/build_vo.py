@@ -2,6 +2,7 @@
 
     audio/take_en_a.mp3 + words_en_a.json     the English take, romaji stand-ins in it (Scribe word timings)
     audio/words_ja_a.mp3                      the 31 Japanese words, one after another (split on their silences)
+    audio/words_ja_b.mp3                      しょうぐん。 とくがわ。
     audio/matane_a.mp3                        またね！ (after "follow for more.")
 
 Each stand-in (one word, or two for Murasaki Shikibu) is cut at the silent edge either side of it, so the pauses
@@ -29,17 +30,19 @@ JA_WORDS = [('jomon', 'じょうもん', 'Jōmon'), ('yayoi', 'やよい', 'Yayo
             ('nobunaga', 'のぶなが', 'Nobunaga'), ('hideyoshi', 'ひでよし', 'Hideyoshi'), ('ieyasu', 'いえやす', 'Ieyasu'),
             ('kabuki', 'かぶき', 'kabuki'), ('ukiyoe', 'うきよえ', 'ukiyo-e'), ('sushi', 'すし', 'sushi'), ('tokyo', 'とうきょう', 'Tōkyō'),
             ('tsunami', 'つなみ', 'tsunami'), ('anime', 'アニメ', 'anime')]
+JA_WORDS_B = [('shogun', 'しょうぐん', 'shōgun'), ('tokugawa', 'とくがわ', 'Tokugawa')]     # audio/words_ja_b.mp3
 # stand-ins in the order they are spoken: (words in the take, normalised; clip)
 STAND_IN = [('jomon', 'jomon'), ('yayoi', 'yayoi'), ('kofun', 'kofun'), ('asuka', 'asuka'), ('nara', 'nara'), ('heian', 'heian'),
             ('kyoto', 'kyoto'), ('kana', 'kana'), ('murasaki shikibu', 'murasaki'), ('genji', 'genji'), ('kamakura', 'kamakura'),
-            ('samurai', 'samurai'), ('muromachi', 'muromachi'), ('zen', 'zen'), ('noh', 'noh'), ('sengoku', 'sengoku'),
-            ('nobunaga', 'nobunaga'), ('hideyoshi', 'hideyoshi'), ('ieyasu', 'ieyasu'), ('edo', 'edo'), ('kabuki', 'kabuki'),
-            ('ukiyoe', 'ukiyoe'), ('sushi', 'sushi'), ('meiji', 'meiji'), ('samurai', 'samurai'), ('taisho', 'taisho'),
-            ('tokyo', 'tokyo'), ('showa', 'showa'), ('tokyo', 'tokyo'), ('heisei', 'heisei'), ('tsunami', 'tsunami'),
-            ('anime', 'anime'), ('reiwa', 'reiwa')]
+            ('kyoto', 'kyoto'), ('samurai', 'samurai'), ('shogun', 'shogun'), ('kamakura', 'kamakura'), ('muromachi', 'muromachi'),
+            ('shogun', 'shogun'), ('kyoto', 'kyoto'), ('zen', 'zen'), ('noh', 'noh'), ('sengoku', 'sengoku'), ('nobunaga', 'nobunaga'),
+            ('hideyoshi', 'hideyoshi'), ('ieyasu', 'ieyasu'), ('edo', 'edo'), ('tokugawa', 'tokugawa'), ('shoguns', 'shogun'),
+            ('kabuki', 'kabuki'), ('ukiyoe', 'ukiyoe'), ('sushi', 'sushi'), ('meiji', 'meiji'), ('samurai', 'samurai'),
+            ('taisho', 'taisho'), ('tokyo', 'tokyo'), ('showa', 'showa'), ('tokyo', 'tokyo'), ('heisei', 'heisei'),
+            ('tsunami', 'tsunami'), ('anime', 'anime'), ('reiwa', 'reiwa')]
 ERAS = [k for k, _, _ in JA_WORDS[:15]]
 MATANE = ('matane', 'またね！', 'matane!')
-HOLD = {'Go!': 0.35, 'arrive.': 0.45, 'classics.': 0.5}     # silence after these words: the race starts, the ships land
+HOLD = {'Go!': 0.35, 'ports.': 0.3, 'classics.': 0.5}     # silence after these words: the race starts, the ships land
 PAD = 0.04
 ERA_BREATH = 0.22                   # extra silence before each era name, so a new era never runs into the last line
 
@@ -105,6 +108,10 @@ def main():
     segs = segments(jw)
     assert len(segs) == len(JA_WORDS), f'{len(segs)} segments in the Japanese words take'
     clips = {k: faded(jw[int(a * SR):int(b * SR)]) for (k, _, _), (a, b) in zip(JA_WORDS, segs)}
+    jb = load('words_ja_b.mp3')
+    sb = segments(jb)
+    assert len(sb) == len(JA_WORDS_B), f'{len(sb)} segments in the second Japanese take'
+    clips.update({k: faded(jb[int(a * SR):int(b * SR)]) for (k, _, _), (a, b) in zip(JA_WORDS_B, sb)})
     for k in clips:
         clips[k] *= 0.95 * level / rms(clips[k])
     edits, i0, seen = [], 0, {}
@@ -120,7 +127,7 @@ def main():
         a = silent_edge(e, prev_end - 0.04, words[i]['start'] + 0.06, 'before')
         b = silent_edge(e, words[j]['end'] - 0.06, nxt + 0.04, 'after')
         pad = np.zeros(int(PAD * SR), np.float32)
-        pre = np.zeros(int(ERA_BREATH * SR), np.float32) if clip in ERAS else pad
+        pre = np.zeros(int(ERA_BREATH * SR), np.float32) if clip in ERAS and key == clip else pad
         edits.append([a, b, np.concatenate([pre, clips[clip], pad]), key, (i, j, clip)])
     for i, w in enumerate(words[:-1]):
         if w['text'] in HOLD:
@@ -136,7 +143,7 @@ def main():
         out.append(en[int(cursor * SR):int(a * SR)])
         t += a - cursor
         if k is not None:
-            lead = ERA_BREATH if k in ERAS else PAD
+            lead = ERA_BREATH if k in ERAS else PAD          # (k == clip only for the first time a word is said)
             segs_out[k] = dict(start=round(t + lead, 3), end=round(t + len(audio) / SR - PAD, 3))
         out.append(audio)
         t += len(audio) / SR
@@ -156,7 +163,7 @@ def main():
             base_en, base_out = b, t_after
         return base_out + (x - base_en)
 
-    lex = {k: (kana, rom) for k, kana, rom in JA_WORDS}
+    lex = {k: (kana, rom) for k, kana, rom in JA_WORDS + JA_WORDS_B}
     span = {x[4][0]: (x[4][1], x[3], x[4][2]) for x in edits if x[3] is not None}
     ws, i = [], 0
     while i < len(words):

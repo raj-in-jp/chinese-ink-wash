@@ -49,9 +49,13 @@ MAPS = {
     'asuka': dict(view=(131.0, 35.0, 0.52), phase=('Buddhism arrives', 'and Japan builds'), boat=False,
                   routes=[[(126.9, 36.2), (127.4, 34.7), (129.4, 34.0), (131.3, 33.95), (133.3, 34.25), (135.4, 34.62)]],
                   labels=[('BUDDHISM', 127.6, 37.6), ('NARA 奈良', 136.6, 33.6)]),
-    'kamakura': dict(view=(127.0, 33.0, 0.48), phase=('Mongol fleets', None), boat=True, back='driven back',
+    'kamakura': dict(view=(131.6, 34.7, 0.55), phase=('The emperor', None), boat=True, back='storms drive', route_t='Mongol fleets',
+                     takeover=dict(markers=[('天皇', 'EMPEROR', 135.77, 35.01, 'The emperor'), ('将軍', 'SHOGUN', 139.55, 35.32, 'ja:shogun')],
+                                   spread='ja:samurai', origin=(139.55, 35.32),
+                                   riders=[(135.77, 35.01), (135.5, 34.7), (132.4, 34.4), (130.6, 32.8), (133.5, 33.8), (140.9, 38.3),
+                                           (139.0, 37.9)]),
                      routes=[[(128.6, 35.2), (129.4, 34.4), (130.3, 33.7)], [(121.8, 29.9), (125.6, 31.0), (128.9, 32.6), (130.2, 33.55)]],
-                     labels=[('1274', 128.0, 34.1), ('1281', 123.4, 29.7), ('HAKATA', 131.4, 32.9)]),
+                     labels=[('1274', 128.0, 34.1), ('1281', 123.4, 30.3)]),
     'ships': dict(view=(139.5, 33.4, 0.55), phase=(None, 'black ships'), boat=True,
                   routes=[[(147.7, 30.4), (145.0, 31.6), (141.8, 33.6), (139.75, 35.2)]],
                   labels=[('FROM THE U.S.', 144.6, 29.8), ('EDO 江戸', 140.6, 36.3)]),
@@ -112,6 +116,8 @@ class Scene(KanjiScene):
         self.extra_build()
 
     def art_pulse(self, t, c):
+        if self.key == 'sengoku':                        # the castle steps back when the warlords come forward
+            return 1 - 0.75 * smooth((t - self.lords[0]['t'] + 0.3) / 0.5)
         if self.key == 'nara' and c == 'red':
             return 0.85 + 0.15 * np.sin(t * 2.2)        # the halo breathes
         return 1.0
@@ -158,7 +164,60 @@ class Scene(KanjiScene):
         self.m_mask = blur(m, 6)[..., None]
         self.m_rim = kit.rim(ph + 16, pw + 16, inset=4, t=3)
         self.m_boat = hart.junk() if M['boat'] else None
-        self.t_mback = at(M['back'])[0] if 'back' in M else None
+        self.t_mback = at(M['back'], after=self.t0)[0] if 'back' in M else None
+        self.m_route_t = at(M['route_t'], after=self.t0)[0] if 'route_t' in M else self.m_in
+        self.tk = None
+        if 'takeover' in M:
+            self.takeover_build(M['takeover'], r5art)
+
+    def takeover_build(self, T, r5art):
+        """the samurai take over: Japan's land washed vermilion outward from Kamakura, riders galloping out"""
+        def when(p):
+            return JA[p[3:]]['start'] if p.startswith('ja:') else at(p, after=self.t0)[0]
+        C = cached('h7_chart_v1', r5art.east_asia_chart)
+        land = C['land'].astype(np.float32)
+        h, w = land.shape
+        yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+        lon = r5art.CHART_LON0 + xx / r5art.CHART_K
+        y_134, y_416 = r5art.chart_xy(0, 34.3)[1], r5art.chart_xy(0, 41.6)[1]
+        japan = (lon > 129.6) | ((yy > y_134) & (lon > 128.5))
+        japan &= yy > y_416
+        o = r5art.chart_xy(*T['origin'])
+        self.tk = dict(mask=(land * japan).astype(np.float32), dist=np.hypot(xx - o[0], yy - o[1]).astype(np.float32),
+                       t_spread=when(T['spread']), origin=o,
+                       markers=[(text_layer(jp, FONT_JP, 40)[0], text_layer(en, FONT_EN_BOLD, 24, tracking=4)[0], r5art.chart_xy(lo, la),
+                                 when(tw)) for jp, en, lo, la, tw in T['markers']],
+                       riders=[r5art.chart_xy(lo, la) for lo, la in T['riders']], icon=hart.samurai_icon())
+
+    def draw_takeover(self, fr, t, m, A):
+        import cv2
+        T = self.tk
+        scr = Cam(540, 960, 1.0)
+        f = (t - T['t_spread']) / 2.6
+        if f > 0:
+            R = 920 * ease_out(min(f, 1))
+            red = T['mask'] * np.clip((R - T['dist']) / 60, 0, 1)
+            fr.ink(cv2.warpAffine(red, A, (W, H), flags=cv2.INTER_LINEAR) * self.m_mask[..., 0], VERM, 0.45 * m)
+            ink, rd = T['icon']
+            for j, dst in enumerate(T['riders']):
+                u = ease_io(np.clip((t - T['t_spread'] - 0.15 * j) / 2.0, 0, 1))
+                if u <= 0:
+                    continue
+                p = self.to_screen(T['origin'] + (dst - T['origin']) * u, t)
+                fl = -1 if dst[0] < T['origin'][0] else 1
+                bob = 3 * np.sin(t * 18 + j) * (u < 1)
+                o = m * smooth(u * 5) * (1 - smooth((t - self.m_route_t + 0.2) / 0.5) * 0.7)
+                kit.put(fr, scr, rd, p[0], p[1] - 30 + bob, VERM, 0.9 * o, 0.9 * fl, 0.9)
+                kit.put(fr, scr, ink, p[0], p[1] - 30 + bob, INK, o, 0.9 * fl, 0.9)
+        for jp, en, xy, tw in T['markers']:
+            fm = (t - tw + 0.1) / 0.35
+            if fm <= 0:
+                continue
+            p = self.to_screen(xy, t)
+            kit.put(fr, scr, self.dot, p[0], p[1], VERM, m * smooth(fm), 0.7 * (1 + 0.6 * np.exp(-fm * 3)))
+            self.plate(fr, scr, p[0], p[1] - 62, 150, 70, m * smooth(fm))
+            kit.put(fr, scr, jp, p[0], p[1] - 76, INK, m * smooth(fm), 1 + 0.2 * np.exp(-fm * 3))
+            kit.put(fr, scr, en, p[0], p[1] - 42, VERM, m * smooth(fm - 0.5))
 
     def map_amount(self, t):
         if self.mp is None:
@@ -182,12 +241,14 @@ class Scene(KanjiScene):
         k = self.m_mask * m
         fr.img = fr.img * (1 - k) + img * k
         kit.put(fr, Cam(540, 960, 1.0), self.m_rim, cx, cy, INK, 0.8 * m)
+        if self.tk is not None:
+            self.draw_takeover(fr, t, m, A)
         # the routes, brushed on as dashes with an arrowhead (or a boat) at the tip
         d = np.zeros((H, W), np.float32)
         back = 0.0 if self.t_mback is None else ease_io((t - self.t_mback - 0.1) / 1.3)
         tips = []
         for j, R in enumerate(self.routes):
-            u = ease_io((t - self.m_in - 0.35 - 0.45 * j) / 1.3)
+            u = ease_io((t - self.m_route_t - 0.35 - 0.45 * j) / 1.3)
             u = u * (1 - 0.55 * back)
             if u <= 0:
                 continue
@@ -234,14 +295,14 @@ class Scene(KanjiScene):
             fr.ink(sw, INK, 0.75 * m * smooth(back * 3))
         for j, (g, xy) in enumerate(self.m_labels):
             p = self.to_screen(xy, t)
-            kit.put(fr, Cam(540, 960, 1.0), g, p[0], p[1], INK, m * smooth((t - self.m_in - 0.5 - 0.3 * j) / 0.3))
+            kit.put(fr, Cam(540, 960, 1.0), g, p[0], p[1], INK, m * smooth((t - self.m_route_t - 0.5 - 0.3 * j) / 0.3))
 
     # ---------------------------------------------------------------- per-era extras
     def extra_build(self):
         k = self.key
         if k == 'kamakura':
-            self.junks = [hart.junk() for _ in range(3)]
-            self.t_back = at('driven back')[0]
+            self.junks = []
+            self.t_back = self.t1 + 10
         elif k == 'heian':
             self.an = text_layer('安', FONT_JP, 170)[0]
             self.a = typeset('あ', 190, font=FONT_BRUSH_JP, seed=461, medians=False, sweep=(0.7, 1))
@@ -278,6 +339,18 @@ class Scene(KanjiScene):
             self.petal = np.clip(1 - np.hypot((xx - 11) / 10, (yy - 8) / 6), 0, 1).astype(np.float32) ** 0.6
         elif k == 'edo':
             self.t_kab = JA['kabuki']['start']
+        elif k == 'sengoku':
+            self.lords = []
+            for j, (key, kanji, crest) in enumerate((('nobunaga', '織田信長', 'crescent'), ('hideyoshi', '豊臣秀吉', 'rays'),
+                                                     ('ieyasu', '徳川家康', 'fern'))):
+                d = cached(f'h7_lord_{key}_v1', lambda c=crest, j=j: dict(zip(('ink', 'red', 'gold'), hart.warrior(c, seed=90 + 20 * j))))
+                ink, red, gold = d['ink'], d['red'], d['gold']
+                self.lords.append(dict(ink=ink, red=red, gold=gold, t=JA[key]['start'], kanji=text_layer(kanji, FONT_JP, 40)[0],
+                                       rom=text_layer(key.upper(), FONT_EN_BOLD, 24, tracking=5)[0], x=195 + 345 * j))
+            self.card_b, self.card_r = kit.box(430, 300, 2.5), kit.rim(430, 300, inset=8, t=3)
+            self.t_unite = at('unite Japan')[0]
+            self.unite = _seal2('統一')
+            self.unite_lab = text_layer('UNITED', FONT_EN_BOLD, 34, tracking=8)[0]
 
     # ---------------------------------------------------------------- camera and transition
     def cam(self, t):
@@ -381,6 +454,23 @@ class Scene(KanjiScene):
                 o = smooth((t - self.t0 - 0.6) / 0.4) * (1 - smooth((back - 0.6) / 0.4))
                 kit.put(fr, cam, red, x, y, VERM, 0.8 * o, 0.8, rot=0.1 * np.sin(t * 2 + j) - 0.2 * back)
                 kit.put(fr, cam, ink, x, y, INK, o, 0.8, rot=0.1 * np.sin(t * 2 + j) - 0.2 * back)
+        elif k == 'sengoku':
+            cam = Cam(540, 960, 1.0)                     # the cards hold still on the screen
+            for L in self.lords:
+                f = (t - L['t'] + 0.25) / 0.45
+                if f <= 0:
+                    continue
+                o = smooth(f)
+                y = 1095 + 60 * (1 - ease_out(min(f, 1)))
+                kit.card(fr, cam, self.card_b, self.card_r, L['x'], y, o, color=np.array([0.96, 0.93, 0.86], np.float32))
+                for c, col in (('red', VERM), ('gold', GOLD), ('ink', INK)):
+                    kit.put(fr, cam, L[c], L['x'], y - 45, col, o * (0.9 if c != 'ink' else 1.0), 0.86)
+                kit.put(fr, cam, L['kanji'], L['x'], y + 150, INK, o)
+                kit.put(fr, cam, L['rom'], L['x'], y + 190, VERM, smooth(f - 0.6))
+            fu = (t - self.t_unite) / 0.18
+            if fu > 0:
+                kit.put(fr, cam, self.unite, 540, 830, VERM, 0.95 * smooth(fu), 0.78 * (1.0 + 0.6 * np.exp(-fu * 2.4)), rot=-0.05)
+                kit.put(fr, cam, self.unite_lab, 790, 830, INK, smooth(fu - 1.5))
         elif k == 'heian':
             f = (t - self.t_kana + 0.1) / 0.5
             if f > 0:
@@ -471,3 +561,17 @@ def _bird(f, w=70, h=40):
         ss.add(stroke(w, h, spline([(35, 22), (35 + s_ * 14, y - 6 if not f else y + 4), (35 + s_ * 30, y - 2)], 6), 3, ink=0.9,
                       dry=0.3, profile=((0, 1), (0.6, 0.8), (1, 0.15)), seed=3 + s_ + int(f) * 7), 0, 1)
     return ss.render(9)
+
+
+def _seal2(text, w=280, h=150):
+    """a vermilion seal with the characters cut out in white, side by side (density: 1 = vermilion)"""
+    d = np.zeros((h, w), np.float32)
+    d[8:-8, 8:-8] = 1
+    d = blur(d, 1.2) * (0.82 + 0.18 * noise(h, w, 10, 3, 141))
+    for k, c in enumerate(text):
+        g, _ = text_layer(c, FONT_JP, 100)
+        gh, gw = g.shape
+        cx, cy = w / 2 + (k - (len(text) - 1) / 2) * 120, h / 2
+        y0, x0 = int(cy - gh / 2), int(cx - gw / 2)
+        d[y0:y0 + gh, x0:x0 + gw] *= 1 - 0.95 * g
+    return d

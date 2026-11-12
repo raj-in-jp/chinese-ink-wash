@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 SR = 48000
 
-from timeline import DURATION, ERA_KEYS, SCENES, VO_OFFSET, at
+from timeline import DURATION, ERA_KEYS, JA, SCENES, VO_OFFSET, at
 
 N = int(DURATION * SR)
 MUSIC_GAIN = 0.22                 # the user's track is mastered loud (-14.5 LUFS): this sits it well under Raj
@@ -390,9 +390,17 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     km = g('kamakura')
     fx('katana', at('samurai', after=km.t0)[0], 0.6)
     fx('storm', km.t_mback - 0.2, 0.55)
+    fx('gallop', km.tk['t_spread'], 0.45, length=2.6)               # the samurai riding out over Japan
+    fx('stamp', km.m_in + 0.3, 0.4)                                 # 天皇 and 将軍 set on the map
+    fx('stamp', JA['shogun']['start'], 0.4)
     ambience('birds', g('muromachi').t0, g('muromachi').t1, 0.3)
+    sg = g('sengoku')
     for j in range(3):                                      # war drums
-        fx('taiko', g('sengoku').t_in + 0.3 + 0.45 * j, 0.35 - 0.06 * j)
+        fx('taiko', sg.t_in + 0.3 + 0.45 * j, 0.35 - 0.06 * j)
+    for L in sg.lords:                                      # each warlord steps forward
+        fx('katana', L['t'] - 0.2, 0.35)
+    fx('stamp', sg.t_unite, 0.7)
+    fx('taiko', sg.t_unite, 0.5)
     fx('wave', g('edo').t_in + 0.3, 0.45)
     sh = g('ships')
     fx('horn', sh.art_t0 + 0.1, 0.45)
