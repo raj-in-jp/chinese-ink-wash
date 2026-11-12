@@ -15,7 +15,7 @@ sys.path.insert(0, HERE)
 import kit  # noqa: E402
 from art import enso  # noqa: E402
 from cards import INDIGO  # noqa: E402
-from engine import (FONT_BRUSH_EN, FONT_EN_BOLD, FONT_HEAD, FONT_JP, H, INK, VERM, W, Cam, Frame, StrokeSet,  # noqa: E402
+from engine import (GREY, FONT_BRUSH_EN, FONT_EN_BOLD, FONT_HEAD, FONT_JP, H, INK, VERM, W, Cam, Frame, StrokeSet,  # noqa: E402
                     cached, make_paper, noise, stroke, text_layer)
 from k6art import mist_hills  # noqa: E402
 from scenes.era import ERAS, FURI  # noqa: E402
@@ -38,17 +38,18 @@ def main():
     ss = StrokeSet(W, H)
     enso(ss, 540, 790, 175, 18, 0, 0.01, seed=5, red=True)
     fr.ink(ss.render(5, red=True), VERM, 0.95)
-    kit.put(fr, CAM, brush('90', 170, 3), 540, 775, INK, 1.0)
+    kit.put(fr, CAM, brush('90', 170, 3), 540, 760, INK, 1.0)
     kit.put(fr, CAM, text_layer('SECONDS', FONT_EN_BOLD, 34, tracking=10)[0], 540, 870, INK, 0.8)
     keys = [k for k in ERA_KEYS if k != 'ships']
     for j, k in enumerate(keys):
-        x, y = 160 + (j % 5) * 190, 1070 + (j // 5) * 125
+        x, y = 160 + (j % 5) * 190, 1050 + (j // 5) * 158
         kit.put(fr, CAM, text_layer(ERAS[k][0], FONT_JP, 74)[0], x, y, INK if j < 14 else VERM, 1.0)
         fu = FURI[k]
         for i, f in enumerate(fu):
             if f:
                 fx = x if not all(fu) else x + (i - 0.5) * 74
                 kit.put(fr, CAM, text_layer(f, FONT_JP, 22)[0], fx, y - 52, INDIGO, 0.9)
+        kit.put(fr, CAM, text_layer(ERAS[k][2].split(' ')[0], FONT_EN_BOLD, 22, tracking=3)[0], x, y + 52, GREY, 1.0)
     bn = StrokeSet(W, H)
     bn.add(stroke(W, H, [(270, 1596), (540, 1586), (810, 1594)], 112, ink=0.96, dry=0.5,
                   profile=((0, 0.6), (0.06, 1.0), (0.85, 0.95), (1, 0.4)), seed=171), 0, 1)

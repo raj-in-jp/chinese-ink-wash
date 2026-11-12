@@ -56,7 +56,9 @@ MAPS = {
                   routes=[[(147.7, 30.4), (145.0, 31.6), (141.8, 33.6), (139.75, 35.2)]],
                   labels=[('FROM THE U.S.', 144.6, 29.8), ('EDO 江戸', 140.6, 36.3)]),
 }
-PANEL = (540, 1080, 1000, 560)              # map panel centre and size on screen
+PANEL = (540, 1080, 1000, 560)
+ART_DEPTH = 1.25                            # the paintings sit nearer than the page: they travel more with the camera
+BIRDS = ('jomon', 'yayoi', 'asuka', 'nara', 'heian', 'muromachi', 'edo', 'reiwa')              # map panel centre and size on screen
 
 
 def year_label(y):
@@ -100,7 +102,36 @@ class Scene(KanjiScene):
         self.mp = None
         if k in MAPS:
             self.map_build(MAPS[k])
+        self.bloom = cached('h7_bloom_v2', lambda: {'d': _bloom()})['d']
+        if k in BIRDS:
+            r = np.random.default_rng(self.idx)
+            self.birds = [(r.uniform(-0.3, 0.3), r.uniform(-40, 40), r.uniform(0.7, 1.1), r.uniform(0, 6)) for _ in range(4)]
+            self.bird_sp = [_bird(f) for f in (0.0, 1.0)]
+        if k == 'jomon':
+            self.smoke = [hart.smoke_puff(seed=30 + j) for j in range(3)]
         self.extra_build()
+
+    def art_pulse(self, t, c):
+        if self.key == 'nara' and c == 'red':
+            return 0.85 + 0.15 * np.sin(t * 2.2)        # the halo breathes
+        return 1.0
+
+    def life(self, fr, cam, t):
+        """small living things: birds crossing the sky, smoke from the hut"""
+        a = smooth((t - self.art_t0 - 0.6) / 0.6)
+        if self.key in BIRDS:
+            dur = self.t1 - self.t0
+            for j, (dy, dx, sc, ph) in enumerate(self.birds):
+                u = (t - self.t0 + 0.4 * j) / (dur + 1.5)
+                x = lerp(-80, 1160, u) + dx
+                y = 880 + 160 * dy + 14 * np.sin(t * 1.6 + ph) - 60 * u
+                flap = self.bird_sp[int((t * 7 + ph) % 2)]
+                kit.put(fr, cam, flap, x, y, INK, 0.75 * a, sc * 0.9)
+        if self.key == 'jomon':
+            for j in range(3):
+                v = ((t - self.t0) * 0.35 + j / 3) % 1
+                kit.put(fr, cam, self.smoke[j], 222 + 40 * v + 10 * np.sin(t + j), 1205 - 230 * v, PALE, 0.35 * np.sin(np.pi * v) * a,
+                        0.5 + 1.2 * v)
 
     # ---------------------------------------------------------------- the map moments
     def map_build(self, M):
@@ -255,7 +286,8 @@ class Scene(KanjiScene):
         if self.key == 'taisho':
             q = t - self.t_quake
             shake = 14 * np.exp(-q * 2.5) * np.sin(q * 47) * (q > 0)
-        return Cam(540 + 18 * (u - 0.5) * (1 if self.idx % 2 else -1) + shake, 960 + 0.5 * shake, 1.0 + 0.035 * u)
+        side = 1 if self.idx % 2 else -1
+        return Cam(540 + 34 * (u - 0.5) * side + shake, 960 - 14 * u + 0.5 * shake, 1.0 + 0.06 * u)
 
     def enter(self, prev_img, cur_img, f, prev_scene):
         """the next era is unrolled over the last one from the right, a wet ink edge riding the front"""
@@ -302,13 +334,17 @@ class Scene(KanjiScene):
         m = self.map_amount(t)
         for c in ('grey', 'blue', 'red', 'gold', 'ink', 'bloss'):
             if c in self.art and fa > 0 and m < 1:
-                self.layer(fr, cam, reveal_time(self.art[c], self.T_art, fa), *self.art_offset(t, c), color=COLOURS[c],
-                           opacity=(0.95 if c != 'red' else 0.85) * (1 - m))
+                self.layer(fr, cam, reveal_time(self.art[c], self.T_art, fa), *self.art_offset(t, c), depth=ART_DEPTH, ref=(540, 960),
+                           color=COLOURS[c], opacity=(0.95 if c != 'red' else 0.85) * (1 - m) * self.art_pulse(t, c))
         if m < 1:
+            self.life(fr, cam, t)
             self.extras(fr, cam, t)
         if m > 0:
             self.draw_map(fr, t, m)
-        # the era's name, reading, romaji and year
+        # the era's name, reading, romaji and year; a pale ink bloom opens behind the name as it is written
+        fb = (t - self.t_in + 0.3) / 0.9
+        if fb > 0:
+            kit.put(fr, cam, self.bloom, 540, KANJI_Y, INK, 0.11 * (1 - 0.5 * smooth(fb - 1)), 0.6 + 0.5 * ease_out(min(fb, 1)))
         for j, g in enumerate(self.glyphs):
             fk = (t - self.t_in + 0.25 - 0.18 * j) / 0.45
             if fk > 0:
@@ -327,6 +363,8 @@ class Scene(KanjiScene):
         return fr.img
 
     def art_offset(self, t, c):
+        if self.key == 'sengoku' and c == 'red':
+            return 4 * np.sin(t * 5.5), 2 * np.sin(t * 3.1)
         if self.key == 'edo' and c == 'blue':
             return 0, 6 * np.sin(t * 2.2)
         if self.key == 'ships':
@@ -411,3 +449,25 @@ class Scene(KanjiScene):
                 self.plate(fr, cam, 300, 880, 360, 150, fm)
                 kit.put(fr, cam, self.man, 300, 855, INK, fm, 1 + 0.15 * np.exp(-max(t - self.t_poem, 0) * 4))
                 kit.put(fr, cam, self.man_r, 300, 920, GREY, smooth((t - self.t_poem - 0.3) / 0.3))
+
+
+def _bloom(s=700):
+    """a pale, soft-edged ink blot with a broken rim (the wash behind a freshly brushed name)"""
+    yy, xx = np.mgrid[0:s, 0:int(s * 1.5)].astype(np.float32)
+    cx, cy = s * 0.75, s / 2
+    r = np.hypot((xx - cx) / 1.5, yy - cy) / (s / 2)
+    n = noise(s, int(s * 1.5), 60, 4, 21)
+    d = np.clip((1 - r + 0.25 * (n - 0.5)) * 3, 0, 1) * (0.7 + 0.3 * noise(s, int(s * 1.5), 14, 3, 22))
+    rim = np.exp(-((r - 0.88 - 0.1 * (n - 0.5)) / 0.05) ** 2) * 0.3
+    return np.clip(blur(d, 6) + rim, 0, 1).astype(np.float32)
+
+
+def _bird(f, w=70, h=40):
+    """one ink bird in flight, wings up (f=0) or down (f=1)"""
+    from engine import StrokeSet, stroke
+    ss = StrokeSet(w, h)
+    y = 14 if f else 26
+    for s_ in (-1, 1):
+        ss.add(stroke(w, h, spline([(35, 22), (35 + s_ * 14, y - 6 if not f else y + 4), (35 + s_ * 30, y - 2)], 6), 3, ink=0.9,
+                      dry=0.3, profile=((0, 1), (0.6, 0.8), (1, 0.15)), seed=3 + s_ + int(f) * 7), 0, 1)
+    return ss.render(9)

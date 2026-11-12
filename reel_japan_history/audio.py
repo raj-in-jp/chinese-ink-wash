@@ -3,7 +3,7 @@ design synced to the animation's own events.
 
 Music: the track's opening runs under the reel and crossfades, beat-matched, into the song's real ending, so the
 last bar lands as the reel ends.
-Sound design: the year counter ticking over in the hook, a stamp on the 90 and a taiko on "Go!", then for every era
+Sound design (recorded effects in audio/sfx): the year counter ticking over in the hook, a stamp on the 90 and a taiko on "Go!", then for every era
 a brush stroke as its name is written and quick ticks as its year rolls on; wind as the Mongol fleet is swept back,
 a low drum for the black ships, train wheels under Meiji, a thud for the earthquake, a whoosh for the bullet train,
 a soft pop for the bubble, paper flicks as the fifteen era cards fall into the grid, a stamp on またね.
@@ -23,10 +23,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 SR = 48000
 
-from timeline import DURATION, ERA_KEYS, SCENES, VO_OFFSET
+from timeline import DURATION, ERA_KEYS, SCENES, VO_OFFSET, at
 
 N = int(DURATION * SR)
-MUSIC_GAIN = 0.27                 # the user's track is mastered loud (-14.5 LUFS): this sits it well under Raj
+MUSIC_GAIN = 0.22                 # the user's track is mastered loud (-14.5 LUFS): this sits it well under Raj
 rng = np.random.default_rng(7)
 D4 = 293.66
 SCALE = {'D': 0, 'Eb': 1, 'G': 5, 'A': 7, 'Bb': 8}
@@ -308,6 +308,41 @@ def bgm(join=86.0, end_at=136.4, xf=1.2):
     return out
 
 
+def _samples():
+    """the recorded sound effects in audio/sfx (ElevenLabs sound effects), each levelled to the same loudness while it
+    sounds (so the gains in build() are the only balance)"""
+    import glob
+    import subprocess
+    out = {}
+    for f in sorted(glob.glob(os.path.join(HERE, 'audio', 'sfx', '*.mp3'))):
+        raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', f, '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True,
+                             check=True).stdout
+        x = np.frombuffer(raw, np.float32).astype(np.float64)
+        h = SR // 50
+        e = np.sqrt(np.convolve(x ** 2, np.ones(h) / h, 'same'))
+        act = e[e > e.max() * 0.1]
+        x *= 0.12 / (np.sqrt(np.mean(act ** 2)) + 1e-9)
+        n = int(0.01 * SR)
+        x[:n] *= np.linspace(0, 1, n)
+        x[-n:] *= np.linspace(1, 0, n)
+        out[os.path.splitext(os.path.basename(f))[0]] = x
+    return out
+
+
+def loop(x, length, xf=0.4):
+    """x repeated with crossfades to fill `length` seconds"""
+    n, k = int(length * SR), int(xf * SR)
+    out = np.zeros(n + len(x))
+    pos = 0
+    while pos < n:
+        seg = x.copy()
+        seg[:k] *= np.linspace(0, 1, k)
+        seg[-k:] *= np.linspace(1, 0, k)
+        out[pos:pos + len(seg)] += seg
+        pos += len(x) - k
+    return out[:n]
+
+
 def build(out_dir=os.path.join(HERE, 'audio')):
     import scenes
     g = scenes.get
@@ -319,49 +354,65 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         if drum:
             place(sfx, taiko(1.4, 54), t, 0.35)
 
+    S = _samples()
+
+    def fx(name, t, gain, pan=0.0, length=None):
+        x = S[name] if length is None else loop(S[name], length)
+        place(sfx, x, t, gain, pan=pan)
+
+    def ambience(name, t0, t1, gain):
+        x = loop(S[name], t1 - t0)
+        n = len(x)
+        e = np.clip(np.minimum(np.arange(n) / (0.8 * SR), (n - np.arange(n)) / (0.8 * SR)), 0, 1)
+        place(amb, x * e, t0, gain)
+
     hk = g('hook')
-    for k in range(18):                                  # the year counter ticking over, faster and faster
-        u = (k / 17) ** 0.6
-        place(sfx, clack(1.2 + 0.5 * u), 0.15 + 2.6 * u, 0.25, pan=0.2 * np.sin(k))
-    place(sfx, brush(0.6, 1.2, True), hk.t_90 - 0.1, 0.6)
-    hit(hk.t_90 + 0.35, 0.4, drum=False)
-    place(sfx, whoosh(0.5, 400, 4000), hk.t_ready, 0.45)
-    hit(hk.t_go, 0.6)
-    place(sfx, whoosh(0.9, 250, 3000), hk.t_go + 0.05, 0.5)
+    fx('counter', 0.1, 0.55)
+    fx('brush', hk.t_90 - 0.1, 0.5)
+    fx('stamp', hk.t_90 + 0.35, 0.6)
+    fx('scroll', hk.t_ready - 0.05, 0.35)
+    fx('taiko', hk.t_go, 0.7)
     for k in ERA_KEYS:
-        s = g(k)
-        place(sfx, brush(0.45, 1.3, True), s.t_in - 0.25, 0.55)
-        place(sfx, stamp(), s.t_in + 0.15, 0.25)
-        for j in range(4):                               # the year rolling on
-            place(sfx, clack(1.6), s.t0 + 0.2 + 0.15 * j, 0.12)
+        s_ = g(k)
+        fx('scroll', s_.t0 - 0.1, 0.32, pan=0.3)            # the page unrolling to the next era
+        fx('brush', s_.t_in - 0.25, 0.5, pan=-0.1)          # its name being written
+        fx('stamp', s_.t_in + 0.2, 0.3)
     from scenes.era import MAPS
-    for k in MAPS:                                       # a brush dragged along each route on the map
-        s = g(k)
-        for j in range(len(s.routes)):
-            place(sfx, brush(1.1, 0.9, False), s.m_in + 0.35 + 0.45 * j, 0.4, pan=0.2 * (j - 0.5))
-        place(sfx, flip() * 0.6, s.m_in, 0.35)
+    for k in MAPS:                                          # a quill drawing each route on the chart
+        s_ = g(k)
+        for j in range(len(s_.routes)):
+            fx('quill', s_.m_in + 0.35 + 0.45 * j, 0.4, pan=0.25 * (j - 0.5))
+    ambience('fire', g('jomon').t0, g('jomon').t1, 0.3)
+    ambience('paddy', g('yayoi').t0, g('yayoi').t1, 0.25)
+    fx('bell', g('asuka').m_in + 0.2, 0.45)
+    fx('bell', g('nara').t_in + 0.9, 0.3)
+    fx('fan', g('heian').t0 + 0.7, 0.6)
     km = g('kamakura')
-    place(amb, wind(int(3.0 * SR), seed=5), km.t_back - 0.3, 0.9)
-    place(sfx, whoosh(1.4, 200, 1800), km.t_back, 0.5)
+    fx('katana', at('samurai', after=km.t0)[0], 0.6)
+    fx('storm', km.t_mback - 0.2, 0.55)
+    ambience('birds', g('muromachi').t0, g('muromachi').t1, 0.3)
+    for j in range(3):                                      # war drums
+        fx('taiko', g('sengoku').t_in + 0.3 + 0.45 * j, 0.35 - 0.06 * j)
+    fx('wave', g('edo').t_in + 0.3, 0.45)
     sh = g('ships')
-    place(sfx, taiko(2.4, 46), sh.t_in, 0.4)
-    mj = g('meiji')
-    place(sfx, wheels(mj.t0 + 0.3, mj.t1, lambda t: 0.75, gain=0.8), mj.t0 + 0.3, 1.0)
+    fx('horn', sh.art_t0 + 0.1, 0.45)
+    fx('train', g('meiji').t0 + 0.4, 0.55)
     ts = g('taisho')
-    place(sfx, thud(), ts.t_quake, 0.8)
-    place(sfx, taiko(2.0, 40), ts.t_quake, 0.6)
+    fx('tram', ts.t0 + 0.7, 0.3)
+    fx('quake', ts.t_quake - 0.1, 0.75)
     sw = g('showa')
-    place(sfx, whoosh(1.2, 300, 5000), sw.t_train - 0.2, 0.6)
+    fx('shinkansen', sw.t_train - 0.35, 0.55)
+    fx('crowd', at('Olympics')[0], 0.3)
     hs = g('heisei')
-    place(sfx, clink(), hs.t_burst, 0.5)
-    place(amb, water(int(1.8 * SR), seed=8), hs.t_tsu - 0.2, 0.35)
+    fx('pop', hs.t_burst, 0.6)
+    fx('wave', hs.t_tsu - 0.1, 0.3)
+    fx('chime', g('reiwa').t0 + 0.4, 0.45)
+    ambience('birds', g('reiwa').t0, g('reiwa').t1 + 1.0, 0.3)
     en = g('end')
-    for j in range(15):
-        place(sfx, flip() * 0.6, en.t0 + 0.25 + 0.06 * j, 0.35, pan=0.15 * (j % 3 - 1))
-    place(sfx, brush(0.5, 1.2, True), en.t_follow - 0.05, 0.5)
-    hit(en.t_hit, 0.6)
-    for name, a, b in SCENES[1:]:
-        place(sfx, whoosh(1.1, 250, 2600), a - 0.1, 0.5, pan=rng.uniform(-0.3, 0.3))
+    fx('scroll', en.t0, 0.35)
+    fx('brush', en.t_follow - 0.05, 0.45)
+    fx('stamp', en.t_hit + 0.1, 0.6)
+    fx('chime', en.t_hit + 0.3, 0.4)
     # narration
     sr, vo = wavfile.read(os.path.join(out_dir, 'narration.wav'))
     vo = vo.astype(np.float64)
