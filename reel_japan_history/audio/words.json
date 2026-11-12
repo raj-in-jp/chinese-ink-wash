@@ -1,1943 +1,1649 @@
 {
 "words": [
 {
-"text": "Sixteen",
+"text": "From",
 "type": "word",
 "start": 0.0,
+"end": 0.24
+},
+{
+"text": "clay",
+"type": "word",
+"start": 0.32,
 "end": 0.48
+},
+{
+"text": "pots...",
+"type": "word",
+"start": 0.56,
+"end": 1.2
+},
+{
+"text": "to",
+"type": "word",
+"start": 1.24,
+"end": 1.28
+},
+{
+"text": "bullet",
+"type": "word",
+"start": 1.44,
+"end": 1.68
+},
+{
+"text": "trains.",
+"type": "word",
+"start": 1.76,
+"end": 2.4
+},
+{
+"text": "Here's",
+"type": "word",
+"start": 2.81,
+"end": 3.13
+},
+{
+"text": "sixteen",
+"type": "word",
+"start": 3.21,
+"end": 3.61
 },
 {
 "text": "thousand",
 "type": "word",
-"start": 0.64,
-"end": 1.04
+"start": 3.85,
+"end": 4.25
 },
 {
 "text": "years",
 "type": "word",
-"start": 1.12,
-"end": 1.36
+"start": 4.33,
+"end": 4.49
 },
 {
 "text": "of",
 "type": "word",
-"start": 1.4,
-"end": 1.44
+"start": 4.57,
+"end": 4.61
 },
 {
 "text": "Japan,",
 "type": "word",
-"start": 1.52,
-"end": 2.24
+"start": 4.65,
+"end": 5.37
 },
 {
 "text": "in",
 "type": "word",
-"start": 2.32,
-"end": 2.4
+"start": 5.45,
+"end": 5.53
 },
 {
 "text": "two",
 "type": "word",
-"start": 2.48,
-"end": 2.64
+"start": 5.61,
+"end": 5.77
 },
 {
 "text": "minutes.",
 "type": "word",
-"start": 2.72,
-"end": 3.2
+"start": 5.85,
+"end": 6.41
 },
 {
-"text": "Ready?",
+"text": "Let's",
 "type": "word",
-"start": 3.52,
-"end": 4.08
+"start": 6.57,
+"end": 6.73
 },
 {
-"text": "Go!",
+"text": "go!",
 "type": "word",
-"start": 4.32,
-"end": 4.64
+"start": 6.81,
+"end": 7.13
 },
 {
 "text": "Jōmon.",
 "type": "word",
 "ja": "jomon",
-"start": 5.63,
-"end": 6.32
+"start": 8.24,
+"end": 8.93
 },
 {
 "text": "Hunters",
 "type": "word",
-"start": 6.62,
-"end": 7.02
+"start": 9.33,
+"end": 9.65
 },
 {
 "text": "live",
 "type": "word",
-"start": 7.1,
-"end": 7.18
+"start": 9.73,
+"end": 9.81
 },
 {
 "text": "in",
 "type": "word",
-"start": 7.26,
-"end": 7.3
+"start": 9.85,
+"end": 9.89
 },
 {
 "text": "villages,",
 "type": "word",
-"start": 7.34,
-"end": 7.98
+"start": 9.97,
+"end": 10.61
 },
 {
 "text": "and",
 "type": "word",
-"start": 8.02,
-"end": 8.06
+"start": 10.69,
+"end": 10.77
 },
 {
 "text": "make",
 "type": "word",
-"start": 8.14,
-"end": 8.3
+"start": 10.85,
+"end": 10.93
 },
 {
 "text": "some",
 "type": "word",
-"start": 8.38,
-"end": 8.46
+"start": 11.01,
+"end": 11.09
 },
 {
 "text": "of",
 "type": "word",
-"start": 8.5,
-"end": 8.54
+"start": 11.17,
+"end": 11.25
 },
 {
 "text": "the",
 "type": "word",
-"start": 8.62,
-"end": 8.7
+"start": 11.29,
+"end": 11.33
 },
 {
 "text": "oldest",
 "type": "word",
-"start": 8.86,
-"end": 9.26
+"start": 11.57,
+"end": 11.89
 },
 {
 "text": "pottery",
 "type": "word",
-"start": 9.34,
-"end": 9.74
+"start": 11.97,
+"end": 12.37
 },
 {
 "text": "on",
 "type": "word",
-"start": 9.82,
-"end": 9.98
+"start": 12.45,
+"end": 12.61
 },
 {
 "text": "Earth.",
 "type": "word",
-"start": 10.06,
-"end": 10.46
+"start": 12.69,
+"end": 13.09
 },
 {
 "text": "Yayoi.",
 "type": "word",
 "ja": "yayoi",
-"start": 11.05,
-"end": 11.59
+"start": 13.79,
+"end": 14.33
 },
 {
 "text": "People",
 "type": "word",
-"start": 11.97,
-"end": 12.21
+"start": 14.71,
+"end": 14.95
 },
 {
 "text": "from",
 "type": "word",
-"start": 12.29,
-"end": 12.37
+"start": 15.03,
+"end": 15.11
 },
 {
 "text": "the",
 "type": "word",
-"start": 12.41,
-"end": 12.45
+"start": 15.15,
+"end": 15.19
 },
 {
 "text": "mainland",
 "type": "word",
-"start": 12.53,
-"end": 13.01
+"start": 15.27,
+"end": 15.75
 },
 {
 "text": "bring",
 "type": "word",
-"start": 13.09,
-"end": 13.33
+"start": 15.83,
+"end": 15.99
 },
 {
 "text": "rice",
 "type": "word",
-"start": 13.41,
-"end": 13.65
+"start": 16.07,
+"end": 16.31
 },
 {
 "text": "farming",
 "type": "word",
-"start": 13.73,
-"end": 14.05
+"start": 16.39,
+"end": 16.79
 },
 {
 "text": "and",
 "type": "word",
-"start": 14.13,
-"end": 14.21
+"start": 16.87,
+"end": 16.95
 },
 {
 "text": "metal",
 "type": "word",
-"start": 14.29,
-"end": 14.53
+"start": 17.03,
+"end": 17.27
 },
 {
 "text": "tools.",
 "type": "word",
-"start": 14.61,
-"end": 15.09
+"start": 17.35,
+"end": 17.83
 },
 {
 "text": "Kofun.",
 "type": "word",
 "ja": "kofun",
-"start": 15.66,
-"end": 16.37
+"start": 18.48,
+"end": 19.19
 },
 {
 "text": "Powerful",
 "type": "word",
-"start": 16.68,
-"end": 17.16
+"start": 19.49,
+"end": 19.97
 },
 {
 "text": "chiefs",
 "type": "word",
-"start": 17.24,
-"end": 17.56
+"start": 20.05,
+"end": 20.37
 },
 {
 "text": "are",
 "type": "word",
-"start": 17.64,
-"end": 17.72
+"start": 20.45,
+"end": 20.53
 },
 {
 "text": "buried",
 "type": "word",
-"start": 17.8,
-"end": 18.12
+"start": 20.61,
+"end": 20.93
 },
 {
 "text": "in",
 "type": "word",
-"start": 18.24,
-"end": 18.36
+"start": 21.05,
+"end": 21.17
 },
 {
 "text": "giant",
 "type": "word",
-"start": 18.44,
-"end": 18.76
+"start": 21.25,
+"end": 21.65
 },
 {
 "text": "keyhole-shaped",
 "type": "word",
-"start": 18.92,
-"end": 19.64
+"start": 21.73,
+"end": 22.45
 },
 {
 "text": "tombs.",
 "type": "word",
-"start": 19.8,
-"end": 20.48
+"start": 22.61,
+"end": 23.29
 },
 {
 "text": "Asuka.",
 "type": "word",
 "ja": "asuka",
-"start": 20.9,
-"end": 21.38
+"start": 23.78,
+"end": 24.26
 },
 {
 "text": "Buddhism",
 "type": "word",
-"start": 21.72,
-"end": 22.12
+"start": 24.6,
+"end": 25.0
 },
 {
 "text": "arrives",
 "type": "word",
-"start": 22.2,
-"end": 22.52
+"start": 25.08,
+"end": 25.4
 },
 {
 "text": "from",
 "type": "word",
-"start": 22.6,
-"end": 22.68
+"start": 25.48,
+"end": 25.56
 },
 {
 "text": "Korea,",
 "type": "word",
-"start": 22.76,
-"end": 23.32
+"start": 25.64,
+"end": 26.28
 },
 {
 "text": "and",
 "type": "word",
-"start": 23.36,
-"end": 23.4
+"start": 26.32,
+"end": 26.36
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 23.48,
-"end": 23.88
+"start": 26.44,
+"end": 26.84
 },
 {
 "text": "builds",
 "type": "word",
-"start": 23.96,
-"end": 24.16
+"start": 26.92,
+"end": 27.12
 },
 {
 "text": "a",
 "type": "word",
-"start": 24.2,
-"end": 24.24
+"start": 27.16,
+"end": 27.2
 },
 {
 "text": "government",
 "type": "word",
-"start": 24.28,
-"end": 24.68
+"start": 27.24,
+"end": 27.64
 },
 {
 "text": "like",
 "type": "word",
-"start": 24.76,
-"end": 24.92
+"start": 27.72,
+"end": 27.88
 },
 {
 "text": "China's.",
 "type": "word",
-"start": 25.0,
-"end": 25.68
+"start": 27.96,
+"end": 28.52
 },
 {
 "text": "Nara.",
 "type": "word",
 "ja": "nara",
-"start": 26.07,
-"end": 26.45
+"start": 29.13,
+"end": 29.51
 },
 {
 "text": "Japan's",
 "type": "word",
-"start": 26.79,
-"end": 27.27
+"start": 29.85,
+"end": 30.33
 },
 {
 "text": "first",
 "type": "word",
-"start": 27.35,
-"end": 27.59
+"start": 30.41,
+"end": 30.65
 },
 {
 "text": "great",
 "type": "word",
-"start": 27.75,
-"end": 27.99
+"start": 30.81,
+"end": 31.05
 },
 {
 "text": "capital,",
 "type": "word",
-"start": 28.07,
-"end": 28.63
+"start": 31.13,
+"end": 31.77
 },
 {
 "text": "with",
 "type": "word",
-"start": 28.71,
-"end": 28.79
+"start": 31.85,
+"end": 31.93
 },
 {
 "text": "a",
 "type": "word",
-"start": 28.83,
-"end": 28.87
+"start": 31.97,
+"end": 32.01
+},
+{
+"text": "giant",
+"type": "word",
+"start": 32.17,
+"end": 32.49
 },
 {
 "text": "bronze",
 "type": "word",
-"start": 28.95,
-"end": 29.19
+"start": 32.65,
+"end": 32.97
 },
 {
-"text": "Buddha",
+"text": "Buddha.",
 "type": "word",
-"start": 29.27,
-"end": 29.59
-},
-{
-"text": "fifteen",
-"type": "word",
-"start": 29.75,
-"end": 30.15
-},
-{
-"text": "meters",
-"type": "word",
-"start": 30.23,
-"end": 30.55
-},
-{
-"text": "tall.",
-"type": "word",
-"start": 30.63,
-"end": 31.15
+"start": 33.05,
+"end": 33.45
 },
 {
 "text": "Heian.",
 "type": "word",
 "ja": "heian",
-"start": 31.54,
-"end": 32.15
+"start": 34.05,
+"end": 34.66
 },
 {
 "text": "The",
 "type": "word",
-"start": 32.39,
-"end": 32.47
+"start": 34.98,
+"end": 35.02
 },
 {
 "text": "capital",
 "type": "word",
-"start": 32.71,
-"end": 32.95
+"start": 35.06,
+"end": 35.46
 },
 {
 "text": "moves",
 "type": "word",
-"start": 33.03,
-"end": 33.27
+"start": 35.54,
+"end": 35.7
 },
 {
 "text": "to",
 "type": "word",
-"start": 33.31,
-"end": 33.35
+"start": 35.78,
+"end": 35.86
 },
 {
-"text": "Kyōto.",
+"text": "Kyōto,",
 "type": "word",
 "ja": "kyoto",
-"start": 33.45,
-"end": 33.91
+"start": 35.91,
+"end": 36.37
+},
+{
+"text": "and",
+"type": "word",
+"start": 36.52,
+"end": 36.56
+},
+{
+"text": "Japan",
+"type": "word",
+"start": 36.64,
+"end": 37.04
+},
+{
+"text": "creates",
+"type": "word",
+"start": 37.12,
+"end": 37.44
+},
+{
+"text": "its",
+"type": "word",
+"start": 37.56,
+"end": 37.68
+},
+{
+"text": "own",
+"type": "word",
+"start": 37.76,
+"end": 37.92
 },
 {
 "text": "kana",
 "type": "word",
 "ja": "kana",
-"start": 34.15,
-"end": 34.51
+"start": 38.04,
+"end": 38.4
 },
 {
-"text": "letters",
+"text": "letters.",
 "type": "word",
-"start": 34.55,
-"end": 34.71
-},
-{
-"text": "are",
-"type": "word",
-"start": 34.75,
-"end": 34.79
-},
-{
-"text": "born,",
-"type": "word",
-"start": 34.87,
-"end": 35.27
-},
-{
-"text": "and",
-"type": "word",
-"start": 35.35,
-"end": 35.46
-},
-{
-"text": "Murasaki Shikibu",
-"type": "word",
-"ja": "murasaki",
-"start": 35.43,
-"end": 36.37
-},
-{
-"text": "writes",
-"type": "word",
-"start": 36.5,
-"end": 36.74
-},
-{
-"text": "The",
-"type": "word",
-"start": 36.82,
-"end": 36.9
-},
-{
-"text": "Tale",
-"type": "word",
-"start": 36.98,
-"end": 37.22
-},
-{
-"text": "of",
-"type": "word",
-"start": 37.3,
-"end": 37.38
-},
-{
-"text": "Genji.",
-"type": "word",
-"ja": "genji",
-"start": 37.47,
-"end": 37.94
+"start": 38.52,
+"end": 38.92
 },
 {
 "text": "Kamakura.",
 "type": "word",
 "ja": "kamakura",
-"start": 38.42,
-"end": 39.07
-},
-{
-"text": "The",
-"type": "word",
-"start": 39.36,
-"end": 39.44
-},
-{
-"text": "emperor",
-"type": "word",
-"start": 39.52,
-"end": 39.84
-},
-{
-"text": "still",
-"type": "word",
-"start": 39.92,
-"end": 40.16
-},
-{
-"text": "reigns",
-"type": "word",
-"start": 40.24,
-"end": 40.48
-},
-{
-"text": "in",
-"type": "word",
-"start": 40.56,
-"end": 40.64
-},
-{
-"text": "Kyōto,",
-"type": "word",
-"ja": "kyoto2",
-"start": 40.73,
-"end": 41.19
-},
-{
-"text": "but",
-"type": "word",
-"start": 41.37,
-"end": 41.45
-},
-{
-"text": "now",
-"type": "word",
-"start": 41.53,
-"end": 41.77
-},
-{
-"text": "the",
-"type": "word",
-"start": 41.85,
-"end": 41.93
+"start": 39.39,
+"end": 40.04
 },
 {
 "text": "samurai",
 "type": "word",
 "ja": "samurai",
-"start": 41.98,
-"end": 42.61
+"start": 40.36,
+"end": 40.99
 },
 {
-"text": "rule.",
+"text": "warriors",
 "type": "word",
-"start": 42.67,
-"end": 42.99
+"start": 41.09,
+"end": 41.49
 },
 {
-"text": "Their",
+"text": "take",
 "type": "word",
-"start": 43.23,
-"end": 43.39
+"start": 41.57,
+"end": 41.73
 },
 {
-"text": "leader,",
+"text": "control",
 "type": "word",
-"start": 43.55,
-"end": 43.87
+"start": 41.81,
+"end": 42.29
 },
 {
-"text": "the",
+"text": "of",
 "type": "word",
-"start": 43.91,
-"end": 44.06
+"start": 42.33,
+"end": 42.37
 },
 {
-"text": "shōgun,",
+"text": "Japan.",
 "type": "word",
-"ja": "shogun",
-"start": 43.99,
-"end": 44.68
-},
-{
-"text": "governs",
-"type": "word",
-"start": 44.86,
-"end": 45.1
-},
-{
-"text": "from",
-"type": "word",
-"start": 45.18,
-"end": 45.26
-},
-{
-"text": "Kamakura.",
-"type": "word",
-"ja": "kamakura2",
-"start": 45.39,
-"end": 46.04
+"start": 42.45,
+"end": 42.93
 },
 {
 "text": "Mongol",
 "type": "word",
-"start": 46.34,
-"end": 46.74
+"start": 43.17,
+"end": 43.57
 },
 {
 "text": "fleets",
 "type": "word",
-"start": 46.82,
-"end": 47.06
+"start": 43.65,
+"end": 43.89
 },
 {
 "text": "attack",
 "type": "word",
-"start": 47.14,
-"end": 47.46
+"start": 43.97,
+"end": 44.29
 },
 {
 "text": "twice,",
 "type": "word",
-"start": 47.54,
-"end": 48.18
+"start": 44.37,
+"end": 45.01
 },
 {
 "text": "and",
 "type": "word",
-"start": 48.22,
-"end": 48.26
+"start": 45.09,
+"end": 45.17
 },
 {
 "text": "storms",
 "type": "word",
-"start": 48.42,
-"end": 48.9
+"start": 45.25,
+"end": 45.73
 },
 {
 "text": "drive",
 "type": "word",
-"start": 49.02,
-"end": 49.14
+"start": 45.85,
+"end": 45.97
 },
 {
 "text": "them",
 "type": "word",
-"start": 49.22,
-"end": 49.3
+"start": 46.05,
+"end": 46.13
 },
 {
 "text": "back.",
 "type": "word",
-"start": 49.38,
-"end": 49.7
+"start": 46.21,
+"end": 46.69
 },
 {
 "text": "Muromachi.",
 "type": "word",
 "ja": "muromachi",
-"start": 50.21,
-"end": 50.91
-},
-{
-"text": "The",
-"type": "word",
-"start": 51.17,
-"end": 51.25
-},
-{
-"text": "shōgun",
-"type": "word",
-"ja": "shogun2",
-"start": 51.39,
-"end": 52.08
-},
-{
-"text": "moves",
-"type": "word",
-"start": 52.09,
-"end": 52.21
-},
-{
-"text": "back",
-"type": "word",
-"start": 52.29,
-"end": 52.45
-},
-{
-"text": "to",
-"type": "word",
-"start": 52.53,
-"end": 52.61
-},
-{
-"text": "Kyōto.",
-"type": "word",
-"ja": "kyoto3",
-"start": 52.68,
-"end": 53.14
+"start": 47.13,
+"end": 47.83
 },
 {
 "text": "Zen,",
 "type": "word",
 "ja": "zen",
-"start": 53.46,
-"end": 53.87
+"start": 48.03,
+"end": 48.44
 },
 {
 "text": "the",
 "type": "word",
-"start": 54.01,
-"end": 54.05
+"start": 48.58,
+"end": 48.62
 },
 {
 "text": "tea",
 "type": "word",
-"start": 54.13,
-"end": 54.29
+"start": 48.7,
+"end": 48.86
 },
 {
 "text": "ceremony,",
 "type": "word",
-"start": 54.37,
-"end": 55.01
+"start": 48.94,
+"end": 49.66
 },
 {
 "text": "and",
 "type": "word",
-"start": 55.05,
-"end": 55.19
+"start": 49.74,
+"end": 49.99
 },
 {
 "text": "Nō",
 "type": "word",
 "ja": "noh",
-"start": 55.12,
-"end": 55.53
+"start": 49.85,
+"end": 50.26
 },
 {
 "text": "theater",
 "type": "word",
-"start": 55.59,
-"end": 55.99
+"start": 50.31,
+"end": 50.71
 },
 {
 "text": "flourish.",
 "type": "word",
-"start": 56.07,
-"end": 56.83
+"start": 50.79,
+"end": 51.55
 },
 {
 "text": "Sengoku.",
 "type": "word",
 "ja": "sengoku",
-"start": 57.15,
-"end": 57.86
+"start": 51.96,
+"end": 52.67
 },
 {
 "text": "The",
 "type": "word",
-"start": 58.12,
-"end": 58.2
+"start": 52.89,
+"end": 52.97
 },
 {
 "text": "country",
 "type": "word",
-"start": 58.28,
-"end": 58.6
+"start": 53.05,
+"end": 53.37
 },
 {
 "text": "breaks",
 "type": "word",
-"start": 58.76,
-"end": 59.04
+"start": 53.45,
+"end": 53.77
 },
 {
 "text": "apart,",
 "type": "word",
-"start": 59.08,
-"end": 59.64
+"start": 53.85,
+"end": 54.41
 },
 {
 "text": "and",
 "type": "word",
-"start": 59.72,
-"end": 59.8
+"start": 54.49,
+"end": 54.57
 },
 {
 "text": "warlords",
 "type": "word",
-"start": 59.88,
-"end": 60.36
+"start": 54.65,
+"end": 55.13
 },
 {
 "text": "fight",
 "type": "word",
-"start": 60.44,
-"end": 60.68
+"start": 55.21,
+"end": 55.37
 },
 {
 "text": "for",
 "type": "word",
-"start": 60.76,
-"end": 60.84
+"start": 55.45,
+"end": 55.53
 },
 {
 "text": "a",
 "type": "word",
-"start": 60.92,
-"end": 61.0
+"start": 55.61,
+"end": 55.69
 },
 {
 "text": "hundred",
 "type": "word",
-"start": 61.08,
-"end": 61.4
+"start": 55.77,
+"end": 56.09
 },
 {
-"text": "years.",
+"text": "years,",
 "type": "word",
-"start": 61.48,
-"end": 62.0
+"start": 56.17,
+"end": 56.73
 },
 {
-"text": "Then",
+"text": "until",
 "type": "word",
-"start": 62.12,
-"end": 62.36
+"start": 56.85,
+"end": 56.97
 },
 {
-"text": "three",
+"text": "Japan",
 "type": "word",
-"start": 62.6,
-"end": 62.84
+"start": 57.05,
+"end": 57.45
 },
 {
-"text": "great",
+"text": "is",
 "type": "word",
-"start": 62.92,
-"end": 63.16
+"start": 57.53,
+"end": 57.61
 },
 {
-"text": "warriors,",
+"text": "united",
 "type": "word",
-"start": 63.24,
-"end": 63.8
+"start": 57.69,
+"end": 58.09
 },
 {
-"text": "Nobunaga,",
+"text": "again.",
 "type": "word",
-"ja": "nobunaga",
-"start": 63.89,
-"end": 64.51
-},
-{
-"text": "Hideyoshi,",
-"type": "word",
-"ja": "hideyoshi",
-"start": 64.66,
-"end": 65.33
-},
-{
-"text": "and",
-"type": "word",
-"start": 65.51,
-"end": 65.59
-},
-{
-"text": "Ieyasu,",
-"type": "word",
-"ja": "ieyasu",
-"start": 65.67,
-"end": 66.29
-},
-{
-"text": "unite",
-"type": "word",
-"start": 66.51,
-"end": 66.79
-},
-{
-"text": "Japan.",
-"type": "word",
-"start": 66.87,
-"end": 67.35
+"start": 58.25,
+"end": 58.57
 },
 {
 "text": "Edo.",
 "type": "word",
 "ja": "edo",
-"start": 67.82,
-"end": 68.2
+"start": 59.05,
+"end": 59.43
 },
 {
-"text": "The",
+"text": "Two",
 "type": "word",
-"start": 68.52,
-"end": 68.56
-},
-{
-"text": "Tokugawa",
-"type": "word",
-"ja": "tokugawa",
-"start": 68.61,
-"end": 69.22
-},
-{
-"text": "shōgun",
-"type": "word",
-"ja": "shogun3",
-"start": 69.3,
-"end": 69.99
-},
-{
-"text": "bring",
-"type": "word",
-"start": 70.03,
-"end": 70.27
-},
-{
-"text": "two",
-"type": "word",
-"start": 70.35,
-"end": 70.51
+"start": 59.69,
+"end": 59.85
 },
 {
 "text": "hundred",
 "type": "word",
-"start": 70.59,
-"end": 70.83
+"start": 59.93,
+"end": 60.17
 },
 {
 "text": "and",
 "type": "word",
-"start": 70.95,
-"end": 71.07
+"start": 60.29,
+"end": 60.41
 },
 {
 "text": "fifty",
 "type": "word",
-"start": 71.177,
-"end": 71.39
+"start": 60.45,
+"end": 60.73
 },
 {
 "text": "years",
 "type": "word",
-"start": 71.47,
-"end": 71.71
+"start": 60.81,
+"end": 61.05
 },
 {
 "text": "of",
 "type": "word",
-"start": 71.75,
-"end": 71.79
+"start": 61.09,
+"end": 61.13
 },
 {
 "text": "peace,",
 "type": "word",
-"start": 71.95,
-"end": 72.43
+"start": 61.21,
+"end": 61.77
 },
 {
 "text": "and",
 "type": "word",
-"start": 72.47,
-"end": 72.51
+"start": 61.81,
+"end": 61.85
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 72.59,
-"end": 72.99
+"start": 61.93,
+"end": 62.33
 },
 {
 "text": "closes",
 "type": "word",
-"start": 73.15,
-"end": 73.47
+"start": 62.49,
+"end": 62.81
 },
 {
 "text": "itself",
 "type": "word",
-"start": 73.55,
-"end": 73.87
+"start": 62.89,
+"end": 63.29
 },
 {
 "text": "off",
 "type": "word",
-"start": 73.95,
-"end": 74.11
+"start": 63.37,
+"end": 63.45
 },
 {
 "text": "from",
 "type": "word",
-"start": 74.19,
-"end": 74.35
-},
-{
-"text": "most",
-"type": "word",
-"start": 74.43,
-"end": 74.67
-},
-{
-"text": "of",
-"type": "word",
-"start": 74.71,
-"end": 74.75
+"start": 63.53,
+"end": 63.61
 },
 {
 "text": "the",
 "type": "word",
-"start": 74.83,
-"end": 74.87
+"start": 63.69,
+"end": 63.77
 },
 {
 "text": "world.",
 "type": "word",
-"start": 74.91,
-"end": 75.31
+"start": 63.85,
+"end": 64.33
 },
 {
 "text": "kabuki,",
 "type": "word",
 "ja": "kabuki",
-"start": 75.53,
-"end": 76.1
+"start": 64.5,
+"end": 65.07
 },
 {
 "text": "ukiyo-e,",
 "type": "word",
 "ja": "ukiyoe",
-"start": 76.29,
-"end": 76.92
+"start": 65.21,
+"end": 65.84
 },
 {
 "text": "and",
 "type": "word",
-"start": 77.1,
-"end": 77.23
+"start": 66.02,
+"end": 66.09
 },
 {
 "text": "sushi",
 "type": "word",
 "ja": "sushi",
-"start": 77.2,
-"end": 77.69
+"start": 66.14,
+"end": 66.63
 },
 {
 "text": "flourish.",
 "type": "word",
-"start": 77.87,
-"end": 78.51
+"start": 66.73,
+"end": 67.37
 },
 {
 "text": "Then,",
 "type": "word",
-"start": 78.67,
-"end": 78.99
+"start": 67.53,
+"end": 67.93
 },
 {
 "text": "in",
 "type": "word",
-"start": 79.07,
-"end": 79.15
+"start": 68.01,
+"end": 68.09
 },
 {
 "text": "1853,",
 "type": "word",
-"start": 79.23,
-"end": 80.35
+"start": 68.17,
+"end": 69.37
 },
 {
 "text": "American",
 "type": "word",
-"start": 80.59,
-"end": 80.83
+"start": 69.61,
+"end": 69.85
 },
 {
 "text": "black",
 "type": "word",
-"start": 80.91,
-"end": 81.15
+"start": 69.93,
+"end": 70.17
 },
 {
 "text": "ships",
 "type": "word",
-"start": 81.23,
-"end": 81.39
+"start": 70.25,
+"end": 70.41
 },
 {
 "text": "arrive,",
 "type": "word",
-"start": 81.47,
-"end": 82.03
+"start": 70.49,
+"end": 71.05
 },
 {
 "text": "and",
 "type": "word",
-"start": 82.07,
-"end": 82.11
+"start": 71.13,
+"end": 71.21
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 82.19,
-"end": 82.59
+"start": 71.45,
+"end": 71.69
 },
 {
 "text": "must",
 "type": "word",
-"start": 82.75,
-"end": 82.99
+"start": 71.77,
+"end": 72.09
 },
 {
 "text": "open",
 "type": "word",
-"start": 83.07,
-"end": 83.31
+"start": 72.17,
+"end": 72.41
 },
 {
-"text": "its",
+"text": "up.",
 "type": "word",
-"start": 83.39,
-"end": 83.47
-},
-{
-"text": "ports.",
-"type": "word",
-"start": 83.55,
-"end": 84.15
+"start": 72.49,
+"end": 72.73
 },
 {
 "text": "Meiji.",
 "type": "word",
 "ja": "meiji",
-"start": 84.81,
-"end": 85.33
+"start": 73.6,
+"end": 74.12
 },
 {
 "text": "The",
 "type": "word",
-"start": 85.55,
-"end": 85.63
+"start": 74.34,
+"end": 74.56
 },
 {
 "text": "samurai",
 "type": "word",
 "ja": "samurai2",
-"start": 85.76,
-"end": 86.39
+"start": 74.44,
+"end": 75.07
 },
 {
 "text": "era",
 "type": "word",
-"start": 86.46,
-"end": 86.78
+"start": 75.12,
+"end": 75.44
 },
 {
 "text": "ends.",
 "type": "word",
-"start": 86.86,
-"end": 87.46
+"start": 75.52,
+"end": 76.16
+},
+{
+"text": "Railways",
+"type": "word",
+"start": 76.32,
+"end": 76.72
+},
+{
+"text": "and",
+"type": "word",
+"start": 76.76,
+"end": 76.8
+},
+{
+"text": "factories",
+"type": "word",
+"start": 76.88,
+"end": 77.36
+},
+{
+"text": "make",
+"type": "word",
+"start": 77.44,
+"end": 77.6
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 87.58,
-"end": 87.98
-},
-{
-"text": "builds",
-"type": "word",
-"start": 88.1,
-"end": 88.3
-},
-{
-"text": "railways",
-"type": "word",
-"start": 88.42,
-"end": 88.86
-},
-{
-"text": "and",
-"type": "word",
-"start": 88.9,
-"end": 88.94
-},
-{
-"text": "factories,",
-"type": "word",
-"start": 89.02,
-"end": 89.74
-},
-{
-"text": "and",
-"type": "word",
-"start": 89.78,
-"end": 89.82
-},
-{
-"text": "becomes",
-"type": "word",
-"start": 89.9,
-"end": 90.22
+"start": 77.8,
+"end": 78.0
 },
 {
 "text": "modern",
 "type": "word",
-"start": 90.3,
-"end": 90.62
+"start": 78.08,
+"end": 78.4
 },
 {
 "text": "in",
 "type": "word",
-"start": 90.7,
-"end": 90.86
+"start": 78.48,
+"end": 78.64
 },
 {
 "text": "one",
 "type": "word",
-"start": 90.94,
-"end": 91.1
+"start": 78.72,
+"end": 78.88
 },
 {
 "text": "generation.",
 "type": "word",
-"start": 91.18,
-"end": 91.98
+"start": 78.96,
+"end": 79.76
 },
 {
 "text": "Taishō.",
 "type": "word",
 "ja": "taisho",
-"start": 92.34,
-"end": 92.95
+"start": 80.22,
+"end": 80.83
 },
 {
 "text": "Democracy",
 "type": "word",
-"start": 93.21,
-"end": 93.69
+"start": 81.08,
+"end": 81.64
 },
 {
 "text": "grows,",
 "type": "word",
-"start": 93.77,
-"end": 94.33
+"start": 81.72,
+"end": 82.28
 },
 {
 "text": "and",
 "type": "word",
-"start": 94.37,
-"end": 94.41
+"start": 82.36,
+"end": 82.44
 },
 {
 "text": "in",
 "type": "word",
-"start": 94.49,
-"end": 94.57
+"start": 82.48,
+"end": 82.52
 },
 {
 "text": "1923,",
 "type": "word",
-"start": 94.65,
-"end": 95.77
+"start": 82.6,
+"end": 83.8
 },
 {
 "text": "a",
 "type": "word",
-"start": 95.823,
-"end": 95.877
+"start": 83.84,
+"end": 83.88
 },
 {
 "text": "great",
 "type": "word",
-"start": 95.93,
-"end": 96.25
+"start": 84.04,
+"end": 84.36
 },
 {
 "text": "earthquake",
 "type": "word",
-"start": 96.33,
-"end": 96.81
+"start": 84.44,
+"end": 84.92
 },
 {
 "text": "devastates",
 "type": "word",
-"start": 96.97,
-"end": 97.53
+"start": 85.0,
+"end": 85.63
 },
 {
 "text": "Tōkyō.",
 "type": "word",
 "ja": "tokyo",
-"start": 97.6,
-"end": 98.25
+"start": 85.68,
+"end": 86.33
 },
 {
 "text": "Shōwa.",
 "type": "word",
 "ja": "showa",
-"start": 98.8,
-"end": 99.35
+"start": 86.71,
+"end": 87.26
 },
 {
 "text": "War,",
 "type": "word",
-"start": 99.69,
-"end": 100.09
+"start": 87.52,
+"end": 87.92
 },
 {
 "text": "and",
 "type": "word",
-"start": 100.13,
-"end": 100.17
+"start": 88.0,
+"end": 88.08
 },
 {
 "text": "defeat",
 "type": "word",
-"start": 100.25,
-"end": 100.73
+"start": 88.2,
+"end": 88.56
 },
 {
 "text": "in",
 "type": "word",
-"start": 100.81,
-"end": 100.89
+"start": 88.64,
+"end": 88.8
 },
 {
 "text": "1945.",
 "type": "word",
-"start": 100.97,
-"end": 102.25
+"start": 88.88,
+"end": 90.16
 },
 {
 "text": "Then",
 "type": "word",
-"start": 102.37,
-"end": 102.49
+"start": 90.28,
+"end": 90.4
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 102.57,
-"end": 102.97
+"start": 90.48,
+"end": 90.88
 },
 {
-"text": "rebuilds:",
+"text": "rebuilds,",
 "type": "word",
-"start": 103.05,
-"end": 103.85
+"start": 90.96,
+"end": 91.68
+},
+{
+"text": "with",
+"type": "word",
+"start": 91.76,
+"end": 91.84
 },
 {
 "text": "the",
 "type": "word",
-"start": 103.89,
-"end": 103.93
+"start": 91.88,
+"end": 91.92
 },
 {
 "text": "bullet",
 "type": "word",
-"start": 104.05,
-"end": 104.17
+"start": 92.0,
+"end": 92.24
 },
 {
-"text": "train,",
+"text": "train",
 "type": "word",
-"start": 104.25,
-"end": 104.73
+"start": 92.44,
+"end": 92.64
 },
 {
 "text": "and",
 "type": "word",
-"start": 104.77,
-"end": 104.81
+"start": 92.68,
+"end": 92.72
 },
 {
 "text": "the",
 "type": "word",
-"start": 104.89,
-"end": 104.97
+"start": 92.8,
+"end": 92.88
 },
 {
 "text": "Tōkyō",
 "type": "word",
 "ja": "tokyo2",
-"start": 105.02,
-"end": 105.67
+"start": 92.93,
+"end": 93.58
 },
 {
 "text": "Olympics.",
 "type": "word",
-"start": 105.78,
-"end": 106.5
+"start": 93.59,
+"end": 94.31
 },
 {
 "text": "Heisei.",
 "type": "word",
 "ja": "heisei",
-"start": 106.85,
-"end": 107.49
+"start": 94.77,
+"end": 95.41
 },
 {
 "text": "The",
 "type": "word",
-"start": 107.63,
-"end": 107.67
+"start": 95.55,
+"end": 95.59
 },
 {
 "text": "bubble",
 "type": "word",
-"start": 107.75,
-"end": 107.99
+"start": 95.67,
+"end": 95.91
 },
 {
 "text": "bursts,",
 "type": "word",
-"start": 108.15,
-"end": 108.87
+"start": 95.99,
+"end": 96.71
 },
 {
 "text": "a",
 "type": "word",
-"start": 108.87,
-"end": 108.91
+"start": 96.72,
+"end": 96.76
 },
 {
 "text": "tsunami",
 "type": "word",
 "ja": "tsunami",
-"start": 108.94,
-"end": 109.46
+"start": 96.79,
+"end": 97.31
 },
 {
-"text": "strikes",
+"text": "strikes,",
 "type": "word",
-"start": 109.47,
-"end": 109.79
-},
-{
-"text": "in",
-"type": "word",
-"start": 109.87,
-"end": 109.95
-},
-{
-"text": "2011,",
-"type": "word",
-"start": 110.07,
-"end": 110.83
+"start": 97.32,
+"end": 97.96
 },
 {
 "text": "and",
 "type": "word",
-"start": 110.87,
-"end": 110.91
+"start": 98.04,
+"end": 98.2
 },
 {
 "text": "anime",
 "type": "word",
 "ja": "anime",
-"start": 111.07,
-"end": 111.49
+"start": 98.27,
+"end": 98.69
 },
 {
 "text": "goes",
 "type": "word",
-"start": 111.54,
-"end": 111.78
+"start": 98.79,
+"end": 99.03
 },
 {
 "text": "global.",
 "type": "word",
-"start": 111.86,
-"end": 112.58
+"start": 99.11,
+"end": 99.83
 },
 {
 "text": "And",
 "type": "word",
-"start": 112.66,
-"end": 112.74
+"start": 99.91,
+"end": 99.99
 },
 {
 "text": "now,",
 "type": "word",
-"start": 112.82,
-"end": 113.37
+"start": 100.07,
+"end": 100.76
 },
 {
 "text": "Reiwa.",
 "type": "word",
 "ja": "reiwa",
-"start": 113.52,
-"end": 113.99
+"start": 100.91,
+"end": 101.38
 },
 {
 "text": "The",
 "type": "word",
-"start": 114.17,
-"end": 114.25
+"start": 101.56,
+"end": 101.64
 },
 {
 "text": "first",
 "type": "word",
-"start": 114.41,
-"end": 114.57
+"start": 101.8,
+"end": 101.96
 },
 {
 "text": "era",
 "type": "word",
-"start": 114.65,
-"end": 114.89
+"start": 102.04,
+"end": 102.28
 },
 {
 "text": "name",
 "type": "word",
-"start": 115.01,
-"end": 115.13
+"start": 102.4,
+"end": 102.52
 },
 {
 "text": "from",
 "type": "word",
-"start": 115.21,
-"end": 115.29
+"start": 102.6,
+"end": 102.68
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 115.37,
-"end": 115.77
+"start": 102.76,
+"end": 103.24
 },
 {
-"text": "poetry,",
+"text": "poetry.",
 "type": "word",
-"start": 115.85,
-"end": 116.49
-},
-{
-"text": "not",
-"type": "word",
-"start": 116.61,
-"end": 116.73
-},
-{
-"text": "Chinese",
-"type": "word",
-"start": 116.89,
-"end": 117.05
-},
-{
-"text": "classics.",
-"type": "word",
-"start": 117.13,
-"end": 117.85
+"start": 103.32,
+"end": 104.12
 },
 {
 "text": "Which",
 "type": "word",
-"start": 118.43,
-"end": 118.51
+"start": 104.7,
+"end": 104.78
 },
 {
 "text": "era",
 "type": "word",
-"start": 118.59,
-"end": 118.75
+"start": 104.86,
+"end": 105.02
 },
 {
 "text": "would",
 "type": "word",
-"start": 118.83,
-"end": 118.99
+"start": 105.14,
+"end": 105.26
 },
 {
 "text": "you",
 "type": "word",
-"start": 119.07,
-"end": 119.15
+"start": 105.34,
+"end": 105.42
 },
 {
 "text": "live",
 "type": "word",
-"start": 119.23,
-"end": 119.31
+"start": 105.5,
+"end": 105.58
 },
 {
 "text": "in?",
 "type": "word",
-"start": 119.39,
-"end": 119.71
+"start": 105.66,
+"end": 106.06
 },
 {
 "text": "Tell",
 "type": "word",
-"start": 119.75,
-"end": 119.79
+"start": 106.1,
+"end": 106.14
 },
 {
 "text": "me",
 "type": "word",
-"start": 119.87,
-"end": 119.95
+"start": 106.22,
+"end": 106.3
 },
 {
 "text": "in",
 "type": "word",
-"start": 119.99,
-"end": 120.03
+"start": 106.34,
+"end": 106.38
 },
 {
 "text": "the",
 "type": "word",
-"start": 120.07,
-"end": 120.11
+"start": 106.42,
+"end": 106.46
 },
 {
 "text": "comments,",
 "type": "word",
-"start": 120.19,
-"end": 120.67
+"start": 106.54,
+"end": 107.02
 },
 {
 "text": "and",
 "type": "word",
-"start": 120.71,
-"end": 120.75
+"start": 107.06,
+"end": 107.1
 },
 {
 "text": "follow",
 "type": "word",
-"start": 120.91,
-"end": 121.07
+"start": 107.26,
+"end": 107.5
 },
 {
 "text": "for",
 "type": "word",
-"start": 121.15,
-"end": 121.31
+"start": 107.58,
+"end": 107.66
 },
 {
 "text": "more.",
 "type": "word",
-"start": 121.43,
-"end": 121.79
+"start": 107.78,
+"end": 108.14
 },
 {
 "text": "matane!",
 "type": "word",
 "ja": "matane",
-"start": 122.11,
-"end": 122.67
+"start": 108.46,
+"end": 109.02
 }
 ],
 "ja": {
 "jomon": {
 "text": "じょうもん",
 "romaji": "Jōmon",
-"start": 5.63,
-"end": 6.32
+"start": 8.24,
+"end": 8.93
 },
 "yayoi": {
 "text": "やよい",
 "romaji": "Yayoi",
-"start": 11.05,
-"end": 11.59
+"start": 13.79,
+"end": 14.33
 },
 "kofun": {
 "text": "こふん",
 "romaji": "Kofun",
-"start": 15.66,
-"end": 16.37
+"start": 18.48,
+"end": 19.19
 },
 "asuka": {
 "text": "あすか",
 "romaji": "Asuka",
-"start": 20.9,
-"end": 21.38
+"start": 23.78,
+"end": 24.26
 },
 "nara": {
 "text": "なら",
 "romaji": "Nara",
-"start": 26.07,
-"end": 26.45
+"start": 29.13,
+"end": 29.51
 },
 "heian": {
 "text": "へいあん",
 "romaji": "Heian",
-"start": 31.54,
-"end": 32.15
+"start": 34.05,
+"end": 34.66
 },
 "kyoto": {
 "text": "きょうと",
 "romaji": "Kyōto",
-"start": 33.45,
-"end": 33.91
+"start": 35.91,
+"end": 36.37
 },
 "kana": {
 "text": "かな",
 "romaji": "kana",
-"start": 34.15,
-"end": 34.51
-},
-"murasaki": {
-"text": "むらさきしきぶ",
-"romaji": "Murasaki Shikibu",
-"start": 35.43,
-"end": 36.37
-},
-"genji": {
-"text": "げんじ",
-"romaji": "Genji",
-"start": 37.47,
-"end": 37.94
+"start": 38.04,
+"end": 38.4
 },
 "kamakura": {
 "text": "かまくら",
 "romaji": "Kamakura",
-"start": 38.42,
-"end": 39.07
-},
-"kyoto2": {
-"text": "きょうと",
-"romaji": "Kyōto",
-"start": 40.73,
-"end": 41.19
+"start": 39.39,
+"end": 40.04
 },
 "samurai": {
 "text": "さむらい",
 "romaji": "samurai",
-"start": 41.98,
-"end": 42.61
-},
-"shogun": {
-"text": "しょうぐん",
-"romaji": "shōgun",
-"start": 43.99,
-"end": 44.68
-},
-"kamakura2": {
-"text": "かまくら",
-"romaji": "Kamakura",
-"start": 45.39,
-"end": 46.04
+"start": 40.36,
+"end": 40.99
 },
 "muromachi": {
 "text": "むろまち",
 "romaji": "Muromachi",
-"start": 50.21,
-"end": 50.91
-},
-"shogun2": {
-"text": "しょうぐん",
-"romaji": "shōgun",
-"start": 51.39,
-"end": 52.08
-},
-"kyoto3": {
-"text": "きょうと",
-"romaji": "Kyōto",
-"start": 52.68,
-"end": 53.14
+"start": 47.13,
+"end": 47.83
 },
 "zen": {
 "text": "ぜん",
 "romaji": "Zen",
-"start": 53.46,
-"end": 53.87
+"start": 48.03,
+"end": 48.44
 },
 "noh": {
 "text": "のう",
 "romaji": "Nō",
-"start": 55.12,
-"end": 55.53
+"start": 49.85,
+"end": 50.26
 },
 "sengoku": {
 "text": "せんごく",
 "romaji": "Sengoku",
-"start": 57.15,
-"end": 57.86
-},
-"nobunaga": {
-"text": "のぶなが",
-"romaji": "Nobunaga",
-"start": 63.89,
-"end": 64.51
-},
-"hideyoshi": {
-"text": "ひでよし",
-"romaji": "Hideyoshi",
-"start": 64.66,
-"end": 65.33
-},
-"ieyasu": {
-"text": "いえやす",
-"romaji": "Ieyasu",
-"start": 65.67,
-"end": 66.29
+"start": 51.96,
+"end": 52.67
 },
 "edo": {
 "text": "えど",
 "romaji": "Edo",
-"start": 67.82,
-"end": 68.2
-},
-"tokugawa": {
-"text": "とくがわ",
-"romaji": "Tokugawa",
-"start": 68.61,
-"end": 69.22
-},
-"shogun3": {
-"text": "しょうぐん",
-"romaji": "shōgun",
-"start": 69.3,
-"end": 69.99
+"start": 59.05,
+"end": 59.43
 },
 "kabuki": {
 "text": "かぶき",
 "romaji": "kabuki",
-"start": 75.53,
-"end": 76.1
+"start": 64.5,
+"end": 65.07
 },
 "ukiyoe": {
 "text": "うきよえ",
 "romaji": "ukiyo-e",
-"start": 76.29,
-"end": 76.92
+"start": 65.21,
+"end": 65.84
 },
 "sushi": {
 "text": "すし",
 "romaji": "sushi",
-"start": 77.2,
-"end": 77.69
+"start": 66.14,
+"end": 66.63
 },
 "meiji": {
 "text": "めいじ",
 "romaji": "Meiji",
-"start": 84.81,
-"end": 85.33
+"start": 73.6,
+"end": 74.12
 },
 "samurai2": {
 "text": "さむらい",
 "romaji": "samurai",
-"start": 85.76,
-"end": 86.39
+"start": 74.44,
+"end": 75.07
 },
 "taisho": {
 "text": "たいしょう",
 "romaji": "Taishō",
-"start": 92.34,
-"end": 92.95
+"start": 80.22,
+"end": 80.83
 },
 "tokyo": {
 "text": "とうきょう",
 "romaji": "Tōkyō",
-"start": 97.6,
-"end": 98.25
+"start": 85.68,
+"end": 86.33
 },
 "showa": {
 "text": "しょうわ",
 "romaji": "Shōwa",
-"start": 98.8,
-"end": 99.35
+"start": 86.71,
+"end": 87.26
 },
 "tokyo2": {
 "text": "とうきょう",
 "romaji": "Tōkyō",
-"start": 105.02,
-"end": 105.67
+"start": 92.93,
+"end": 93.58
 },
 "heisei": {
 "text": "へいせい",
 "romaji": "Heisei",
-"start": 106.85,
-"end": 107.49
+"start": 94.77,
+"end": 95.41
 },
 "tsunami": {
 "text": "つなみ",
 "romaji": "tsunami",
-"start": 108.94,
-"end": 109.46
+"start": 96.79,
+"end": 97.31
 },
 "anime": {
 "text": "アニメ",
 "romaji": "anime",
-"start": 111.07,
-"end": 111.49
+"start": 98.27,
+"end": 98.69
 },
 "reiwa": {
 "text": "れいわ",
 "romaji": "Reiwa",
-"start": 113.52,
-"end": 113.99
+"start": 100.91,
+"end": 101.38
 },
 "matane": {
 "text": "またね！",
 "romaji": "matane!",
-"start": 122.11,
-"end": 122.67
+"start": 108.46,
+"end": 109.02
 }
 }
 }

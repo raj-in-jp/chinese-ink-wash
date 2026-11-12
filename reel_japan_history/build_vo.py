@@ -33,18 +33,15 @@ JA_WORDS = [('jomon', 'じょうもん', 'Jōmon'), ('yayoi', 'やよい', 'Yayo
 JA_WORDS_B = [('shogun', 'しょうぐん', 'shōgun'), ('tokugawa', 'とくがわ', 'Tokugawa')]     # audio/words_ja_b.mp3
 # stand-ins in the order they are spoken: (words in the take, normalised; clip)
 STAND_IN = [('jomon', 'jomon'), ('yayoi', 'yayoi'), ('kofun', 'kofun'), ('asuka', 'asuka'), ('nara', 'nara'), ('heian', 'heian'),
-            ('kyoto', 'kyoto'), ('kana', 'kana'), ('murasaki shikibu', 'murasaki'), ('genji', 'genji'), ('kamakura', 'kamakura'),
-            ('kyoto', 'kyoto'), ('samurai', 'samurai'), ('shogun', 'shogun'), ('kamakura', 'kamakura'), ('muromachi', 'muromachi'),
-            ('shogun', 'shogun'), ('kyoto', 'kyoto'), ('zen', 'zen'), ('noh', 'noh'), ('sengoku', 'sengoku'), ('nobunaga', 'nobunaga'),
-            ('hideyoshi', 'hideyoshi'), ('ieyasu', 'ieyasu'), ('edo', 'edo'), ('tokugawa', 'tokugawa'), ('shoguns', 'shogun'),
-            ('kabuki', 'kabuki'), ('ukiyoe', 'ukiyoe'), ('sushi', 'sushi'), ('meiji', 'meiji'), ('samurai', 'samurai'),
-            ('taisho', 'taisho'), ('tokyo', 'tokyo'), ('showa', 'showa'), ('tokyo', 'tokyo'), ('heisei', 'heisei'),
-            ('tsunami', 'tsunami'), ('anime', 'anime'), ('reiwa', 'reiwa')]
+            ('kyoto', 'kyoto'), ('kana', 'kana'), ('kamakura', 'kamakura'), ('samurai', 'samurai'), ('muromachi', 'muromachi'),
+            ('zen', 'zen'), ('noh', 'noh'), ('sengoku', 'sengoku'), ('edo', 'edo'), ('kabuki', 'kabuki'), ('ukiyoe', 'ukiyoe'),
+            ('sushi', 'sushi'), ('meiji', 'meiji'), ('samurai', 'samurai'), ('taisho', 'taisho'), ('tokyo', 'tokyo'), ('showa', 'showa'),
+            ('tokyo', 'tokyo'), ('heisei', 'heisei'), ('tsunami', 'tsunami'), ('anime', 'anime'), ('reiwa', 'reiwa')]
 ERAS = [k for k, _, _ in JA_WORDS[:15]]
 MATANE = ('matane', 'またね！', 'matane!')
-HOLD = {'Go!': 0.35, 'ports.': 0.3, 'classics.': 0.5}     # silence after these words: the race starts, the ships land
+HOLD = {'trains.': 0.25, 'go!': 0.3, 'up.': 0.3, 'poetry.': 0.5}     # silence after these words: the race starts, the ships land
 PAD = 0.04
-ERA_BREATH = 0.22                   # extra silence before each era name, so a new era never runs into the last line
+ERA_BREATH = 0.3                   # extra silence before each era name, so a new era never runs into the last line
 
 
 def norm(s):

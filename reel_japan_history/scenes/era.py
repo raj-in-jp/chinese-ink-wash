@@ -49,9 +49,9 @@ MAPS = {
     'asuka': dict(view=(131.0, 35.0, 0.52), phase=('Buddhism arrives', 'and Japan builds'), boat=False,
                   routes=[[(126.9, 36.2), (127.4, 34.7), (129.4, 34.0), (131.3, 33.95), (133.3, 34.25), (135.4, 34.62)]],
                   labels=[('BUDDHISM', 127.6, 37.6), ('NARA 奈良', 136.6, 33.6)]),
-    'kamakura': dict(view=(131.6, 34.7, 0.55), phase=('The emperor', None), boat=True, back='storms drive', route_t='Mongol fleets',
-                     takeover=dict(markers=[('天皇', 'EMPEROR', 135.77, 35.01, 'The emperor'), ('将軍', 'SHOGUN', 139.55, 35.32, 'ja:shogun')],
-                                   spread='ja:samurai', origin=(139.55, 35.32),
+    'kamakura': dict(view=(131.6, 34.7, 0.55), phase=('samurai warriors', None), boat=True, back='storms drive', route_t='Mongol fleets',
+                     takeover=dict(markers=[('鎌倉', 'KAMAKURA', 139.55, 35.32, 'samurai warriors')],
+                                   spread='take control', origin=(139.55, 35.32),
                                    riders=[(135.77, 35.01), (135.5, 34.7), (132.4, 34.4), (130.6, 32.8), (133.5, 33.8), (140.9, 38.3),
                                            (139.0, 37.9)]),
                      routes=[[(128.6, 35.2), (129.4, 34.4), (130.3, 33.7)], [(121.8, 29.9), (125.6, 31.0), (128.9, 32.6), (130.2, 33.55)]],
@@ -96,7 +96,12 @@ class Scene(KanjiScene):
         self.glyphs = [typeset(c, 250, font=FONT_BRUSH_JP, seed=400 + 10 * self.idx + j, medians=False, sweep=(0.7, 1)) for j, c in enumerate(kanji)]
         self.furi = [text_layer(f, FONT_JP, 42)[0] if f else None for f in FURI[k]]
         self.rom, _ = text_layer(rom, FONT_EN_BOLD, 40, tracking=8)
-        self.art = cached(f'h7_{k}_v1', getattr(hart, k))
+        if k == 'heian':
+            self.art = cached('h7_heian_nofan_v1', lambda: hart.heian(fan=False))
+        elif k == 'taisho':
+            self.art = cached('h7_taisho_notram_v1', lambda: hart.taisho(tram=False))
+        else:
+            self.art = cached(f'h7_{k}_v1', getattr(hart, k))
         self.T_art = wash_map(H, W, (0 if self.idx % 2 else W, 1100), noise_amp=0.3, noise_scale=180, seed=self.paper_seed)
         self.T_turn = wash_map(H, W, None, direction=(-1, -0.15), noise_amp=0.07, noise_scale=220, seed=self.paper_seed + 1)
         self._years = {}
@@ -144,7 +149,7 @@ class Scene(KanjiScene):
         import r5art
         self.chart = cached('h7_chart_v1', r5art.east_asia_chart)['rgb'].astype(np.float32)
         a, b = M['phase']
-        self.m_in = self.t0 if a is None else at(a, after=self.t0 - 0.5)[0] - 0.25
+        self.m_in = self.t0 if a is None else at(a, after=self.t0 - 0.5)[0] - 0.1
         self.m_out = None if b is None else at(b, after=self.t0 - 0.5)[0] - 0.2
         if a is None:
             self.art_t0 = self.m_out
@@ -304,6 +309,7 @@ class Scene(KanjiScene):
             self.junks = []
             self.t_back = self.t1 + 10
         elif k == 'heian':
+            self.fans = cached('h7_fan_v1', lambda: {f'{c}{i}': a for i in range(9) for c, a in zip('ir', hart.fan_open(i / 8))})
             self.an = text_layer('安', FONT_JP, 170)[0]
             self.a = typeset('あ', 190, font=FONT_BRUSH_JP, seed=461, medians=False, sweep=(0.7, 1))
             self.arrow = text_layer('→', FONT_EN_BOLD, 80)[0]
@@ -315,6 +321,7 @@ class Scene(KanjiScene):
             self.train = cached('h7_train_v1', lambda: dict(zip(('ink', 'red'), hart.steam_train())))
             self.puffs = [hart.smoke_puff(seed=10 + j) for j in range(4)]
         elif k == 'taisho':
+            self.tram = cached('h7_tram_v1', lambda: dict(zip(('ink', 'red'), hart.tram_sprite())))
             self.crack = cached('h7_crack_v1', lambda: {'d': hart.crack()})['d']
             self.T_crack = wash_map(H, W, None, direction=(1, 0), noise_amp=0.1, noise_scale=80, seed=9)
             self.t_quake = at('earthquake')[0]
@@ -345,10 +352,10 @@ class Scene(KanjiScene):
                                                      ('ieyasu', '徳川家康', 'fern'))):
                 d = cached(f'h7_lord_{key}_v1', lambda c=crest, j=j: dict(zip(('ink', 'red', 'gold'), hart.warrior(c, seed=90 + 20 * j))))
                 ink, red, gold = d['ink'], d['red'], d['gold']
-                self.lords.append(dict(ink=ink, red=red, gold=gold, t=JA[key]['start'], kanji=text_layer(kanji, FONT_JP, 40)[0],
-                                       rom=text_layer(key.upper(), FONT_EN_BOLD, 24, tracking=5)[0], x=195 + 345 * j))
+                self.lords.append(dict(ink=ink, red=red, gold=gold, t=at('warlords fight')[0] - 0.1 + 0.35 * j, x=195 + 345 * j))
             self.card_b, self.card_r = kit.box(430, 300, 2.5), kit.rim(430, 300, inset=8, t=3)
-            self.t_unite = at('unite Japan')[0]
+            self.t_unite = at('united again')[0]
+            self.t_fight = at('fight for')[0]
             self.unite = _seal2('統一')
             self.unite_lab = text_layer('UNITED', FONT_EN_BOLD, 34, tracking=8)[0]
 
@@ -405,6 +412,12 @@ class Scene(KanjiScene):
         fr = self.frame(cam)
         fa = (t - self.art_t0 - 0.1) / 1.0
         m = self.map_amount(t)
+        if self.key == 'kofun' and fa > 0:                # the drone shot: slowly pushing in over the tomb
+            z = 0.84 + 0.16 * smooth((t - self.art_t0) / (self.t1 - self.art_t0))
+            for c in ('blue', 'ink'):
+                d = reveal_time(self.art[c], self.T_art, fa)
+                kit.put(fr, cam, d, 540, 1150 + (960 - 1150) * z, COLOURS[c], 0.95, z)
+            fa = -1
         for c in ('grey', 'blue', 'red', 'gold', 'ink', 'bloss'):
             if c in self.art and fa > 0 and m < 1:
                 self.layer(fr, cam, reveal_time(self.art[c], self.T_art, fa), *self.art_offset(t, c), depth=ART_DEPTH, ref=(540, 960),
@@ -436,6 +449,13 @@ class Scene(KanjiScene):
         return fr.img
 
     def art_offset(self, t, c):
+        dx, dy = self.art_offset_(t, c)
+        u = max(t - self.art_t0 - 0.1, 0)
+        if self.key == 'kamakura':                       # dropped from above, lands with a bounce
+            return dx, dy - 160 * np.exp(-u * 5) * np.cos(u * 11)
+        return dx, dy + 45 * (1 - ease_out(min(u / 1.0, 1)))
+
+    def art_offset_(self, t, c):
         if self.key == 'sengoku' and c == 'red':
             return 4 * np.sin(t * 5.5), 2 * np.sin(t * 3.1)
         if self.key == 'edo' and c == 'blue':
@@ -456,22 +476,30 @@ class Scene(KanjiScene):
                 kit.put(fr, cam, ink, x, y, INK, o, 0.8, rot=0.1 * np.sin(t * 2 + j) - 0.2 * back)
         elif k == 'sengoku':
             cam = Cam(540, 960, 1.0)                     # the cards hold still on the screen
-            for L in self.lords:
+            clash = smooth((t - self.t_fight) / 0.3) * (1 - smooth((t - self.t_unite + 0.4) / 0.4))
+            unite = ease_io((t - self.t_unite + 0.2) / 0.6)
+            for j, L in enumerate(self.lords):
                 f = (t - L['t'] + 0.25) / 0.45
                 if f <= 0:
                     continue
                 o = smooth(f)
-                y = 1095 + 60 * (1 - ease_out(min(f, 1)))
-                kit.card(fr, cam, self.card_b, self.card_r, L['x'], y, o, color=np.array([0.96, 0.93, 0.86], np.float32))
+                side = j - 1                             # left, middle, right: they lunge at each other while they fight
+                lunge = clash * (18 * np.sin(t * 9 + j * 2.1) - 10 * side)
+                x = L['x'] + lunge + side * (-60) * unite
+                y = 1080 + 60 * (1 - ease_out(min(f, 1))) + clash * 6 * np.sin(t * 13 + j)
+                rot = clash * 0.06 * np.sin(t * 7 + j * 1.7) - 0.05 * side * (1 - unite) * clash
+                kit.card(fr, cam, self.card_b, self.card_r, x, y, o, color=np.array([0.96, 0.93, 0.86], np.float32))
                 for c, col in (('red', VERM), ('gold', GOLD), ('ink', INK)):
-                    kit.put(fr, cam, L[c], L['x'], y - 45, col, o * (0.9 if c != 'ink' else 1.0), 0.86)
-                kit.put(fr, cam, L['kanji'], L['x'], y + 150, INK, o)
-                kit.put(fr, cam, L['rom'], L['x'], y + 190, VERM, smooth(f - 0.6))
+                    kit.put(fr, cam, L[c], x, y - 10, col, o * (0.9 if c != 'ink' else 1.0), 0.95, rot=rot)
             fu = (t - self.t_unite) / 0.18
             if fu > 0:
                 kit.put(fr, cam, self.unite, 540, 830, VERM, 0.95 * smooth(fu), 0.78 * (1.0 + 0.6 * np.exp(-fu * 2.4)), rot=-0.05)
                 kit.put(fr, cam, self.unite_lab, 790, 830, INK, smooth(fu - 1.5))
         elif k == 'heian':
+            fo = ease_out(np.clip((t - self.art_t0 - 0.3) / 0.9, 0, 1))      # the fan snaps open
+            i = int(round(fo * 8))
+            kit.put(fr, cam, self.fans[f'r{i}'], 300, 1140, VERM, 0.85 * smooth((t - self.art_t0) / 0.3), rot=0.06 * np.sin(t * 1.3))
+            kit.put(fr, cam, self.fans[f'i{i}'], 300, 1140, INK, smooth((t - self.art_t0) / 0.3), rot=0.06 * np.sin(t * 1.3))
             f = (t - self.t_kana + 0.1) / 0.5
             if f > 0:
                 self.plate(fr, cam, 780, 1090, 420, 300, smooth(f))
@@ -497,6 +525,13 @@ class Scene(KanjiScene):
             kit.put(fr, cam, self.train['red'], x, y, VERM, 0.85)
             kit.put(fr, cam, self.train['ink'], x, y, INK, 1.0)
         elif k == 'taisho':
+            u = ease_out(np.clip((t - self.art_t0) / (self.t_quake - self.art_t0), 0, 1))
+            q = t - self.t_quake
+            jolt = 10 * np.exp(-q * 3) * np.sin(q * 40) * (q > 0)
+            x = lerp(-260, 330, u) + jolt
+            y = 1170 + 2 * np.sin(t * 14) * (u < 1) + 0.5 * jolt
+            kit.put(fr, cam, self.tram['red'], x, y, VERM, 0.85, rot=0.03 * np.sin(q * 30) * np.exp(-max(q, 0) * 3) * (q > 0))
+            kit.put(fr, cam, self.tram['ink'], x, y, INK, 1.0, rot=0.03 * np.sin(q * 30) * np.exp(-max(q, 0) * 3) * (q > 0))
             fc = (t - self.t_quake - 0.15) / 0.5
             if fc > 0:
                 self.layer(fr, cam, reveal_time(self.crack, self.T_crack, fc), color=INK, opacity=1.0)

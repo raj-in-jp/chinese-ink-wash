@@ -131,8 +131,10 @@ def nara():
 
 
 # ------------------------------------------------------------------ 平安: an unrolled handscroll and a court fan
-def heian():
+def heian(fan=True):
     ss, red = StrokeSet(W, H), StrokeSet(W, H)
+    if not fan:                                             # the scene opens the fan itself (fan_open)
+        return {'ink': _f(_hills(1250, 6, 0.4)), 'red': np.zeros((H, W), np.float32)}
     # a folding fan (hiōgi) open on the left
     fx, fy = 300, 1300
     for k, a in enumerate(np.linspace(-2.55, -0.6, 13)):
@@ -330,8 +332,9 @@ def meiji():
     return {'ink': _f(np.maximum(ss.render(9), _hills(1220, 8, 0.35)))}
 
 
-def taisho():
-    """a streetcar under its wire, Western-style brick front behind; the earthquake crack is a separate layer"""
+def taisho(tram=True):
+    """a streetcar under its wire, Western-style brick front behind; the earthquake crack is a separate layer
+    (tram=False: the street without it, for the scene to drive tram_sprite() along)"""
     ss, red = StrokeSet(W, H), StrokeSet(W, H)
     # a brick building with a clock tower
     ss.add(pwash(W, H, [(620, 1260), (980, 1260), (980, 1000), (620, 1000)], ink=0.2, soft=1.5, seed=470), 0, 1)
@@ -343,6 +346,10 @@ def taisho():
             ss.add(pwash(W, H, [(x, y), (x + 30, y), (x + 30, y + 40), (x, y + 40)], ink=0.6, soft=1, seed=480 + j * 5 + i), 0, 1)
     # the streetcar
     x0, y0 = 120, 1290
+    if not tram:
+        ss.add(stroke(W, H, [(40, 958), (1040, 952)], 2, ink=0.6, dry=0.5, profile=SWEEP, seed=531), 0, 1)
+        ss.add(stroke(W, H, [(40, y0 + 30), (1040, y0 + 30)], 5, ink=0.7, dry=0.4, profile=BLUNT, seed=532), 0, 1)
+        return {'ink': _f(ss.render(9)), 'red': _f(red.render(9))}
     body = [(x0, y0), (x0 + 430, y0), (x0 + 440, y0 - 170), (x0 - 10, y0 - 170)]
     red.add(pwash(W, H, body, ink=0.55, soft=1.8, seed=500, grain=0.4), 0, 1)
     ss.add(pwash(W, H, [(x0 - 20, y0 - 170), (x0 + 450, y0 - 170), (x0 + 420, y0 - 200), (x0 + 10, y0 - 200)], ink=0.85, soft=1.5, seed=501), 0, 1)
@@ -590,4 +597,37 @@ def samurai_icon(w=80, h=90, seed=0):
     ss.add(pwash(w, h, [(33, 26), (49, 26), (47, 16), (41, 12), (35, 16)], ink=0.95, soft=1.0, seed=seed + 9), 0, 1)
     ss.add(stroke(w, h, [(30, 44), (66, 4)], 2.2, ink=0.9, dry=0.3, profile=BLUNT, seed=seed + 10), 0, 1)
     red.add(pwash(w, h, [(36, 30), (50, 32), (46, 6), (38, 8)], ink=0.85, soft=1.0, seed=seed + 11), 0, 1)
+    return _f(ss.render(9)), _f(red.render(9))
+
+
+def fan_open(f, w=640, h=400):
+    """the court fan opening: ribs spread from closed (f=0) to fully open (f=1), pivot at the bottom centre of the
+    w x h canvas; returns (ink, red)"""
+    ss, red = StrokeSet(w, h), StrokeSet(w, h)
+    fx, fy = w / 2, h - 30
+    a0, a1 = -np.pi / 2 - 0.98 * f, -np.pi / 2 + 0.98 * f
+    for k, a in enumerate(np.linspace(a0, a1, 13)):
+        ss.add(stroke(w, h, [(fx, fy), (fx + 290 * np.cos(a), fy + 290 * np.sin(a))], 3, ink=0.6, dry=0.5, profile=SWEEP, seed=70 + k), 0, 1)
+    if f > 0.04:
+        arc = [(fx + 290 * np.cos(a), fy + 290 * np.sin(a)) for a in np.linspace(a0, a1, 20)]
+        arc_in = [(fx + 120 * np.cos(a), fy + 120 * np.sin(a)) for a in np.linspace(a1, a0, 12)]
+        red.add(pwash(w, h, arc + arc_in, ink=0.5, soft=2, seed=85, grain=0.5), 0, 1)
+        ss.add(stroke(w, h, spline(arc, 6), 5, ink=0.8, dry=0.4, profile=BLUNT, seed=86), 0, 1)
+    ss.add(stroke(w, h, spline([(fx, fy), (fx - 30, fy + 18), (fx - 10, fy + 28)], 6), 3, ink=0.6, dry=0.5, profile=SWEEP, seed=87), 0, 1)
+    return _f(ss.render(9)), _f(red.render(9))
+
+
+def tram_sprite(w=520, h=380):
+    """the streetcar on its own canvas (wheels at y = h - 60, pole up to the wire at the top); returns (ink, red)"""
+    ss, red = StrokeSet(w, h), StrokeSet(w, h)
+    x0, y0 = 40, h - 60
+    red.add(pwash(w, h, [(x0, y0), (x0 + 430, y0), (x0 + 440, y0 - 170), (x0 - 10, y0 - 170)], ink=0.55, soft=1.8, seed=500, grain=0.4), 0, 1)
+    ss.add(pwash(w, h, [(x0 - 20, y0 - 170), (x0 + 450, y0 - 170), (x0 + 420, y0 - 200), (x0 + 10, y0 - 200)], ink=0.85, soft=1.5, seed=501), 0, 1)
+    for i in range(5):
+        x = x0 + 30 + i * 80
+        ss.add(stroke(w, h, [(x, y0 - 150), (x + 55, y0 - 150), (x + 55, y0 - 90), (x, y0 - 90), (x, y0 - 150)], 3, ink=0.85, dry=0.3,
+                      profile=BLUNT, seed=510 + i), 0, 1)
+    for x in (x0 + 80, x0 + 350):
+        ss.add(_ring_s(w, h, x, y0 + 4, 26, 7, 520 + x), 0, 1)
+    ss.add(stroke(w, h, [(x0 + 220, y0 - 200), (x0 + 300, y0 - 330)], 4, ink=0.8, dry=0.3, profile=BLUNT, seed=530), 0, 1)
     return _f(ss.render(9)), _f(red.render(9))

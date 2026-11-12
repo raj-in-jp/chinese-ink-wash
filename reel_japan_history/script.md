@@ -9,6 +9,34 @@ Look: the same ink-wash style. One long brushstroke timeline runs across the who
 along it. Each era gets its kanji name brushed in large, with its reading, its years, and one small illustration.
 A progress bar of era seals sits at the top, and the year counter in the corner keeps rolling forward.
 
+## v3 narration (recorded, final): simpler, no ruler names
+
+From clay pots... to bullet trains. Here's sixteen thousand years of Japan, in two minutes. Let's go!
+  [hook: the Jōmon pot, wiped away by a shinkansen racing across; Fuji behind it; the year flies to 2026]
+Jōmon. Hunters live in villages, and make some of the oldest pottery on Earth.
+Yayoi. People from the mainland bring rice farming and metal tools.  [map]
+Kofun. Powerful chiefs are buried in giant keyhole-shaped tombs.  [aerial push-in]
+Asuka. Buddhism arrives from Korea, and Japan builds a government like China's.  [map]
+Nara. Japan's first great capital, with a giant bronze Buddha.
+Heian. The capital moves to Kyōto, and Japan creates its own kana letters.  [the fan opens; 安 → あ]
+Kamakura. Samurai warriors take control of Japan. Mongol fleets attack twice, and storms drive them back.
+  [the helmet drops in; map: riders gallop out of Kamakura as vermilion spreads; the fleets and the storm]
+Muromachi. Zen, the tea ceremony, and Noh theater flourish.
+Sengoku. The country breaks apart, and warlords fight for a hundred years, until Japan is united again.
+  [three nameless armoured warriors clash, then close ranks under the 統一 seal]
+Edo. Two hundred and fifty years of peace, and Japan closes itself off from the world. Kabuki, ukiyo-e, and sushi
+flourish.
+Then, in 1853, American black ships arrive, and Japan must open up.  [map]
+Meiji. The samurai era ends. Railways and factories make Japan modern in one generation.
+Taishō. Democracy grows, and in 1923, a great earthquake devastates Tōkyō.  [the tram rolls in, the ground cracks]
+Shōwa. War, and defeat in 1945. Then Japan rebuilds, with the bullet train and the Tōkyō Olympics.
+Heisei. The bubble bursts, a tsunami strikes, and anime goes global.
+And now, Reiwa. The first era name from Japanese poetry.
+Which era would you live in? Tell me in the comments, and follow for more. またね！
+
+Recording: audio/take_en_a.mp3 (Raj, take 2 of 2, Scribe word-exact); Japanese words from words_ja_a.mp3.
+Narration 109.2 s; the reel runs 112.6 s.
+
 ## v2 narration (recorded, about 2 minutes)
 
 Slower, with one "what changed" line per era and a breath before every era name (Japanese words in Raj in Japanese).

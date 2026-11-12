@@ -367,10 +367,13 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         place(amb, x * e, t0, gain)
 
     hk = g('hook')
-    fx('counter', 0.1, 0.55)
-    fx('brush', hk.t_90 - 0.1, 0.5)
-    fx('stamp', hk.t_90 + 0.35, 0.6)
-    fx('scroll', hk.t_ready - 0.05, 0.35)
+    fx('fire', 0.0, 0.3)                                    # the clay pot by the fire...
+    fx('shinkansen', hk.t_bt - 0.25, 0.75)                  # ...blown away by the bullet train
+    fx('counter', hk.t_bt, 0.45)
+    fx('brush', hk.t_here, 0.5)
+    fx('brush', hk.t_two - 0.1, 0.45)
+    fx('stamp', hk.t_two + 0.3, 0.55)
+    fx('scroll', hk.t_go - 0.1, 0.35)
     fx('taiko', hk.t_go, 0.7)
     for k in ERA_KEYS:
         s_ = g(k)
@@ -386,19 +389,21 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     ambience('paddy', g('yayoi').t0, g('yayoi').t1, 0.25)
     fx('bell', g('asuka').m_in + 0.2, 0.45)
     fx('bell', g('nara').t_in + 0.9, 0.3)
-    fx('fan', g('heian').t0 + 0.7, 0.6)
+    fx('fan', g('heian').art_t0 + 0.3, 0.6)
     km = g('kamakura')
     fx('katana', at('samurai', after=km.t0)[0], 0.6)
     fx('storm', km.t_mback - 0.2, 0.55)
     fx('gallop', km.tk['t_spread'], 0.45, length=2.6)               # the samurai riding out over Japan
-    fx('stamp', km.m_in + 0.3, 0.4)                                 # 天皇 and 将軍 set on the map
-    fx('stamp', JA['shogun']['start'], 0.4)
+    fx('stamp', km.m_in + 0.3, 0.45)                                # Kamakura marked on the map
+    fx('taiko', km.art_t0 + 0.15, 0.45)                             # the helmet lands
     ambience('birds', g('muromachi').t0, g('muromachi').t1, 0.3)
     sg = g('sengoku')
     for j in range(3):                                      # war drums
         fx('taiko', sg.t_in + 0.3 + 0.45 * j, 0.35 - 0.06 * j)
     for L in sg.lords:                                      # each warlord steps forward
         fx('katana', L['t'] - 0.2, 0.35)
+    for j in range(4):                                      # the clash
+        fx('katana', sg.t_fight + 0.25 + 0.55 * j, 0.25, pan=0.3 * (-1) ** j)
     fx('stamp', sg.t_unite, 0.7)
     fx('taiko', sg.t_unite, 0.5)
     fx('wave', g('edo').t_in + 0.3, 0.45)
