@@ -73,7 +73,7 @@ class Scene(KanjiScene):
         self.t_hit = self.t_go
         m = cached('h7_hookmap_v2', _map_layer)
         self.map_rgb, self.map_a = m['rgb'], m['a']
-        self.cards = cached('h7_hookcards_v3', _drop_cards)['cards']
+        self.cards = cached('h7_hookcards_v4', _drop_cards)['cards']
         self.cap = []
         for k, *_ in DROPS:
             kj = text_layer(ERAS[k][0], FONT_BRUSH_JP, 84)[0]
@@ -198,7 +198,9 @@ def _map_layer():
 def _drop_cards(h=168):
     """the prints: each real picture cropped to a 4:3 window, on a cream mat"""
     out = []
-    for _, f, _, _ in DROPS:
+    from engine import FONT_EN
+    caps = ['jōmon pot', 'daisen kofun', 'the great buddha', 'golden pavilion', 'the great wave', 'black ship', 'shinkansen', 'tokyo today']
+    for (_, f, _, _), cap in zip(DROPS, caps):
         im = cv2.imread(os.path.join(HERE, 'data', 'photos', f))[..., ::-1].astype(np.float32) / 255
         ih, iw = im.shape[:2]
         w = int(h * 4 / 3)
@@ -208,9 +210,12 @@ def _drop_cards(h=168):
         if f == 'nara_daibutsu.jpg':                      # keep the Buddha's face in the window
             y0 = max(0, int(im.shape[0] * 0.08))
         im = im[y0:y0 + h, x0:x0 + w] * 0.92 + np.array([0.95, 0.92, 0.85], np.float32) * 0.08
-        m = 10
-        card = np.ones((h + 2 * m, w + 2 * m, 3), np.float32) * np.array([0.97, 0.95, 0.9], np.float32)
+        m, capb = 11, 34                                   # a little polaroid with its caption
+        card = np.ones((h + 2 * m + capb, w + 2 * m, 3), np.float32) * np.array([0.955, 0.945, 0.915], np.float32)
         card[m:m + h, m:m + w] = im
+        cg = text_layer(cap, FONT_EN, 22)[0]
+        gy, gx = m + h + (capb + m) // 2 - cg.shape[0] // 2 - 2, (card.shape[1] - cg.shape[1]) // 2
+        card[gy:gy + cg.shape[0], gx:gx + cg.shape[1]] *= (1 - cg[..., None] * 0.84)
         out.append(card.astype(np.float32))
     return {'cards': np.stack(out)}
 

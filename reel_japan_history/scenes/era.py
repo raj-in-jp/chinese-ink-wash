@@ -82,17 +82,20 @@ PHOTOS = {
     'asuka': [('asuka_horyuji.jpg', None, "HŌRYŪ-JI · ONE OF THE WORLD'S OLDEST WOODEN BUILDINGS", 'and Japan builds', None)],
     'nara': [('nara_daibutsu.jpg', (0, 40, 736, 840), 'THE GREAT BUDDHA · TŌDAI-JI', 'giant bronze', None)],
     'heian': [('heian_byodoin.jpg', None, 'BYŌDŌ-IN · THE PHOENIX HALL', 'capital moves', 'its own kana')],
+    'kamakura': [('kamakura_mongol_scroll.jpg', None, 'THE MONGOL INVASION SCROLL · 13TH CENTURY', 'Mongol fleets', 'storms drive')],
     'muromachi': [('muromachi_kinkakuji.jpg', (0, 110, 736, 900), 'KINKAKU-JI · THE GOLDEN PAVILION', 'ja:zen', None)],
     'sengoku': [('sengoku_unifier.jpg', (0, 0, 736, 780), 'JAPAN UNITED', 'united again', None)],
     'edo': [('edo_great_wave.jpg', None, 'THE GREAT WAVE · HOKUSAI · UKIYO-E', 'ja:kabuki', None)],
     'ships': [('ships_kurofune.jpg', None, 'A BLACK SHIP, DRAWN BY A JAPANESE ARTIST · 1850s', 'black ships', None)],
     'meiji': [('meiji_samurai.jpg', (0, 0, 551, 720), 'A SAMURAI · 19TH CENTURY', 'samurai era', 'Railways'),
               ('meiji_railway_print.jpg', None, "JAPAN'S FIRST RAILWAY · A WOODBLOCK PRINT", 'Railways', None)],
-    'taisho': [('taisho_1923.jpg', None, 'TOKYO AFTER THE 1923 EARTHQUAKE', 'devastates', None)],
-    'showa': [('showa_shinkansen0.jpg', None, 'THE FIRST SHINKANSEN · 1964', 'Olympics', None)],
-    'reiwa': [('reiwa_announcement.jpg', (1050, 380, 2000, 1250), 'THE NEW ERA NAME IS ANNOUNCED · 2019', 'ja:reiwa', None)],
+    'taisho': [('taisho_1923_street.jpg', None, 'TOKYO AFTER THE 1923 EARTHQUAKE', 'devastates', None)],
+    'showa': [('showa_shinkansen_fuji.jpg', None, 'THE SHINKANSEN PASSING MOUNT FUJI · 1964', 'bullet train', None)],
+    'heisei': [('heisei_tokyo_neon.jpg', None, 'TOKYO NEON · 1990s', 'ja:heisei', 'bubble bursts')],
+    'reiwa': [('reiwa_announcement.jpg', (1050, 380, 2000, 1250), 'THE NEW ERA NAME IS ANNOUNCED · 2019', 'ja:reiwa', 'Japanese poetry'),
+              ('reiwa_frame.jpg', None, "REIWA · FROM THE MAN'YŌSHŪ POEMS", 'Japanese poetry', None)],
 }
-PHOTO_BOX = (880, 520)                                     # largest picture inside the print
+PHOTO_BOX = (840, 480)                                     # largest picture inside the print
 ART_DEPTH = 1.25                            # the paintings sit nearer than the page: they travel more with the camera
 BIRDS = ('jomon', 'yayoi', 'asuka', 'nara', 'heian', 'muromachi', 'edo', 'reiwa')              # map panel centre and size on screen
 
@@ -171,7 +174,14 @@ class Scene(KanjiScene):
         paper = np.array([0.95, 0.92, 0.85], np.float32)
         im = im * 0.9 + paper * 0.1                              # a touch of the page's warmth, so it sits on the washi
         when = lambda p: (JA[p[3:]]['start'] if p.startswith('ja:') else at(p, after=self.t0 - 0.5)[0])
-        return dict(img=im, w=int(im.shape[1] / 1.08), h=int(im.shape[0] / 1.08), cap=text_layer(cap, FONT_EN_BOLD, 22, tracking=4)[0],
+        from engine import FONT_EN
+        w, h = int(im.shape[1] / 1.08), int(im.shape[0] / 1.08)
+        cg = text_layer(cap.lower(), FONT_EN, 36, tracking=1)[0]
+        m = max(22, int(0.05 * max(w, h)))
+        if cg.shape[1] > w + 2 * m - 40:                       # long captions shrink to fit the polaroid
+            k = (w + 2 * m - 40) / cg.shape[1]
+            cg = cv2.resize(cg, (int(cg.shape[1] * k), max(1, int(cg.shape[0] * k))), interpolation=cv2.INTER_AREA)
+        return dict(img=im, w=w, h=h, cap=cg, m=m, capb=max(84, int(0.15 * h)),
                     t_in=when(a) - 0.25, t_out=None if b is None else when(b) - 0.15)
 
     @staticmethod
@@ -198,15 +208,15 @@ class Scene(KanjiScene):
         cw, ch = int(W0 / 1.08 / z * 1.0), int(H0 / 1.08 / z * 1.0)
         cx0, cy0 = (W0 - cw) // 2, (H0 - ch) // 2
         pic = cv2.resize(P['img'][cy0:cy0 + ch, cx0:cx0 + cw], (w, h), interpolation=cv2.INTER_LINEAR)
-        m, capb = 16, 46
-        card = np.ones((h + 2 * m + capb, w + 2 * m, 3), np.float32) * np.array([0.97, 0.95, 0.9], np.float32)
+        m, capb = P['m'], P['capb']                              # a polaroid: even border, deep bottom strip with the caption
+        card = np.ones((h + 2 * m + capb, w + 2 * m, 3), np.float32) * np.array([0.955, 0.945, 0.915], np.float32)
         card[m:m + h, m:m + w] = pic
         ca = np.ones(card.shape[:2], np.float32)
         cg = P['cap']
-        gy, gx = m + h + capb // 2 - cg.shape[0] // 2, (card.shape[1] - cg.shape[1]) // 2
-        card[gy:gy + cg.shape[0], gx:gx + cg.shape[1]] *= (1 - cg[..., None] * (1 - np.array([0.3, 0.28, 0.26], np.float32)))
+        gy, gx = m + h + (capb + m) // 2 - cg.shape[0] // 2 - 4, (card.shape[1] - cg.shape[1]) // 2
+        card[gy:gy + cg.shape[0], gx:gx + cg.shape[1]] *= (1 - cg[..., None] * (1 - np.array([0.16, 0.15, 0.14], np.float32)))
         e = ease_out(min(u / 0.6, 1))
-        cx, cy = 540, 1105 + 40 * (1 - e)
+        cx, cy = 540, 1128 + 40 * (1 - e)
         rot = np.radians(-1.6 * (1 - e) + 0.6 * np.sin(t * 0.6))
         sc = 0.94 + 0.06 * e
         Hc, Wc = card.shape[:2]
@@ -546,10 +556,10 @@ class Scene(KanjiScene):
         if m < 1:
             self.life(fr, cam, t)
             self.extras(fr, cam, t)
-        if self.photos:
-            self.draw_photos(fr, t)
         if m > 0:
             self.draw_map(fr, t, m)
+        if self.photos:
+            self.draw_photos(fr, t)
         # the era's name, reading, romaji and year; a pale ink bloom opens behind the name as it is written
         fb = (t - self.t_in + 0.3) / 0.9
         if fb > 0:
@@ -703,7 +713,7 @@ class Scene(KanjiScene):
                 u = ((t - self.t0) * 0.12 * sp + d / 7) % 1
                 kit.put(fr, cam, self.petal, x + 60 * np.sin(t * sp + ph) - 140 * u, 760 + 700 * u, BLOSS, 0.8 * smooth((t - self.t0 - 0.5) / 0.6),
                         rot=t * sp + ph)
-            fm = smooth((t - self.t_poem + 0.1) / 0.4)
+            fm = smooth((t - self.t_poem + 0.1) / 0.4) * (0 if self.photos else 1)
             if fm > 0:
                 scr = Cam(540, 960, 1.0)
                 self.plate(fr, scr, 540, 1500, 520, 160, fm)
