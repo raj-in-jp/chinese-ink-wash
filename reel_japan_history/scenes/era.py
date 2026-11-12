@@ -11,7 +11,7 @@ import numpy as np
 import hart
 import kit
 from cards import INDIGO
-from engine import (FONT_BRUSH_JP, FONT_EN_BOLD, FONT_EN_ITALIC, FONT_HEAD, FONT_JP, GREY, H, INK, VERM, W, Cam, blur, cached,
+from engine import (spline, FONT_BRUSH_JP, FONT_EN_BOLD, FONT_EN_ITALIC, FONT_HEAD, FONT_JP, GREY, H, INK, VERM, W, Cam, blur, cached,
                     ease_io, ease_out, lerp, noise, reveal_time, smooth, text_layer, wash_map, wipe_mix)
 from art import soft_disc
 from glyphs import typeset
@@ -33,7 +33,30 @@ ERAS = {'jomon': ('縄文', 'じょうもん', 'JŌMON PERIOD', -14000), 'yayoi'
         'taisho': ('大正', 'たいしょう', 'TAISHŌ ERA', 1912), 'showa': ('昭和', 'しょうわ', 'SHŌWA ERA', 1926),
         'heisei': ('平成', 'へいせい', 'HEISEI ERA', 1989), 'reiwa': ('令和', 'れいわ', 'REIWA ERA', 2019)}
 RIB_Y, RIB_X0, RIB_X1 = 205, 110, 970
-KANJI_Y, KANA_Y, ROM_Y, YEAR_Y = 425, 600, 655, 728
+FURI_Y, KANJI_Y, ROM_Y, YEAR_Y = 318, 470, 640, 712
+# furigana over each character ('' = the reading spans both: 飛鳥 is read あすか as a whole)
+FURI = {'jomon': ('じょう', 'もん'), 'yayoi': ('や', 'よい'), 'kofun': ('こ', 'ふん'), 'asuka': ('あすか', ''), 'nara': ('な', 'ら'),
+        'heian': ('へい', 'あん'), 'kamakura': ('かま', 'くら'), 'muromachi': ('むろ', 'まち'), 'sengoku': ('せん', 'ごく'),
+        'edo': ('え', 'ど'), 'ships': ('くろ', 'ふね'), 'meiji': ('めい', 'じ'), 'taisho': ('たい', 'しょう'), 'showa': ('しょう', 'わ'),
+        'heisei': ('へい', 'せい'), 'reiwa': ('れい', 'わ')}
+KX = 140                                   # half the gap between the two characters
+# the map moments: a framed sea chart in the painting's place, routes brushed on in vermilion as Raj says them
+#   view = (lon, lat) at the panel centre and chart px -> screen px; routes = [(lon, lat), ...]; phase = (from, until)
+MAPS = {
+    'yayoi': dict(view=(128.5, 34.5, 0.52), phase=('rice farming', None), boat=False,
+                  routes=[[(126.9, 35.6), (128.2, 34.6), (129.6, 33.9), (130.4, 33.6)], [(121.6, 31.0), (125.5, 31.6), (129.2, 32.6), (130.0, 33.0)]],
+                  labels=[('RICE  ·  METAL', 124.8, 33.4), ('KYŪSHŪ', 131.4, 32.4)]),
+    'asuka': dict(view=(131.0, 35.0, 0.52), phase=('Buddhism arrives', 'and Japan builds'), boat=False,
+                  routes=[[(126.9, 36.2), (127.4, 34.7), (129.4, 34.0), (131.3, 33.95), (133.3, 34.25), (135.4, 34.62)]],
+                  labels=[('BUDDHISM', 127.6, 37.6), ('NARA 奈良', 136.6, 33.6)]),
+    'kamakura': dict(view=(127.0, 33.0, 0.48), phase=('Mongol fleets', None), boat=True, back='driven back',
+                     routes=[[(128.6, 35.2), (129.4, 34.4), (130.3, 33.7)], [(121.8, 29.9), (125.6, 31.0), (128.9, 32.6), (130.2, 33.55)]],
+                     labels=[('1274', 128.0, 34.1), ('1281', 123.4, 29.7), ('HAKATA', 131.4, 32.9)]),
+    'ships': dict(view=(139.5, 33.4, 0.55), phase=(None, 'black ships'), boat=True,
+                  routes=[[(147.7, 30.4), (145.0, 31.6), (141.8, 33.6), (139.75, 35.2)]],
+                  labels=[('FROM THE U.S.', 144.6, 29.8), ('EDO 江戸', 140.6, 36.3)]),
+}
+PANEL = (540, 1080, 1000, 560)              # map panel centre and size on screen
 
 
 def year_label(y):
@@ -65,15 +88,122 @@ class Scene(KanjiScene):
         self.year = year
         self.t_in = JA[k]['start'] if k in JA else at('Then in')[0] + 0.4
         self.glyphs = [typeset(c, 250, font=FONT_BRUSH_JP, seed=400 + 10 * self.idx + j, medians=False, sweep=(0.7, 1)) for j, c in enumerate(kanji)]
-        self.kana, _ = text_layer(kana, FONT_JP, 58)
+        self.furi = [text_layer(f, FONT_JP, 42)[0] if f else None for f in FURI[k]]
         self.rom, _ = text_layer(rom, FONT_EN_BOLD, 40, tracking=8)
         self.art = cached(f'h7_{k}_v1', getattr(hart, k))
         self.T_art = wash_map(H, W, (0 if self.idx % 2 else W, 1100), noise_amp=0.3, noise_scale=180, seed=self.paper_seed)
-        self.T_turn = wash_map(H, W, None, direction=(-1, -0.15), noise_amp=0.22, noise_scale=260, seed=self.paper_seed + 1)
+        self.T_turn = wash_map(H, W, None, direction=(-1, -0.15), noise_amp=0.07, noise_scale=220, seed=self.paper_seed + 1)
         self._years = {}
         self.dot = soft_disc(40, 40, 20, 20, 14, edge=2).astype(np.float32)
         self.rim = (soft_disc(44, 44, 22, 22, 15, edge=1.5) - soft_disc(44, 44, 22, 22, 11, edge=1.5)).clip(0, 1).astype(np.float32)
+        self.art_t0 = self.t0
+        self.mp = None
+        if k in MAPS:
+            self.map_build(MAPS[k])
         self.extra_build()
+
+    # ---------------------------------------------------------------- the map moments
+    def map_build(self, M):
+        import r5art
+        self.chart = cached('h7_chart_v1', r5art.east_asia_chart)['rgb'].astype(np.float32)
+        a, b = M['phase']
+        self.m_in = self.t0 if a is None else at(a, after=self.t0 - 0.5)[0] - 0.25
+        self.m_out = None if b is None else at(b, after=self.t0 - 0.5)[0] - 0.2
+        if a is None:
+            self.art_t0 = self.m_out
+        self.mp = M
+        lo, la, sc = M['view']
+        self.m_c = r5art.chart_xy(lo, la)
+        self.routes = [np.array(spline([tuple(r5art.chart_xy(x, y)) for x, y in R], 24), np.float32) for R in M['routes']]
+        self.m_labels = []
+        for txt, x, y in M['labels']:                    # 'EDO 江戸': the English in Cormorant, the kanji under it
+            en, _, jp = txt.partition(' ') if any(ord(c) > 0x2000 for c in txt) else (txt, '', '')
+            self.m_labels.append((text_layer(en, FONT_EN_BOLD, 30, tracking=4)[0], r5art.chart_xy(x, y)))
+            if jp:
+                self.m_labels.append((text_layer(jp, FONT_JP, 30)[0], r5art.chart_xy(x, y) + np.array([0, 40 / M['view'][2]], np.float32)))
+        cx, cy, pw, ph = PANEL
+        m = np.zeros((H, W), np.float32)
+        m[int(cy - ph / 2):int(cy + ph / 2), int(cx - pw / 2):int(cx + pw / 2)] = 1
+        self.m_mask = blur(m, 6)[..., None]
+        self.m_rim = kit.rim(ph + 16, pw + 16, inset=4, t=3)
+        self.m_boat = hart.junk() if M['boat'] else None
+        self.t_mback = at(M['back'])[0] if 'back' in M else None
+
+    def map_amount(self, t):
+        if self.mp is None:
+            return 0.0
+        a = smooth((t - self.m_in) / 0.45)
+        return a if self.m_out is None else a * (1 - smooth((t - self.m_out) / 0.45))
+
+    def map_scale(self, t):
+        return self.mp['view'][2] * (1 + 0.06 * smooth((t - self.m_in) / 4))
+
+    def to_screen(self, p, t):
+        s = self.map_scale(t)
+        return np.array([PANEL[0], PANEL[1]], np.float32) + (np.asarray(p, np.float32) - self.m_c) * s
+
+    def draw_map(self, fr, t, m):
+        import cv2
+        s = self.map_scale(t)
+        cx, cy = PANEL[:2]
+        A = np.array([[s, 0, cx - s * self.m_c[0]], [0, s, cy - s * self.m_c[1]]], np.float32)
+        img = cv2.warpAffine(self.chart, A, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+        k = self.m_mask * m
+        fr.img = fr.img * (1 - k) + img * k
+        kit.put(fr, Cam(540, 960, 1.0), self.m_rim, cx, cy, INK, 0.8 * m)
+        # the routes, brushed on as dashes with an arrowhead (or a boat) at the tip
+        d = np.zeros((H, W), np.float32)
+        back = 0.0 if self.t_mback is None else ease_io((t - self.t_mback - 0.1) / 1.3)
+        tips = []
+        for j, R in enumerate(self.routes):
+            u = ease_io((t - self.m_in - 0.35 - 0.45 * j) / 1.3)
+            u = u * (1 - 0.55 * back)
+            if u <= 0:
+                continue
+            P = np.array([self.to_screen(q, t) for q in R])
+            seg = np.r_[0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]
+            L = seg[-1] * u
+            n = np.searchsorted(seg, L)
+            tip = np.array([np.interp(L, seg, P[:, 0]), np.interp(L, seg, P[:, 1])])
+            pts = np.vstack([P[:n], tip])
+            dash = 0.0
+            for a_, b_ in zip(pts[:-1], pts[1:]):
+                ln = np.hypot(*(b_ - a_))
+                q = 0.0
+                while q < ln:
+                    on = (dash % 28) < 18
+                    step = min(ln - q, (18 - dash % 28) if on else (28 - dash % 28))
+                    if on:
+                        p0, p1 = a_ + (b_ - a_) * q / ln, a_ + (b_ - a_) * (q + step) / ln
+                        cv2.line(d, tuple(np.round(p0).astype(int)), tuple(np.round(p1).astype(int)), 1.0, 7, cv2.LINE_AA)
+                    q += max(step, 1e-3)
+                    dash += max(step, 1e-3)
+            dirv = pts[-1] - pts[-2] if len(pts) > 1 else np.array([1.0, 0])
+            dirv = dirv / (np.hypot(*dirv) + 1e-6)
+            tips.append((tip, dirv))
+            if self.m_boat is None:
+                nrm = np.array([-dirv[1], dirv[0]])
+                tri = np.array([tip + dirv * 22, tip - dirv * 10 + nrm * 16, tip - dirv * 10 - nrm * 16]).astype(np.int32)
+                cv2.fillPoly(d, [tri], 1.0, cv2.LINE_AA)
+        fr.ink(d, VERM, 0.95 * m)
+        for tip, dirv in tips:
+            if self.m_boat is not None:
+                ink, red = self.m_boat
+                o = m * (1 - smooth((back - 0.7) / 0.3)) if back else m
+                fl = -1 if back > 0 else 1
+                kit.put(fr, Cam(540, 960, 1.0), red, tip[0], tip[1] - 30, VERM, 0.8 * o, 0.42 * fl, 0.42, rot=0.1 * np.sin(t * 3))
+                kit.put(fr, Cam(540, 960, 1.0), ink, tip[0], tip[1] - 30, INK, o, 0.42 * fl, 0.42, rot=0.1 * np.sin(t * 3))
+        if back > 0:                                     # the storms that drove them back
+            sw = np.zeros((H, W), np.float32)
+            c = self.to_screen(self.routes[0][-1], t)
+            for j in range(3):
+                r = 40 + 26 * j
+                a0 = np.degrees(t * (3 - j)) % 360
+                cv2.ellipse(sw, tuple(np.round(c).astype(int)), (r, int(r * 0.6)), 0, a0, a0 + 250, 1.0, 5, cv2.LINE_AA)
+            fr.ink(sw, INK, 0.75 * m * smooth(back * 3))
+        for j, (g, xy) in enumerate(self.m_labels):
+            p = self.to_screen(xy, t)
+            kit.put(fr, Cam(540, 960, 1.0), g, p[0], p[1], INK, m * smooth((t - self.m_in - 0.5 - 0.3 * j) / 0.3))
 
     # ---------------------------------------------------------------- per-era extras
     def extra_build(self):
@@ -129,7 +259,7 @@ class Scene(KanjiScene):
 
     def enter(self, prev_img, cur_img, f, prev_scene):
         """the next era is unrolled over the last one from the right, a wet ink edge riding the front"""
-        return wipe_mix(prev_img, cur_img, self.T_turn, ease_io(f) * 1.12 - 0.04, soft=0.05, edge=0.35)
+        return wipe_mix(prev_img, cur_img, self.T_turn, ease_io(f) * 1.12 - 0.04, soft=0.05, edge=0.18)
 
     # ---------------------------------------------------------------- the page
     def ribbon(self, fr, t):
@@ -168,20 +298,29 @@ class Scene(KanjiScene):
     def render(self, t):
         cam = self.cam(t)
         fr = self.frame(cam)
-        fa = (t - self.t0 - 0.1) / 1.0
+        fa = (t - self.art_t0 - 0.1) / 1.0
+        m = self.map_amount(t)
         for c in ('grey', 'blue', 'red', 'gold', 'ink', 'bloss'):
-            if c in self.art and fa > 0:
+            if c in self.art and fa > 0 and m < 1:
                 self.layer(fr, cam, reveal_time(self.art[c], self.T_art, fa), *self.art_offset(t, c), color=COLOURS[c],
-                           opacity=0.95 if c != 'red' else 0.85)
-        self.extras(fr, cam, t)
+                           opacity=(0.95 if c != 'red' else 0.85) * (1 - m))
+        if m < 1:
+            self.extras(fr, cam, t)
+        if m > 0:
+            self.draw_map(fr, t, m)
         # the era's name, reading, romaji and year
         for j, g in enumerate(self.glyphs):
             fk = (t - self.t_in + 0.25 - 0.18 * j) / 0.45
             if fk > 0:
-                x = 540 + (j - (len(self.glyphs) - 1) / 2) * 280
+                x = 540 + (j - (len(self.glyphs) - 1) / 2) * 2 * KX
                 kit.put(fr, cam, g.at(fk, soft=0.05), x, KANJI_Y, INK, 1.0, 1 + 0.12 * np.exp(-fk * 3))
+        for j, g in enumerate(self.furi):
+            if g is None:
+                continue
+            ff = smooth((t - self.t_in - 0.15 - 0.12 * j) / 0.3)
+            x = 540 if any(f is None for f in self.furi) else 540 + (j - 0.5) * 2 * KX
+            kit.put(fr, cam, g, x, FURI_Y + 10 * (1 - ff), INDIGO, ff)
         fr_ = smooth((t - self.t_in - 0.3) / 0.3)
-        kit.put(fr, cam, self.kana, 540, KANA_Y + 10 * (1 - fr_), INDIGO, fr_)
         kit.put(fr, cam, self.rom, 540, ROM_Y + 10 * (1 - fr_), GREY, smooth((t - self.t_in - 0.45) / 0.3))
         kit.put(fr, cam, self.year_patch(t), 540, YEAR_Y, VERM, smooth((t - self.t0 - 0.1) / 0.25))
         self.ribbon(fr, t)
@@ -191,7 +330,7 @@ class Scene(KanjiScene):
         if self.key == 'edo' and c == 'blue':
             return 0, 6 * np.sin(t * 2.2)
         if self.key == 'ships':
-            return 160 * (1 - ease_out((t - self.t0) / 2.4)), 3 * np.sin(t * 2.5)
+            return 160 * (1 - ease_out((t - self.art_t0) / 1.6)), 3 * np.sin(t * 2.5)
         return 0, 0
 
     def extras(self, fr, cam, t):
@@ -215,7 +354,7 @@ class Scene(KanjiScene):
                 kit.put(fr, cam, self.kana_lab, 780, 1205, VERM, smooth((t - self.t_kana - 0.9) / 0.3))
         elif k == 'ships':
             for j, (sx, sy, s) in enumerate(((550, 1100, 1.0), (222, 1088, 0.55), (873, 1082, 0.45))):
-                ox = 160 * (1 - ease_out((t - self.t0) / 2.4))
+                ox = 160 * (1 - ease_out((t - self.art_t0) / 1.6))
                 for p in range(3):
                     u = ((t - self.t0) * 0.5 + p / 3 + j * 0.13) % 1
                     kit.put(fr, cam, self.puffs[(p + j) % 4], sx + ox - 90 * u * s + 10, sy - 40 * s - 160 * u * s, PALE,

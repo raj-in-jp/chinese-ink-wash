@@ -334,6 +334,12 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         place(sfx, stamp(), s.t_in + 0.15, 0.25)
         for j in range(4):                               # the year rolling on
             place(sfx, clack(1.6), s.t0 + 0.2 + 0.15 * j, 0.12)
+    from scenes.era import MAPS
+    for k in MAPS:                                       # a brush dragged along each route on the map
+        s = g(k)
+        for j in range(len(s.routes)):
+            place(sfx, brush(1.1, 0.9, False), s.m_in + 0.35 + 0.45 * j, 0.4, pan=0.2 * (j - 0.5))
+        place(sfx, flip() * 0.6, s.m_in, 0.35)
     km = g('kamakura')
     place(amb, wind(int(3.0 * SR), seed=5), km.t_back - 0.3, 0.9)
     place(sfx, whoosh(1.4, 200, 1800), km.t_back, 0.5)

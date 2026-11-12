@@ -9,15 +9,15 @@ import kit
 from cards import INDIGO
 from engine import (FONT_BRUSH_EN, FONT_BRUSH_JP, FONT_EN_BOLD, FONT_HEAD, FONT_JP, GREY, H, INK, VERM, W, Cam, StrokeSet, ease_io,
                     noise, smooth, stroke, text_layer)
-from scenes.era import ERAS
+from scenes.era import ERAS, FURI
 from scenes.kscene import KanjiScene
 from timeline import ERA_KEYS, JA, at
 
 IVORY = np.array([0.98, 0.95, 0.88], np.float32)
 CARD = np.array([0.96, 0.93, 0.86], np.float32)
 KEYS = [k for k in ERA_KEYS if k != 'ships']
-XS, Y0, DY = (230, 540, 850), 520, 132
-CW, CH = 270, 116
+XS, Y0, DY = (230, 540, 850), 505, 134
+CW, CH = 270, 124
 
 
 class Scene(KanjiScene):
@@ -27,8 +27,8 @@ class Scene(KanjiScene):
         self.q1, _ = text_layer('WHICH ERA', FONT_HEAD, 70)
         b = text_layer('would you live in?', FONT_BRUSH_EN, 96)[0]
         self.q2 = b * (0.86 + 0.14 * noise(*b.shape, 6, 2, 2))
-        self.cells = [(text_layer(ERAS[k][0], FONT_JP, 66)[0], text_layer(ERAS[k][2].split(' ')[0], FONT_EN_BOLD, 22, tracking=4)[0])
-                      for k in KEYS]
+        self.cells = [(text_layer(ERAS[k][0], FONT_JP, 62)[0], text_layer(ERAS[k][2].split(' ')[0], FONT_EN_BOLD, 20, tracking=4)[0],
+                       [text_layer(f, FONT_JP, 20)[0] if f else None for f in FURI[k]]) for k in KEYS]
         self.box, self.rim = kit.box(CH, CW, 2.5), kit.rim(CH, CW, inset=6, t=3)
         self.sel = kit.rim(CH + 16, CW + 16, inset=4, t=6)
         self.cm, _ = text_layer('TELL ME IN THE COMMENTS ↓', FONT_EN_BOLD, 36, tracking=4)
@@ -58,7 +58,7 @@ class Scene(KanjiScene):
         fq = smooth((t - self.t_q + 0.2) / 0.35)
         kit.put(fr, cam, self.q1, 540, 270 + 15 * (1 - fq), INK, fq)
         kit.put(fr, cam, self.q2, 540, 375, VERM, smooth((t - self.t_q - 0.2) / 0.35), rot=-0.03)
-        for j, (g, lab) in enumerate(self.cells):
+        for j, (g, lab, furi) in enumerate(self.cells):
             f = (t - self.t0 - 0.25 - 0.06 * j) / 0.3
             if f <= 0:
                 continue
@@ -66,8 +66,12 @@ class Scene(KanjiScene):
             o = smooth(f)
             dy = -30 * (1 - ease_io(min(f, 1)))
             kit.card(fr, cam, self.box, self.rim, x, y + dy, o, color=CARD)
-            kit.put(fr, cam, g, x, y - 14 + dy, INK, o)
-            kit.put(fr, cam, lab, x, y + 38 + dy, INDIGO, o)
+            kit.put(fr, cam, g, x, y - 2 + dy, INK, o)
+            for i, fg in enumerate(furi):                   # furigana over each character (over both for あすか)
+                if fg is not None:
+                    fx = x if any(f is None for f in furi) else x + (i - 0.5) * 62
+                    kit.put(fr, cam, fg, fx, y - 44 + dy, INDIGO, o)
+            kit.put(fr, cam, lab, x, y + 42 + dy, GREY, o)
         # the roulette ring, slowing down, gone by "comments"
         u = (t - self.t_q) / (self.t_cm - self.t_q)
         if 0 < u < 1.1:
