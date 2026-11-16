@@ -13,7 +13,7 @@ from timeline import JA, at
 
 IVORY = np.array([0.98, 0.95, 0.88], np.float32)
 CARD = np.array([0.96, 0.93, 0.86], np.float32)
-CARDS = [('H', 'あ', 'hiragana4'), ('T', 'ア', 'katakana4'), ('K', '漢', 'kanji7')]
+CARDS = [('H', 'あ', 'hiragana4'), ('T', 'ア', 'katakana3'), ('K', '漢', 'kanji3')]
 XS, CY, CW, CH = (215, 540, 865), 760, 270, 330
 
 

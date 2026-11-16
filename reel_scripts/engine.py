@@ -47,6 +47,7 @@ FONT_EN_ITALIC = os.path.join(HERE, 'fonts', 'CormorantGaramond-MediumItalic.ttf
 FONT_HEAD = os.path.join(HERE, 'fonts', 'NotoSerifJP-Black-latin.ttf')          # headline serif (Latin)
 FONT_BRUSH_EN = os.path.join(HERE, 'fonts', 'KaushanScript-Regular.ttf')         # brush-script Latin
 FONT_BRUSH_JP = os.path.join(HERE, 'fonts', 'YujiSyuku-subset.ttf')              # brush-calligraphy kanji (JP forms)
+FONT_BOLD = os.path.join(HERE, 'fonts', 'BebasNeue-Regular.ttf')                # bold hook titles (reel font pack)
 
 # Instagram Reels safe area: keep key content inside these margins
 SAFE_TOP, SAFE_BOTTOM, SAFE_LEFT, SAFE_RIGHT = 212, 1498, 80, 960   # Reels UI: top ~11%, bottom ~22%, right buttons

@@ -1,12 +1,11 @@
-"""The scenes of the reel: the hook sentence, kanji borrowed from China, the verb-ending problem, hiragana (安 → あ),
-katakana (伊 → イ), the payoff (no spaces), and the ending.  Each scene is built lazily and renders a float RGB frame
+"""The scenes of the reel: the hook sentence, each script's job (kanji = meaning, hiragana = grammar, katakana =
+foreign words), the payoff (no spaces: a wall of hiragana vs the three mixed), and the ending.  Each scene is built lazily and renders a float RGB frame
 for any absolute time inside its window."""
 import importlib
 
 from timeline import SCENES
 
-_MODULES = {'hook': 's_hook', 'borrow': 's_borrow', 'endings': 's_endings', 'hira': 's_hira', 'kata': 's_kata',
-            'payoff': 's_payoff', 'end': 's_end'}
+_MODULES = {'hook': 's_hook', 'jobs': 's_jobs', 'payoff': 's_payoff', 'end': 's_end'}
 _built = {}
 
 

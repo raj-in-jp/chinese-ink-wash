@@ -20,21 +20,21 @@ from scipy.io import wavfile
 
 A = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audio')
 SR = 48000
-# the Japanese list take (audio/words_ja_1.mp3), in order: (clip, kana, romaji shown in the captions)
-JA_WORDS = [('kanji', 'かんじ', 'kanji'), ('hiragana', 'ひらがな', 'hiragana'), ('katakana', 'カタカナ', 'katakana'),
-            ('taberu', 'たべる', 'taberu'), ('tabeta', 'たべた', 'tabeta'), ('tabenai', 'たべない', 'tabenai'),
-            ('an', 'あん', 'an'), ('a', 'あ', 'a'), ('i', 'い', 'i'), ('kohi', 'コーヒー', 'kōhī')]
+# the Japanese words, (clip, kana, romaji shown in the captions): the first three from audio/words_ja_1.mp3,
+# the rest from audio/words_ja_2a.mp3
+JA_WORDS = [('kanji', 'かんじ', 'kanji'), ('hiragana', 'ひらがな', 'hiragana'), ('katakana', 'カタカナ', 'katakana')]
+JA_WORDS2 = [('watashi', 'わたし', 'watashi'), ('nomu', 'のむ', 'nomu'), ('wa', 'は', 'wa'), ('o', 'を', 'o'), ('masu', 'ます', 'masu'),
+             ('kohi', 'コーヒー', 'kōhī')]
 SENTENCE = ('sentence', '私はコーヒーを飲みます', 'watashi wa kōhī o nomimasu')        # audio/sentence_1.mp3
 # stand-ins in the order they are spoken: (words in the take, normalised; clip)
 STAND_IN = [('watashi wa kohi o nomimasu', 'sentence'), ('kanji', 'kanji'), ('hiragana', 'hiragana'), ('katakana', 'katakana'),
-            ('kanji', 'kanji'), ('taberu', 'taberu'), ('tabeta', 'tabeta'), ('tabenai', 'tabenai'), ('kanji', 'kanji'),
-            ('kanji', 'kanji'), ('an', 'an'), ('a', 'a'), ('hiragana', 'hiragana'), ('kanji', 'kanji'), ('i', 'i'),
-            ('katakana', 'katakana'), ('kohi', 'kohi'), ('kanji', 'kanji'), ('hiragana', 'hiragana'), ('katakana', 'katakana'),
+            ('kanji', 'kanji'), ('watashi', 'watashi'), ('nomu', 'nomu'), ('hiragana', 'hiragana'), ('wa', 'wa'), ('o', 'o'),
+            ('masu', 'masu'), ('katakana', 'katakana'), ('kohi', 'kohi'), ('hiragana', 'hiragana'),
             ('hiragana', 'hiragana'), ('katakana', 'katakana'), ('kanji', 'kanji')]
 ERAS = []
 MATANE = ('matane', 'またね！', 'matane!')
 # silence after these words: the sentence lands, the three scripts are named, each "aha" gets a beat
-HOLD = {'Why?!': 0.2, 'spaces.': 0.25, 'ends.': 0.4}
+HOLD = {'Why?!': 0.25, 'line.': 0.2, 'job.': 0.25, 'coffee.': 0.3, 'spaces.': 0.3, 'letters.': 0.5, 'word.': 0.5}
 PAD = 0.04
 ERA_BREATH = 0.0
 
@@ -91,15 +91,23 @@ def silent_edge(e, t0, t1, side, thresh=-55):
 
 
 def main():
-    en = load('take_en_1.mp3')
+    en = load('take_en_v2a.mp3')
     e = env(en)
-    words = [w for w in json.load(open(os.path.join(A, 'words_en_1.json')))['words'] if w.get('type', 'word') == 'word']
+    words = [w for w in json.load(open(os.path.join(A, 'words_en_v2a.json')))['words'] if w.get('type', 'word') == 'word']
     rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 0.01] ** 2))
     level = rms(en)
     jw = load('words_ja_1.mp3')
     segs = segments(jw)
-    assert len(segs) == len(JA_WORDS), f'{len(segs)} segments in the Japanese words take'
     clips = {k: faded(jw[int(a * SR):int(b * SR)]) for (k, _, _), (a, b) in zip(JA_WORDS, segs)}
+    j2 = load('words_ja_2a.mp3')
+    s2 = []
+    for a, b in segments(j2):                               # a breath split off a word joins the word before it
+        if s2 and (b - a < 0.15 or a - s2[-1][1] < 0.12):
+            s2[-1] = (s2[-1][0], b)
+        else:
+            s2.append((a, b))
+    assert len(s2) == len(JA_WORDS2), f'{len(s2)} segments in the second Japanese words take'
+    clips.update({k: faded(j2[int(a * SR):int(b * SR)]) for (k, _, _), (a, b) in zip(JA_WORDS2, s2)})
     sn = load('sentence_1.mp3')
     ss = segments(sn, hold=40)
     clips['sentence'] = faded(sn[int(ss[0][0] * SR):int(ss[-1][1] * SR)])
@@ -154,7 +162,7 @@ def main():
             base_en, base_out = b, t_after
         return base_out + (x - base_en)
 
-    lex = {k: (kana, rom) for k, kana, rom in JA_WORDS + [SENTENCE]}
+    lex = {k: (kana, rom) for k, kana, rom in JA_WORDS + JA_WORDS2 + [SENTENCE]}
     span = {x[4][0]: (x[4][1], x[3], x[4][2]) for x in edits if x[3] is not None}
     ws, i = [], 0
     while i < len(words):

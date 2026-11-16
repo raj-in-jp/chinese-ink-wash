@@ -347,7 +347,7 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     import scenes
     g = scenes.get
     sfx, amb = np.zeros((N, 2)), np.zeros((N, 2))
-    music = bgm(join=62.0)
+    music = bgm(join=36.0)
 
     def hit(t, gain=0.6, drum=True):
         place(sfx, stamp(), t, gain)
@@ -368,54 +368,38 @@ def build(out_dir=os.path.join(HERE, 'audio')):
 
     from timeline import JA, at
     hk = g('hook')
-    for j in range(3):                                      # the three scripts flashing in the first second
-        fx('pop', 0.2 + 0.45 * j, 0.22, pan=(-0.4, 0.0, 0.4)[j])
+    fx('taiko', 0.0, 0.55)                                  # 3 ALPHABETS slams in
+    fx('stamp', 0.05, 0.5)
+    for i, (_, _, _, tl) in enumerate(hk.fly):              # each character of the sentence landing
+        fx('pop', tl, 0.12, pan=-0.5 + i / 10)
     fx('stamp', hk.t_why, 0.7)
     fx('taiko', hk.t_why, 0.5)
-    fx('brush', hk.t_sent - 0.1, 0.35)
+    fx('brush', hk.t_sent - 0.1, 0.3)
     for ts, pan in ((hk.t_k, -0.4), (hk.t_h, 0.0), (hk.t_t, 0.4)):
-        fx('pop', ts, 0.3, pan=pan)                         # each script lighting up as Raj names it
-    fx('chime', hk.t_three, 0.35)
-    b = g('borrow')
-    fx('scroll', b.t0 + 0.2, 0.35)
-    fx('wave', b.t0 + 0.4, 0.25)
-    fx('quill', b.t_nw, 0.3)
-    for j in range(len('漢字山川日月人木')):              # each character landing in Japan
-        fx('pop', b.t_b + 0.15 * j + 1.6, 0.12, pan=0.4)
-    fx('brush', b.t_k - 0.15, 0.45)
-    fx('stamp', b.t_k + 0.1, 0.5)
-    e = g('endings')
-    fx('scroll', e.t0 + 0.2, 0.35)
-    fx('stamp', e.t_cn, 0.4)
-    for k in ('taberu', 'tabeta', 'tabenai'):
-        fx('brush', JA[k]['start'] - 0.15, 0.35)
-    fx('quake', e.t_no + 0.05, 0.25)                        # the endings drain away: no kanji for them
-    fx('stamp', e.t_no + 0.3, 0.45)
-    h = g('hira')
-    fx('scroll', h.t0 + 0.2, 0.35)
-    fx('brush', h.t_fast, 0.45)
-    fx('brush', h.t_cur, 0.5)
-    fx('brush', h.t_soft, 0.45)
-    fx('chime', h.t_an, 0.3)
-    fx('stamp', h.t_hira, 0.5)
-    for j in range(3):
-        fx('pop', h.t_gram + 0.4 * j, 0.22, pan=(-0.4, 0.0, 0.4)[j])
-    k8 = g('kata')
-    fx('scroll', k8.t0 + 0.2, 0.35)
-    fx('bell', k8.t_m, 0.3)                                 # the monks' temple
-    fx('katana', k8.t_left, 0.25)                           # one piece cut off
-    fx('brush', k8.t_i, 0.4)
-    fx('stamp', k8.t_kata, 0.5)
-    fx('pop', k8.t_fw, 0.25)
-    fx('chime', k8.t_kohi, 0.3)
+        fx('pop', ts, 0.3, pan=pan)                         # each script hopping up as Raj names it
+    fx('brush', hk.t_line, 0.45)
+    jb = g('jobs')
+    fx('scroll', jb.t0 + 0.2, 0.35)
+    fx('stamp', jb.t_job, 0.45)
+    for ts in (jb.t_k, jb.t_h, jb.t_t):
+        fx('scroll', ts - 0.15, 0.3)                        # each header sliding in
+    fx('pop', jb.t_wat, 0.3, pan=-0.3)
+    fx('pop', jb.t_nomu, 0.3, pan=0.3)
+    for ts, pan in ((jb.t_wa, -0.4), (jb.t_o, 0.1), (jb.t_masu, 0.4)):
+        fx('pop', ts, 0.28, pan=pan)
+    fx('chime', jb.t_kohi, 0.3)
+    fx('quill', jb.t_dutch, 0.3)
     py = g('payoff')
     fx('scroll', py.t0 + 0.2, 0.35)
-    fx('stamp', py.t_ns, 0.55)
-    for ts, pan in ((py.t_k, -0.4), (py.t_h, 0.0), (py.t_t, 0.4)):
-        fx('pop', ts, 0.3, pan=pan)
-    for j in range(4):                                      # the dividers dropping in between the words
+    fx('stamp', py.t_ns, 0.6)
+    fx('taiko', py.t_ns, 0.4)
+    for r in range(7):                                      # the wall building up row by row
+        fx('scroll', py.t_wall + 0.12 * abs(r - 3), 0.12, pan=-0.4 + 0.13 * r)
+    fx('quake', py.t_mix, 0.2)                              # the wall falls away
+    fx('chime', py.t_mix + 0.4, 0.3)
+    for j in range(4):                                      # the dividers dropping between the words
         fx('stamp', py.t_ch + 0.15 + 0.12 * j, 0.22, pan=-0.45 + 0.3 * j)
-    fx('chime', py.t_eye, 0.35)
+    fx('stamp', py.t_new, 0.45)
     en = g('end')
     fx('scroll', en.t0 + 0.2, 0.35)
     for j in range(10):                                     # the roulette ticking round the three cards, slowing

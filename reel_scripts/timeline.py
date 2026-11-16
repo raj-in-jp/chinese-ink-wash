@@ -37,8 +37,7 @@ def at(phrase, nth=0, after=None):
 # Scene boundaries come from the narration itself (single source of truth): each scene begins a little before
 # the first word of its section ('ja:<key>' = a Japanese word), and the outgoing scene overlaps it for the transition.
 ERA_KEYS = []
-_CUTS = [('hook', None, 0.0, 0.0), ('borrow', 'About fifteen', 0.3, 0.5), ('endings', 'But there was', 0.3, 0.5),
-         ('hira', 'The fix', 0.3, 0.5), ('kata', 'Then Buddhist', 0.3, 0.5), ('payoff', "And here's the payoff", 0.3, 0.5),
+_CUTS = [('hook', None, 0.0, 0.0), ('jobs', 'And each one', 0.3, 0.5), ('payoff', 'But why mix', 0.3, 0.5),
          ('end', 'So, which one', 0.3, 0.6)]
 DURATION = round(WORDS[-1]['end'] + 3.2, 2)                 # hold the final frame so the handle can be read
 _starts = [0.0 if w is None else (JA[w[3:]]['start'] if w.startswith('ja:') else at(w)[0]) - lead for _, w, lead, _ in _CUTS]
