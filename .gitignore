@@ -47,3 +47,7 @@ reel_japan_history/cache/
 reel_japan_history/audio/stems/
 reel_japan_history/audio/*.wav
 reel_japan_history/output/
+reel_scripts/cache/
+reel_scripts/audio/stems/
+reel_scripts/audio/*.wav
+reel_scripts/output/
