@@ -55,7 +55,7 @@ class Scene(KanjiScene):
     def part(self, t):
         """which script is being explained, and how far in (0..1 fade in, 1..0 fade out)"""
         bounds = [('K', self.t_k, self.t_h), ('H', self.t_h, self.t_t), ('T', self.t_t, self.t1 + 5)]
-        return [(s, smooth((t - a + 0.15) / 0.35) * (1 - smooth((t - b + 0.15) / 0.3))) for s, a, b in bounds]
+        return [(s, smooth((t - a + 0.02) / 0.3) * (1 - smooth((t - b + 0.3) / 0.25))) for s, a, b in bounds]
 
     def render(self, t):
         cam = self.cam(t)
