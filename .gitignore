@@ -55,3 +55,7 @@ reel_japan_name/cache/
 reel_japan_name/audio/stems/
 reel_japan_name/audio/*.wav
 reel_japan_name/output/
+reel_tokyo/cache/
+reel_tokyo/audio/stems/
+reel_tokyo/audio/*.wav
+reel_tokyo/output/
