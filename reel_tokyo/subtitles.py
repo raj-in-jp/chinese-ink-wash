@@ -13,8 +13,8 @@ from PIL import Image, ImageDraw, ImageFont
 from engine import FONT_EN, FONT_EN_ITALIC, VERM, blur
 from timeline import WORDS
 
-MAX_CHARS = 28
-SIZE = 58
+MAX_CHARS = 26
+SIZE = 50
 CX, CY = 520, 1500                 # slightly left of centre: clear of the like/comment/share column
 INK_RGB = np.array([24, 22, 21], np.float32) / 255
 PLATE_RGB = np.array([244, 238, 224], np.float32) / 255

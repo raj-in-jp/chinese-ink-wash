@@ -5,1015 +5,1015 @@
 "type": "word",
 "ja": "tokyo",
 "start": 0.04,
-"end": 0.7
+"end": 0.79
 },
 {
 "text": "is",
 "type": "word",
-"start": 0.75,
-"end": 0.91
+"start": 0.84,
+"end": 1.0
 },
 {
 "text": "one",
 "type": "word",
-"start": 0.95,
-"end": 0.99
+"start": 1.04,
+"end": 1.08
 },
 {
 "text": "of",
 "type": "word",
-"start": 1.07,
-"end": 1.15
+"start": 1.16,
+"end": 1.24
 },
 {
 "text": "the",
 "type": "word",
-"start": 1.27,
-"end": 1.39
+"start": 1.36,
+"end": 1.48
 },
 {
 "text": "biggest",
 "type": "word",
-"start": 1.47,
-"end": 1.79
+"start": 1.56,
+"end": 1.88
 },
 {
 "text": "cities",
 "type": "word",
-"start": 1.99,
-"end": 2.19
+"start": 2.08,
+"end": 2.28
 },
 {
 "text": "on",
 "type": "word",
-"start": 2.27,
-"end": 2.35
+"start": 2.36,
+"end": 2.44
 },
 {
 "text": "Earth.",
 "type": "word",
-"start": 2.43,
-"end": 3.15
+"start": 2.52,
+"end": 3.24
 },
 {
 "text": "But",
 "type": "word",
-"start": 3.31,
-"end": 3.47
+"start": 3.4,
+"end": 3.56
 },
 {
 "text": "a",
 "type": "word",
-"start": 3.51,
-"end": 3.55
+"start": 3.6,
+"end": 3.64
 },
 {
 "text": "hundred",
 "type": "word",
-"start": 3.63,
-"end": 3.87
+"start": 3.72,
+"end": 3.96
 },
 {
 "text": "and",
 "type": "word",
-"start": 3.95,
-"end": 4.03
+"start": 4.04,
+"end": 4.12
 },
 {
 "text": "sixty",
 "type": "word",
-"start": 4.15,
-"end": 4.35
+"start": 4.24,
+"end": 4.44
 },
 {
 "text": "years",
 "type": "word",
-"start": 4.43,
-"end": 4.67
+"start": 4.52,
+"end": 4.76
 },
 {
 "text": "ago,",
 "type": "word",
-"start": 4.75,
-"end": 5.23
+"start": 4.84,
+"end": 5.32
 },
 {
 "text": "there",
 "type": "word",
-"start": 5.31,
-"end": 5.39
+"start": 5.4,
+"end": 5.48
 },
 {
 "text": "was",
 "type": "word",
-"start": 5.47,
-"end": 5.63
+"start": 5.56,
+"end": 5.72
 },
 {
 "text": "no",
 "type": "word",
-"start": 5.71,
-"end": 5.76
+"start": 5.8,
+"end": 5.94
 },
 {
 "text": "Tōkyō!",
 "type": "word",
 "ja": "tokyo2",
-"start": 5.96,
-"end": 6.62
+"start": 6.05,
+"end": 6.8
 },
 {
 "text": "Japan's",
 "type": "word",
-"start": 7.18,
-"end": 7.5
+"start": 7.06,
+"end": 7.38
 },
 {
 "text": "first",
 "type": "word",
-"start": 7.66,
-"end": 7.82
+"start": 7.54,
+"end": 7.7
 },
 {
 "text": "great",
 "type": "word",
-"start": 7.9,
-"end": 8.14
+"start": 7.78,
+"end": 8.02
 },
 {
 "text": "capital",
 "type": "word",
-"start": 8.34,
-"end": 8.54
+"start": 8.22,
+"end": 8.42
 },
 {
 "text": "was",
 "type": "word",
-"start": 8.62,
-"end": 8.63
+"start": 8.5,
+"end": 8.62
 },
 {
 "text": "Nara,",
 "type": "word",
 "ja": "nara",
-"start": 8.8,
-"end": 9.16
+"start": 8.68,
+"end": 9.15
 },
 {
 "text": "in",
 "type": "word",
-"start": 9.35,
-"end": 9.43
+"start": 9.34,
+"end": 9.42
 },
 {
 "text": "seven-ten.",
 "type": "word",
-"start": 9.51,
-"end": 10.55
+"start": 9.5,
+"end": 10.54
 },
 {
 "text": "Then",
 "type": "word",
-"start": 10.63,
-"end": 10.95
+"start": 10.62,
+"end": 10.94
 },
 {
 "text": "in",
 "type": "word",
-"start": 11.03,
-"end": 11.19
+"start": 11.02,
+"end": 11.18
 },
 {
 "text": "seven",
 "type": "word",
-"start": 11.31,
-"end": 11.43
+"start": 11.3,
+"end": 11.42
 },
 {
 "text": "ninety-four,",
 "type": "word",
-"start": 11.47,
-"end": 12.43
+"start": 11.46,
+"end": 12.42
 },
 {
 "text": "the",
 "type": "word",
-"start": 12.47,
-"end": 12.55
+"start": 12.46,
+"end": 12.54
 },
 {
 "text": "emperor",
 "type": "word",
-"start": 12.63,
-"end": 12.95
+"start": 12.62,
+"end": 12.94
 },
 {
 "text": "moved",
 "type": "word",
-"start": 13.03,
-"end": 13.27
+"start": 13.02,
+"end": 13.26
 },
 {
 "text": "to",
 "type": "word",
-"start": 13.31,
-"end": 13.35
+"start": 13.3,
+"end": 13.34
 },
 {
 "text": "a",
 "type": "word",
-"start": 13.43,
-"end": 13.51
+"start": 13.42,
+"end": 13.5
 },
 {
 "text": "new",
 "type": "word",
-"start": 13.59,
-"end": 13.75
+"start": 13.58,
+"end": 13.74
 },
 {
 "text": "city,",
 "type": "word",
-"start": 13.83,
-"end": 14.12
+"start": 13.82,
+"end": 14.22
 },
 {
 "text": "Kyōto.",
 "type": "word",
 "ja": "kyoto",
-"start": 14.41,
-"end": 14.89
+"start": 14.4,
+"end": 14.99
 },
 {
 "text": "Its",
 "type": "word",
-"start": 15.08,
-"end": 15.16
+"start": 15.18,
+"end": 15.26
 },
 {
 "text": "name",
 "type": "word",
-"start": 15.24,
-"end": 15.56
+"start": 15.34,
+"end": 15.66
 },
 {
 "text": "simply",
 "type": "word",
-"start": 15.64,
-"end": 15.96
+"start": 15.74,
+"end": 16.06
 },
 {
 "text": "means",
 "type": "word",
-"start": 16.12,
-"end": 16.28
+"start": 16.22,
+"end": 16.38
 },
 {
 "text": "\"capital",
 "type": "word",
-"start": 16.44,
-"end": 16.84
+"start": 16.54,
+"end": 16.94
 },
 {
 "text": "city\".",
 "type": "word",
-"start": 16.92,
-"end": 17.56
+"start": 17.02,
+"end": 17.66
 },
 {
 "text": "And",
 "type": "word",
-"start": 17.6,
-"end": 17.64
+"start": 17.7,
+"end": 17.74
 },
 {
 "text": "it",
 "type": "word",
-"start": 17.72,
-"end": 17.8
+"start": 17.82,
+"end": 17.9
 },
 {
 "text": "stayed",
 "type": "word",
-"start": 17.88,
-"end": 18.12
+"start": 17.98,
+"end": 18.22
 },
 {
 "text": "the",
 "type": "word",
-"start": 18.2,
-"end": 18.28
+"start": 18.3,
+"end": 18.38
 },
 {
 "text": "capital",
 "type": "word",
-"start": 18.48,
-"end": 18.68
+"start": 18.58,
+"end": 18.78
 },
 {
 "text": "for",
 "type": "word",
-"start": 18.76,
-"end": 18.92
+"start": 18.86,
+"end": 19.02
 },
 {
 "text": "over",
 "type": "word",
-"start": 19.04,
-"end": 19.16
+"start": 19.14,
+"end": 19.26
 },
 {
 "text": "a",
 "type": "word",
-"start": 19.24,
-"end": 19.32
+"start": 19.34,
+"end": 19.42
 },
 {
 "text": "thousand",
 "type": "word",
-"start": 19.4,
-"end": 19.88
+"start": 19.5,
+"end": 19.98
 },
 {
 "text": "years.",
 "type": "word",
-"start": 19.96,
-"end": 20.92
+"start": 20.06,
+"end": 21.02
 },
 {
 "text": "Meanwhile,",
 "type": "word",
-"start": 21.46,
-"end": 21.94
+"start": 21.26,
+"end": 21.74
 },
 {
 "text": "far",
 "type": "word",
-"start": 22.02,
-"end": 22.18
+"start": 21.82,
+"end": 21.98
 },
 {
 "text": "to",
 "type": "word",
-"start": 22.26,
-"end": 22.34
+"start": 22.06,
+"end": 22.14
 },
 {
 "text": "the",
 "type": "word",
-"start": 22.42,
-"end": 22.5
+"start": 22.22,
+"end": 22.3
 },
 {
 "text": "east,",
 "type": "word",
-"start": 22.66,
-"end": 22.98
+"start": 22.46,
+"end": 22.78
 },
 {
 "text": "there",
 "type": "word",
-"start": 23.02,
-"end": 23.06
+"start": 22.82,
+"end": 22.86
 },
 {
 "text": "was",
 "type": "word",
-"start": 23.14,
-"end": 23.22
+"start": 22.94,
+"end": 23.02
 },
 {
 "text": "a",
 "type": "word",
-"start": 23.3,
-"end": 23.38
+"start": 23.1,
+"end": 23.18
 },
 {
 "text": "small",
 "type": "word",
-"start": 23.58,
-"end": 23.78
+"start": 23.38,
+"end": 23.58
 },
 {
 "text": "castle",
 "type": "word",
-"start": 23.98,
-"end": 24.18
+"start": 23.78,
+"end": 23.98
 },
 {
 "text": "town",
 "type": "word",
-"start": 24.34,
-"end": 24.5
+"start": 24.14,
+"end": 24.3
 },
 {
 "text": "called",
 "type": "word",
-"start": 24.58,
-"end": 24.71
+"start": 24.38,
+"end": 24.62
 },
 {
 "text": "Edo.",
 "type": "word",
 "ja": "edo",
-"start": 24.92,
-"end": 25.29
+"start": 24.72,
+"end": 25.2
 },
 {
 "text": "Its",
 "type": "word",
-"start": 25.43,
-"end": 25.59
+"start": 25.34,
+"end": 25.5
 },
 {
 "text": "name",
 "type": "word",
-"start": 25.67,
-"end": 25.83
+"start": 25.58,
+"end": 25.74
 },
 {
 "text": "means",
 "type": "word",
-"start": 25.91,
-"end": 26.31
+"start": 25.82,
+"end": 26.22
 },
 {
 "text": "\"the",
 "type": "word",
-"start": 26.35,
-"end": 26.55
+"start": 26.26,
+"end": 26.46
 },
 {
 "text": "door",
 "type": "word",
-"start": 26.67,
-"end": 26.79
+"start": 26.58,
+"end": 26.7
 },
 {
 "text": "of",
 "type": "word",
-"start": 26.87,
-"end": 26.95
+"start": 26.78,
+"end": 26.86
 },
 {
 "text": "the",
 "type": "word",
-"start": 26.99,
-"end": 27.03
+"start": 26.9,
+"end": 26.94
 },
 {
 "text": "bay\".",
 "type": "word",
-"start": 27.11,
-"end": 27.75
+"start": 27.02,
+"end": 27.66
 },
 {
 "text": "In",
 "type": "word",
-"start": 27.83,
-"end": 27.91
+"start": 27.74,
+"end": 27.82
 },
 {
 "text": "sixteen-oh-three,",
 "type": "word",
-"start": 27.99,
-"end": 29.083
+"start": 27.9,
+"end": 28.993
 },
 {
 "text": "the",
 "type": "word",
-"start": 29.137,
-"end": 29.19
+"start": 29.047,
+"end": 29.1
 },
 {
 "text": "samurai",
 "type": "word",
-"start": 29.27,
-"end": 29.59
+"start": 29.18,
+"end": 29.5
 },
 {
 "text": "rulers",
 "type": "word",
-"start": 29.67,
-"end": 29.99
+"start": 29.58,
+"end": 29.9
 },
 {
 "text": "made",
 "type": "word",
-"start": 30.07,
-"end": 30.39
+"start": 29.98,
+"end": 30.41
 },
 {
 "text": "Edo",
 "type": "word",
 "ja": "edo2",
-"start": 30.32,
-"end": 30.69
+"start": 30.23,
+"end": 30.71
 },
 {
 "text": "their",
 "type": "word",
-"start": 30.79,
-"end": 30.95
+"start": 30.81,
+"end": 30.97
 },
 {
 "text": "base.",
 "type": "word",
-"start": 31.31,
-"end": 31.723
+"start": 31.33,
+"end": 31.743
 },
 {
 "text": "By",
 "type": "word",
-"start": 31.777,
-"end": 31.83
+"start": 31.797,
+"end": 31.85
 },
 {
 "text": "the",
 "type": "word",
-"start": 31.87,
-"end": 31.91
+"start": 31.89,
+"end": 31.93
 },
 {
 "text": "seventeen-hundreds,",
 "type": "word",
-"start": 31.99,
-"end": 33.083
+"start": 32.01,
+"end": 33.103
 },
 {
 "text": "it",
 "type": "word",
-"start": 33.137,
-"end": 33.19
+"start": 33.157,
+"end": 33.21
 },
 {
 "text": "had",
 "type": "word",
-"start": 33.27,
-"end": 33.35
+"start": 33.29,
+"end": 33.37
 },
 {
 "text": "a",
 "type": "word",
-"start": 33.47,
-"end": 33.59
+"start": 33.49,
+"end": 33.61
 },
 {
 "text": "million",
 "type": "word",
-"start": 33.79,
-"end": 33.99
+"start": 33.81,
+"end": 34.01
 },
 {
 "text": "people.",
 "type": "word",
-"start": 34.31,
-"end": 34.71
+"start": 34.33,
+"end": 34.73
 },
 {
 "text": "Maybe",
 "type": "word",
-"start": 34.83,
-"end": 34.95
+"start": 34.85,
+"end": 34.97
 },
 {
 "text": "the",
 "type": "word",
-"start": 35.07,
-"end": 35.19
+"start": 35.09,
+"end": 35.21
 },
 {
 "text": "biggest",
 "type": "word",
-"start": 35.27,
-"end": 35.51
+"start": 35.29,
+"end": 35.53
 },
 {
 "text": "city",
 "type": "word",
-"start": 35.59,
-"end": 35.83
+"start": 35.61,
+"end": 35.85
 },
 {
 "text": "in",
 "type": "word",
-"start": 35.87,
-"end": 35.91
+"start": 35.89,
+"end": 35.93
 },
 {
 "text": "the",
 "type": "word",
-"start": 35.99,
-"end": 36.07
+"start": 36.01,
+"end": 36.09
 },
 {
 "text": "world.",
 "type": "word",
-"start": 36.47,
-"end": 36.91
+"start": 36.49,
+"end": 36.93
 },
 {
 "text": "Then,",
 "type": "word",
-"start": 37.25,
-"end": 37.703
+"start": 36.97,
+"end": 37.423
 },
 {
 "text": "in",
 "type": "word",
-"start": 37.757,
-"end": 37.81
+"start": 37.477,
+"end": 37.53
 },
 {
 "text": "eighteen",
 "type": "word",
-"start": 37.89,
-"end": 38.21
+"start": 37.61,
+"end": 37.93
 },
 {
 "text": "sixty-eight,",
 "type": "word",
-"start": 38.33,
-"end": 39.063
+"start": 38.05,
+"end": 38.783
 },
 {
 "text": "the",
 "type": "word",
-"start": 39.117,
-"end": 39.17
+"start": 38.837,
+"end": 38.89
 },
 {
 "text": "samurai",
 "type": "word",
-"start": 39.25,
-"end": 39.65
+"start": 38.97,
+"end": 39.37
 },
 {
 "text": "era",
 "type": "word",
-"start": 39.73,
-"end": 39.97
+"start": 39.45,
+"end": 39.69
 },
 {
 "text": "ended.",
 "type": "word",
-"start": 40.05,
-"end": 40.743
+"start": 39.77,
+"end": 40.463
 },
 {
 "text": "The",
 "type": "word",
-"start": 40.797,
-"end": 40.85
+"start": 40.517,
+"end": 40.57
 },
 {
 "text": "young",
 "type": "word",
-"start": 40.93,
-"end": 41.01
+"start": 40.65,
+"end": 40.73
 },
 {
 "text": "emperor",
 "type": "word",
-"start": 41.09,
-"end": 41.49
+"start": 40.81,
+"end": 41.21
 },
 {
 "text": "moved",
 "type": "word",
-"start": 41.65,
-"end": 41.81
+"start": 41.37,
+"end": 41.53
 },
 {
 "text": "east.",
 "type": "word",
-"start": 41.89,
-"end": 42.49
+"start": 41.61,
+"end": 42.21
 },
 {
 "text": "And",
 "type": "word",
-"start": 42.83,
-"end": 43.04
+"start": 42.25,
+"end": 42.57
 },
 {
 "text": "Edo",
 "type": "word",
 "ja": "edo3",
-"start": 43.02,
-"end": 43.39
+"start": 42.44,
+"end": 42.92
 },
 {
 "text": "got",
 "type": "word",
-"start": 43.52,
-"end": 43.6
+"start": 43.05,
+"end": 43.13
 },
 {
 "text": "a",
 "type": "word",
-"start": 43.68,
-"end": 43.76
+"start": 43.21,
+"end": 43.29
 },
 {
 "text": "new",
 "type": "word",
-"start": 43.84,
-"end": 43.92
+"start": 43.37,
+"end": 43.45
 },
 {
 "text": "name:",
 "type": "word",
-"start": 44.0,
-"end": 44.587
+"start": 43.53,
+"end": 44.117
 },
 {
 "text": "Tōkyō.",
 "type": "word",
 "ja": "tokyo3",
-"start": 45.0,
-"end": 45.66
+"start": 44.28,
+"end": 45.03
 },
 {
 "text": "\"The",
 "type": "word",
-"start": 45.7,
-"end": 45.78
+"start": 45.07,
+"end": 45.15
 },
 {
 "text": "eastern",
 "type": "word",
-"start": 45.86,
-"end": 46.26
+"start": 45.23,
+"end": 45.63
 },
 {
 "text": "capital\".",
 "type": "word",
-"start": 46.46,
-"end": 46.98
+"start": 45.83,
+"end": 46.35
 },
 {
 "text": "Because",
 "type": "word",
-"start": 47.14,
-"end": 47.21
+"start": 46.51,
+"end": 46.69
 },
 {
 "text": "Kyōto,",
 "type": "word",
 "ja": "kyoto2",
-"start": 47.31,
-"end": 47.79
+"start": 46.68,
+"end": 47.27
 },
 {
 "text": "the",
 "type": "word",
-"start": 47.93,
-"end": 48.01
+"start": 47.41,
+"end": 47.49
 },
 {
 "text": "old",
 "type": "word",
-"start": 48.09,
-"end": 48.25
+"start": 47.57,
+"end": 47.73
 },
 {
 "text": "capital,",
 "type": "word",
-"start": 48.53,
-"end": 48.85
+"start": 48.01,
+"end": 48.33
 },
 {
 "text": "was",
 "type": "word",
-"start": 48.89,
-"end": 48.97
+"start": 48.37,
+"end": 48.45
 },
 {
 "text": "in",
 "type": "word",
-"start": 49.05,
-"end": 49.13
+"start": 48.53,
+"end": 48.61
 },
 {
 "text": "the",
 "type": "word",
-"start": 49.17,
-"end": 49.21
+"start": 48.65,
+"end": 48.69
 },
 {
 "text": "west.",
 "type": "word",
-"start": 49.29,
-"end": 49.97
+"start": 48.77,
+"end": 49.45
 },
 {
 "text": "And",
 "type": "word",
-"start": 50.36,
-"end": 50.52
+"start": 49.49,
+"end": 49.65
 },
 {
 "text": "here's",
 "type": "word",
-"start": 50.6,
-"end": 50.76
+"start": 49.73,
+"end": 49.89
 },
 {
 "text": "the",
 "type": "word",
-"start": 50.84,
-"end": 50.92
+"start": 49.97,
+"end": 50.05
 },
 {
 "text": "twist.",
 "type": "word",
-"start": 51.0,
-"end": 51.72
+"start": 50.13,
+"end": 50.85
 },
 {
 "text": "No",
 "type": "word",
-"start": 52.1,
-"end": 52.26
+"start": 50.93,
+"end": 51.09
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 52.34,
-"end": 52.74
+"start": 51.17,
+"end": 51.57
 },
 {
 "text": "law",
 "type": "word",
-"start": 52.82,
-"end": 53.14
+"start": 51.65,
+"end": 51.97
 },
 {
 "text": "actually",
 "type": "word",
-"start": 53.22,
-"end": 53.62
+"start": 52.05,
+"end": 52.45
 },
 {
 "text": "says",
 "type": "word",
-"start": 53.7,
-"end": 53.94
+"start": 52.53,
+"end": 52.77
 },
 {
 "text": "that",
 "type": "word",
-"start": 54.02,
-"end": 54.18
+"start": 52.85,
+"end": 53.01
 },
 {
 "text": "Tōkyō",
 "type": "word",
 "ja": "tokyo4",
-"start": 54.39,
-"end": 55.05
+"start": 53.22,
+"end": 53.97
 },
 {
 "text": "is",
 "type": "word",
-"start": 55.06,
-"end": 55.1
+"start": 53.98,
+"end": 54.02
 },
 {
 "text": "the",
 "type": "word",
-"start": 55.18,
-"end": 55.26
+"start": 54.1,
+"end": 54.18
 },
 {
 "text": "capital!",
 "type": "word",
-"start": 55.66,
-"end": 56.1
+"start": 54.58,
+"end": 55.02
 },
 {
 "text": "Would",
 "type": "word",
-"start": 56.54,
-"end": 56.62
+"start": 55.06,
+"end": 55.14
 },
 {
 "text": "you",
 "type": "word",
-"start": 56.7,
-"end": 56.78
+"start": 55.22,
+"end": 55.3
 },
 {
 "text": "rather",
 "type": "word",
-"start": 56.86,
-"end": 57.1
+"start": 55.38,
+"end": 55.62
 },
 {
 "text": "live",
 "type": "word",
-"start": 57.18,
-"end": 57.26
+"start": 55.7,
+"end": 55.78
 },
 {
 "text": "in",
 "type": "word",
-"start": 57.34,
-"end": 57.42
+"start": 55.86,
+"end": 55.94
 },
 {
 "text": "old",
 "type": "word",
-"start": 57.5,
-"end": 57.61
+"start": 56.02,
+"end": 56.24
 },
 {
 "text": "Edo,",
 "type": "word",
 "ja": "edo4",
-"start": 57.75,
-"end": 58.12
+"start": 56.27,
+"end": 56.75
 },
 {
 "text": "or",
 "type": "word",
-"start": 58.277,
-"end": 58.33
+"start": 56.907,
+"end": 56.96
 },
 {
 "text": "modern",
 "type": "word",
-"start": 58.41,
-"end": 58.61
+"start": 57.04,
+"end": 57.33
 },
 {
 "text": "Tōkyō?",
 "type": "word",
 "ja": "tokyo5",
-"start": 58.69,
-"end": 59.35
+"start": 57.32,
+"end": 58.07
 },
 {
 "text": "Tell",
 "type": "word",
-"start": 59.49,
-"end": 59.57
+"start": 58.21,
+"end": 58.29
 },
 {
 "text": "me",
 "type": "word",
-"start": 59.65,
-"end": 59.73
+"start": 58.37,
+"end": 58.45
 },
 {
 "text": "in",
 "type": "word",
-"start": 59.77,
-"end": 59.81
+"start": 58.49,
+"end": 58.53
 },
 {
 "text": "the",
 "type": "word",
-"start": 59.85,
-"end": 59.89
+"start": 58.57,
+"end": 58.61
 },
 {
 "text": "comments,",
 "type": "word",
-"start": 59.97,
-"end": 60.49
+"start": 58.69,
+"end": 59.21
 },
 {
 "text": "and",
 "type": "word",
-"start": 60.53,
-"end": 60.69
+"start": 59.25,
+"end": 59.41
 },
 {
 "text": "follow",
 "type": "word",
-"start": 60.81,
-"end": 60.93
+"start": 59.53,
+"end": 59.65
 },
 {
 "text": "for",
 "type": "word",
-"start": 61.01,
-"end": 61.09
+"start": 59.73,
+"end": 59.81
 },
 {
 "text": "more.",
 "type": "word",
-"start": 61.21,
-"end": 61.57
+"start": 59.93,
+"end": 60.29
 },
 {
 "text": "matane!",
 "type": "word",
 "ja": "matane",
-"start": 61.89,
-"end": 62.45
+"start": 60.61,
+"end": 61.17
 }
 ],
 "ja": {
@@ -1021,79 +1021,79 @@
 "text": "とうきょう",
 "romaji": "Tōkyō",
 "start": 0.04,
-"end": 0.7
+"end": 0.79
 },
 "tokyo2": {
 "text": "とうきょう",
 "romaji": "Tōkyō",
-"start": 5.96,
-"end": 6.62
+"start": 6.05,
+"end": 6.8
 },
 "nara": {
 "text": "なら",
 "romaji": "Nara",
-"start": 8.8,
-"end": 9.16
+"start": 8.68,
+"end": 9.15
 },
 "kyoto": {
 "text": "きょうと",
 "romaji": "Kyōto",
-"start": 14.41,
-"end": 14.89
+"start": 14.4,
+"end": 14.99
 },
 "edo": {
 "text": "えど",
 "romaji": "Edo",
-"start": 24.92,
-"end": 25.29
+"start": 24.72,
+"end": 25.2
 },
 "edo2": {
 "text": "えど",
 "romaji": "Edo",
-"start": 30.32,
-"end": 30.69
+"start": 30.23,
+"end": 30.71
 },
 "edo3": {
 "text": "えど",
 "romaji": "Edo",
-"start": 43.02,
-"end": 43.39
+"start": 42.44,
+"end": 42.92
 },
 "tokyo3": {
 "text": "とうきょう",
 "romaji": "Tōkyō",
-"start": 45.0,
-"end": 45.66
+"start": 44.28,
+"end": 45.03
 },
 "kyoto2": {
 "text": "きょうと",
 "romaji": "Kyōto",
-"start": 47.31,
-"end": 47.79
+"start": 46.68,
+"end": 47.27
 },
 "tokyo4": {
 "text": "とうきょう",
 "romaji": "Tōkyō",
-"start": 54.39,
-"end": 55.05
+"start": 53.22,
+"end": 53.97
 },
 "edo4": {
 "text": "えど",
 "romaji": "Edo",
-"start": 57.75,
-"end": 58.12
+"start": 56.27,
+"end": 56.75
 },
 "tokyo5": {
 "text": "とうきょう",
 "romaji": "Tōkyō",
-"start": 58.69,
-"end": 59.35
+"start": 57.32,
+"end": 58.07
 },
 "matane": {
 "text": "またね！",
 "romaji": "matane!",
-"start": 61.89,
-"end": 62.45
+"start": 60.61,
+"end": 61.17
 }
 }
 }

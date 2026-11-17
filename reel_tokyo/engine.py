@@ -41,13 +41,14 @@ SAKURA = np.array([206, 128, 124], np.float32) / 255
 
 FONT_JP = os.path.join(HERE, 'fonts', 'ShipporiMinchoB1-ExtraBold-subset.ttf')
 FONT_JP_FALLBACK = '/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc'
-FONT_EN = os.path.join(HERE, 'fonts', 'CormorantGaramond-SemiBold.ttf')
-FONT_EN_BOLD = os.path.join(HERE, 'fonts', 'CormorantGaramond-Bold.ttf')
-FONT_EN_ITALIC = os.path.join(HERE, 'fonts', 'CormorantGaramond-MediumItalic.ttf')
+FONT_EN = os.path.join(HERE, 'fonts', 'Inter-600.ttf')
+FONT_EN_BOLD = os.path.join(HERE, 'fonts', 'Inter-700.ttf')
+FONT_EN_ITALIC = os.path.join(HERE, 'fonts', 'PlayfairDisplay-Italic.ttf')
 FONT_HEAD = os.path.join(HERE, 'fonts', 'NotoSerifJP-Black-latin.ttf')          # headline serif (Latin)
 FONT_BRUSH_EN = os.path.join(HERE, 'fonts', 'KaushanScript-Regular.ttf')         # brush-script Latin
 FONT_BRUSH_JP = os.path.join(HERE, 'fonts', 'YujiSyuku-subset.ttf')              # brush-calligraphy kanji (JP forms)
-FONT_BOLD = os.path.join(HERE, 'fonts', 'BebasNeue-Regular.ttf')                # bold hook titles (reel font pack)
+FONT_BOLD = os.path.join(HERE, 'fonts', 'BebasNeue-Regular.ttf')
+FONT_TITLE = os.path.join(HERE, 'fonts', 'Cinzel-900.ttf')                # bold hook titles (reel font pack)
 
 # Instagram Reels safe area: keep key content inside these margins
 SAFE_TOP, SAFE_BOTTOM, SAFE_LEFT, SAFE_RIGHT = 212, 1498, 80, 960   # Reels UI: top ~11%, bottom ~22%, right buttons

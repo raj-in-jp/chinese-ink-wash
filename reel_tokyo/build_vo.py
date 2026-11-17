@@ -71,6 +71,26 @@ def faded(y, ms=10):
     return y
 
 
+def joined(y, first=False, ms=18):
+    """a slice of the take that is about to be spliced: a short fade at each cut edge, so no join clicks or stops dead"""
+    y = y.copy()
+    k = int(SR * 0.02)
+    lvl = lambda s: 20 * np.log10(np.sqrt(np.mean(s ** 2)) + 1e-9) if len(s) else -120
+    for side in ('in', 'out'):
+        if side == 'in' and first:
+            continue
+        edge = y[:k] if side == 'in' else y[-k:]
+        L = 60 if lvl(edge) > -38 else ms                # cut on live speech: a longer, natural-sounding decay
+        n = min(int(SR * L / 1000), len(y) // 2)
+        if n <= 0:
+            continue
+        if side == 'in':
+            y[:n] *= np.sin(np.linspace(0, np.pi / 2, n)) ** 2
+        else:
+            y[-n:] *= np.cos(np.linspace(0, np.pi / 2, n)) ** 2
+    return y
+
+
 def quietest(e, t0, t1):
     a, b = int(t0 * 100), max(int(t0 * 100) + 1, int(t1 * 100))
     return (a + int(np.argmin(e[a:b]))) / 100
@@ -98,7 +118,10 @@ def main():
         else:
             segs.append((a, b))
     assert len(segs) == len(JA_WORDS), f'{len(segs)} segments in the Japanese words take'
-    clips = {k: faded(jw[int(a * SR):int(b * SR)]) for (k, _, _), (a, b) in zip(JA_WORDS, segs)}
+    bounds = [0.0] + [(segs[k][1] + segs[k + 1][0]) / 2 for k in range(len(segs) - 1)] + [len(jw) / SR]
+    # keep each word's natural decay: 30 ms before and 80 ms after its loud part (never past halfway to the next word)
+    clips = {k: faded(jw[int(max(a - 0.03, bounds[n]) * SR):int(min(b + 0.08, bounds[n + 1]) * SR)], 22)
+             for n, ((k, _, _), (a, b)) in enumerate(zip(JA_WORDS, segs))}
     for k in clips:
         clips[k] *= 0.95 * level / rms(clips[k])
     edits, i0, seen = [], 0, {}
@@ -118,7 +141,13 @@ def main():
         edits.append([a, b, np.concatenate([pre, clips[clip], pad]), key, (i, j, clip)])
     for i, w in enumerate(words[:-1]):
         if w['text'] in HOLD:
-            c = quietest(e, w['end'] + 0.02, words[i + 1]['start'] - 0.02)
+            # only where the voice has really died away; never cut a pause into the tail of a word
+            a0, b0 = int((w['end'] + 0.02) * 100), int((words[i + 1]['start'] - 0.02) * 100)
+            q = [k for k in range(a0, max(a0, b0)) if e[k] < -45]
+            if not q:
+                print(f'  hold after {w["text"]!r} skipped: no silence in the gap')
+                continue
+            c = q[len(q) // 2] / 100
             edits.append([c, c, np.zeros(int(HOLD[w['text']] * SR), np.float32), None, (i, i, None)])
     end = min(len(en) / SR, words[-1]['end'] + 0.15)
     mt = load('matane_a.mp3')
@@ -127,7 +156,7 @@ def main():
     mt *= 0.95 * level / rms(mt)
     out, segs_out, cursor, t, shifts = [], {}, 0.0, 0.0, []
     for a, b, audio, k, _ in sorted(edits, key=lambda x: (x[0], x[1])):
-        out.append(en[int(cursor * SR):int(a * SR)])
+        out.append(joined(en[int(cursor * SR):int(a * SR)], first=cursor == 0))
         t += a - cursor
         if k is not None:
             lead = ERA_BREATH if k in ERAS else PAD          # (k == clip only for the first time a word is said)
@@ -136,7 +165,7 @@ def main():
         t += len(audio) / SR
         shifts.append((a, b, t))
         cursor = b
-    out.append(faded(en[int(cursor * SR):int(end * SR)]))
+    out.append(joined(en[int(cursor * SR):int(end * SR)]))
     t += end - cursor
     t_mt = t + 0.4
     out += [np.zeros(int(0.4 * SR), np.float32), mt, np.zeros(int(0.2 * SR), np.float32)]

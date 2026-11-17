@@ -15,7 +15,7 @@ from scenes.s_hook import Scene  # noqa: E402
 
 def main():
     sc = Scene(0.0, 7.8)
-    img = sc.render(sc.t_no + 0.9)
+    img = sc.render(sc.t_back - 0.3)
     os.makedirs(os.path.join(HERE, 'output'), exist_ok=True)
     out = os.path.join(HERE, 'output', 'thumbnail.jpg')
     Image.fromarray((np.clip(img, 0, 1) * 255).astype(np.uint8)).save(out, quality=95)
