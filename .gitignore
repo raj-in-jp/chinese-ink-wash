@@ -51,3 +51,7 @@ reel_scripts/cache/
 reel_scripts/audio/stems/
 reel_scripts/audio/*.wav
 reel_scripts/output/
+reel_japan_name/cache/
+reel_japan_name/audio/stems/
+reel_japan_name/audio/*.wav
+reel_japan_name/output/
