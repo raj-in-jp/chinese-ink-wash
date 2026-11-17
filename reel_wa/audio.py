@@ -370,9 +370,7 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     rs = g('rising')
     fx('wave', 0.0, 0.3, length=rs.t1 + 0.3)                # the sea at sunrise
     fx('chime', rs.t_rs, 0.35)                              # RISING SUN
-    fx('stamp', rs.t_bc, 0.5)                               # BECAUSE OF
-    fx('taiko', rs.t_cn, 0.6)                               # CHINA?!
-    fx('stamp', rs.t_cn + 0.25, 0.65)                       # the 中國 seal
+    fx('chime', rs.t_cn, 0.25)                              # CHINA, told plainly
     hk = g('hook')
     fx('taiko', hk.t607, 0.55)                              # 607 slams in
     fx('stamp', hk.t607 + 0.05, 0.5)
@@ -417,11 +415,8 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     fx('brush', td.items[2][-1] + 0.1, 0.45)                # 令和 on the board
     fx('chime', td.items[-1][-1], 0.3)
     en = g('end')
-    fx('stamp', en.t_q, 0.45)
-    fx('brush', en.q_t0, 0.45)                              # the ? is drawn
-    fx('pop', en.q_t0 + 0.65, 0.3)
-    fx('quill', en.t_cm, 0.3)
-    fx('brush', en.t_follow - 0.05, 0.45)
+    fx('scroll', en.t0 + 0.2, 0.3)                          # the recap row
+    fx('brush', en.t_follow + 0.1, 0.45)                    # the banner
     fx('chime', en.t_mt, 0.35)
 
     # narration

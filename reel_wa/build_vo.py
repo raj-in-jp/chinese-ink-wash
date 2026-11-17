@@ -28,7 +28,7 @@ STAND_IN = [(w, w) for w in ('wa', 'wa', 'nihon', 'wa', 'washoku', 'washi', 'rei
 ERAS = []
 MATANE = ('matane', 'またね！', 'matane!')
 # silence after these words: the sentence lands, the three scripts are named, each "aha" gets a beat
-HOLD = {'China!': 0.15, 'Japan.': 0.3, 'furious.': 0.25, 'sets."': 0.4, 'bold?': 0.2, '"dwarf".': 0.35, 'elegant.': 0.3, '"harmony".': 0.35, 'era.': 0.4}
+HOLD = {'China.': 0.25, 'Japan.': 0.3, 'furious.': 0.25, 'sets."': 0.4, 'bold?': 0.2, '"dwarf".': 0.35, 'elegant.': 0.3, '"harmony".': 0.35, 'era.': 0.4}
 PAD = 0.04
 ERA_BREATH = 0.0
 
@@ -105,9 +105,9 @@ def silent_edge(e, t0, t1, side, thresh=-55):
 
 
 def main():
-    en = load('take_en_b2.mp3')
+    en = load('take_en_c1.mp3')
     e = env(en)
-    words = [w for w in json.load(open(os.path.join(A, 'words_en_b.json')))['words'] if w.get('type', 'word') == 'word']
+    words = [w for w in json.load(open(os.path.join(A, 'words_en_c.json')))['words'] if w.get('type', 'word') == 'word']
     rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 0.01] ** 2))
     level = rms(en)
     jw = load('words_ja_1.mp3')

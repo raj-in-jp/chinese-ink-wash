@@ -1,8 +1,7 @@
 """The title hook.  "Why is Japan called 'the Land of the Rising Sun'?  Because of China!"
 From the first frame the sea is moving and a big red sun is coming up out of it; WHY IS JAPAN CALLED, then THE LAND OF
 THE and RISING SUN letter by letter in Cinzel as the sun clears the horizon, its reflection shimmering on the water.
-On "Because of China!" the camera jolts: BECAUSE OF on a slip, CHINA?! slammed in, and a vermilion seal 中國 stamped
-beside it.  (Only the disc of the sun is drawn, no rays.)"""
+On "It's because of China." the answer fades up calmly: IT'S BECAUSE OF / CHINA with a small vermilion 中國 seal.  (Only the disc of the sun is drawn, no rays.)"""
 import numpy as np
 
 import kit
@@ -48,9 +47,9 @@ class Scene(KanjiScene):
         self.xs = self.xs - (self.xs[-1] + ws[-1] / 2) / 2 + 540
         self.sun = disc(220)
         self.glow = _glow()
-        self.bc = text_layer('BECAUSE OF', FONT_BOLD, 120, tracking=6)[0]
-        self.cn = text_layer('CHINA?!', FONT_BOLD, 250, tracking=6)[0]
-        self.seal = vertical('中國', 70, FONT_JP_ANTIQUE)
+        self.bc = label("IT'S BECAUSE OF", 40, FONT_EN_BOLD, 10)
+        self.cn = text_layer('CHINA', FONT_TITLE, 120, tracking=4)[0]
+        self.seal = vertical('中國', 46, FONT_JP_ANTIQUE)
         self.t_why = at('Why is Japan')[0]
         self.t_land = at('Land of')[0] - 0.2
         self.t_rs = at('Rising Sun')[0]
@@ -59,10 +58,8 @@ class Scene(KanjiScene):
         self.t_hit = self.t_cn
 
     def cam(self, t):
-        q = t - self.t_cn
-        shake = 14 * np.exp(-max(q, 0) * 7) * np.sin(q * 55) * (q > 0)
-        z = 1.0 + 0.04 * smooth(t / 5) + 0.05 * ease_out(np.clip((t - self.t_bc) / 0.4, 0, 1))
-        return Cam(540 + shake, 960 + 0.6 * shake, z)
+        z = 1.0 + 0.05 * smooth(t / 6)
+        return Cam(540, 960, z)
 
     def render(self, t):
         cam = self.cam(t)
@@ -101,19 +98,16 @@ class Scene(KanjiScene):
             f = (t - self.t_rs + 0.1 - 0.06 * j) / 0.25
             if f > 0:
                 kit.put(fr, cam, g, x, 545 + 30 * (1 - ease_out(min(f, 1))), VERM, smooth(f), 1 + 0.35 * np.exp(-f * 3))
-        # BECAUSE OF CHINA?!
-        fb = (t - self.t_bc + 0.05) / 0.2
-        if fb > 0:
-            chip(fr, cam, self.bc, 540, 745, smooth(fb), INK, 1 + 0.3 * np.exp(-fb * 3))
-        fc = (t - self.t_cn + 0.05) / 0.15
+        # It's because of China. — told plainly: a soft fade-up, no stamp, no shake
+        fb = smooth((t - self.t_bc + 0.1) / 0.4)
+        kit.put(fr, cam, self.bc, 540, 680 + 12 * (1 - fb), GREY, fb)
+        fc = smooth((t - self.t_cn + 0.05) / 0.45)
         if fc > 0:
-            s = 1 + 0.6 * np.exp(-fc * 2.5)
-            card(fr, cam, 470, 930, self.cn.shape[1] + 70, self.cn.shape[0] + 40, smooth(fc), s, rim=False)
-            kit.put(fr, cam, self.cn, 470, 930, INK, smooth(fc), s, rot=-0.03)
-            fs = (t - self.t_cn - 0.25) / 0.15
-            if fs > 0:
-                ss = 1 + 0.8 * np.exp(-fs * 3)
-                kit.put(fr, cam, kit.box(self.seal.shape[0] + 40, self.seal.shape[1] + 40, 3), 900, 930, VERM, smooth(fs), ss, rot=0.08,
-                        over=True)
-                kit.put(fr, cam, self.seal, 900, 930, PAPER, smooth(fs), ss, rot=0.08, over=True)
+            w = self.cn.shape[1] + 30 + self.seal.shape[1] + 30
+            x0 = 540 - w / 2
+            kit.put(fr, cam, self.cn, x0 + self.cn.shape[1] / 2, 785 + 14 * (1 - fc), INK, fc)
+            sx = x0 + self.cn.shape[1] + 30 + (self.seal.shape[1] + 30) / 2
+            kit.put(fr, cam, kit.box(self.seal.shape[0] + 30, self.seal.shape[1] + 30, 3), sx, 785, VERM,
+                    smooth((t - self.t_cn - 0.3) / 0.45), over=True)
+            kit.put(fr, cam, self.seal, sx, 785, PAPER, smooth((t - self.t_cn - 0.3) / 0.45), over=True)
         return fr.img

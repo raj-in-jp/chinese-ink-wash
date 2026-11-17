@@ -3,1152 +3,1062 @@
 {
 "text": "Why",
 "type": "word",
-"start": 0.382,
-"end": 0.4
+"start": 0.16,
+"end": 0.32
 },
 {
 "text": "is",
 "type": "word",
-"start": 0.48,
-"end": 0.64
+"start": 0.4,
+"end": 0.48
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 0.84,
-"end": 1.04
+"start": 0.56,
+"end": 0.96
 },
 {
 "text": "called",
 "type": "word",
-"start": 1.12,
-"end": 1.52
+"start": 1.2,
+"end": 1.44
 },
 {
 "text": "\"the",
 "type": "word",
-"start": 1.56,
-"end": 1.68
+"start": 1.493,
+"end": 1.6
 },
 {
 "text": "Land",
 "type": "word",
-"start": 1.76,
-"end": 2.0
+"start": 1.72,
+"end": 1.84
 },
 {
 "text": "of",
+"type": "word",
+"start": 1.92,
+"end": 2.0
+},
+{
+"text": "the",
 "type": "word",
 "start": 2.04,
 "end": 2.08
 },
 {
-"text": "the",
-"type": "word",
-"start": 2.16,
-"end": 2.2
-},
-{
 "text": "Rising",
 "type": "word",
-"start": 2.24,
-"end": 2.56
+"start": 2.16,
+"end": 2.48
 },
 {
 "text": "Sun\"?",
 "type": "word",
-"start": 2.72,
-"end": 3.16
+"start": 2.56,
+"end": 3.36
 },
 {
-"text": "Because",
+"text": "It's",
 "type": "word",
-"start": 3.696,
-"end": 3.76
+"start": 3.44,
+"end": 3.6
+},
+{
+"text": "because",
+"type": "word",
+"start": 3.68,
+"end": 3.92
 },
 {
 "text": "of",
 "type": "word",
-"start": 3.84,
-"end": 4.0
+"start": 4.0,
+"end": 4.16
 },
 {
-"text": "China!",
+"text": "China.",
 "type": "word",
-"start": 4.08,
-"end": 4.76
+"start": 4.36,
+"end": 5.04
 },
 {
 "text": "In",
 "type": "word",
-"start": 5.316,
-"end": 5.35
+"start": 5.37,
+"end": 5.45
 },
 {
 "text": "six-oh-seven,",
 "type": "word",
-"start": 5.47,
-"end": 6.35
+"start": 5.53,
+"end": 6.53
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 6.47,
-"end": 6.79
+"start": 6.57,
+"end": 6.97
 },
 {
 "text": "sent",
 "type": "word",
-"start": 6.87,
-"end": 7.03
+"start": 7.09,
+"end": 7.21
 },
 {
 "text": "China",
 "type": "word",
-"start": 7.11,
-"end": 7.43
+"start": 7.37,
+"end": 7.53
 },
 {
 "text": "a",
 "type": "word",
-"start": 7.51,
-"end": 7.55
+"start": 7.69,
+"end": 7.823
 },
 {
 "text": "letter",
 "type": "word",
-"start": 7.59,
-"end": 7.91
+"start": 7.957,
+"end": 8.09
 },
 {
 "text": "so",
 "type": "word",
-"start": 7.99,
-"end": 8.23
+"start": 8.17,
+"end": 8.41
 },
 {
 "text": "bold,",
 "type": "word",
-"start": 8.31,
-"end": 8.87
+"start": 8.57,
+"end": 8.97
 },
 {
 "text": "the",
 "type": "word",
-"start": 8.95,
-"end": 9.03
+"start": 9.05,
+"end": 9.13
 },
 {
 "text": "Chinese",
 "type": "word",
-"start": 9.23,
-"end": 9.43
+"start": 9.33,
+"end": 9.53
 },
 {
 "text": "emperor",
 "type": "word",
-"start": 9.51,
-"end": 9.91
+"start": 9.61,
+"end": 10.01
 },
 {
 "text": "was",
 "type": "word",
-"start": 10.07,
-"end": 10.23
+"start": 10.17,
+"end": 10.33
 },
 {
 "text": "furious.",
 "type": "word",
-"start": 10.31,
-"end": 11.27
+"start": 10.41,
+"end": 11.423
 },
 {
 "text": "It",
 "type": "word",
-"start": 11.6,
-"end": 11.68
+"start": 11.477,
+"end": 11.53
 },
 {
 "text": "began:",
 "type": "word",
-"start": 11.813,
-"end": 12.48
+"start": 11.663,
+"end": 12.33
 },
 {
 "text": "\"From",
 "type": "word",
-"start": 12.533,
-"end": 12.64
+"start": 12.383,
+"end": 12.49
 },
 {
 "text": "the",
 "type": "word",
-"start": 12.72,
-"end": 12.8
+"start": 12.57,
+"end": 12.65
 },
 {
 "text": "Son",
 "type": "word",
-"start": 12.88,
-"end": 12.96
+"start": 12.73,
+"end": 12.81
 },
 {
 "text": "of",
 "type": "word",
-"start": 13.04,
-"end": 13.12
+"start": 12.89,
+"end": 12.97
 },
 {
 "text": "Heaven",
 "type": "word",
-"start": 13.2,
-"end": 13.44
+"start": 13.05,
+"end": 13.29
 },
 {
 "text": "where",
 "type": "word",
-"start": 13.52,
-"end": 13.68
+"start": 13.37,
+"end": 13.45
 },
 {
 "text": "the",
 "type": "word",
-"start": 13.733,
-"end": 13.787
+"start": 13.53,
+"end": 13.69
 },
 {
 "text": "sun",
 "type": "word",
-"start": 13.84,
-"end": 14.08
+"start": 13.81,
+"end": 13.93
 },
 {
 "text": "rises...",
 "type": "word",
-"start": 14.12,
-"end": 14.96
+"start": 13.97,
+"end": 14.757
 },
 {
 "text": "to",
 "type": "word",
-"start": 15.04,
-"end": 15.12
+"start": 14.783,
+"end": 14.81
 },
 {
 "text": "the",
 "type": "word",
-"start": 15.16,
-"end": 15.2
+"start": 14.89,
+"end": 14.97
 },
 {
 "text": "Son",
 "type": "word",
-"start": 15.28,
-"end": 15.44
+"start": 15.05,
+"end": 15.13
 },
 {
 "text": "of",
 "type": "word",
-"start": 15.48,
-"end": 15.52
+"start": 15.21,
+"end": 15.29
 },
 {
 "text": "Heaven",
 "type": "word",
-"start": 15.6,
-"end": 15.92
+"start": 15.37,
+"end": 15.61
 },
 {
 "text": "where",
 "type": "word",
-"start": 16.08,
-"end": 16.16
+"start": 15.77,
+"end": 15.85
 },
 {
 "text": "the",
 "type": "word",
-"start": 16.24,
-"end": 16.32
+"start": 15.93,
+"end": 16.09
 },
 {
 "text": "sun",
 "type": "word",
-"start": 16.4,
-"end": 16.64
+"start": 16.21,
+"end": 16.33
 },
 {
 "text": "sets.\"",
 "type": "word",
-"start": 16.72,
-"end": 17.6
+"start": 16.41,
+"end": 17.29
 },
 {
 "text": "Why",
 "type": "word",
-"start": 17.72,
-"end": 17.84
+"start": 17.77,
+"end": 18.01
 },
 {
 "text": "so",
 "type": "word",
-"start": 17.92,
-"end": 18.08
+"start": 18.09,
+"end": 18.25
 },
 {
 "text": "bold?",
 "type": "word",
-"start": 18.16,
-"end": 18.96
+"start": 18.33,
+"end": 19.05
 },
 {
 "text": "For",
 "type": "word",
-"start": 19.24,
-"end": 19.32
+"start": 19.37,
+"end": 19.49
 },
 {
 "text": "centuries,",
 "type": "word",
-"start": 19.44,
-"end": 20.12
+"start": 19.61,
+"end": 20.29
 },
 {
 "text": "China",
 "type": "word",
-"start": 20.2,
-"end": 20.44
+"start": 20.37,
+"end": 20.69
 },
 {
 "text": "had",
 "type": "word",
-"start": 20.52,
-"end": 20.6
+"start": 20.77,
+"end": 20.85
 },
 {
 "text": "called",
 "type": "word",
-"start": 20.68,
-"end": 20.84
+"start": 20.93,
+"end": 21.09
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 20.92,
-"end": 21.32
+"start": 21.33,
+"end": 21.57
 },
 {
 "text": "Wa.",
 "type": "word",
 "ja": "wa",
-"start": 21.55,
-"end": 22.06
+"start": 21.77,
+"end": 22.28
 },
 {
 "text": "Written",
 "type": "word",
-"start": 22.32,
-"end": 22.48
+"start": 22.54,
+"end": 22.7
 },
 {
 "text": "with",
 "type": "word",
-"start": 22.52,
-"end": 22.56
+"start": 22.74,
+"end": 22.78
 },
 {
 "text": "a",
 "type": "word",
-"start": 22.64,
-"end": 22.72
+"start": 22.86,
+"end": 22.94
 },
 {
 "text": "character",
 "type": "word",
-"start": 22.92,
-"end": 23.12
+"start": 23.14,
+"end": 23.34
 },
 {
 "text": "that",
 "type": "word",
-"start": 23.2,
-"end": 23.28
+"start": 23.42,
+"end": 23.5
 },
 {
 "text": "meant",
 "type": "word",
-"start": 23.32,
-"end": 23.52
+"start": 23.58,
+"end": 23.74
 },
 {
 "text": "something",
 "type": "word",
-"start": 23.68,
-"end": 23.84
+"start": 23.82,
+"end": 24.14
 },
 {
 "text": "like",
 "type": "word",
-"start": 23.92,
-"end": 24.16
+"start": 24.22,
+"end": 24.38
 },
 {
 "text": "\"submissive\".",
 "type": "word",
-"start": 24.24,
-"end": 25.28
+"start": 24.62,
+"end": 25.66
 },
 {
 "text": "And",
 "type": "word",
-"start": 25.36,
-"end": 25.44
+"start": 25.74,
+"end": 25.82
 },
 {
 "text": "later,",
 "type": "word",
-"start": 25.64,
-"end": 26.08
+"start": 26.02,
+"end": 26.46
 },
 {
 "text": "many",
 "type": "word",
-"start": 26.16,
-"end": 26.32
+"start": 26.54,
+"end": 26.78
 },
 {
 "text": "read",
 "type": "word",
-"start": 26.4,
-"end": 26.56
+"start": 26.86,
+"end": 26.94
 },
 {
 "text": "it",
 "type": "word",
-"start": 26.64,
-"end": 26.72
+"start": 27.02,
+"end": 27.18
 },
 {
 "text": "as",
 "type": "word",
-"start": 26.8,
-"end": 26.88
+"start": 27.26,
+"end": 27.34
 },
 {
 "text": "\"dwarf\".",
 "type": "word",
-"start": 26.96,
-"end": 27.84
+"start": 27.42,
+"end": 28.3
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 28.43,
-"end": 28.67
+"start": 28.73,
+"end": 29.13
 },
 {
 "text": "wanted",
 "type": "word",
-"start": 28.75,
-"end": 29.07
+"start": 29.21,
+"end": 29.53
 },
 {
 "text": "a",
 "type": "word",
-"start": 29.15,
-"end": 29.31
+"start": 29.61,
+"end": 29.77
 },
 {
 "text": "better",
 "type": "word",
-"start": 29.43,
-"end": 29.55
+"start": 29.89,
+"end": 30.01
 },
 {
 "text": "name.",
 "type": "word",
-"start": 29.63,
-"end": 30.27
+"start": 30.09,
+"end": 30.73
 },
 {
 "text": "So,",
 "type": "word",
-"start": 30.35,
-"end": 30.75
+"start": 30.81,
+"end": 31.21
 },
 {
 "text": "around",
 "type": "word",
-"start": 30.91,
-"end": 31.07
+"start": 31.29,
+"end": 31.53
 },
 {
 "text": "the",
 "type": "word",
-"start": 31.11,
-"end": 31.15
+"start": 31.57,
+"end": 31.61
 },
 {
 "text": "year",
 "type": "word",
-"start": 31.23,
-"end": 31.31
+"start": 31.69,
+"end": 31.85
 },
 {
 "text": "seven",
 "type": "word",
-"start": 31.47,
-"end": 31.71
+"start": 31.93,
+"end": 32.17
 },
 {
 "text": "hundred,",
 "type": "word",
-"start": 31.75,
-"end": 32.35
+"start": 32.25,
+"end": 32.81
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 32.55,
-"end": 32.75
+"start": 32.89,
+"end": 33.29
 },
 {
 "text": "envoys",
 "type": "word",
-"start": 32.83,
-"end": 33.31
+"start": 33.41,
+"end": 33.77
 },
 {
 "text": "told",
 "type": "word",
-"start": 33.35,
-"end": 33.55
+"start": 33.85,
+"end": 34.01
 },
 {
 "text": "China:",
 "type": "word",
-"start": 33.63,
-"end": 34.27
+"start": 34.09,
+"end": 34.81
 },
 {
 "text": "we",
 "type": "word",
-"start": 34.35,
-"end": 34.43
+"start": 34.89,
+"end": 34.97
 },
 {
 "text": "are",
 "type": "word",
-"start": 34.51,
-"end": 34.59
+"start": 35.05,
+"end": 35.13
 },
 {
 "text": "not",
 "type": "word",
-"start": 34.71,
-"end": 35.0
+"start": 35.25,
+"end": 35.56
 },
 {
 "text": "Wa",
 "type": "word",
 "ja": "wa2",
-"start": 34.83,
-"end": 35.34
+"start": 35.38,
+"end": 35.89
 },
 {
 "text": "anymore.",
 "type": "word",
-"start": 35.4,
-"end": 36.2
+"start": 35.96,
+"end": 36.68
 },
 {
 "text": "We",
 "type": "word",
-"start": 36.32,
-"end": 36.44
+"start": 36.8,
+"end": 36.92
 },
 {
 "text": "are",
 "type": "word",
-"start": 36.6,
-"end": 36.66
+"start": 37.08,
+"end": 37.16
 },
 {
 "text": "Nihon.",
 "type": "word",
 "ja": "nihon",
-"start": 36.78,
-"end": 37.44
+"start": 37.29,
+"end": 37.95
 },
 {
 "text": "\"The",
 "type": "word",
-"start": 37.58,
-"end": 37.62
+"start": 38.14,
+"end": 38.22
 },
 {
 "text": "origin",
 "type": "word",
-"start": 37.78,
-"end": 38.18
+"start": 38.38,
+"end": 38.78
 },
 {
 "text": "of",
 "type": "word",
-"start": 38.26,
-"end": 38.34
+"start": 38.86,
+"end": 38.94
 },
 {
 "text": "the",
 "type": "word",
-"start": 38.42,
-"end": 38.5
+"start": 39.02,
+"end": 39.1
 },
 {
 "text": "sun.\"",
 "type": "word",
-"start": 38.58,
-"end": 39.3
+"start": 39.26,
+"end": 39.9
 },
 {
 "text": "Because",
 "type": "word",
-"start": 39.42,
-"end": 39.54
+"start": 39.98,
+"end": 40.22
 },
 {
 "text": "seen",
 "type": "word",
-"start": 39.62,
-"end": 39.78
+"start": 40.34,
+"end": 40.46
 },
 {
 "text": "from",
 "type": "word",
-"start": 39.86,
-"end": 39.94
+"start": 40.54,
+"end": 40.62
 },
 {
 "text": "China,",
 "type": "word",
-"start": 40.02,
-"end": 40.66
+"start": 40.7,
+"end": 41.26
 },
 {
 "text": "the",
 "type": "word",
-"start": 40.7,
-"end": 40.74
+"start": 41.34,
+"end": 41.38
 },
 {
 "text": "sun",
 "type": "word",
-"start": 40.82,
-"end": 41.06
+"start": 41.42,
+"end": 41.66
 },
 {
 "text": "rises",
 "type": "word",
-"start": 41.14,
-"end": 41.54
+"start": 41.74,
+"end": 42.14
 },
 {
 "text": "over",
 "type": "word",
-"start": 41.62,
-"end": 41.78
+"start": 42.22,
+"end": 42.46
 },
 {
 "text": "Japan.",
 "type": "word",
-"start": 41.86,
-"end": 42.58
+"start": 42.7,
+"end": 43.42
 },
 {
 "text": "Chinese",
 "type": "word",
-"start": 43.12,
-"end": 43.44
+"start": 43.92,
+"end": 44.12
 },
 {
 "text": "records",
 "type": "word",
-"start": 43.52,
-"end": 43.92
+"start": 44.36,
+"end": 44.6
 },
 {
 "text": "even",
 "type": "word",
-"start": 44.0,
-"end": 44.24
+"start": 44.68,
+"end": 44.92
 },
 {
 "text": "say",
 "type": "word",
-"start": 44.32,
-"end": 44.48
+"start": 45.0,
+"end": 45.16
 },
 {
 "text": "the",
 "type": "word",
-"start": 44.56,
-"end": 44.64
+"start": 45.24,
+"end": 45.32
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 44.88,
-"end": 45.12
+"start": 45.56,
+"end": 45.8
 },
 {
 "text": "disliked",
 "type": "word",
-"start": 45.28,
-"end": 45.68
+"start": 45.88,
+"end": 46.36
 },
 {
 "text": "the",
 "type": "word",
-"start": 45.72,
-"end": 45.76
+"start": 46.44,
+"end": 46.48
 },
 {
 "text": "old",
 "type": "word",
-"start": 45.84,
-"end": 45.92
+"start": 46.52,
+"end": 46.68
 },
 {
 "text": "name,",
 "type": "word",
-"start": 46.0,
-"end": 46.4
+"start": 46.76,
+"end": 47.08
 },
 {
 "text": "because",
 "type": "word",
-"start": 46.48,
-"end": 46.64
+"start": 47.2,
+"end": 47.32
 },
 {
 "text": "it",
 "type": "word",
-"start": 46.72,
-"end": 46.76
+"start": 47.36,
+"end": 47.4
 },
 {
 "text": "was",
 "type": "word",
-"start": 46.8,
-"end": 46.88
+"start": 47.48,
+"end": 47.56
 },
 {
 "text": "not",
 "type": "word",
-"start": 47.0,
-"end": 47.12
+"start": 47.68,
+"end": 47.8
 },
 {
 "text": "elegant.",
 "type": "word",
-"start": 47.2,
-"end": 47.84
+"start": 47.84,
+"end": 48.68
 },
 {
 "text": "But",
 "type": "word",
-"start": 48.3,
-"end": 48.38
+"start": 48.72,
+"end": 48.76
 },
 {
 "text": "they",
 "type": "word",
-"start": 48.46,
-"end": 48.54
+"start": 48.84,
+"end": 48.92
 },
 {
 "text": "kept",
 "type": "word",
-"start": 48.62,
-"end": 48.78
+"start": 49.0,
+"end": 49.16
 },
 {
 "text": "the",
 "type": "word",
-"start": 48.86,
-"end": 48.94
+"start": 49.2,
+"end": 49.24
 },
 {
 "text": "old",
 "type": "word",
-"start": 49.02,
-"end": 49.18
+"start": 49.32,
+"end": 49.48
 },
 {
 "text": "sound,",
 "type": "word",
-"start": 49.34,
-"end": 49.98
+"start": 49.56,
+"end": 50.2
 },
 {
 "text": "Wa.",
 "type": "word",
 "ja": "wa3",
-"start": 50.08,
-"end": 50.59
+"start": 50.29,
+"end": 50.8
 },
 {
 "text": "They",
 "type": "word",
-"start": 50.74,
-"end": 50.78
+"start": 50.94,
+"end": 50.98
 },
 {
 "text": "just",
 "type": "word",
-"start": 50.86,
-"end": 51.02
+"start": 51.06,
+"end": 51.22
 },
 {
 "text": "swapped",
 "type": "word",
-"start": 51.06,
-"end": 51.26
+"start": 51.26,
+"end": 51.54
 },
 {
 "text": "the",
 "type": "word",
-"start": 51.3,
-"end": 51.34
+"start": 51.58,
+"end": 51.62
 },
 {
 "text": "kanji,",
 "type": "word",
-"start": 51.42,
-"end": 52.06
+"start": 51.74,
+"end": 52.26
 },
 {
 "text": "for",
 "type": "word",
-"start": 52.14,
-"end": 52.22
+"start": 52.34,
+"end": 52.42
 },
 {
 "text": "one",
 "type": "word",
-"start": 52.3,
-"end": 52.38
+"start": 52.5,
+"end": 52.58
 },
 {
 "text": "that",
 "type": "word",
-"start": 52.46,
-"end": 52.54
+"start": 52.66,
+"end": 52.74
 },
 {
 "text": "means",
 "type": "word",
-"start": 52.62,
-"end": 52.94
+"start": 52.82,
+"end": 53.14
 },
 {
 "text": "\"harmony\".",
 "type": "word",
-"start": 53.1,
-"end": 53.98
+"start": 53.3,
+"end": 54.18
 },
 {
 "text": "And",
 "type": "word",
-"start": 54.41,
-"end": 54.49
+"start": 54.61,
+"end": 54.69
 },
 {
 "text": "that",
 "type": "word",
-"start": 54.57,
-"end": 54.73
+"start": 54.77,
+"end": 54.93
 },
 {
 "text": "kanji",
 "type": "word",
-"start": 54.85,
-"end": 55.21
+"start": 55.05,
+"end": 55.41
 },
 {
 "text": "is",
 "type": "word",
-"start": 55.29,
-"end": 55.37
+"start": 55.49,
+"end": 55.57
 },
 {
 "text": "still",
 "type": "word",
-"start": 55.57,
-"end": 55.77
+"start": 55.77,
+"end": 55.97
 },
 {
 "text": "everywhere",
 "type": "word",
-"start": 55.93,
-"end": 56.41
+"start": 56.05,
+"end": 56.45
 },
 {
 "text": "today.",
 "type": "word",
-"start": 56.49,
-"end": 57.01
+"start": 56.53,
+"end": 57.25
 },
 {
 "text": "washoku,",
 "type": "word",
 "ja": "washoku",
-"start": 57.23,
-"end": 57.97
+"start": 57.31,
+"end": 58.05
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 58.15,
-"end": 58.55
+"start": 58.4,
+"end": 58.64
 },
 {
 "text": "food.",
 "type": "word",
-"start": 58.63,
-"end": 59.27
+"start": 58.72,
+"end": 59.36
 },
 {
 "text": "washi,",
 "type": "word",
 "ja": "washi",
-"start": 59.35,
-"end": 59.94
+"start": 59.43,
+"end": 60.02
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 60.12,
-"end": 60.52
+"start": 60.2,
+"end": 60.6
 },
 {
 "text": "paper.",
 "type": "word",
-"start": 60.6,
-"end": 61.32
+"start": 60.68,
+"end": 61.4
 },
 {
 "text": "Even",
 "type": "word",
-"start": 61.48,
-"end": 61.64
+"start": 61.56,
+"end": 61.72
 },
 {
 "text": "Reiwa,",
 "type": "word",
 "ja": "reiwa",
-"start": 61.76,
-"end": 62.39
+"start": 61.82,
+"end": 62.45
 },
 {
 "text": "the",
 "type": "word",
-"start": 62.53,
-"end": 62.57
+"start": 62.59,
+"end": 62.63
 },
 {
 "text": "name",
 "type": "word",
-"start": 62.65,
-"end": 62.81
+"start": 62.71,
+"end": 62.87
 },
 {
 "text": "of",
 "type": "word",
-"start": 62.89,
-"end": 62.97
+"start": 62.95,
+"end": 63.03
 },
 {
 "text": "this",
 "type": "word",
-"start": 63.05,
-"end": 63.13
+"start": 63.11,
+"end": 63.19
 },
 {
 "text": "era.",
 "type": "word",
-"start": 63.21,
-"end": 64.01
+"start": 63.27,
+"end": 63.99
 },
 {
-"text": "So,",
+"text": "Follow",
 "type": "word",
-"start": 64.13,
-"end": 64.41
-},
-{
-"text": "which",
-"type": "word",
-"start": 64.57,
-"end": 64.73
-},
-{
-"text": "kanji",
-"type": "word",
-"start": 64.81,
-"end": 65.13
-},
-{
-"text": "would",
-"type": "word",
-"start": 65.21,
-"end": 65.29
-},
-{
-"text": "you",
-"type": "word",
-"start": 65.37,
-"end": 65.53
-},
-{
-"text": "choose",
-"type": "word",
-"start": 65.61,
-"end": 65.85
+"start": 64.51,
+"end": 64.63
 },
 {
 "text": "for",
 "type": "word",
-"start": 65.93,
-"end": 66.01
-},
-{
-"text": "your",
-"type": "word",
-"start": 66.09,
-"end": 66.17
-},
-{
-"text": "country's",
-"type": "word",
-"start": 66.25,
-"end": 66.57
-},
-{
-"text": "name?",
-"type": "word",
-"start": 66.65,
-"end": 67.21
-},
-{
-"text": "Tell",
-"type": "word",
-"start": 67.29,
-"end": 67.37
-},
-{
-"text": "me",
-"type": "word",
-"start": 67.41,
-"end": 67.45
-},
-{
-"text": "in",
-"type": "word",
-"start": 67.53,
-"end": 67.57
-},
-{
-"text": "the",
-"type": "word",
-"start": 67.61,
-"end": 67.69
-},
-{
-"text": "comments,",
-"type": "word",
-"start": 67.89,
-"end": 68.25
-},
-{
-"text": "and",
-"type": "word",
-"start": 68.33,
-"end": 68.41
-},
-{
-"text": "follow",
-"type": "word",
-"start": 68.49,
-"end": 68.73
-},
-{
-"text": "for",
-"type": "word",
-"start": 68.81,
-"end": 68.89
+"start": 64.71,
+"end": 64.79
 },
 {
 "text": "more.",
 "type": "word",
-"start": 68.97,
-"end": 69.45
+"start": 64.87,
+"end": 65.35
 },
 {
 "text": "matane!",
 "type": "word",
 "ja": "matane",
-"start": 69.77,
-"end": 70.33
+"start": 65.67,
+"end": 66.23
 }
 ],
 "ja": {
 "wa": {
 "text": "わ",
 "romaji": "Wa",
-"start": 21.55,
-"end": 22.06
+"start": 21.77,
+"end": 22.28
 },
 "wa2": {
 "text": "わ",
 "romaji": "Wa",
-"start": 34.83,
-"end": 35.34
+"start": 35.38,
+"end": 35.89
 },
 "nihon": {
 "text": "にほん",
 "romaji": "Nihon",
-"start": 36.78,
-"end": 37.44
+"start": 37.29,
+"end": 37.95
 },
 "wa3": {
 "text": "わ",
 "romaji": "Wa",
-"start": 50.08,
-"end": 50.59
+"start": 50.29,
+"end": 50.8
 },
 "washoku": {
 "text": "わしょく",
 "romaji": "washoku",
-"start": 57.23,
-"end": 57.97
+"start": 57.31,
+"end": 58.05
 },
 "washi": {
 "text": "わし",
 "romaji": "washi",
-"start": 59.35,
-"end": 59.94
+"start": 59.43,
+"end": 60.02
 },
 "reiwa": {
 "text": "れいわ",
 "romaji": "Reiwa",
-"start": 61.76,
-"end": 62.39
+"start": 61.82,
+"end": 62.45
 },
 "matane": {
 "text": "またね！",
 "romaji": "matane!",
-"start": 69.77,
-"end": 70.33
+"start": 65.67,
+"end": 66.23
 }
 }
 }

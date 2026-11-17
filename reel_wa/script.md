@@ -7,8 +7,8 @@ Zen Antique and Yuji Syuku for kanji.
 
 ## Narration (recorded; Scribe word-exact, English and Japanese)
 
-Why is Japan called "the Land of the Rising Sun"? Because of China!
-      [a red sun comes up out of a moving sea; THE LAND OF THE RISING SUN in Cinzel; BECAUSE OF CHINA?! + 中國 seal]
+Why is Japan called "the Land of the Rising Sun"? It's because of China.
+      [a red sun comes up out of a moving sea; THE LAND OF THE RISING SUN in Cinzel; IT'S BECAUSE OF CHINA, told calmly, with a small 中國 seal]
 In 607, Japan sent China a letter so bold, the Chinese emperor was furious. It began: "From the Son of Heaven where
 the sun rises... to the Son of Heaven where the sun sets."
       [607 slams in; the scroll 日出處天子致書日沒處天子無恙 unrolls; FURIOUS!; a sun rises over Japan, sets over China]
@@ -27,9 +27,9 @@ And that kanji is still everywhere today. Washoku, Japanese food. Washi, Japanes
 this era.
       [和 IS EVERYWHERE; painted panels slide in: a steaming ichijū-sansai meal (和食), a sheet of washi with 和 brushed
        on it (和紙), a hinoki board with 令和, plum blossom and falling petals (令和, 2019)]
-So, which kanji would you choose for your country's name? Tell me in the comments, and follow for more. またね！
+Follow for more. またね！   [recap 倭 → 日本 · 和; FOLLOW @raj_in_jp]
 
-Recording: audio/take_en_b2.mp3 (+ words_en_b.json), audio/words_ja_1.mp3, matane_a.mp3.  Reel 74.0 s.
+Recording: audio/take_en_c1.mp3 (+ words_en_c.json), audio/words_ja_1.mp3, matane_a.mp3.  Reel 69.8 s.
 
 ## Fact notes
 
