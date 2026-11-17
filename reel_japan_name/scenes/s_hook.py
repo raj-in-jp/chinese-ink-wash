@@ -25,7 +25,7 @@ class Scene(KanjiScene):
         self.t_x = at('never call')[0]
         self.t_who = at('where did')[0]
         self.t_fly = at('travelled ten')[0]
-        self.cam_ = MapCam([(0.0, 137.5, 36.5, 1.35), (self.t_fly - 0.2, 136.0, 37.0, 1.2), (self.t_fly + 1.6, 60.0, 22.0, 0.19),
+        self.cam_ = MapCam([(0.0, 134.0, 36.5, 1.35), (self.t_fly - 0.2, 133.5, 37.0, 1.25), (self.t_fly + 1.6, 60.0, 22.0, 0.19),
                             (self.t1, 60.0, 22.0, 0.185)], cy=1060)
         self.japan = text_layer('JAPAN', FONT_BOLD, 250, tracking=6)[0]
         self.nihon = text_layer('日本', FONT_JP, 190)[0]
