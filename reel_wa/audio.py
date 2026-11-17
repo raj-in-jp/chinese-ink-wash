@@ -367,9 +367,15 @@ def build(out_dir=os.path.join(HERE, 'audio')):
         place(amb, x * e, t0, gain)
 
     from timeline import JA, at
+    rs = g('rising')
+    fx('wave', 0.0, 0.3, length=rs.t1 + 0.3)                # the sea at sunrise
+    fx('chime', rs.t_rs, 0.35)                              # RISING SUN
+    fx('stamp', rs.t_bc, 0.5)                               # BECAUSE OF
+    fx('taiko', rs.t_cn, 0.6)                               # CHINA?!
+    fx('stamp', rs.t_cn + 0.25, 0.65)                       # the 中國 seal
     hk = g('hook')
-    fx('taiko', 0.55, 0.6)                                  # 607 slams in
-    fx('stamp', 0.6, 0.5)
+    fx('taiko', hk.t607, 0.55)                              # 607 slams in
+    fx('stamp', hk.t607 + 0.05, 0.5)
     fx('scroll', hk.t_let - 0.2, 0.45)                      # the letter unrolls
     fx('brush', hk.t_let + 0.6, 0.3)
     fx('taiko', hk.t_fur, 0.6)                              # FURIOUS!
@@ -392,6 +398,8 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     fx('taiko', rn.t_nihon, 0.6)                            # 日本
     fx('brush', rn.t_nihon - 0.25, 0.5)
     fx('chime', rn.t_or, 0.35)
+    fx('quill', rn.t_seen + 0.3, 0.25)                      # the line of sight, east
+    fx('chime', rn.t_up, 0.3)                               # the sun comes up over Japan
     fx('scroll', rn.t_rec - 0.1, 0.45)                      # the Chinese record
     fx('stamp', rn.t_el, 0.65)
     hm = g('harmony')
@@ -403,7 +411,10 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     td = g('today')
     fx('stamp', td.t_ev, 0.45)
     for it in td.items:
-        fx('pop', it[-1] - 0.2, 0.35)
+        fx('fan', it[-1] - 0.3, 0.3)                        # each panel slides in
+        fx('pop', it[-1], 0.3)
+    fx('brush', td.items[1][-1] + 0.2, 0.45)                # 和 written on the washi
+    fx('brush', td.items[2][-1] + 0.1, 0.45)                # 令和 on the board
     fx('chime', td.items[-1][-1], 0.3)
     en = g('end')
     fx('stamp', en.t_q, 0.45)

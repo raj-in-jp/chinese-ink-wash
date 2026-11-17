@@ -8,7 +8,7 @@ import numpy as np
 
 import kit
 from draw9 import sun
-from engine import FONT_BOLD, FONT_EN_ITALIC, FONT_JP, GREY, INK, VERM, Cam, StrokeSet, ease_io, ease_out, smooth, stroke, text_layer
+from engine import FONT_BOLD, FONT_EN_ITALIC, FONT_TITLE, FONT_JP, GREY, INK, VERM, Cam, StrokeSet, ease_io, ease_out, smooth, stroke, text_layer
 from scenes.common11 import PAPER, SCREEN, SCROLL, card, chip, label
 from scenes.kscene import KanjiScene
 from timeline import at
@@ -21,16 +21,17 @@ class Scene(KanjiScene):
     paper_seed = 1101
 
     def build(self):
-        self.y607 = text_layer('607', FONT_BOLD, 220, tracking=6)[0]
+        self.y607 = text_layer('607', FONT_TITLE, 210, tracking=6)[0]
         self.sub = label('A LETTER FROM JAPAN TO CHINA', 36)
         self.fur = text_layer('FURIOUS!', FONT_BOLD, 180, tracking=4)[0]
         self.chars = [[label(c, 78, FONT_JP, 0) for c in col] for col in (COL_R, COL_L)]
-        self.en1 = label('“FROM THE SON OF HEAVEN WHERE THE SUN RISES…”', 30, FONT_EN_ITALIC, 1)
-        self.en2 = label('“…TO THE SON OF HEAVEN WHERE THE SUN SETS.”', 30, FONT_EN_ITALIC, 1)
+        self.en1 = label('“From the Son of Heaven where the sun rises…”', 38, FONT_EN_ITALIC, 0)
+        self.en2 = label('“…to the Son of Heaven where the sun sets.”', 38, FONT_EN_ITALIC, 0)
         self.sun = sun(58)
         self.jp = label('JAPAN  日出', 30)
         self.cn = label('CHINA  日沒', 30)
         self.jpk, self.cnk = label('JAPAN', 32), label('CHINA', 32)
+        self.t607 = at('six-oh-seven')[0]
         self.t_let = at('letter')[0]
         self.t_fur = at('furious')[0]
         self.t_rise = at('sun rises')[0]
@@ -40,7 +41,7 @@ class Scene(KanjiScene):
     def cam(self, t):
         q = t - self.t_fur
         shake = 12 * np.exp(-max(q, 0) * 6) * np.sin(q * 50) * (q > 0)
-        return Cam(540 + shake, 960, 1.0 + 0.03 * smooth(t / 14))
+        return Cam(540 + shake, 960, 1.0 + 0.03 * smooth((t - self.t0) / 14))
 
     def render(self, t):
         cam = self.cam(t)
@@ -48,11 +49,11 @@ class Scene(KanjiScene):
         q = t - self.t_fur
         fr.img *= 1 - 0.12 * np.exp(-max(q, 0) * 4) * (q > 0) * (1 - np.array([0.95, 0.55, 0.45], np.float32))
         # 607 and the subtitle
-        sl = (t + 0.1) / 0.3
+        sl = (t - self.t607 + 0.1) / 0.3
         kit.put(fr, cam, self.y607, 540, 260, VERM, smooth(sl * 2), 1 + 0.5 * np.exp(-max(sl, 0) * 3), rot=-0.02)
         kit.put(fr, cam, self.sub, 540, 385, INK, smooth((t - self.t_let) / 0.3))
         # the scroll unrolling downward, the two columns read right to left
-        u = ease_out(np.clip((t - 0.5) / 1.4, 0, 1))
+        u = ease_out(np.clip((t - self.t607 - 0.5) / 1.4, 0, 1))
         if u > 0:
             top, full = 450, 720
             h = int(60 + full * u)

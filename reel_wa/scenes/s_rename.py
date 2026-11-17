@@ -8,9 +8,9 @@ import numpy as np
 
 import kit
 from draw9 import junk, sun
-from engine import FONT_BOLD, FONT_BRUSH_JP, FONT_EN_ITALIC, FONT_JP, GREY, INK, VERM, Cam, cached, ease_io, ease_out, smooth, text_layer
+from engine import FONT_UI, FONT_BOLD, FONT_BRUSH_JP, FONT_EN_ITALIC, FONT_JP, GREY, INK, VERM, Cam, cached, ease_io, ease_out, smooth, text_layer
 from glyphs import typeset
-from scenes.common11 import SCROLL, brush_x, card, chip, label, mixed, vertical
+from scenes.common11 import PAPER, SCROLL, brush_x, card, chip, label, mixed, vertical
 from scenes.kscene import KanjiScene
 from timeline import JA, at
 
@@ -29,6 +29,21 @@ class Scene(KanjiScene):
         self.t_nihon = JA['nihon']['start']
         self.t_or = at('origin of')[0]
         self.t_rec = at('Chinese records')[0]
+        self.t_seen = at('Because seen')[0]
+        self.t_up = at('sun rises', after=self.t_seen)[0]
+        import cv2
+        isl = np.zeros((140, 300), np.uint8)
+        ridge = [(0, 124), (30, 104), (70, 96), (105, 70), (135, 30), (150, 24), (165, 30), (195, 70), (225, 88), (255, 84),
+                 (285, 106), (300, 124)]
+        cv2.fillPoly(isl, [np.array(ridge, np.int32)], 255, cv2.LINE_AA)
+        cv2.fillPoly(isl, [np.array([(135, 30), (150, 24), (165, 30), (172, 42), (158, 38), (150, 46), (140, 38), (128, 42)], np.int32)], 120,
+                     cv2.LINE_AA)
+        self.isl = isl.astype(np.float32) / 255
+        self.cn_k = label('中國', 80, FONT_JP, 0)
+        self.cn_l, self.jp_l = label('CHINA', 40, FONT_BOLD, 6), label('JAPAN', 40, FONT_BOLD, 6)
+        self.east = label('EAST  →', 40, FONT_UI, 8)
+        self.sun2 = sun(110)
+        self.eye = label('SEEN FROM CHINA…', 38, FONT_UI, 6)
         self.t_dis = at('disliked')[0]
         self.t_el = at('elegant')[0]
         self.x = brush_x(540, 700, 230, self.t_better + 0.1, seed=31)
@@ -53,6 +68,8 @@ class Scene(KanjiScene):
         cam = self.cam(t)
         fr = self.frame(cam)
         rec = ease_io((t - self.t_rec + 0.1) / 0.6)
+        seen = ease_io((t - self.t_seen + 0.1) / 0.6)
+        up = max(seen, rec)
         # 倭, slashed
         fw = 1 - smooth((t - self.t_nihon + 0.3) / 0.4)
         if fw > 0:
@@ -82,16 +99,34 @@ class Scene(KanjiScene):
         # 日本 with the rising sun
         fn = (t - self.t_nihon + 0.3) / 0.5
         if fn > 0:
-            sc = 1 - 0.5 * rec
-            y = 700 - 300 * rec
+            sc = 1 - 0.5 * up
+            y = 700 - 300 * up
             ur = ease_out(min(fn, 1))
             kit.put(fr, cam, self.sun, 540, y + 80 - 80 * ur, VERM, 0.8 * smooth(fn), sc)
             for j, g in enumerate(self.g):
                 kit.put(fr, cam, g.at(fn - 0.3 * j, soft=0.05), 540 + (j - 0.5) * 320 * sc, y, INK, 1.0, sc)
-            kit.put(fr, cam, self.nih, 540, y + 225 * sc, GREY, smooth(fn - 0.8) * (1 - rec))
-            fo = smooth((t - self.t_or) / 0.3) * (1 - rec)
+            kit.put(fr, cam, self.nih, 540, y + 225 * sc, GREY, smooth(fn - 0.8) * (1 - up))
+            fo = smooth((t - self.t_or) / 0.3) * (1 - up)
             kit.put(fr, cam, self.sunl, 540, 1050, VERM, fo)
-            kit.put(fr, cam, self.orl, 540, 1140, VERM, smooth((t - self.t_or - 0.4) / 0.3) * (1 - rec))
+            kit.put(fr, cam, self.orl, 540, 1140, VERM, smooth((t - self.t_or - 0.4) / 0.3) * (1 - up))
+        # seen from China, the sun rises over Japan
+        fd = smooth((t - self.t_seen) / 0.4) * (1 - smooth((t - self.t_rec + 0.2) / 0.35))
+        if fd > 0:
+            HZ = 1170
+            kit.put(fr, cam, self.eye, 540, 690, GREY, fd)
+            ur = ease_out(np.clip((t - self.t_up + 0.3) / 1.2, 0, 1))
+            kit.put(fr, cam, self.sun2, 820, HZ + 40 - 210 * ur, VERM, 0.95 * fd * smooth(ur * 4))
+            fr.img[HZ + 2:HZ + 200, 600:1040] = self.frame(cam).img[HZ + 2:HZ + 200, 600:1040]
+            kit.put(fr, cam, kit.box(5, 960, 1.5), 540, HZ, INK, 0.7 * fd)
+            kit.put(fr, cam, self.isl, 820, HZ - 60, INK, 0.85 * fd)
+            kit.put(fr, cam, self.cn_k, 220, HZ - 70, INK, fd)
+            kit.put(fr, cam, self.cn_l, 220, HZ + 50, INK, fd)
+            kit.put(fr, cam, self.jp_l, 820, HZ + 50, INK, fd)
+            ua = np.clip((t - self.t_seen - 0.3) / 0.9, 0, 1)
+            for k in range(9):                                   # the dashed line of sight, east
+                if k / 9 < ua:
+                    kit.put(fr, cam, kit.box(10, 34, 1.5), 330 + k * 40, HZ - 90 - 8 * np.sin(k / 8 * np.pi), VERM, fd)
+            kit.put(fr, cam, self.east, 500, HZ - 150, VERM, fd * smooth((ua - 0.6) * 4))
         # the old Chinese record
         if rec > 0:
             card(fr, cam, 540, 930, 360, 690, rec, color=SCROLL, rim=False)
