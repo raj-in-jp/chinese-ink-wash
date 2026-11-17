@@ -18,6 +18,8 @@ import subprocess
 import numpy as np
 from scipy.io import wavfile
 
+from wordbounds import word_bounds
+
 A = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audio')
 SR = 48000
 # the Japanese words (audio/words_ja_1.mp3), in order: (clip, kana, romaji shown in the captions)
@@ -30,6 +32,9 @@ MATANE = ('matane', 'またね！', 'matane!')
 # silence after these words: the sentence lands, the three scripts are named, each "aha" gets a beat
 HOLD = {'Tokyo!': 0.3, 'years.': 0.3, 'world.': 0.3, 'east.': 0.3, 'name:': 0.25, 'west.': 0.35, 'twist.': 0.3, 'capital!': 0.4}
 PAD = 0.04
+# shortest each stand-in word can be: a dip inside it (the k of Tokyo, the d of Edo) is never taken for its edge
+MINLEN = {'tokyo': 0.42, 'kyoto': 0.34, 'nara': 0.28, 'edo': 0.28, 'wa': 0.14, 'nihon': 0.30, 'washoku': 0.45, 'washi': 0.30,
+          'reiwa': 0.34}
 CUT = [("And here's the twist.", 'capital!')]          # the 'no law names the capital' line, taken out
 ERA_BREATH = 0.0
 
@@ -98,11 +103,24 @@ def quietest(e, t0, t1):
 
 
 def silent_edge(e, t0, t1, side, thresh=-55):
+    """the cut point in the gap between two words: the edge of the LONGEST silence in the window, so a short silence
+    inside a word (the closure of a k, t or p) is never mistaken for the gap and no fragment of the word is left behind"""
     a, b = int(t0 * 100), max(int(t0 * 100) + 1, int(t1 * 100))
-    q = np.where(e[a:b] < thresh)[0]
-    if len(q) == 0:
+    q = e[a:b] < thresh
+    runs, k = [], 0
+    while k < len(q):
+        if q[k]:
+            j = k
+            while j < len(q) and q[j]:
+                j += 1
+            runs.append((k, j))
+            k = j
+        else:
+            k += 1
+    if not runs:
         return quietest(e, t0, t1)
-    return (a + (q[-1] if side == 'before' else q[0])) / 100
+    r0, r1 = max(runs, key=lambda r: (r[1] - r[0], r[0] if side == 'before' else -r[0]))
+    return (a + (r1 - 1 if side == 'before' else r0)) / 100
 
 
 def main():
@@ -143,8 +161,12 @@ def main():
         key = clip if seen[clip] == 1 else f'{clip}{seen[clip]}'
         prev_end = words[i - 1]['end'] if i > 0 else 0.0
         nxt = words[j + 1]['start'] if j + 1 < len(words) else words[j]['end'] + 0.3
-        a = 0.0 if i == 0 else silent_edge(e, prev_end - 0.04, words[i]['start'] + 0.06, 'before')
-        b = silent_edge(e, words[j]['end'] - 0.06, nxt + 0.04, 'after')
+        # cut at the word's real edges in the sound (Scribe's times drift by up to half a second): no part of the English
+        # stand-in may be left either side of the Japanese clip
+        a, b = word_bounds(e, words[i]['start'], words[j]['end'], MINLEN.get(clip, 0.25))
+        if i == 0:
+            a = 0.0
+        a = max(0.0, a - 0.02)
         pad = np.zeros(int(PAD * SR), np.float32)
         pre = np.zeros(int(ERA_BREATH * SR), np.float32) if clip in ERAS and key == clip else pad
         edits.append([a, b, np.concatenate([pre, clips[clip], pad]), key, (i, j, clip)])

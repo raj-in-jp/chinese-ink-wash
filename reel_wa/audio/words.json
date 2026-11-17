@@ -352,663 +352,663 @@
 {
 "text": "Written",
 "type": "word",
-"start": 22.54,
-"end": 22.7
+"start": 22.88,
+"end": 23.04
 },
 {
 "text": "with",
 "type": "word",
-"start": 22.74,
-"end": 22.78
+"start": 23.08,
+"end": 23.12
 },
 {
 "text": "a",
 "type": "word",
-"start": 22.86,
-"end": 22.94
+"start": 23.2,
+"end": 23.28
 },
 {
 "text": "character",
 "type": "word",
-"start": 23.14,
-"end": 23.34
+"start": 23.48,
+"end": 23.68
 },
 {
 "text": "that",
 "type": "word",
-"start": 23.42,
-"end": 23.5
+"start": 23.76,
+"end": 23.84
 },
 {
 "text": "meant",
 "type": "word",
-"start": 23.58,
-"end": 23.74
+"start": 23.92,
+"end": 24.08
 },
 {
 "text": "something",
 "type": "word",
-"start": 23.82,
-"end": 24.14
+"start": 24.16,
+"end": 24.48
 },
 {
 "text": "like",
 "type": "word",
-"start": 24.22,
-"end": 24.38
+"start": 24.56,
+"end": 24.72
 },
 {
 "text": "\"submissive\".",
 "type": "word",
-"start": 24.62,
-"end": 25.66
+"start": 24.96,
+"end": 26.0
 },
 {
 "text": "And",
 "type": "word",
-"start": 25.74,
-"end": 25.82
+"start": 26.08,
+"end": 26.16
 },
 {
 "text": "later,",
 "type": "word",
-"start": 26.02,
-"end": 26.46
+"start": 26.36,
+"end": 26.8
 },
 {
 "text": "many",
 "type": "word",
-"start": 26.54,
-"end": 26.78
+"start": 26.88,
+"end": 27.12
 },
 {
 "text": "read",
 "type": "word",
-"start": 26.86,
-"end": 26.94
+"start": 27.2,
+"end": 27.28
 },
 {
 "text": "it",
 "type": "word",
-"start": 27.02,
-"end": 27.18
+"start": 27.36,
+"end": 27.52
 },
 {
 "text": "as",
 "type": "word",
-"start": 27.26,
-"end": 27.34
+"start": 27.6,
+"end": 27.68
 },
 {
 "text": "\"dwarf\".",
 "type": "word",
-"start": 27.42,
-"end": 28.3
+"start": 27.76,
+"end": 28.64
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 28.73,
-"end": 29.13
+"start": 29.07,
+"end": 29.47
 },
 {
 "text": "wanted",
 "type": "word",
-"start": 29.21,
-"end": 29.53
+"start": 29.55,
+"end": 29.87
 },
 {
 "text": "a",
 "type": "word",
-"start": 29.61,
-"end": 29.77
+"start": 29.95,
+"end": 30.11
 },
 {
 "text": "better",
 "type": "word",
-"start": 29.89,
-"end": 30.01
+"start": 30.23,
+"end": 30.35
 },
 {
 "text": "name.",
 "type": "word",
-"start": 30.09,
-"end": 30.73
+"start": 30.43,
+"end": 31.07
 },
 {
 "text": "So,",
 "type": "word",
-"start": 30.81,
-"end": 31.21
+"start": 31.15,
+"end": 31.55
 },
 {
 "text": "around",
 "type": "word",
-"start": 31.29,
-"end": 31.53
+"start": 31.63,
+"end": 31.87
 },
 {
 "text": "the",
 "type": "word",
-"start": 31.57,
-"end": 31.61
+"start": 31.91,
+"end": 31.95
 },
 {
 "text": "year",
 "type": "word",
-"start": 31.69,
-"end": 31.85
+"start": 32.03,
+"end": 32.19
 },
 {
 "text": "seven",
 "type": "word",
-"start": 31.93,
-"end": 32.17
+"start": 32.27,
+"end": 32.51
 },
 {
 "text": "hundred,",
 "type": "word",
-"start": 32.25,
-"end": 32.81
+"start": 32.59,
+"end": 33.15
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 32.89,
-"end": 33.29
+"start": 33.23,
+"end": 33.63
 },
 {
 "text": "envoys",
 "type": "word",
-"start": 33.41,
-"end": 33.77
+"start": 33.75,
+"end": 34.11
 },
 {
 "text": "told",
 "type": "word",
-"start": 33.85,
-"end": 34.01
+"start": 34.19,
+"end": 34.35
 },
 {
 "text": "China:",
 "type": "word",
-"start": 34.09,
-"end": 34.81
+"start": 34.43,
+"end": 35.15
 },
 {
 "text": "we",
 "type": "word",
-"start": 34.89,
-"end": 34.97
+"start": 35.23,
+"end": 35.31
 },
 {
 "text": "are",
 "type": "word",
-"start": 35.05,
-"end": 35.13
+"start": 35.39,
+"end": 35.47
 },
 {
 "text": "not",
 "type": "word",
-"start": 35.25,
-"end": 35.56
+"start": 35.59,
+"end": 35.94
 },
 {
 "text": "Wa",
 "type": "word",
 "ja": "wa2",
-"start": 35.38,
-"end": 35.89
+"start": 35.73,
+"end": 36.24
 },
 {
 "text": "anymore.",
 "type": "word",
-"start": 35.96,
-"end": 36.68
+"start": 36.34,
+"end": 37.06
 },
 {
 "text": "We",
 "type": "word",
-"start": 36.8,
-"end": 36.92
+"start": 37.18,
+"end": 37.3
 },
 {
 "text": "are",
 "type": "word",
-"start": 37.08,
-"end": 37.16
+"start": 37.51,
+"end": 37.59
 },
 {
 "text": "Nihon.",
 "type": "word",
 "ja": "nihon",
-"start": 37.29,
-"end": 37.95
+"start": 37.47,
+"end": 38.13
 },
 {
 "text": "\"The",
 "type": "word",
-"start": 38.14,
-"end": 38.22
+"start": 38.55,
+"end": 38.63
 },
 {
 "text": "origin",
 "type": "word",
-"start": 38.38,
-"end": 38.78
+"start": 38.79,
+"end": 39.19
 },
 {
 "text": "of",
 "type": "word",
-"start": 38.86,
-"end": 38.94
+"start": 39.27,
+"end": 39.35
 },
 {
 "text": "the",
 "type": "word",
-"start": 39.02,
-"end": 39.1
+"start": 39.43,
+"end": 39.51
 },
 {
 "text": "sun.\"",
 "type": "word",
-"start": 39.26,
-"end": 39.9
+"start": 39.67,
+"end": 40.31
 },
 {
 "text": "Because",
 "type": "word",
-"start": 39.98,
-"end": 40.22
+"start": 40.39,
+"end": 40.63
 },
 {
 "text": "seen",
 "type": "word",
-"start": 40.34,
-"end": 40.46
+"start": 40.75,
+"end": 40.87
 },
 {
 "text": "from",
 "type": "word",
-"start": 40.54,
-"end": 40.62
+"start": 40.95,
+"end": 41.03
 },
 {
 "text": "China,",
 "type": "word",
-"start": 40.7,
-"end": 41.26
+"start": 41.11,
+"end": 41.67
 },
 {
 "text": "the",
 "type": "word",
-"start": 41.34,
-"end": 41.38
+"start": 41.75,
+"end": 41.79
 },
 {
 "text": "sun",
 "type": "word",
-"start": 41.42,
-"end": 41.66
+"start": 41.83,
+"end": 42.07
 },
 {
 "text": "rises",
 "type": "word",
-"start": 41.74,
-"end": 42.14
+"start": 42.15,
+"end": 42.55
 },
 {
 "text": "over",
 "type": "word",
-"start": 42.22,
-"end": 42.46
+"start": 42.63,
+"end": 42.87
 },
 {
 "text": "Japan.",
 "type": "word",
-"start": 42.7,
-"end": 43.42
+"start": 43.11,
+"end": 43.83
 },
 {
 "text": "Chinese",
 "type": "word",
-"start": 43.92,
-"end": 44.12
+"start": 44.33,
+"end": 44.53
 },
 {
 "text": "records",
 "type": "word",
-"start": 44.36,
-"end": 44.6
+"start": 44.77,
+"end": 45.01
 },
 {
 "text": "even",
 "type": "word",
-"start": 44.68,
-"end": 44.92
+"start": 45.09,
+"end": 45.33
 },
 {
 "text": "say",
 "type": "word",
-"start": 45.0,
-"end": 45.16
+"start": 45.41,
+"end": 45.57
 },
 {
 "text": "the",
 "type": "word",
-"start": 45.24,
-"end": 45.32
+"start": 45.65,
+"end": 45.73
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 45.56,
-"end": 45.8
+"start": 45.97,
+"end": 46.21
 },
 {
 "text": "disliked",
 "type": "word",
-"start": 45.88,
-"end": 46.36
+"start": 46.29,
+"end": 46.77
 },
 {
 "text": "the",
 "type": "word",
-"start": 46.44,
-"end": 46.48
+"start": 46.85,
+"end": 46.89
 },
 {
 "text": "old",
 "type": "word",
-"start": 46.52,
-"end": 46.68
+"start": 46.93,
+"end": 47.09
 },
 {
 "text": "name,",
 "type": "word",
-"start": 46.76,
-"end": 47.08
+"start": 47.17,
+"end": 47.49
 },
 {
 "text": "because",
 "type": "word",
-"start": 47.2,
-"end": 47.32
+"start": 47.61,
+"end": 47.73
 },
 {
 "text": "it",
 "type": "word",
-"start": 47.36,
-"end": 47.4
+"start": 47.77,
+"end": 47.81
 },
 {
 "text": "was",
 "type": "word",
-"start": 47.48,
-"end": 47.56
+"start": 47.89,
+"end": 47.97
 },
 {
 "text": "not",
 "type": "word",
-"start": 47.68,
-"end": 47.8
+"start": 48.09,
+"end": 48.21
 },
 {
 "text": "elegant.",
 "type": "word",
-"start": 47.84,
-"end": 48.68
+"start": 48.25,
+"end": 49.09
 },
 {
 "text": "But",
 "type": "word",
-"start": 48.72,
-"end": 48.76
+"start": 49.13,
+"end": 49.17
 },
 {
 "text": "they",
 "type": "word",
-"start": 48.84,
-"end": 48.92
+"start": 49.25,
+"end": 49.33
 },
 {
 "text": "kept",
 "type": "word",
-"start": 49.0,
-"end": 49.16
+"start": 49.41,
+"end": 49.57
 },
 {
 "text": "the",
 "type": "word",
-"start": 49.2,
-"end": 49.24
+"start": 49.61,
+"end": 49.65
 },
 {
 "text": "old",
 "type": "word",
-"start": 49.32,
-"end": 49.48
+"start": 49.73,
+"end": 49.89
 },
 {
 "text": "sound,",
 "type": "word",
-"start": 49.56,
-"end": 50.2
+"start": 49.97,
+"end": 50.61
 },
 {
 "text": "Wa.",
 "type": "word",
 "ja": "wa3",
-"start": 50.29,
-"end": 50.8
+"start": 50.69,
+"end": 51.2
 },
 {
 "text": "They",
 "type": "word",
-"start": 50.94,
-"end": 50.98
+"start": 51.67,
+"end": 51.71
 },
 {
 "text": "just",
 "type": "word",
-"start": 51.06,
-"end": 51.22
+"start": 51.79,
+"end": 51.95
 },
 {
 "text": "swapped",
 "type": "word",
-"start": 51.26,
-"end": 51.54
+"start": 51.99,
+"end": 52.27
 },
 {
 "text": "the",
 "type": "word",
-"start": 51.58,
-"end": 51.62
+"start": 52.31,
+"end": 52.35
 },
 {
 "text": "kanji,",
 "type": "word",
-"start": 51.74,
-"end": 52.26
+"start": 52.47,
+"end": 52.99
 },
 {
 "text": "for",
 "type": "word",
-"start": 52.34,
-"end": 52.42
+"start": 53.07,
+"end": 53.15
 },
 {
 "text": "one",
 "type": "word",
-"start": 52.5,
-"end": 52.58
+"start": 53.23,
+"end": 53.31
 },
 {
 "text": "that",
 "type": "word",
-"start": 52.66,
-"end": 52.74
+"start": 53.39,
+"end": 53.47
 },
 {
 "text": "means",
 "type": "word",
-"start": 52.82,
-"end": 53.14
+"start": 53.55,
+"end": 53.87
 },
 {
 "text": "\"harmony\".",
 "type": "word",
-"start": 53.3,
-"end": 54.18
+"start": 54.03,
+"end": 54.91
 },
 {
 "text": "And",
 "type": "word",
-"start": 54.61,
-"end": 54.69
+"start": 55.34,
+"end": 55.42
 },
 {
 "text": "that",
 "type": "word",
-"start": 54.77,
-"end": 54.93
+"start": 55.5,
+"end": 55.66
 },
 {
 "text": "kanji",
 "type": "word",
-"start": 55.05,
-"end": 55.41
+"start": 55.78,
+"end": 56.14
 },
 {
 "text": "is",
 "type": "word",
-"start": 55.49,
-"end": 55.57
+"start": 56.22,
+"end": 56.3
 },
 {
 "text": "still",
 "type": "word",
-"start": 55.77,
-"end": 55.97
+"start": 56.5,
+"end": 56.7
 },
 {
 "text": "everywhere",
 "type": "word",
-"start": 56.05,
-"end": 56.45
+"start": 56.78,
+"end": 57.18
 },
 {
 "text": "today.",
 "type": "word",
-"start": 56.53,
-"end": 57.25
+"start": 57.26,
+"end": 57.98
 },
 {
 "text": "washoku,",
 "type": "word",
 "ja": "washoku",
-"start": 57.31,
-"end": 58.05
+"start": 58.03,
+"end": 58.77
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 58.4,
-"end": 58.64
+"start": 59.36,
+"end": 59.6
 },
 {
 "text": "food.",
 "type": "word",
-"start": 58.72,
-"end": 59.36
+"start": 59.68,
+"end": 60.32
 },
 {
 "text": "washi,",
 "type": "word",
 "ja": "washi",
-"start": 59.43,
-"end": 60.02
+"start": 60.38,
+"end": 60.97
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 60.2,
-"end": 60.6
+"start": 61.35,
+"end": 61.75
 },
 {
 "text": "paper.",
 "type": "word",
-"start": 60.68,
-"end": 61.4
+"start": 61.83,
+"end": 62.55
 },
 {
 "text": "Even",
-"type": "word",
-"start": 61.56,
-"end": 61.72
-},
-{
-"text": "Reiwa,",
-"type": "word",
-"ja": "reiwa",
-"start": 61.82,
-"end": 62.45
-},
-{
-"text": "the",
-"type": "word",
-"start": 62.59,
-"end": 62.63
-},
-{
-"text": "name",
 "type": "word",
 "start": 62.71,
 "end": 62.87
 },
 {
+"text": "Reiwa,",
+"type": "word",
+"ja": "reiwa",
+"start": 62.95,
+"end": 63.58
+},
+{
+"text": "the",
+"type": "word",
+"start": 63.89,
+"end": 63.93
+},
+{
+"text": "name",
+"type": "word",
+"start": 64.01,
+"end": 64.17
+},
+{
 "text": "of",
 "type": "word",
-"start": 62.95,
-"end": 63.03
+"start": 64.25,
+"end": 64.33
 },
 {
 "text": "this",
 "type": "word",
-"start": 63.11,
-"end": 63.19
+"start": 64.41,
+"end": 64.49
 },
 {
 "text": "era.",
 "type": "word",
-"start": 63.27,
-"end": 63.99
+"start": 64.57,
+"end": 65.29
 },
 {
 "text": "Follow",
 "type": "word",
-"start": 64.51,
-"end": 64.63
+"start": 65.81,
+"end": 65.93
 },
 {
 "text": "for",
 "type": "word",
-"start": 64.71,
-"end": 64.79
+"start": 66.01,
+"end": 66.09
 },
 {
 "text": "more.",
 "type": "word",
-"start": 64.87,
-"end": 65.35
+"start": 66.17,
+"end": 66.65
 },
 {
 "text": "matane!",
 "type": "word",
 "ja": "matane",
-"start": 65.67,
-"end": 66.23
+"start": 66.97,
+"end": 67.53
 }
 ],
 "ja": {
@@ -1021,44 +1021,44 @@
 "wa2": {
 "text": "わ",
 "romaji": "Wa",
-"start": 35.38,
-"end": 35.89
+"start": 35.73,
+"end": 36.24
 },
 "nihon": {
 "text": "にほん",
 "romaji": "Nihon",
-"start": 37.29,
-"end": 37.95
+"start": 37.47,
+"end": 38.13
 },
 "wa3": {
 "text": "わ",
 "romaji": "Wa",
-"start": 50.29,
-"end": 50.8
+"start": 50.69,
+"end": 51.2
 },
 "washoku": {
 "text": "わしょく",
 "romaji": "washoku",
-"start": 57.31,
-"end": 58.05
+"start": 58.03,
+"end": 58.77
 },
 "washi": {
 "text": "わし",
 "romaji": "washi",
-"start": 59.43,
-"end": 60.02
+"start": 60.38,
+"end": 60.97
 },
 "reiwa": {
 "text": "れいわ",
 "romaji": "Reiwa",
-"start": 61.82,
-"end": 62.45
+"start": 62.95,
+"end": 63.58
 },
 "matane": {
 "text": "またね！",
 "romaji": "matane!",
-"start": 65.67,
-"end": 66.23
+"start": 66.97,
+"end": 67.53
 }
 }
 }
