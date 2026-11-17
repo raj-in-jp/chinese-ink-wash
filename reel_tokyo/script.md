@@ -17,7 +17,6 @@ the samurai rulers made Edo their base. By the 1700s, it had a million people. M
 Then, in 1868, the samurai era ended. The young emperor moved east. And Edo got a new name: Tokyo. "The eastern
 capital". Because Kyoto, the old capital, was in the west.
       [the chrysanthemum travels the Tōkaidō; 江戸 EDO → 東京 TOKYO; 東 = EAST · 京 = CAPITAL; 西 WEST / 東 EAST]
-And here's the twist. No Japanese law actually says that Tokyo is the capital!     [a law book searched; ?]
 Would you rather live in old Edo, or modern Tokyo? Tell me in the comments, and follow for more. またね！
 
 Recording: audio/take_en_a.mp3 (+ words_en_a.json), audio/words_ja_1.mp3, matane_a.mp3.  Narration 62.7 s; reel 66.1 s.

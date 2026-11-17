@@ -404,13 +404,6 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     fx('stamp', R['cap'], 0.4)
     fx('pop', R['west'], 0.3, pan=-0.4)
     fx('pop', R['west'] + 0.6, 0.3, pan=0.4)
-    tw = g('twist')
-    fx('scroll', tw.t0 + 0.2, 0.35)
-    fx('taiko', tw.t_tw, 0.5)
-    fx('scroll', tw.t_tw + 0.4, 0.35)                       # the book falls open
-    fx('quill', tw.t_law, 0.3)
-    fx('stamp', tw.t_law + 1.4, 0.65)                       # ?
-    fx('taiko', tw.t_tok, 0.4)
     en = g('end')
     fx('scroll', en.t0 + 0.2, 0.35)
     fx('stamp', en.t0 + 0.6, 0.45)

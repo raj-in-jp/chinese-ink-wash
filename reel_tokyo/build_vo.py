@@ -24,12 +24,13 @@ SR = 48000
 JA_WORDS = [('tokyo', 'とうきょう', 'Tōkyō'), ('nara', 'なら', 'Nara'), ('kyoto', 'きょうと', 'Kyōto'), ('edo', 'えど', 'Edo')]
 JA_WORDS2 = []
 # stand-ins in the order they are spoken: (words in the take, normalised; clip)
-STAND_IN = [(w, w) for w in ('tokyo', 'tokyo', 'nara', 'kyoto', 'edo', 'edo', 'edo', 'tokyo', 'kyoto', 'tokyo', 'edo', 'tokyo')]
+STAND_IN = [(w, w) for w in ('tokyo', 'tokyo', 'nara', 'kyoto', 'edo', 'edo', 'edo', 'tokyo', 'kyoto', 'edo', 'tokyo')]
 ERAS = []
 MATANE = ('matane', 'またね！', 'matane!')
 # silence after these words: the sentence lands, the three scripts are named, each "aha" gets a beat
 HOLD = {'Tokyo!': 0.3, 'years.': 0.3, 'world.': 0.3, 'east.': 0.3, 'name:': 0.25, 'west.': 0.35, 'twist.': 0.3, 'capital!': 0.4}
 PAD = 0.04
+CUT = [("And here's the twist.", 'capital!')]          # the 'no law names the capital' line, taken out
 ERA_BREATH = 0.0
 
 
@@ -110,6 +111,14 @@ def main():
     words = [w for w in json.load(open(os.path.join(A, 'words_en_a.json')))['words'] if w.get('type', 'word') == 'word']
     rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 0.01] ** 2))
     level = rms(en)
+    # lines taken out of the take: (first words, last word); the audio is cut at the quiet gaps either side
+    cut_ranges = []
+    for first, last in CUT:
+        fw = [norm(x) for x in first.split()]
+        ci = next(i for i in range(len(words)) if [norm(w['text']) for w in words[i:i + len(fw)]] == fw)
+        cj = next(k for k in range(ci, len(words)) if words[k]['text'] == last)
+        cut_ranges.append((ci, cj))
+    in_cut = lambda k: any(a_ <= k <= b_ for a_, b_ in cut_ranges)
     jw = load('words_ja_1.mp3')
     segs = []
     for a, b in segments(jw):                               # the small っ splits にっぽん: join it back
@@ -127,7 +136,7 @@ def main():
     edits, i0, seen = [], 0, {}
     for phrase, clip in STAND_IN:
         target = phrase.split()
-        i = next(i for i in range(i0, len(words)) if [norm(w['text']) for w in words[i:i + len(target)]] == target)
+        i = next(i for i in range(i0, len(words)) if not in_cut(i) and [norm(w['text']) for w in words[i:i + len(target)]] == target)
         j = i + len(target) - 1
         i0 = j + 1
         seen[clip] = seen.get(clip, 0) + 1
@@ -139,7 +148,13 @@ def main():
         pad = np.zeros(int(PAD * SR), np.float32)
         pre = np.zeros(int(ERA_BREATH * SR), np.float32) if clip in ERAS and key == clip else pad
         edits.append([a, b, np.concatenate([pre, clips[clip], pad]), key, (i, j, clip)])
+    for ci, cj in cut_ranges:
+        a_ = quietest(e, words[ci - 1]['end'], words[ci]['start'] + 0.02)
+        b_ = quietest(e, words[cj]['end'], words[cj + 1]['start'] + 0.02)
+        edits.append([a_, b_, np.zeros(int(0.2 * SR), np.float32), None, (ci, cj, None)])
     for i, w in enumerate(words[:-1]):
+        if in_cut(i) or in_cut(i + 1):
+            continue
         if w['text'] in HOLD:
             # only where the voice has really died away; never cut a pause into the tail of a word
             a0, b0 = int((w['end'] + 0.02) * 100), int((words[i + 1]['start'] - 0.02) * 100)
@@ -184,6 +199,9 @@ def main():
     ws, i = [], 0
     while i < len(words):
         w = words[i]
+        if in_cut(i):
+            i += 1
+            continue
         if i in span:
             j, key, clip = span[i]
             last = words[j]['text']
