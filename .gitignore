@@ -59,3 +59,7 @@ reel_tokyo/cache/
 reel_tokyo/audio/stems/
 reel_tokyo/audio/*.wav
 reel_tokyo/output/
+reel_wa/cache/
+reel_wa/audio/stems/
+reel_wa/audio/*.wav
+reel_wa/output/

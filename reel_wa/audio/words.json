@@ -1,0 +1,1022 @@
+{
+"words": [
+{
+"text": "In",
+"type": "word",
+"start": 0.0,
+"end": 0.16
+},
+{
+"text": "six-oh-seven,",
+"type": "word",
+"start": 0.24,
+"end": 1.36
+},
+{
+"text": "Japan",
+"type": "word",
+"start": 1.44,
+"end": 1.76
+},
+{
+"text": "sent",
+"type": "word",
+"start": 1.84,
+"end": 2.08
+},
+{
+"text": "China",
+"type": "word",
+"start": 2.28,
+"end": 2.48
+},
+{
+"text": "a",
+"type": "word",
+"start": 2.52,
+"end": 2.56
+},
+{
+"text": "letter",
+"type": "word",
+"start": 2.64,
+"end": 2.96
+},
+{
+"text": "so",
+"type": "word",
+"start": 3.12,
+"end": 3.36
+},
+{
+"text": "bold,",
+"type": "word",
+"start": 3.44,
+"end": 4.08
+},
+{
+"text": "the",
+"type": "word",
+"start": 4.16,
+"end": 4.24
+},
+{
+"text": "Chinese",
+"type": "word",
+"start": 4.32,
+"end": 4.72
+},
+{
+"text": "emperor",
+"type": "word",
+"start": 4.8,
+"end": 5.2
+},
+{
+"text": "was",
+"type": "word",
+"start": 5.28,
+"end": 5.44
+},
+{
+"text": "furious.",
+"type": "word",
+"start": 5.6,
+"end": 6.64
+},
+{
+"text": "It",
+"type": "word",
+"start": 6.97,
+"end": 7.05
+},
+{
+"text": "began:",
+"type": "word",
+"start": 7.183,
+"end": 7.93
+},
+{
+"text": "\"From",
+"type": "word",
+"start": 7.983,
+"end": 8.09
+},
+{
+"text": "the",
+"type": "word",
+"start": 8.13,
+"end": 8.17
+},
+{
+"text": "Son",
+"type": "word",
+"start": 8.25,
+"end": 8.41
+},
+{
+"text": "of",
+"type": "word",
+"start": 8.49,
+"end": 8.57
+},
+{
+"text": "Heaven",
+"type": "word",
+"start": 8.65,
+"end": 8.97
+},
+{
+"text": "where",
+"type": "word",
+"start": 9.05,
+"end": 9.13
+},
+{
+"text": "the",
+"type": "word",
+"start": 9.21,
+"end": 9.29
+},
+{
+"text": "sun",
+"type": "word",
+"start": 9.37,
+"end": 9.61
+},
+{
+"text": "rises...",
+"type": "word",
+"start": 9.69,
+"end": 10.65
+},
+{
+"text": "to",
+"type": "word",
+"start": 10.73,
+"end": 10.81
+},
+{
+"text": "the",
+"type": "word",
+"start": 10.85,
+"end": 10.89
+},
+{
+"text": "Son",
+"type": "word",
+"start": 10.97,
+"end": 11.13
+},
+{
+"text": "of",
+"type": "word",
+"start": 11.17,
+"end": 11.21
+},
+{
+"text": "Heaven",
+"type": "word",
+"start": 11.29,
+"end": 11.61
+},
+{
+"text": "where",
+"type": "word",
+"start": 11.85,
+"end": 11.93
+},
+{
+"text": "the",
+"type": "word",
+"start": 12.01,
+"end": 12.09
+},
+{
+"text": "sun",
+"type": "word",
+"start": 12.17,
+"end": 12.33
+},
+{
+"text": "sets.\"",
+"type": "word",
+"start": 12.49,
+"end": 12.97
+},
+{
+"text": "Why",
+"type": "word",
+"start": 13.85,
+"end": 14.01
+},
+{
+"text": "so",
+"type": "word",
+"start": 14.09,
+"end": 14.25
+},
+{
+"text": "bold?",
+"type": "word",
+"start": 14.33,
+"end": 14.81
+},
+{
+"text": "For",
+"type": "word",
+"start": 15.41,
+"end": 15.57
+},
+{
+"text": "centuries,",
+"type": "word",
+"start": 15.65,
+"end": 16.45
+},
+{
+"text": "China",
+"type": "word",
+"start": 16.61,
+"end": 16.77
+},
+{
+"text": "had",
+"type": "word",
+"start": 16.85,
+"end": 16.93
+},
+{
+"text": "called",
+"type": "word",
+"start": 17.01,
+"end": 17.17
+},
+{
+"text": "Japan",
+"type": "word",
+"start": 17.25,
+"end": 17.65
+},
+{
+"text": "Wa.",
+"type": "word",
+"ja": "wa",
+"start": 17.92,
+"end": 18.33
+},
+{
+"text": "Written",
+"type": "word",
+"start": 18.55,
+"end": 18.67
+},
+{
+"text": "with",
+"type": "word",
+"start": 18.75,
+"end": 18.83
+},
+{
+"text": "a",
+"type": "word",
+"start": 18.87,
+"end": 18.91
+},
+{
+"text": "character",
+"type": "word",
+"start": 18.99,
+"end": 19.39
+},
+{
+"text": "that",
+"type": "word",
+"start": 19.47,
+"end": 19.55
+},
+{
+"text": "meant",
+"type": "word",
+"start": 19.59,
+"end": 19.79
+},
+{
+"text": "something",
+"type": "word",
+"start": 19.87,
+"end": 20.19
+},
+{
+"text": "like",
+"type": "word",
+"start": 20.27,
+"end": 20.51
+},
+{
+"text": "\"submissive\".",
+"type": "word",
+"start": 20.75,
+"end": 21.79
+},
+{
+"text": "And",
+"type": "word",
+"start": 21.87,
+"end": 21.95
+},
+{
+"text": "later,",
+"type": "word",
+"start": 22.03,
+"end": 22.67
+},
+{
+"text": "many",
+"type": "word",
+"start": 22.75,
+"end": 22.99
+},
+{
+"text": "read",
+"type": "word",
+"start": 23.11,
+"end": 23.23
+},
+{
+"text": "it",
+"type": "word",
+"start": 23.31,
+"end": 23.39
+},
+{
+"text": "as",
+"type": "word",
+"start": 23.47,
+"end": 23.63
+},
+{
+"text": "\"dwarf\".",
+"type": "word",
+"start": 23.71,
+"end": 24.75
+},
+{
+"text": "Japan",
+"type": "word",
+"start": 25.3,
+"end": 25.5
+},
+{
+"text": "wanted",
+"type": "word",
+"start": 25.58,
+"end": 25.9
+},
+{
+"text": "a",
+"type": "word",
+"start": 25.98,
+"end": 26.06
+},
+{
+"text": "better",
+"type": "word",
+"start": 26.14,
+"end": 26.38
+},
+{
+"text": "name.",
+"type": "word",
+"start": 26.46,
+"end": 27.1
+},
+{
+"text": "So,",
+"type": "word",
+"start": 27.18,
+"end": 27.58
+},
+{
+"text": "around",
+"type": "word",
+"start": 27.74,
+"end": 27.9
+},
+{
+"text": "the",
+"type": "word",
+"start": 27.94,
+"end": 27.98
+},
+{
+"text": "year",
+"type": "word",
+"start": 28.06,
+"end": 28.22
+},
+{
+"text": "seven",
+"type": "word",
+"start": 28.3,
+"end": 28.54
+},
+{
+"text": "hundred,",
+"type": "word",
+"start": 28.62,
+"end": 29.26
+},
+{
+"text": "Japanese",
+"type": "word",
+"start": 29.34,
+"end": 29.74
+},
+{
+"text": "envoys",
+"type": "word",
+"start": 29.82,
+"end": 30.3
+},
+{
+"text": "told",
+"type": "word",
+"start": 30.34,
+"end": 30.54
+},
+{
+"text": "China:",
+"type": "word",
+"start": 30.62,
+"end": 31.34
+},
+{
+"text": "we",
+"type": "word",
+"start": 31.42,
+"end": 31.5
+},
+{
+"text": "are",
+"type": "word",
+"start": 31.58,
+"end": 31.66
+},
+{
+"text": "not",
+"type": "word",
+"start": 31.78,
+"end": 31.96
+},
+{
+"text": "Wa",
+"type": "word",
+"ja": "wa2",
+"start": 31.92,
+"end": 32.33
+},
+{
+"text": "anymore.",
+"type": "word",
+"start": 32.44,
+"end": 33.24
+},
+{
+"text": "We",
+"type": "word",
+"start": 33.32,
+"end": 33.48
+},
+{
+"text": "are",
+"type": "word",
+"start": 33.64,
+"end": 33.8
+},
+{
+"text": "Nihon.",
+"type": "word",
+"ja": "nihon",
+"start": 33.88,
+"end": 34.43
+},
+{
+"text": "\"The",
+"type": "word",
+"start": 34.58,
+"end": 34.62
+},
+{
+"text": "origin",
+"type": "word",
+"start": 34.78,
+"end": 35.18
+},
+{
+"text": "of",
+"type": "word",
+"start": 35.34,
+"end": 35.42
+},
+{
+"text": "the",
+"type": "word",
+"start": 35.5,
+"end": 35.58
+},
+{
+"text": "sun.\"",
+"type": "word",
+"start": 35.66,
+"end": 35.98
+},
+{
+"text": "Chinese",
+"type": "word",
+"start": 36.54,
+"end": 36.86
+},
+{
+"text": "records",
+"type": "word",
+"start": 36.94,
+"end": 37.34
+},
+{
+"text": "even",
+"type": "word",
+"start": 37.5,
+"end": 37.74
+},
+{
+"text": "say",
+"type": "word",
+"start": 37.82,
+"end": 37.98
+},
+{
+"text": "the",
+"type": "word",
+"start": 38.06,
+"end": 38.14
+},
+{
+"text": "Japanese",
+"type": "word",
+"start": 38.22,
+"end": 38.62
+},
+{
+"text": "disliked",
+"type": "word",
+"start": 38.78,
+"end": 39.34
+},
+{
+"text": "the",
+"type": "word",
+"start": 39.42,
+"end": 39.46
+},
+{
+"text": "old",
+"type": "word",
+"start": 39.5,
+"end": 39.66
+},
+{
+"text": "name,",
+"type": "word",
+"start": 39.74,
+"end": 40.14
+},
+{
+"text": "because",
+"type": "word",
+"start": 40.26,
+"end": 40.38
+},
+{
+"text": "it",
+"type": "word",
+"start": 40.42,
+"end": 40.46
+},
+{
+"text": "was",
+"type": "word",
+"start": 40.54,
+"end": 40.62
+},
+{
+"text": "not",
+"type": "word",
+"start": 40.7,
+"end": 40.78
+},
+{
+"text": "elegant.",
+"type": "word",
+"start": 40.94,
+"end": 41.62
+},
+{
+"text": "But",
+"type": "word",
+"start": 42.12,
+"end": 42.2
+},
+{
+"text": "they",
+"type": "word",
+"start": 42.28,
+"end": 42.36
+},
+{
+"text": "kept",
+"type": "word",
+"start": 42.44,
+"end": 42.6
+},
+{
+"text": "the",
+"type": "word",
+"start": 42.68,
+"end": 42.72
+},
+{
+"text": "old",
+"type": "word",
+"start": 42.76,
+"end": 43.0
+},
+{
+"text": "sound,",
+"type": "word",
+"start": 43.08,
+"end": 43.8
+},
+{
+"text": "Wa.",
+"type": "word",
+"ja": "wa3",
+"start": 43.85,
+"end": 44.26
+},
+{
+"text": "They",
+"type": "word",
+"start": 44.4,
+"end": 44.44
+},
+{
+"text": "just",
+"type": "word",
+"start": 44.52,
+"end": 44.68
+},
+{
+"text": "swapped",
+"type": "word",
+"start": 44.76,
+"end": 45.0
+},
+{
+"text": "the",
+"type": "word",
+"start": 45.08,
+"end": 45.16
+},
+{
+"text": "kanji,",
+"type": "word",
+"start": 45.24,
+"end": 45.88
+},
+{
+"text": "for",
+"type": "word",
+"start": 45.96,
+"end": 46.04
+},
+{
+"text": "one",
+"type": "word",
+"start": 46.12,
+"end": 46.28
+},
+{
+"text": "that",
+"type": "word",
+"start": 46.36,
+"end": 46.44
+},
+{
+"text": "means",
+"type": "word",
+"start": 46.52,
+"end": 46.76
+},
+{
+"text": "\"harmony\".",
+"type": "word",
+"start": 47.0,
+"end": 47.88
+},
+{
+"text": "And",
+"type": "word",
+"start": 48.31,
+"end": 48.39
+},
+{
+"text": "that",
+"type": "word",
+"start": 48.47,
+"end": 48.55
+},
+{
+"text": "kanji",
+"type": "word",
+"start": 48.63,
+"end": 49.03
+},
+{
+"text": "is",
+"type": "word",
+"start": 49.11,
+"end": 49.19
+},
+{
+"text": "still",
+"type": "word",
+"start": 49.35,
+"end": 49.51
+},
+{
+"text": "everywhere",
+"type": "word",
+"start": 49.75,
+"end": 50.15
+},
+{
+"text": "today.",
+"type": "word",
+"start": 50.23,
+"end": 50.75
+},
+{
+"text": "washoku,",
+"type": "word",
+"ja": "washoku",
+"start": 50.97,
+"end": 51.6
+},
+{
+"text": "Japanese",
+"type": "word",
+"start": 51.94,
+"end": 52.18
+},
+{
+"text": "food.",
+"type": "word",
+"start": 52.26,
+"end": 52.9
+},
+{
+"text": "washi,",
+"type": "word",
+"ja": "washi",
+"start": 52.97,
+"end": 53.45
+},
+{
+"text": "Japanese",
+"type": "word",
+"start": 53.75,
+"end": 53.95
+},
+{
+"text": "paper.",
+"type": "word",
+"start": 54.03,
+"end": 54.83
+},
+{
+"text": "Even",
+"type": "word",
+"start": 54.99,
+"end": 55.15
+},
+{
+"text": "Reiwa,",
+"type": "word",
+"ja": "reiwa",
+"start": 55.32,
+"end": 55.84
+},
+{
+"text": "the",
+"type": "word",
+"start": 55.98,
+"end": 56.02
+},
+{
+"text": "name",
+"type": "word",
+"start": 56.1,
+"end": 56.26
+},
+{
+"text": "of",
+"type": "word",
+"start": 56.34,
+"end": 56.42
+},
+{
+"text": "this",
+"type": "word",
+"start": 56.54,
+"end": 56.66
+},
+{
+"text": "era.",
+"type": "word",
+"start": 56.82,
+"end": 57.46
+},
+{
+"text": "So,",
+"type": "word",
+"start": 57.98,
+"end": 58.42
+},
+{
+"text": "which",
+"type": "word",
+"start": 58.5,
+"end": 58.66
+},
+{
+"text": "kanji",
+"type": "word",
+"start": 58.74,
+"end": 59.06
+},
+{
+"text": "would",
+"type": "word",
+"start": 59.14,
+"end": 59.22
+},
+{
+"text": "you",
+"type": "word",
+"start": 59.3,
+"end": 59.46
+},
+{
+"text": "choose",
+"type": "word",
+"start": 59.58,
+"end": 59.7
+},
+{
+"text": "for",
+"type": "word",
+"start": 59.78,
+"end": 59.94
+},
+{
+"text": "your",
+"type": "word",
+"start": 60.02,
+"end": 60.1
+},
+{
+"text": "country's",
+"type": "word",
+"start": 60.18,
+"end": 60.58
+},
+{
+"text": "name?",
+"type": "word",
+"start": 60.7,
+"end": 61.22
+},
+{
+"text": "Tell",
+"type": "word",
+"start": 61.3,
+"end": 61.38
+},
+{
+"text": "me",
+"type": "word",
+"start": 61.42,
+"end": 61.46
+},
+{
+"text": "in",
+"type": "word",
+"start": 61.5,
+"end": 61.54
+},
+{
+"text": "the",
+"type": "word",
+"start": 61.58,
+"end": 61.62
+},
+{
+"text": "comments,",
+"type": "word",
+"start": 61.7,
+"end": 62.26
+},
+{
+"text": "and",
+"type": "word",
+"start": 62.34,
+"end": 62.42
+},
+{
+"text": "follow",
+"type": "word",
+"start": 62.54,
+"end": 62.66
+},
+{
+"text": "for",
+"type": "word",
+"start": 62.74,
+"end": 62.82
+},
+{
+"text": "more.",
+"type": "word",
+"start": 62.9,
+"end": 63.38
+},
+{
+"text": "matane!",
+"type": "word",
+"ja": "matane",
+"start": 63.7,
+"end": 64.26
+}
+],
+"ja": {
+"wa": {
+"text": "わ",
+"romaji": "Wa",
+"start": 17.92,
+"end": 18.33
+},
+"wa2": {
+"text": "わ",
+"romaji": "Wa",
+"start": 31.92,
+"end": 32.33
+},
+"nihon": {
+"text": "にほん",
+"romaji": "Nihon",
+"start": 33.88,
+"end": 34.43
+},
+"wa3": {
+"text": "わ",
+"romaji": "Wa",
+"start": 43.85,
+"end": 44.26
+},
+"washoku": {
+"text": "わしょく",
+"romaji": "washoku",
+"start": 50.97,
+"end": 51.6
+},
+"washi": {
+"text": "わし",
+"romaji": "washi",
+"start": 52.97,
+"end": 53.45
+},
+"reiwa": {
+"text": "れいわ",
+"romaji": "Reiwa",
+"start": 55.32,
+"end": 55.84
+},
+"matane": {
+"text": "またね！",
+"romaji": "matane!",
+"start": 63.7,
+"end": 64.26
+}
+}
+}
