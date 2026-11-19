@@ -38,7 +38,8 @@ def at(phrase, nth=0, after=None):
 # the first word of its section ('ja:<key>' = a Japanese word), and the outgoing scene overlaps it for the transition.
 ERA_KEYS = []
 _CUTS = [('hook', None, 0.0, 0.0), ('beats', 'Japanese words', 0.3, 0.45), ('vowels', 'So when English', 0.3, 0.45),
-         ('missing', 'Some English sounds', 0.3, 0.45), ('paris', 'So why is', 0.3, 0.45), ('end', 'Follow for more', 0.5, 0.45)]
+         ('missing', 'Some English sounds', 0.3, 0.45), ('paris', 'So why is', 0.3, 0.45), ('origins', 'And Paris isnt', 0.3, 0.45),
+         ('puzzle', 'Now a little', 0.3, 0.45), ('end', 'Follow for more', 0.5, 0.45)]
 DURATION = round(WORDS[-1]['end'] + 3.2, 2)                 # hold the final frame so the handle can be read
 _starts = [0.0 if w is None else (JA[w[3:]]['start'] if w.startswith('ja:') else at(w)[0]) - lead for _, w, lead, _ in _CUTS]
 SCENES = []

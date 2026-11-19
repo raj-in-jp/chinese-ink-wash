@@ -4,7 +4,7 @@ import importlib
 
 from timeline import SCENES
 
-_MODULES = {'hook': 's_hook', 'beats': 's_beats', 'vowels': 's_vowels', 'missing': 's_missing', 'paris': 's_paris', 'end': 's_end'}
+_MODULES = {'hook': 's_hook', 'beats': 's_beats', 'vowels': 's_vowels', 'missing': 's_missing', 'paris': 's_paris', 'origins': 's_origins', 'puzzle': 's_puzzle', 'end': 's_end'}
 _built = {}
 
 

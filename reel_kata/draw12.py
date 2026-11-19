@@ -188,3 +188,35 @@ def eiffel(w=420, h=900):
     cv2.line(m, (int(cx * S), int(top * S)), (int(cx * S), int((top + 60) * S)), 255, 4 * S, cv2.LINE_AA)  # spire
     out = cv2.resize(m, (w, h), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
     return out
+
+
+def ice_cream(w=360, h=620, seed=8):
+    """a waffle cone with two scoops (strawberry on vanilla) and a cherry"""
+    c = Canvas(w, h)
+    cx = w / 2
+    cone = c.poly([(cx - 110, 300), (cx + 110, 300), (cx, h - 20)], 1)
+    c.lay((0.86, 0.62, 0.32), cone)
+    c.lay((0.66, 0.42, 0.18), cone * np.clip((c.X - cx) / 110, 0, 1), 0.5)
+    for k in range(-6, 7):                                                   # waffle lines
+        c.lay((0.62, 0.38, 0.16), c.line([(cx + k * 34 - 60, 300), (cx + k * 34 + 120, h - 40)], 3, 0.8) * cone, 0.7)
+        c.lay((0.62, 0.38, 0.16), c.line([(cx + k * 34 + 60, 300), (cx + k * 34 - 120, h - 40)], 3, 0.8) * cone, 0.7)
+    van = np.clip(c.ell(cx, 280, 128, 92) + c.poly([(cx - 128, 280), (cx + 128, 280), (cx + 120, 312), (cx - 120, 312)], 1), 0, 1)
+    c.lay((0.98, 0.94, 0.80), van)
+    c.lay((0.86, 0.80, 0.62), van * np.clip((c.X - cx) / 128, 0, 1), 0.5)
+    for k in range(7):                                                       # drippy rim
+        x = cx - 110 + k * 36
+        c.lay((0.98, 0.94, 0.80), c.ell(x, 312, 20, 18 + 10 * (k % 2)))
+    st = c.ell(cx + 6, 170, 108, 92)
+    c.lay((0.97, 0.62, 0.70), st)
+    c.lay((0.86, 0.42, 0.52), st * np.clip((c.X - cx) / 108, 0, 1), 0.5)
+    r = np.random.default_rng(seed)
+    for k in range(18):                                                      # sprinkles
+        x, y = r.uniform(cx - 80, cx + 90), r.uniform(110, 230)
+        a = r.uniform(0, np.pi)
+        col = [(0.2, 0.5, 0.9), (0.98, 0.85, 0.2), (0.3, 0.75, 0.4), (1, 1, 1)][k % 4]
+        c.lay(col, c.line([(x, y), (x + 12 * np.cos(a), y + 12 * np.sin(a))], 4, 0.6) * st)
+    c.lay((1, 1, 1), blur(c.ell(cx - 40, 140, 30, 18), 6) * st, 0.6)
+    c.lay((0.80, 0.08, 0.12), c.ell(cx + 10, 72, 28, 28))                    # cherry
+    c.lay((1, 1, 1), c.ell(cx + 2, 64, 7, 6), 0.7)
+    c.lay((0.30, 0.45, 0.15), c.line([(cx + 14, 46), (cx + 30, 10)], 4, 0.6))
+    return c.out()

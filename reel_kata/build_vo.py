@@ -1,14 +1,16 @@
 """build_vo — the narration: Raj's English take with every Japanese word spoken by Raj in Japanese.
 
-    audio/take_en_a.mp3 + words_en_a.json     the English take, romaji stand-ins in it (Scribe word timings)
-    audio/words_ja_a.mp3                      the 31 Japanese words, one after another (split on their silences)
-    audio/words_ja_b.mp3                      しょうぐん。 とくがわ。
-    audio/matane_a.mp3                        またね！ (after "follow for more.")
+The English take is recorded WITH A PAUSE wherever a Japanese word goes ("Test becomes... [pause]").  Each Japanese
+clip is dropped into that silence — nothing is ever cut out of the middle of speech, so there is no leftover English
+syllable, no clipped word and no click.  Cuts happen only inside silence (< -50 dB), with short fades.
 
-Each stand-in (one word, or two for Murasaki Shikibu) is cut at the silent edge either side of it, so the pauses
-round it stay, and replaced by its Japanese clip.  A word said twice (samurai, Tokyo) reuses its clip; the second
-gets key `<key>2`.  Writes audio/narration.wav + .mp3 and audio/words.json: the English words shifted into place
-(each replaced word shown in romaji, flagged ja) plus the Japanese segments {key: text, romaji, start, end}.
+    audio/take_en_b.mp3 + words_en_b.json    the English take (Scribe word timings; "[pause]" tokens mark the slots)
+    audio/words_ja_1.mp3                     マクドナルド か き く け こ テスト クリスマス ライス サンキュー バイオリン パリ パリス
+    audio/words_ja_2.mp3                     エネルギー アレルギー パン コーヒー
+    audio/matane_a.mp3                       またね！ (after "follow for more.")
+
+Writes audio/narration.wav + .mp3 and audio/words.json: the English words shifted into place, each Japanese word
+inserted as a word flagged ja (romaji for the captions), plus the Japanese segments {key: text, romaji, start, end}.
 """
 import json
 import os
@@ -18,32 +20,21 @@ import subprocess
 import numpy as np
 from scipy.io import wavfile
 
-from wordbounds import word_bounds
-
 A = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audio')
 SR = 48000
-# the Japanese words (audio/words_ja_1.mp3), in order: (clip, kana, romaji shown in the captions)
-JA_WORDS = [('makudonarudo', 'マクドナルド', 'Makudonarudo'), ('ka', 'か', 'ka'), ('ki', 'き', 'ki'), ('ku', 'く', 'ku'), ('ke', 'け', 'ke'),
-            ('ko', 'こ', 'ko'), ('tesuto', 'テスト', 'tesuto'), ('kurisumasu', 'クリスマス', 'Kurisumasu'), ('raisu', 'ライス', 'raisu'),
-            ('sankyu', 'サンキュー', 'sankyū'), ('baiorin', 'バイオリン', 'baiorin'), ('pari', 'パリ', 'Pari'), ('parisu', 'パリス', 'Parisu')]
-JA_WORDS2 = []
-# stand-ins in the order they are spoken: (words in the take, normalised; clip)
-STAND_IN = [(w, w) for w in ('makudonarudo', 'ka', 'ki', 'ku', 'ke', 'ko', 'tesuto', 'kurisumasu', 'raisu', 'sankyu', 'baiorin', 'pari',
-                             'parisu')]
-ERAS = []
+TAKE, WORDS_JSON = 'take_en_b.mp3', 'words_en_b.json'
+JA_TAKES = [('words_ja_1.mp3', [('makudonarudo', 'マクドナルド', 'Makudonarudo'), ('ka', 'か', 'ka'), ('ki', 'き', 'ki'),
+                                ('ku', 'く', 'ku'), ('ke', 'け', 'ke'), ('ko', 'こ', 'ko'), ('tesuto', 'テスト', 'tesuto'),
+                                ('kurisumasu', 'クリスマス', 'Kurisumasu'), ('raisu', 'ライス', 'raisu'),
+                                ('sankyu', 'サンキュー', 'sankyū'), ('baiorin', 'バイオリン', 'baiorin'), ('pari', 'パリ', 'Pari'),
+                                ('parisu', 'パリス', 'Parisu')]),
+            ('words_ja_2.mp3', [('enerugi', 'エネルギー', 'enerugī'), ('arerugi', 'アレルギー', 'arerugī'), ('pan', 'パン', 'pan'),
+                                ('kohi', 'コーヒー', 'kōhī')])]
+# what goes in each [pause] of the English take, in order (a slot can hold several clips, said one after another)
+SLOTS = [['makudonarudo'], ['ka', 'ki', 'ku', 'ke', 'ko'], ['tesuto'], ['kurisumasu'], ['raisu'], ['sankyu'], ['baiorin'],
+         ['pari'], ['parisu'], ['enerugi'], ['arerugi'], ['pan'], ['kohi']]
 MATANE = ('matane', 'またね！', 'matane!')
-# silence after these words: the sentence lands, the three scripts are named, each "aha" gets a beat
-HOLD = {'rule.': 0.25, '"o".': 0.3, 'all.': 0.2, 'silent.': 0.2}
-PAD = 0.04
-# shortest each stand-in word can be: a dip inside it (the k of Tokyo, the d of Edo) is never taken for its edge
-MINLEN = {'makudonarudo': 0.7, 'ka': 0.12, 'ki': 0.12, 'ku': 0.12, 'ke': 0.12, 'ko': 0.12, 'tesuto': 0.4, 'kurisumasu': 0.6,
-          'raisu': 0.35, 'sankyu': 0.4, 'baiorin': 0.45, 'pari': 0.3, 'parisu': 0.4, 'tokyo': 0.42, 'kyoto': 0.34, 'nara': 0.28, 'edo': 0.28, 'wa': 0.14, 'nihon': 0.30, 'washoku': 0.45, 'washi': 0.30,
-          'reiwa': 0.34}
-ERA_BREATH = 0.0
-
-
-def norm(s):
-    return re.sub(r'[^a-z]', '', s.lower())
+LEAD, TAIL, GAP = 0.16, 0.22, 0.16        # silence kept before / after a clip, and between clips in one slot
 
 
 def load(name):
@@ -55,6 +46,20 @@ def load(name):
 def env(x):
     h = SR // 100
     return 20 * np.log10(np.sqrt(np.convolve(x ** 2, np.ones(h) / h, 'same')[::h]) + 1e-9)
+
+
+def runs(mask):
+    out, k = [], 0
+    while k < len(mask):
+        if mask[k]:
+            j = k
+            while j < len(mask) and mask[j]:
+                j += 1
+            out.append((k, j))
+            k = j
+        else:
+            k += 1
+    return out
 
 
 def segments(x, thresh=-42, hold=12):
@@ -72,129 +77,82 @@ def segments(x, thresh=-42, hold=12):
     return segs
 
 
-def faded(y, ms=10):
+def faded(y, ms=12):
     y = y.copy()
-    n = int(SR * ms / 1000)
-    y[:n] *= np.linspace(0, 1, n)
-    y[-n:] *= np.linspace(1, 0, n)
+    n = min(int(SR * ms / 1000), len(y) // 2)
+    if n > 0:
+        y[:n] *= np.sin(np.linspace(0, np.pi / 2, n)) ** 2
+        y[-n:] *= np.cos(np.linspace(0, np.pi / 2, n)) ** 2
     return y
 
 
-def joined(y, first=False, ms=18):
-    """a slice of the take that is about to be spliced: a short fade at each cut edge, so no join clicks or stops dead"""
-    y = y.copy()
-    k = int(SR * 0.02)
-    lvl = lambda s: 20 * np.log10(np.sqrt(np.mean(s ** 2)) + 1e-9) if len(s) else -120
-    for side in ('in', 'out'):
-        if side == 'in' and first:
-            continue
-        edge = y[:k] if side == 'in' else y[-k:]
-        L = 60 if lvl(edge) > -38 else ms                # cut on live speech: a longer, natural-sounding decay
-        n = min(int(SR * L / 1000), len(y) // 2)
-        if n <= 0:
-            continue
-        if side == 'in':
-            y[:n] *= np.sin(np.linspace(0, np.pi / 2, n)) ** 2
-        else:
-            y[-n:] *= np.cos(np.linspace(0, np.pi / 2, n)) ** 2
-    return y
-
-
-def quietest(e, t0, t1):
-    a, b = int(t0 * 100), max(int(t0 * 100) + 1, int(t1 * 100))
-    return (a + int(np.argmin(e[a:b]))) / 100
-
-
-def silent_edge(e, t0, t1, side, thresh=-55):
-    """the cut point in the gap between two words: the edge of the LONGEST silence in the window, so a short silence
-    inside a word (the closure of a k, t or p) is never mistaken for the gap and no fragment of the word is left behind"""
-    a, b = int(t0 * 100), max(int(t0 * 100) + 1, int(t1 * 100))
-    q = e[a:b] < thresh
-    runs, k = [], 0
-    while k < len(q):
-        if q[k]:
-            j = k
-            while j < len(q) and q[j]:
-                j += 1
-            runs.append((k, j))
-            k = j
-        else:
-            k += 1
-    if not runs:
-        return quietest(e, t0, t1)
-    r0, r1 = max(runs, key=lambda r: (r[1] - r[0], r[0] if side == 'before' else -r[0]))
-    return (a + (r1 - 1 if side == 'before' else r0)) / 100
+def ja_clips(level):
+    rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 0.01] ** 2))
+    clips, lex = {}, {}
+    for take, words in JA_TAKES:
+        jw = load(take)
+        segs = []
+        for a, b in segments(jw):
+            if segs and (b - a < 0.15 or a - segs[-1][1] < 0.12):
+                segs[-1] = (segs[-1][0], b)
+            else:
+                segs.append((a, b))
+        assert len(segs) == len(words), f'{take}: {len(segs)} segments for {len(words)} words'
+        bounds = [0.0] + [(segs[k][1] + segs[k + 1][0]) / 2 for k in range(len(segs) - 1)] + [len(jw) / SR]
+        for n, ((k, kana, rom), (a, b)) in enumerate(zip(words, segs)):
+            y = jw[int(max(a - 0.03, bounds[n]) * SR):int(min(b + 0.08, bounds[n + 1]) * SR)]
+            y = faded(y, 20)
+            clips[k] = y * 0.95 * level / rms(y)
+            lex[k] = (kana, rom)
+    return clips, lex
 
 
 def main():
-    en = load('take_en_a.mp3')
+    en = load(TAKE)
     e = env(en)
-    words = [w for w in json.load(open(os.path.join(A, 'words_en_a.json')))['words'] if w.get('type', 'word') == 'word']
-    rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 0.01] ** 2))
-    level = rms(en)
-    jw = load('words_ja_1.mp3')
-    segs = []
-    for a, b in segments(jw):                               # the small っ splits にっぽん: join it back
-        if segs and (b - a < 0.15 or a - segs[-1][1] < 0.12):
-            segs[-1] = (segs[-1][0], b)
-        else:
-            segs.append((a, b))
-    assert len(segs) == len(JA_WORDS), f'{len(segs)} segments in the Japanese words take'
-    bounds = [0.0] + [(segs[k][1] + segs[k + 1][0]) / 2 for k in range(len(segs) - 1)] + [len(jw) / SR]
-    # keep each word's natural decay: 30 ms before and 80 ms after its loud part (never past halfway to the next word)
-    clips = {k: faded(jw[int(max(a - 0.03, bounds[n]) * SR):int(min(b + 0.08, bounds[n + 1]) * SR)], 22)
-             for n, ((k, _, _), (a, b)) in enumerate(zip(JA_WORDS, segs))}
-    for k in clips:
-        clips[k] *= 0.95 * level / rms(clips[k])
-    edits, i0, seen = [], 0, {}
-    for phrase, clip in STAND_IN:
-        target = phrase.split()
-        i = next(i for i in range(i0, len(words)) if [norm(w['text']) for w in words[i:i + len(target)]] == target)
-        j = i + len(target) - 1
-        i0 = j + 1
-        seen[clip] = seen.get(clip, 0) + 1
-        key = clip if seen[clip] == 1 else f'{clip}{seen[clip]}'
-        prev_end = words[i - 1]['end'] if i > 0 else 0.0
-        nxt = words[j + 1]['start'] if j + 1 < len(words) else words[j]['end'] + 0.3
-        # cut at the word's real edges in the sound (Scribe's times drift by up to half a second): no part of the English
-        # stand-in may be left either side of the Japanese clip
-        a, b = word_bounds(e, words[i]['start'], words[j]['end'], MINLEN.get(clip, 0.25))
-        if i == 0:
-            a = 0.0
-        a = max(0.0, a - 0.02)
-        pad = np.zeros(int(PAD * SR), np.float32)
-        pre = np.zeros(int(ERA_BREATH * SR), np.float32) if clip in ERAS and key == clip else pad
-        edits.append([a, b, np.concatenate([pre, clips[clip], pad]), key, (i, j, clip)])
-    for i, w in enumerate(words[:-1]):
-        if w['text'] in HOLD:
-            # only where the voice has really died away; never cut a pause into the tail of a word
-            a0, b0 = int((w['end'] + 0.02) * 100), int((words[i + 1]['start'] - 0.02) * 100)
-            q = [k for k in range(a0, max(a0, b0)) if e[k] < -45]
-            if not q:
-                print(f'  hold after {w["text"]!r} skipped: no silence in the gap')
-                continue
-            c = q[len(q) // 2] / 100
-            edits.append([c, c, np.zeros(int(HOLD[w['text']] * SR), np.float32), None, (i, i, None)])
-    end = min(len(en) / SR, words[-1]['end'] + 0.15)
+    level = np.sqrt(np.mean(en[np.abs(en) > 0.01] ** 2))
+    raw = json.load(open(os.path.join(A, WORDS_JSON)))['words']
+    raw = [w for w in raw if w.get('type', 'word') == 'word']
+    clips, lex = ja_clips(level)
+    # the slots: each "[pause]" token; find the real silence round it from the sound (Scribe times drift)
+    pauses = [i for i, w in enumerate(raw) if w['text'].strip('.,') == '[pause]']
+    assert len(pauses) == len(SLOTS), f'{len(pauses)} pauses in the take, {len(SLOTS)} slots'
+    cuts = []                                   # (silence start, silence end) in the take, one per slot
+    for i in pauses:
+        prev = max(k for k in range(i) if not raw[k]['text'].startswith('['))
+        lo = int((raw[prev]['end'] - 0.3) * 100)
+        nxt = [k for k in range(i + 1, len(raw)) if not raw[k]['text'].startswith('[')]
+        hi = int(((raw[nxt[0]]['start'] if nxt else len(en) / SR) + 0.5) * 100)
+        sil = [r for r in runs(e[lo:hi] < -50) if r[1] - r[0] >= 15]
+        assert sil, f'no pause found near "{raw[prev]["text"]}" — the pause may have been spoken over'
+        r0, r1 = max(sil, key=lambda r: r[1] - r[0])
+        cuts.append(((lo + r0) / 100, (lo + r1) / 100))
+    # assemble: English up to just inside each silence, the clip(s), English again from just before the silence ends
+    out, t, cursor, shifts, ja = [], 0.0, 0.0, [], {}
+    for (s0, s1), keys in zip(cuts, SLOTS):
+        a = min(s0 + LEAD, (s0 + s1) / 2)
+        b = max(s1 - TAIL, (s0 + s1) / 2)
+        seg = en[int(cursor * SR):int(a * SR)]
+        out.append(faded(seg, 8) if cursor > 0 else seg)
+        t += len(seg) / SR
+        for n, k in enumerate(keys):
+            if n:
+                out.append(np.zeros(int(GAP * SR), np.float32))
+                t += GAP
+            ja[k] = dict(text=lex[k][0], romaji=lex[k][1], start=round(t, 3), end=round(t + len(clips[k]) / SR, 3))
+            out.append(clips[k])
+            t += len(clips[k]) / SR
+        shifts.append((a, b, t))
+        cursor = b
+    end = min(len(en) / SR, max(w['end'] for w in raw) + 0.2)
+    out.append(faded(en[int(cursor * SR):int(end * SR)], 8))
+    t += end - cursor
     mt = load('matane_a.mp3')
     ms = segments(mt, hold=40)
     mt = faded(mt[int(ms[0][0] * SR):int(ms[-1][1] * SR)])
-    mt *= 0.95 * level / rms(mt)
-    out, segs_out, cursor, t, shifts = [], {}, 0.0, 0.0, []
-    for a, b, audio, k, _ in sorted(edits, key=lambda x: (x[0], x[1])):
-        out.append(joined(en[int(cursor * SR):int(a * SR)], first=cursor == 0))
-        t += a - cursor
-        if k is not None:
-            lead = ERA_BREATH if k in ERAS else PAD          # (k == clip only for the first time a word is said)
-            segs_out[k] = dict(start=round(t + lead, 3), end=round(t + len(audio) / SR - PAD, 3))
-        out.append(audio)
-        t += len(audio) / SR
-        shifts.append((a, b, t))
-        cursor = b
-    out.append(joined(en[int(cursor * SR):int(end * SR)]))
-    t += end - cursor
+    mt *= 0.95 * level / np.sqrt(np.mean(mt[np.abs(mt) > 0.01] ** 2))
     t_mt = t + 0.4
-    out += [np.zeros(int(0.4 * SR), np.float32), mt, np.zeros(int(0.2 * SR), np.float32)]
+    out += [np.zeros(int(0.4 * SR), np.float32), mt, np.zeros(int(0.25 * SR), np.float32)]
     nar = np.concatenate(out)
 
     def sh(x):
@@ -205,35 +163,29 @@ def main():
             base_en, base_out = b, t_after
         return base_out + (x - base_en)
 
-    lex = {k: (kana, rom) for k, kana, rom in JA_WORDS}
-    span = {x[4][0]: (x[4][1], x[3], x[4][2]) for x in edits if x[3] is not None}
-    ws, i = [], 0
-    while i < len(words):
-        w = words[i]
-        if i in span:
-            j, key, clip = span[i]
-            last = words[j]['text']
-            punct = last[-1] if last[-1] in '.,:!?' else ''
-            ws.append(dict(text=lex[clip][1] + punct, type='word', ja=key, start=segs_out[key]['start'], end=segs_out[key]['end']))
-            i = j + 1
+    ws, slot = [], 0
+    for w in raw:
+        if w['text'].strip('.,') == '[pause]':
+            for k in SLOTS[slot]:
+                ws.append(dict(text=lex[k][1] + ('.' if k in ('tesuto', 'kurisumasu', 'raisu', 'sankyu', 'baiorin', 'parisu') else ''),
+                               type='word', ja=k, start=ja[k]['start'], end=ja[k]['end']))
+            slot += 1
+            continue
+        if w['text'].startswith('[') or w['text'].endswith(']'):
             continue
         ws.append(dict(text=w['text'], type='word', start=round(sh(w['start']), 3), end=round(sh(w['end']), 3)))
-        i += 1
     t_end = round(t_mt + len(mt) / SR, 3)
     ws.append(dict(text=MATANE[2], type='word', ja=MATANE[0], start=round(t_mt, 3), end=t_end))
-    ja = {}
-    for x in edits:
-        if x[3] is not None:
-            clip = x[4][2]
-            ja[x[3]] = dict(text=lex[clip][0], romaji=lex[clip][1], **segs_out[x[3]])
     ja[MATANE[0]] = dict(text=MATANE[1], romaji=MATANE[2], start=round(t_mt, 3), end=t_end)
     wavfile.write(os.path.join(A, 'narration.wav'), SR, (np.clip(nar, -1, 1) * 32767).astype(np.int16))
     subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', os.path.join(A, 'narration.wav'), '-b:a', '192k',
                     os.path.join(A, 'narration.mp3')], check=True)
     json.dump({'words': ws, 'ja': ja}, open(os.path.join(A, 'words.json'), 'w'), ensure_ascii=False, indent=0)
     print(f'narration {len(nar) / SR:.2f}s')
+    for (s0, s1), keys in zip(cuts, SLOTS):
+        print(f'  slot {"/".join(keys):22s} pause in take {s0:6.2f}-{s1:6.2f} ({s1 - s0:.2f}s)')
     for k, v in sorted(ja.items(), key=lambda kv: kv[1]['start']):
-        print(f'  {k:11s} {v["start"]:6.2f}-{v["end"]:6.2f}  {v["text"]}')
+        print(f'  {k:13s} {v["start"]:6.2f}-{v["end"]:6.2f}  {v["text"]}  {v["romaji"]}')
 
 
 if __name__ == '__main__':

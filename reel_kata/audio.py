@@ -426,6 +426,23 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     fx('quill', pr.t_s, 0.3)                                                # the S goes quiet
     for k in range(3):
         fx('pop', pr.t_parisu + 0.15 * k + 0.25, 0.25)
+    og = g('origins')
+    fx('stamp', og.t_weird, 0.35)
+    for c in og.cards:
+        for k in range(len(c['tiles'])):
+            fx('pop', c['t_ja'] + 0.12 * k + 0.3, 0.25, pan=-0.5 + 0.25 * k)
+        fx('brush', c['t_src'], 0.4)                                        # the English word struck through
+        fx('pop', c['t_src'] + 0.1, 0.3)                                    # the flag + source word
+    for k in range(4):
+        fx('pop', og.t_odd + 0.15 * k + 0.3, 0.22)
+    fx('taiko', og.t_neq, 0.55)                                             # ≠ ENGLISH
+    fx('stamp', og.t_neq + 0.02, 0.6)
+    pz = g('puzzle')
+    fx('stamp', pz.t_pz, 0.45)
+    fx('pop', pz.t0 + 0.6, 0.3)
+    for k in range(7):
+        fx('pop', pz.t_how + 0.12 * k + 0.3, 0.22, pan=-0.6 + 0.2 * k)
+    fx('chime', pz.t_cm, 0.3)
     en = g('end')
     fx('brush', en.t_follow + 0.05, 0.45)
     fx('chime', en.t_mt, 0.35)
