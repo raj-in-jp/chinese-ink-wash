@@ -71,3 +71,7 @@ reel_yamato/cache/
 reel_yamato/audio/stems/
 reel_yamato/audio/*.wav
 reel_yamato/output/
+reel_sun/cache/
+reel_sun/audio/stems/
+reel_sun/audio/*.wav
+reel_sun/output/
