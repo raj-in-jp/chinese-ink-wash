@@ -47,7 +47,7 @@ class Scene(KanjiScene):
             tk = self.t_ya + 0.15 * k
             if t > tk:
                 tl.draw(fr, cam, x, 300 + drop_y(t, tk, 220, 0.4), smooth((t - tk) / 0.1), pulse(t, tk + 0.3, 0.2))
-        fq = (t - self.t_ya - 0.5) / 0.3
+        fq = (t - self.t0 - 0.15) / 0.3      # the ? pops in as the scene opens: no empty paper before やまと
         if fq > 0:
             kit.put(fr, cam, self.q, 820, 300, VERM, smooth(fq), (1 + 0.5 * np.exp(-fq * 2.5)) * (1 + 0.05 * np.sin(t * 5)), rot=0.12 * np.sin(t * 2.5))
         fn = (t - self.t_nobody + 0.05) / 0.2

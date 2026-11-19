@@ -308,6 +308,29 @@ def bgm(join=86.0, end_at=136.4, xf=1.2):
     return out
 
 
+def score(name='music_score.mp3', fade_in=0.6, fade_out=2.5):
+    """an original track made for this reel: placed so its own ending lands on the reel's last frame (its opening is
+    trimmed if it is longer than the reel, or it is looped with a crossfade if shorter); gentle fades at both ends"""
+    import subprocess
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', os.path.join(HERE, 'audio', name), '-ac', '2', '-ar', str(SR),
+                          '-f', 'f32le', '-'], capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, np.float32).reshape(-1, 2).astype(np.float64)
+    if len(x) < N:
+        reps = int(np.ceil(N / len(x))) + 1
+        xf = int(1.0 * SR)
+        y = x.copy()
+        for _ in range(reps):
+            ramp = np.linspace(0, 1, xf)[:, None]
+            y = np.concatenate([y[:-xf], y[-xf:] * (1 - ramp) + x[:xf] * ramp, x[xf:]])
+        x = y
+    out = x[len(x) - N:] if len(x) - N < 12 * SR else x[:N]
+    out = out.copy()
+    a, b = int(fade_in * SR), int(fade_out * SR)
+    out[:a] *= np.linspace(0, 1, a)[:, None]
+    out[-b:] *= np.linspace(1, 0, b)[:, None] ** 1.5
+    return out
+
+
 def _samples():
     """the recorded sound effects in audio/sfx (ElevenLabs sound effects), each levelled to the same loudness while it
     sounds (so the gains in build() are the only balance)"""
@@ -347,7 +370,7 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     import scenes
     g = scenes.get
     sfx, amb = np.zeros((N, 2)), np.zeros((N, 2))
-    music = bgm(join=40.0)
+    music = score() if os.path.exists(os.path.join(HERE, 'audio', 'music_score.mp3')) else bgm(join=40.0)
 
     def hit(t, gain=0.6, drum=True):
         place(sfx, stamp(), t, gain)
@@ -442,7 +465,7 @@ def build(out_dir=os.path.join(HERE, 'audio')):
     music *= (1 - 0.8 * duck)[:, None]
     amb *= (1 - 0.55 * duck)[:, None]
     sfx *= (1 - 0.65 * duck)[:, None]
-    stems = {'voice': voice, 'music': music * MUSIC_GAIN, 'sfx': sfx * 0.4, 'amb': amb * 0.3}
+    stems = {'voice': voice, 'music': music * MUSIC_GAIN * 1.75, 'sfx': sfx * 0.4, 'amb': amb * 0.3}
     mix = sum(stems.values())
     fade = np.ones(N)
     fade[-int(1.2 * SR):] = np.linspace(1, 0, int(1.2 * SR)) ** 1.5
