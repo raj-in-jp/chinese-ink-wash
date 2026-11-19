@@ -23,13 +23,14 @@ from scipy.io import wavfile
 A = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audio')
 SR = 48000
 TAKE, WORDS_JSON = 'take_en_b.mp3', 'words_en_b.json'
-JA_TAKES = [('words_ja_1.mp3', [('makudonarudo', 'マクドナルド', 'Makudonarudo'), ('ka', 'か', 'ka'), ('ki', 'き', 'ki'),
-                                ('ku', 'く', 'ku'), ('ke', 'け', 'ke'), ('ko', 'こ', 'ko'), ('tesuto', 'テスト', 'tesuto'),
-                                ('kurisumasu', 'クリスマス', 'Kurisumasu'), ('raisu', 'ライス', 'raisu'),
-                                ('sankyu', 'サンキュー', 'sankyū'), ('baiorin', 'バイオリン', 'baiorin'), ('pari', 'パリ', 'Pari'),
-                                ('parisu', 'パリス', 'Parisu')]),
-            ('words_ja_2.mp3', [('enerugi', 'エネルギー', 'enerugī'), ('arerugi', 'アレルギー', 'arerugī'), ('pan', 'パン', 'pan'),
-                                ('kohi', 'コーヒー', 'kōhī')])]
+# one slow, clear take of every Japanese word, written in hiragana so it is always read with Japanese sounds;
+# the captions / tiles still show the katakana
+JA_TAKES = [('words_ja_s1.mp3', [('makudonarudo', 'マクドナルド', 'Makudonarudo'), ('ka', 'か', 'ka'), ('ki', 'き', 'ki'),
+                                 ('ku', 'く', 'ku'), ('ke', 'け', 'ke'), ('ko', 'こ', 'ko'), ('tesuto', 'テスト', 'tesuto'),
+                                 ('kurisumasu', 'クリスマス', 'Kurisumasu'), ('raisu', 'ライス', 'raisu'),
+                                 ('sankyu', 'サンキュー', 'sankyū'), ('baiorin', 'バイオリン', 'baiorin'), ('pari', 'パリ', 'Pari'),
+                                 ('parisu', 'パリス', 'Parisu'), ('enerugi', 'エネルギー', 'enerugī'), ('arerugi', 'アレルギー', 'arerugī'),
+                                 ('pan', 'パン', 'pan'), ('kohi', 'コーヒー', 'kōhī')])]
 # what goes in each [pause] of the English take, in order (a slot can hold several clips, said one after another)
 SLOTS = [['makudonarudo'], ['ka', 'ki', 'ku', 'ke', 'ko'], ['tesuto'], ['kurisumasu'], ['raisu'], ['sankyu'], ['baiorin'],
          ['pari'], ['parisu'], ['enerugi'], ['arerugi'], ['pan'], ['kohi']]

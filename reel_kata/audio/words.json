@@ -34,1273 +34,1273 @@
 "text": "into...",
 "type": "word",
 "start": 2.4,
-"end": 3.64
+"end": 4.16
 },
 {
 "text": "Makudonarudo",
 "type": "word",
 "ja": "makudonarudo",
 "start": 2.98,
-"end": 3.94
+"end": 4.46
 },
 {
 "text": "It's",
 "type": "word",
-"start": 4.248,
-"end": 4.36
+"start": 4.768,
+"end": 4.88
 },
 {
 "text": "not",
 "type": "word",
-"start": 4.44,
-"end": 4.52
+"start": 4.96,
+"end": 5.04
 },
 {
 "text": "a",
 "type": "word",
-"start": 4.547,
-"end": 4.573
+"start": 5.067,
+"end": 5.093
 },
 {
 "text": "mistake.",
 "type": "word",
-"start": 4.6,
-"end": 5.32
+"start": 5.12,
+"end": 5.84
 },
 {
 "text": "It's",
 "type": "word",
-"start": 5.48,
-"end": 5.64
+"start": 6.0,
+"end": 6.16
 },
 {
 "text": "a",
 "type": "word",
-"start": 5.68,
-"end": 5.72
+"start": 6.2,
+"end": 6.24
 },
 {
 "text": "rule.",
 "type": "word",
-"start": 5.8,
-"end": 6.4
+"start": 6.32,
+"end": 6.92
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 6.68,
-"end": 7.08
+"start": 7.2,
+"end": 7.6
 },
 {
 "text": "words",
 "type": "word",
-"start": 7.16,
-"end": 7.4
+"start": 7.68,
+"end": 7.92
 },
 {
 "text": "are",
 "type": "word",
-"start": 7.48,
-"end": 7.56
+"start": 8.0,
+"end": 8.08
 },
 {
 "text": "built",
 "type": "word",
-"start": 7.68,
-"end": 7.8
+"start": 8.2,
+"end": 8.32
 },
 {
 "text": "from",
 "type": "word",
-"start": 7.92,
-"end": 8.04
+"start": 8.44,
+"end": 8.56
 },
 {
 "text": "small",
 "type": "word",
-"start": 8.12,
-"end": 8.36
+"start": 8.64,
+"end": 8.88
 },
 {
 "text": "beats.",
 "type": "word",
-"start": 8.52,
-"end": 9.24
+"start": 9.04,
+"end": 9.76
 },
 {
 "text": "And",
 "type": "word",
-"start": 9.32,
-"end": 9.4
+"start": 9.84,
+"end": 9.92
 },
 {
 "text": "almost",
 "type": "word",
-"start": 9.6,
-"end": 9.8
+"start": 10.12,
+"end": 10.32
 },
 {
 "text": "every",
 "type": "word",
-"start": 9.88,
-"end": 10.12
+"start": 10.4,
+"end": 10.64
 },
 {
 "text": "beat",
 "type": "word",
-"start": 10.2,
-"end": 10.52
+"start": 10.72,
+"end": 11.04
 },
 {
 "text": "ends",
 "type": "word",
-"start": 10.6,
-"end": 10.76
+"start": 11.12,
+"end": 11.28
 },
 {
 "text": "in",
 "type": "word",
-"start": 10.84,
-"end": 10.88
+"start": 11.36,
+"end": 11.4
 },
 {
 "text": "a",
 "type": "word",
-"start": 10.92,
-"end": 11.0
+"start": 11.44,
+"end": 11.52
 },
 {
 "text": "vowel...",
 "type": "word",
-"start": 11.04,
-"end": 14.56
+"start": 11.56,
+"end": 15.13
 },
 {
 "text": "ka",
 "type": "word",
 "ja": "ka",
-"start": 11.81,
-"end": 12.16
+"start": 12.33,
+"end": 12.72
 },
 {
 "text": "ki",
 "type": "word",
 "ja": "ki",
-"start": 12.32,
-"end": 12.74
+"start": 12.88,
+"end": 13.31
 },
 {
 "text": "ku",
 "type": "word",
 "ja": "ku",
-"start": 12.9,
-"end": 13.33
+"start": 13.47,
+"end": 13.89
 },
 {
 "text": "ke",
 "type": "word",
 "ja": "ke",
-"start": 13.49,
-"end": 13.89
+"start": 14.05,
+"end": 14.45
 },
 {
 "text": "ko",
 "type": "word",
 "ja": "ko",
-"start": 14.05,
-"end": 14.42
+"start": 14.61,
+"end": 14.99
 },
 {
 "text": "The",
 "type": "word",
-"start": 14.76,
-"end": 14.8
+"start": 15.33,
+"end": 15.37
 },
 {
 "text": "only",
 "type": "word",
-"start": 14.96,
-"end": 15.12
+"start": 15.53,
+"end": 15.69
 },
 {
 "text": "sound",
 "type": "word",
-"start": 15.2,
-"end": 15.44
+"start": 15.77,
+"end": 16.01
 },
 {
 "text": "that",
 "type": "word",
-"start": 15.48,
-"end": 15.52
+"start": 16.05,
+"end": 16.09
 },
 {
 "text": "can",
 "type": "word",
-"start": 15.6,
-"end": 15.76
+"start": 16.17,
+"end": 16.33
 },
 {
 "text": "end",
 "type": "word",
-"start": 15.84,
-"end": 15.92
+"start": 16.41,
+"end": 16.49
 },
 {
 "text": "without",
 "type": "word",
-"start": 16.0,
-"end": 16.4
+"start": 16.57,
+"end": 16.97
 },
 {
 "text": "a",
 "type": "word",
-"start": 16.44,
-"end": 16.48
+"start": 17.01,
+"end": 17.05
 },
 {
 "text": "vowel",
 "type": "word",
-"start": 16.52,
-"end": 16.88
+"start": 17.09,
+"end": 17.45
 },
 {
 "text": "is",
 "type": "word",
-"start": 16.96,
-"end": 17.12
+"start": 17.53,
+"end": 17.69
 },
 {
 "text": "\"n\".",
 "type": "word",
-"start": 17.28,
-"end": 18.0
+"start": 17.85,
+"end": 18.57
 },
 {
 "text": "So",
 "type": "word",
-"start": 18.08,
-"end": 18.16
+"start": 18.65,
+"end": 18.73
 },
 {
 "text": "when",
 "type": "word",
-"start": 18.24,
-"end": 18.32
+"start": 18.81,
+"end": 18.89
 },
 {
 "text": "English",
 "type": "word",
-"start": 18.4,
-"end": 18.72
+"start": 18.97,
+"end": 19.29
 },
 {
 "text": "puts",
 "type": "word",
-"start": 18.84,
-"end": 18.96
+"start": 19.41,
+"end": 19.53
 },
 {
 "text": "consonants",
 "type": "word",
-"start": 19.08,
-"end": 19.52
+"start": 19.65,
+"end": 20.09
 },
 {
 "text": "together,",
 "type": "word",
-"start": 19.6,
-"end": 20.32
+"start": 20.17,
+"end": 20.89
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 20.4,
-"end": 20.88
+"start": 20.97,
+"end": 21.45
 },
 {
 "text": "adds",
 "type": "word",
-"start": 21.0,
-"end": 21.12
+"start": 21.57,
+"end": 21.69
 },
 {
 "text": "a",
 "type": "word",
-"start": 21.16,
-"end": 21.2
+"start": 21.73,
+"end": 21.77
 },
 {
 "text": "little",
 "type": "word",
-"start": 21.28,
-"end": 21.52
+"start": 21.85,
+"end": 22.09
 },
 {
 "text": "vowel",
 "type": "word",
-"start": 21.6,
-"end": 21.92
+"start": 22.17,
+"end": 22.49
 },
 {
 "text": "to",
 "type": "word",
-"start": 22.0,
-"end": 22.08
+"start": 22.57,
+"end": 22.65
 },
 {
 "text": "each",
 "type": "word",
-"start": 22.2,
-"end": 22.32
+"start": 22.77,
+"end": 22.89
 },
 {
 "text": "one.",
 "type": "word",
-"start": 22.4,
-"end": 23.04
+"start": 22.97,
+"end": 23.61
 },
 {
 "text": "Test",
 "type": "word",
-"start": 23.28,
-"end": 23.52
+"start": 23.85,
+"end": 24.09
 },
 {
 "text": "becomes...",
 "type": "word",
-"start": 23.6,
-"end": 25.37
+"start": 24.17,
+"end": 25.93
 },
 {
 "text": "tesuto.",
 "type": "word",
 "ja": "tesuto",
-"start": 24.57,
-"end": 25.22
+"start": 25.14,
+"end": 25.78
 },
 {
 "text": "Christmas",
 "type": "word",
-"start": 25.903,
-"end": 26.01
+"start": 26.463,
+"end": 26.57
 },
 {
 "text": "becomes...",
 "type": "word",
-"start": 26.09,
-"end": 28.04
+"start": 26.65,
+"end": 28.68
 },
 {
 "text": "Kurisumasu.",
 "type": "word",
 "ja": "kurisumasu",
-"start": 26.99,
-"end": 27.9
+"start": 27.55,
+"end": 28.54
 },
 {
 "text": "Which",
 "type": "word",
-"start": 28.24,
-"end": 28.28
+"start": 28.88,
+"end": 28.92
 },
 {
 "text": "vowel?",
 "type": "word",
-"start": 28.36,
-"end": 29.0
+"start": 29.0,
+"end": 29.64
 },
 {
 "text": "Usually",
 "type": "word",
-"start": 29.08,
-"end": 29.48
+"start": 29.72,
+"end": 30.12
 },
 {
 "text": "\"u\".",
 "type": "word",
-"start": 29.64,
-"end": 30.28
+"start": 30.28,
+"end": 30.92
 },
 {
 "text": "But",
 "type": "word",
-"start": 30.32,
-"end": 30.36
+"start": 30.96,
+"end": 31.0
 },
 {
 "text": "after",
 "type": "word",
-"start": 30.44,
-"end": 30.68
+"start": 31.08,
+"end": 31.32
 },
 {
 "text": "\"t\"",
 "type": "word",
-"start": 30.84,
-"end": 31.16
+"start": 31.48,
+"end": 31.8
 },
 {
 "text": "and",
 "type": "word",
-"start": 31.24,
-"end": 31.32
+"start": 31.88,
+"end": 31.96
 },
 {
 "text": "\"d\",",
 "type": "word",
-"start": 31.48,
-"end": 31.96
+"start": 32.12,
+"end": 32.6
 },
 {
 "text": "it's",
 "type": "word",
-"start": 32.04,
-"end": 32.2
+"start": 32.68,
+"end": 32.84
 },
 {
 "text": "\"o\".",
 "type": "word",
-"start": 32.36,
-"end": 33.16
+"start": 33.0,
+"end": 33.8
 },
 {
 "text": "Some",
 "type": "word",
-"start": 33.28,
-"end": 33.4
-},
-{
-"text": "English",
-"type": "word",
-"start": 33.56,
-"end": 33.72
-},
-{
-"text": "sounds",
-"type": "word",
-"start": 33.88,
+"start": 33.92,
 "end": 34.04
 },
 {
-"text": "don't",
+"text": "English",
 "type": "word",
 "start": 34.2,
 "end": 34.36
 },
 {
+"text": "sounds",
+"type": "word",
+"start": 34.52,
+"end": 34.68
+},
+{
+"text": "don't",
+"type": "word",
+"start": 34.84,
+"end": 35.0
+},
+{
 "text": "exist",
 "type": "word",
-"start": 34.44,
-"end": 34.76
+"start": 35.08,
+"end": 35.4
 },
 {
 "text": "in",
 "type": "word",
-"start": 34.8,
-"end": 34.84
+"start": 35.44,
+"end": 35.48
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 34.92,
-"end": 35.4
+"start": 35.56,
+"end": 36.04
 },
 {
 "text": "at",
 "type": "word",
-"start": 35.48,
-"end": 35.56
+"start": 36.12,
+"end": 36.2
 },
 {
 "text": "all.",
 "type": "word",
-"start": 35.64,
-"end": 36.2
+"start": 36.28,
+"end": 36.84
 },
 {
 "text": "There's",
 "type": "word",
-"start": 36.24,
-"end": 36.36
+"start": 36.88,
+"end": 37.0
 },
 {
 "text": "no",
 "type": "word",
-"start": 36.44,
-"end": 36.52
+"start": 37.08,
+"end": 37.16
 },
 {
 "text": "separate",
 "type": "word",
-"start": 36.6,
-"end": 37.0
+"start": 37.24,
+"end": 37.64
 },
 {
 "text": "L",
 "type": "word",
-"start": 37.16,
-"end": 37.4
+"start": 37.8,
+"end": 38.04
 },
 {
 "text": "and",
 "type": "word",
-"start": 37.48,
-"end": 37.56
+"start": 38.12,
+"end": 38.2
 },
 {
 "text": "R.",
 "type": "word",
-"start": 37.72,
-"end": 38.04
+"start": 38.36,
+"end": 38.68
 },
 {
 "text": "Just",
 "type": "word",
-"start": 38.28,
-"end": 38.44
+"start": 38.92,
+"end": 39.08
 },
 {
 "text": "one",
 "type": "word",
-"start": 38.6,
-"end": 38.76
+"start": 39.24,
+"end": 39.4
 },
 {
 "text": "sound",
 "type": "word",
-"start": 38.84,
-"end": 39.08
+"start": 39.48,
+"end": 39.72
 },
 {
 "text": "in",
 "type": "word",
-"start": 39.16,
-"end": 39.24
+"start": 39.8,
+"end": 39.88
 },
 {
 "text": "between.",
 "type": "word",
-"start": 39.48,
-"end": 40.04
+"start": 40.12,
+"end": 40.68
 },
 {
 "text": "So",
 "type": "word",
-"start": 40.12,
-"end": 40.2
+"start": 40.76,
+"end": 40.84
 },
 {
 "text": "rice",
 "type": "word",
-"start": 40.36,
-"end": 40.76
+"start": 41.0,
+"end": 41.4
 },
 {
 "text": "and",
 "type": "word",
-"start": 40.84,
-"end": 40.92
+"start": 41.48,
+"end": 41.56
 },
 {
 "text": "lice",
 "type": "word",
-"start": 41.08,
-"end": 41.48
+"start": 41.72,
+"end": 42.12
 },
 {
 "text": "are",
 "type": "word",
-"start": 41.56,
-"end": 41.72
+"start": 42.2,
+"end": 42.36
 },
 {
 "text": "both...",
 "type": "word",
-"start": 41.92,
-"end": 43.3
+"start": 42.56,
+"end": 43.94
 },
 {
 "text": "raisu.",
 "type": "word",
 "ja": "raisu",
-"start": 42.46,
-"end": 43.16
+"start": 43.1,
+"end": 43.8
 },
 {
 "text": "There's",
 "type": "word",
-"start": 43.367,
-"end": 43.46
+"start": 44.007,
+"end": 44.1
 },
 {
 "text": "no",
 "type": "word",
-"start": 43.54,
-"end": 43.62
+"start": 44.18,
+"end": 44.26
 },
 {
 "text": "\"th\",",
 "type": "word",
-"start": 43.78,
-"end": 44.34
-},
-{
-"text": "so",
-"type": "word",
 "start": 44.42,
-"end": 44.58
-},
-{
-"text": "thank",
-"type": "word",
-"start": 44.74,
 "end": 44.98
 },
 {
-"text": "you",
+"text": "so",
 "type": "word",
 "start": 45.06,
 "end": 45.22
 },
 {
+"text": "thank",
+"type": "word",
+"start": 45.38,
+"end": 45.62
+},
+{
+"text": "you",
+"type": "word",
+"start": 45.7,
+"end": 45.86
+},
+{
 "text": "becomes...",
 "type": "word",
-"start": 45.3,
-"end": 46.93
+"start": 45.94,
+"end": 47.79
 },
 {
 "text": "sankyū.",
 "type": "word",
 "ja": "sankyu",
-"start": 46.195,
-"end": 46.785
+"start": 46.835,
+"end": 47.645
 },
 {
 "text": "And",
 "type": "word",
-"start": 47.063,
-"end": 47.09
+"start": 47.923,
+"end": 47.95
 },
 {
 "text": "\"v\"",
 "type": "word",
-"start": 47.25,
-"end": 47.65
+"start": 48.11,
+"end": 48.51
 },
 {
 "text": "often",
 "type": "word",
-"start": 47.73,
-"end": 47.97
+"start": 48.59,
+"end": 48.83
 },
 {
 "text": "becomes",
 "type": "word",
-"start": 48.05,
-"end": 48.45
+"start": 48.91,
+"end": 49.31
 },
 {
 "text": "\"b\".",
 "type": "word",
-"start": 48.61,
-"end": 49.25
+"start": 49.47,
+"end": 50.11
 },
 {
 "text": "Violin",
 "type": "word",
-"start": 49.33,
-"end": 49.89
+"start": 50.19,
+"end": 50.75
 },
 {
 "text": "is...",
 "type": "word",
-"start": 50.05,
-"end": 51.74
+"start": 50.91,
+"end": 52.59
 },
 {
 "text": "baiorin.",
 "type": "word",
 "ja": "baiorin",
-"start": 50.7,
-"end": 51.59
+"start": 51.56,
+"end": 52.44
 },
 {
 "text": "So",
 "type": "word",
-"start": 51.82,
-"end": 51.9
+"start": 52.67,
+"end": 52.75
 },
 {
 "text": "why",
 "type": "word",
-"start": 51.98,
-"end": 52.14
+"start": 52.83,
+"end": 52.99
 },
 {
 "text": "is",
 "type": "word",
-"start": 52.22,
-"end": 52.3
+"start": 53.07,
+"end": 53.15
 },
 {
 "text": "Paris...",
 "type": "word",
-"start": 52.54,
-"end": 54.03
+"start": 53.39,
+"end": 54.9
 },
 {
 "text": "Pari",
 "type": "word",
 "ja": "pari",
-"start": 53.44,
-"end": 53.89
+"start": 54.29,
+"end": 54.76
 },
 {
 "text": "Because",
 "type": "word",
-"start": 54.23,
-"end": 54.27
+"start": 55.1,
+"end": 55.14
 },
 {
 "text": "Japan",
 "type": "word",
-"start": 54.35,
-"end": 54.75
+"start": 55.22,
+"end": 55.62
 },
 {
 "text": "borrowed",
 "type": "word",
-"start": 54.83,
-"end": 55.15
+"start": 55.7,
+"end": 56.02
 },
 {
 "text": "it",
 "type": "word",
-"start": 55.19,
-"end": 55.23
+"start": 56.06,
+"end": 56.1
 },
 {
 "text": "from",
 "type": "word",
-"start": 55.31,
-"end": 55.47
+"start": 56.18,
+"end": 56.34
 },
 {
 "text": "French,",
 "type": "word",
-"start": 55.55,
-"end": 56.11
+"start": 56.42,
+"end": 56.98
 },
 {
 "text": "where",
 "type": "word",
-"start": 56.15,
-"end": 56.19
+"start": 57.02,
+"end": 57.06
 },
 {
 "text": "the",
 "type": "word",
-"start": 56.27,
-"end": 56.35
+"start": 57.14,
+"end": 57.22
 },
 {
 "text": "S",
 "type": "word",
-"start": 56.51,
-"end": 56.75
+"start": 57.38,
+"end": 57.62
 },
 {
 "text": "is",
 "type": "word",
-"start": 56.83,
-"end": 56.99
+"start": 57.7,
+"end": 57.86
 },
 {
 "text": "silent.",
 "type": "word",
-"start": 57.23,
-"end": 57.79
+"start": 58.1,
+"end": 58.66
 },
 {
 "text": "From",
 "type": "word",
-"start": 57.87,
-"end": 57.95
+"start": 58.74,
+"end": 58.82
 },
 {
 "text": "English,",
 "type": "word",
-"start": 58.15,
-"end": 58.43
+"start": 59.02,
+"end": 59.3
 },
 {
 "text": "it",
 "type": "word",
-"start": 58.51,
-"end": 58.59
+"start": 59.38,
+"end": 59.46
 },
 {
 "text": "would",
 "type": "word",
-"start": 58.63,
-"end": 58.67
+"start": 59.5,
+"end": 59.54
 },
 {
 "text": "have",
 "type": "word",
-"start": 58.75,
-"end": 58.83
+"start": 59.62,
+"end": 59.7
 },
 {
 "text": "been...",
 "type": "word",
-"start": 58.95,
-"end": 60.26
+"start": 59.82,
+"end": 61.09
 },
 {
 "text": "Parisu.",
 "type": "word",
 "ja": "parisu",
-"start": 59.395,
-"end": 60.105
+"start": 60.265,
+"end": 60.935
 },
 {
 "text": "And",
 "type": "word",
-"start": 60.393,
-"end": 60.42
+"start": 61.223,
+"end": 61.25
 },
 {
 "text": "Paris",
 "type": "word",
-"start": 60.62,
-"end": 60.82
+"start": 61.45,
+"end": 61.65
 },
 {
 "text": "isn't",
 "type": "word",
-"start": 60.9,
-"end": 61.14
+"start": 61.73,
+"end": 61.97
 },
 {
 "text": "alone.",
 "type": "word",
-"start": 61.22,
-"end": 61.86
+"start": 62.05,
+"end": 62.69
 },
 {
 "text": "A",
 "type": "word",
-"start": 61.9,
-"end": 61.94
+"start": 62.73,
+"end": 62.77
 },
 {
 "text": "lot",
 "type": "word",
-"start": 62.02,
-"end": 62.1
+"start": 62.85,
+"end": 62.93
 },
 {
 "text": "of",
 "type": "word",
-"start": 62.18,
-"end": 62.34
+"start": 63.01,
+"end": 63.17
 },
 {
 "text": "\"weird",
 "type": "word",
-"start": 62.42,
-"end": 62.74
+"start": 63.25,
+"end": 63.57
 },
 {
 "text": "English\"",
 "type": "word",
-"start": 62.82,
-"end": 63.18
+"start": 63.65,
+"end": 64.01
 },
 {
 "text": "in",
 "type": "word",
-"start": 63.22,
-"end": 63.3
+"start": 64.05,
+"end": 64.13
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 63.38,
-"end": 63.94
+"start": 64.21,
+"end": 64.77
 },
 {
 "text": "isn't",
 "type": "word",
-"start": 64.1,
-"end": 64.34
+"start": 64.93,
+"end": 65.17
 },
 {
 "text": "English",
 "type": "word",
-"start": 64.42,
-"end": 64.66
+"start": 65.25,
+"end": 65.49
 },
 {
 "text": "at",
 "type": "word",
-"start": 64.74,
-"end": 64.82
+"start": 65.57,
+"end": 65.65
 },
 {
 "text": "all.",
 "type": "word",
-"start": 64.9,
-"end": 65.54
+"start": 65.73,
+"end": 66.37
 },
 {
 "text": "Energy?",
 "type": "word",
-"start": 65.78,
-"end": 67.24
+"start": 66.61,
+"end": 68.13
 },
 {
 "text": "enerugī",
 "type": "word",
 "ja": "enerugi",
-"start": 66.28,
-"end": 67.1
+"start": 67.11,
+"end": 67.99
 },
 {
 "text": "That's",
 "type": "word",
-"start": 67.373,
-"end": 67.48
+"start": 68.263,
+"end": 68.37
 },
 {
 "text": "from",
 "type": "word",
-"start": 67.56,
-"end": 67.64
+"start": 68.45,
+"end": 68.53
 },
 {
 "text": "German,",
 "type": "word",
-"start": 67.72,
-"end": 68.36
+"start": 68.61,
+"end": 69.25
 },
 {
 "text": "Energie.",
 "type": "word",
-"start": 68.4,
-"end": 69.32
+"start": 69.29,
+"end": 70.21
 },
 {
 "text": "Allergy?",
 "type": "word",
-"start": 69.4,
-"end": 70.95
+"start": 70.29,
+"end": 71.83
 },
 {
 "text": "arerugī",
 "type": "word",
 "ja": "arerugi",
-"start": 69.98,
-"end": 70.82
+"start": 70.87,
+"end": 71.7
 },
 {
 "text": "German",
 "type": "word",
-"start": 71.03,
-"end": 71.35
+"start": 71.91,
+"end": 72.23
 },
 {
 "text": "too.",
 "type": "word",
-"start": 71.43,
-"end": 72.07
+"start": 72.31,
+"end": 72.95
 },
 {
 "text": "Bread?",
 "type": "word",
-"start": 72.177,
-"end": 73.165
+"start": 73.057,
+"end": 74.065
 },
 {
 "text": "pan",
 "type": "word",
 "ja": "pan",
-"start": 72.57,
-"end": 73.04
+"start": 73.45,
+"end": 73.94
 },
 {
 "text": "From",
 "type": "word",
-"start": 73.245,
-"end": 73.405
+"start": 74.145,
+"end": 74.305
 },
 {
 "text": "Portuguese,",
 "type": "word",
-"start": 73.525,
-"end": 74.365
+"start": 74.425,
+"end": 75.265
 },
 {
 "text": "pão.",
 "type": "word",
-"start": 74.405,
-"end": 75.085
+"start": 75.305,
+"end": 75.985
 },
 {
 "text": "Coffee?",
 "type": "word",
-"start": 75.285,
-"end": 76.535
+"start": 76.185,
+"end": 77.545
 },
 {
 "text": "kōhī",
 "type": "word",
 "ja": "kohi",
-"start": 75.65,
-"end": 76.38
+"start": 76.55,
+"end": 77.39
 },
 {
 "text": "From",
 "type": "word",
-"start": 76.668,
-"end": 76.695
+"start": 77.678,
+"end": 77.705
 },
 {
 "text": "Dutch,",
 "type": "word",
-"start": 76.775,
-"end": 77.335
+"start": 77.785,
+"end": 78.345
 },
 {
 "text": "koffie.",
 "type": "word",
-"start": 77.415,
-"end": 78.135
+"start": 78.425,
+"end": 79.145
 },
 {
 "text": "So",
 "type": "word",
-"start": 78.215,
-"end": 78.295
+"start": 79.225,
+"end": 79.305
 },
 {
 "text": "when",
 "type": "word",
-"start": 78.375,
-"end": 78.455
+"start": 79.385,
+"end": 79.465
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 78.535,
-"end": 78.935
+"start": 79.545,
+"end": 79.945
 },
 {
 "text": "English",
 "type": "word",
-"start": 79.015,
-"end": 79.335
+"start": 80.025,
+"end": 80.345
 },
 {
 "text": "sounds",
 "type": "word",
-"start": 79.535,
-"end": 79.735
+"start": 80.545,
+"end": 80.745
 },
 {
 "text": "odd...",
 "type": "word",
-"start": 79.815,
-"end": 80.375
+"start": 80.825,
+"end": 81.385
 },
 {
 "text": "it",
 "type": "word",
-"start": 80.455,
-"end": 80.535
+"start": 81.465,
+"end": 81.545
 },
 {
 "text": "might",
 "type": "word",
-"start": 80.615,
-"end": 80.775
+"start": 81.625,
+"end": 81.785
 },
 {
 "text": "not",
 "type": "word",
-"start": 80.855,
-"end": 80.935
+"start": 81.865,
+"end": 81.945
 },
 {
 "text": "be",
 "type": "word",
-"start": 81.015,
-"end": 81.095
+"start": 82.025,
+"end": 82.105
 },
 {
 "text": "English",
 "type": "word",
-"start": 81.255,
-"end": 81.415
+"start": 82.265,
+"end": 82.425
 },
 {
 "text": "at",
 "type": "word",
-"start": 81.495,
-"end": 81.575
+"start": 82.505,
+"end": 82.585
 },
 {
 "text": "all!",
 "type": "word",
-"start": 81.655,
-"end": 82.375
+"start": 82.665,
+"end": 83.385
 },
 {
 "text": "Now,",
 "type": "word",
-"start": 82.495,
-"end": 82.855
+"start": 83.505,
+"end": 83.865
 },
 {
 "text": "a",
 "type": "word",
-"start": 82.882,
-"end": 82.908
+"start": 83.892,
+"end": 83.918
 },
 {
 "text": "little",
 "type": "word",
-"start": 82.935,
-"end": 83.175
+"start": 83.945,
+"end": 84.185
 },
 {
 "text": "puzzle",
 "type": "word",
-"start": 83.215,
-"end": 83.495
+"start": 84.225,
+"end": 84.505
 },
 {
 "text": "for",
 "type": "word",
-"start": 83.575,
-"end": 83.735
+"start": 84.585,
+"end": 84.745
 },
 {
 "text": "you.",
 "type": "word",
-"start": 83.815,
-"end": 84.295
+"start": 84.825,
+"end": 85.305
 },
 {
 "text": "Ice",
 "type": "word",
-"start": 84.415,
-"end": 84.535
+"start": 85.425,
+"end": 85.545
 },
 {
 "text": "cream.",
 "type": "word",
-"start": 84.615,
-"end": 85.175
+"start": 85.625,
+"end": 86.185
 },
 {
 "text": "How",
 "type": "word",
-"start": 85.215,
-"end": 85.255
+"start": 86.225,
+"end": 86.265
 },
 {
 "text": "do",
 "type": "word",
-"start": 85.335,
-"end": 85.415
+"start": 86.345,
+"end": 86.425
 },
 {
 "text": "you",
 "type": "word",
-"start": 85.455,
-"end": 85.495
+"start": 86.465,
+"end": 86.505
 },
 {
 "text": "think",
 "type": "word",
-"start": 85.575,
-"end": 85.735
+"start": 86.585,
+"end": 86.745
 },
 {
 "text": "Japanese",
 "type": "word",
-"start": 85.815,
-"end": 86.295
+"start": 86.825,
+"end": 87.305
 },
 {
 "text": "says",
 "type": "word",
-"start": 86.415,
-"end": 86.535
+"start": 87.425,
+"end": 87.545
 },
 {
 "text": "it?",
 "type": "word",
-"start": 86.615,
-"end": 87.015
+"start": 87.625,
+"end": 88.025
 },
 {
 "text": "Tell",
 "type": "word",
-"start": 87.095,
-"end": 87.175
+"start": 88.105,
+"end": 88.185
 },
 {
 "text": "me",
 "type": "word",
-"start": 87.215,
-"end": 87.255
+"start": 88.225,
+"end": 88.265
 },
 {
 "text": "in",
 "type": "word",
-"start": 87.295,
-"end": 87.335
+"start": 88.305,
+"end": 88.345
 },
 {
 "text": "the",
 "type": "word",
-"start": 87.375,
-"end": 87.415
+"start": 88.385,
+"end": 88.425
 },
 {
 "text": "comments.",
 "type": "word",
-"start": 87.495,
-"end": 88.215
+"start": 88.505,
+"end": 89.225
 },
 {
 "text": "Follow",
 "type": "word",
-"start": 88.335,
-"end": 88.455
+"start": 89.345,
+"end": 89.465
 },
 {
 "text": "for",
 "type": "word",
-"start": 88.535,
-"end": 88.615
+"start": 89.545,
+"end": 89.625
 },
 {
 "text": "more.",
 "type": "word",
-"start": 88.695,
-"end": 89.175
+"start": 89.705,
+"end": 90.185
 },
 {
 "text": "matane!",
 "type": "word",
 "ja": "matane",
-"start": 89.495,
-"end": 90.055
+"start": 90.505,
+"end": 91.065
 }
 ],
 "ja": {
@@ -1308,109 +1308,109 @@
 "text": "マクドナルド",
 "romaji": "Makudonarudo",
 "start": 2.98,
-"end": 3.94
+"end": 4.46
 },
 "ka": {
 "text": "か",
 "romaji": "ka",
-"start": 11.81,
-"end": 12.16
+"start": 12.33,
+"end": 12.72
 },
 "ki": {
 "text": "き",
 "romaji": "ki",
-"start": 12.32,
-"end": 12.74
+"start": 12.88,
+"end": 13.31
 },
 "ku": {
 "text": "く",
 "romaji": "ku",
-"start": 12.9,
-"end": 13.33
+"start": 13.47,
+"end": 13.89
 },
 "ke": {
 "text": "け",
 "romaji": "ke",
-"start": 13.49,
-"end": 13.89
+"start": 14.05,
+"end": 14.45
 },
 "ko": {
 "text": "こ",
 "romaji": "ko",
-"start": 14.05,
-"end": 14.42
+"start": 14.61,
+"end": 14.99
 },
 "tesuto": {
 "text": "テスト",
 "romaji": "tesuto",
-"start": 24.57,
-"end": 25.22
+"start": 25.14,
+"end": 25.78
 },
 "kurisumasu": {
 "text": "クリスマス",
 "romaji": "Kurisumasu",
-"start": 26.99,
-"end": 27.9
+"start": 27.55,
+"end": 28.54
 },
 "raisu": {
 "text": "ライス",
 "romaji": "raisu",
-"start": 42.46,
-"end": 43.16
+"start": 43.1,
+"end": 43.8
 },
 "sankyu": {
 "text": "サンキュー",
 "romaji": "sankyū",
-"start": 46.195,
-"end": 46.785
+"start": 46.835,
+"end": 47.645
 },
 "baiorin": {
 "text": "バイオリン",
 "romaji": "baiorin",
-"start": 50.7,
-"end": 51.59
+"start": 51.56,
+"end": 52.44
 },
 "pari": {
 "text": "パリ",
 "romaji": "Pari",
-"start": 53.44,
-"end": 53.89
+"start": 54.29,
+"end": 54.76
 },
 "parisu": {
 "text": "パリス",
 "romaji": "Parisu",
-"start": 59.395,
-"end": 60.105
+"start": 60.265,
+"end": 60.935
 },
 "enerugi": {
 "text": "エネルギー",
 "romaji": "enerugī",
-"start": 66.28,
-"end": 67.1
+"start": 67.11,
+"end": 67.99
 },
 "arerugi": {
 "text": "アレルギー",
 "romaji": "arerugī",
-"start": 69.98,
-"end": 70.82
+"start": 70.87,
+"end": 71.7
 },
 "pan": {
 "text": "パン",
 "romaji": "pan",
-"start": 72.57,
-"end": 73.04
+"start": 73.45,
+"end": 73.94
 },
 "kohi": {
 "text": "コーヒー",
 "romaji": "kōhī",
-"start": 75.65,
-"end": 76.38
+"start": 76.55,
+"end": 77.39
 },
 "matane": {
 "text": "またね！",
 "romaji": "matane!",
-"start": 89.495,
-"end": 90.055
+"start": 90.505,
+"end": 91.065
 }
 }
 }
