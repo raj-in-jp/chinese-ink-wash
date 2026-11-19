@@ -104,6 +104,23 @@ def ja_clips(level):
     return clips, lex
 
 
+def level(x):
+    """no sudden voice peaks: ride the voice gently towards one even loudness (400 ms windows, at most +-5 dB, gain
+    moving slowly so no word jumps out or dips), then a soft limiter on the few remaining peaks; silence is untouched"""
+    h = SR // 100
+    e = np.sqrt(np.convolve(x ** 2, np.ones(40 * h) / (40 * h), 'same'))
+    speech = e > 10 ** (-38 / 20)
+    target = np.median(e[speech])
+    g = np.where(speech, np.clip(target / (e + 1e-9), 10 ** (-5 / 20), 10 ** (5 / 20)), 1.0)
+    k = int(0.25 * SR)                                   # smooth the gain over 250 ms: no pumping, no clicks
+    g = np.convolve(g, np.ones(k) / k, 'same')
+    y = x * g
+    pk = 0.5                                             # soft knee above -6 dBFS
+    a = np.abs(y)
+    y = np.where(a > pk, np.sign(y) * (pk + (1 - pk) * np.tanh((a - pk) / (1 - pk))), y)
+    return y * 0.9
+
+
 def main():
     en = load(TAKE)
     e = env(en)
@@ -194,6 +211,7 @@ def main():
     t_end = round(t_mt + len(mt) / SR, 3)
     ws.append(dict(text=MATANE[2], type='word', ja=MATANE[0], start=round(t_mt, 3), end=t_end))
     ja[MATANE[0]] = dict(text=MATANE[1], romaji=MATANE[2], start=round(t_mt, 3), end=t_end)
+    nar = level(nar)
     wavfile.write(os.path.join(A, 'narration.wav'), SR, (np.clip(nar, -1, 1) * 32767).astype(np.int16))
     subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', os.path.join(A, 'narration.wav'), '-b:a', '192k',
                     os.path.join(A, 'narration.mp3')], check=True)
