@@ -67,3 +67,7 @@ reel_kata/cache/
 reel_kata/audio/stems/
 reel_kata/audio/*.wav
 reel_kata/output/
+reel_yamato/cache/
+reel_yamato/audio/stems/
+reel_yamato/audio/*.wav
+reel_yamato/output/
