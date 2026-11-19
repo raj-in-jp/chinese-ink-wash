@@ -113,6 +113,16 @@ def main():
     level = np.sqrt(np.mean(en[np.abs(en) > 0.01] ** 2))
     raw = json.load(open(os.path.join(A, WORDS_JSON)))['words']
     raw = [w for w in raw if w.get('type', 'word') == 'word']
+    # drop the style note at the top ("[warm, curious storytelling]") — every word of it, not just the bracketed ends
+    keep, inside = [], False
+    for w in raw:
+        if w['text'].startswith('[') and not w['text'].strip('.,') == '[pause]':
+            inside = True
+        if not inside:
+            keep.append(w)
+        if inside and w['text'].endswith(']'):
+            inside = False
+    raw = keep
     clips, lex = ja_clips(level)
     # the slots: each "[pause]" token; find the real silence round it from the sound (Scribe times drift)
     pauses = [i for i, w in enumerate(raw) if w['text'].strip('.,') == '[pause]']
