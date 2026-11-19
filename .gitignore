@@ -63,3 +63,7 @@ reel_wa/cache/
 reel_wa/audio/stems/
 reel_wa/audio/*.wav
 reel_wa/output/
+reel_kata/cache/
+reel_kata/audio/stems/
+reel_kata/audio/*.wav
+reel_kata/output/
